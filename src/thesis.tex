@@ -1,0 +1,47 @@
+\documentclass[a4paper,11pt]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amsfonts,amssymb,amsopn,amsthm}
+\usepackage{graphicx,fancyhdr,xcolor}
+\usepackage[a4paper,top=22mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
+%\usepackage{tikz}
+\usepackage{epstopdf}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{subcaption}
+%\usepackage{url}
+%\usepackage{listings}
+\usepackage[version=3]{mhchem}
+\usepackage[toc,page]{appendix}
+\usepackage{siunitx}
+%\usepackage{enumitem}
+
+\input{config-media.tex}
+\input{config-typography.tex}
+%\input{config-biber.tex}
+%\input{config-pgfplots.tex}
+
+
+\title{M\'ethodes num\'eriques li\'ees \`a la distribution d'alumine dans une cuve d'\'electrolyse d'aluminium}
+\date{\today}
+\author{Thomas Hilke}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\input{notations.tex}
+
+\chapter{Introduction}
+\label{chap:introduction}
+\input{introduction-chapter.tex}
+
+\chapter{Particules d'alumine dans un bain \'electrolytique}
+\label{chap:particles}
+\input{particles-chapter.tex}
+
+\end{document}
