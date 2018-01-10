@@ -19,6 +19,7 @@ TEX_SOURCES = src/thesis.tex \
   src/graphicspath.tex \
   src/notations.tex \
   src/introduction-chapter.tex \
+  src/introduction-hall-heroult.tex \
   src/particles-chapter.tex
 
 
