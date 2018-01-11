@@ -1,29 +1,71 @@
 
+\begin{figure}[t]
+\begin{center}
+  \input{../media/introduction/electrolysis-pot/electrolysis-pot.pdf_tex}
+  \begin{multicols}{2}
+    \small
+    \begin{enumerate}[label=(\alph*)]
+    \item Injecteur de dose d'alumine
+    \item Broches de connections des anodes
+    \item Bain électrolytique
+    \item Aluminium métallique liquide
+    \item Pâte de brasquage
+    \item Isolation réfractaire
+    \item Caisson
+    \item Couvercle
+    \item Anodes
+    \item Talus, croûte de bain solidifiée
+    \item Interface bain-métal
+    \item Isolation réfractaire
+    \item Cathode
+    \item Bus barre collectrice
+    \end{enumerate}
+  \end{multicols}
+  \caption{Représentation de la structure des éléments internes
+    d'une cuve d'électrolyse d'aluminium. Vue de coupe.}
+  \label{fig:electrolysis-pot}
+\end{center}
+\end{figure}
+
 % réaction chimique
 Le procédé consiste à dissoudre l'oxyde d'aluminium dans un bain
 composé de cryolite, puis à réduire les ions d'aluminium en effectuant
 l'électrolyse de la solution:
 \begin{align}
-  \cee{Al2O3 &-> 2Al^{3+} + 2O^{2-}},\\
-  \cee{Al^{3+} + 3e^{-} &-> Al}.
+  \cee{Al2O3 &-> 2Al^{3+} + 2O^{2-}},\label{reac:dissociation}\\
+  \cee{Al^{3+} + 3e^{-} &-> Al}.\label{reac:electrolysis}
 \end{align}
 
 % contexte industriel
-Dans un cadre industriel, la réaction a lieu dans une récipient dont
+Dans un cadre industriel, la réaction a lieu dans un bain
+électrolytique contenu dans un récipient dont
 une coupe verticale schématique est représentée par la figure
-\fig{pot}.
+\fig{pot}. Le bain électrolytique, dont le rôle est de permettre
+la dissociation des ions \ce{Al^{3+}} et \ce{O^{2-}} nécessaire à
+la réaction d'électrolyse, est essentiellement constitué par de la
+cryolite (\ce{Na3.AlF6}). Un nombre d'additifs sont ajoutés dans le
+bain afin de ramener la température de fusion de celui-ci à environ
+\num{950}\si\celsius.
 
 % structure de la cuve
-Le bain électrolytique est maintenu à une température de
-\num{950}\si{\celsius} environ dans un contenant formé par une
-épaisseurs de briques réfractaires au niveau des parois verticales et
-une cathode en carbone au fond. Le tout est soutenu par une structure
-appelée cuve. Les briques réfractaires jouent le rôle d'isolant
-thermique d'une part, et protègent le reste de la structure des
-attaques corrosives de l'électrolyte d'autre part.
+Le bain électrolytique est maintenu sous forme liquide un contenant
+constitué par une épaisseurs de briques réfractaires au niveau des
+parois verticales et une cathode en carbone au fond. Le tout est
+soutenu par une structure appelée cuve. Les briques réfractaires
+jouent le rôle d'isolant thermique d'une part, et protègent le reste
+de la structure des attaques corrosives de l'électrolyte d'autre part.
 
 % métal liquide
-
+La réaction d'électrolyse (\ref{reac:electrolysis}) produit de
+l'aluminium métallique au niveau de la cathode. La température de
+fusion de l'aluminium étant de \num{660.3}\si{\celsius}, le métal
+produit est maintenu sous forme liquide. L'aluminium métallique est
+immiscible dans l'électrolyte. En raison de sa densité légèrement
+supérieure à celle de l'électrolyte, le métal forme une nappe au
+fond de la cuve et recouvre la cathode. C'est le métal liquide qui
+joue effectivement le rôle de cathode. Le bain électrolytique et le
+métal forment un système à deux phases séparées par une
+interface libre.
 
 % circuit électrique
 L'électrolyte est alimenté en courant électrique à travers une série
@@ -32,68 +74,102 @@ de celui-ci par un pont qui sert à la fois de support mécanique et de
 conducteur électrique. Le courant électrique traverse l'électrolyte,
 le métal liquide et atteint la cathode en carbone placée au fond de la
 cuve. Finalement, le courant est conduit en dehors de la cuve à
-travers des conducteurs appelés {\em bus barres} placés sous la
-cathode. L'intensité du courant électrique qui traverse une cuve
-d'élecrolyse industrielle peut atteindre \num{500}\si{\kilo\ampere},
-et jusqu'à \num{1}\si{\mega\ampere} dans le cuves les plus modernes.
+travers des conducteurs horizontaux appelés {\em bus barres} placés
+sous la cathode. L'intensité du courant électrique qui traverse une
+cuve d'électrolyse industrielle peut atteindre
+\num{500}\si{\kilo\ampere}, et jusqu'à \num{1}\si{\mega\ampere} dans
+le cuves les plus modernes.
+
+% champs magnétiques et forces de lorentz
+Les courants électriques importants qui traversent la cuve
+d'électrolyse ainsi que les nombreuses cuves voisines dans une usine
+de production génèrent des champs d'induction magnétique
+importants. Le passage du courant électrique dans l'électrolyte et le
+métal en présence du champ d'induction magnétique engendre des forces
+de Lorentz qui mettent les fluides en mouvement.
+
+% écoulement dans les fluides, mouvements de l'interface
+Le mouvement des fluides dans les cuves d'électrolyse est un aspect
+important pour plusieurs raisons, et qui a déjà fait l'objet de
+nombreuses études\needcite.  Le bain électrolytique est l'élément du
+circuit électrique qui est responsable, en raison de sa faible
+conductivité électrique, de l'essentiel de la production d'énergie
+thermiques par effet Joule. Pour minimiser ces pertes d'énergie par
+effet Joule, on cherche à minimiser la distance parcourue par le
+courant électrique entre les anodes et l'interface entre le bain et le
+métal. Cependant, les mouvements dans les fluides perturbe la forme de
+l'interface. En particulier, on cherche à tout prix à éviter que
+le métal entre en contact avec les anodes, et crée un court
+circuit.
+
+% écoulement dans les fluides, transport des particules et de la
+% concentration
+A intervalles réguliers, de l'oxyde d'aluminium sous forme de poudre
+solide est injecté dans le bain afin de compenser la concentration
+consommée par la réaction d'électrolyse (\ref{reac:electrolysis}).
+Cette poudre est libérée au niveau de la surface du bain
+électrolytique dans le canal central entre les deux rangées d'anodes
+par un injecteur. Le transport de cette poudre dans l'ensemble du bain
+et sa dissolution dépendent fortement du mouvement du fluide. On
+cherche un équilibre fin entre des écoulements qui déforment peu
+l'interface bain-métal, mais suffisamment fort pour assurer le
+transport et la dissolution de la poudre d'alumine dans toutes les
+parties du bain électrolytique.
+
+% maîtrise de la température
+Le bain électrolytique maintenu au-dessus de sa température de fusion
+est un milieu extrêmement corrosif, y compris pour les structures qui
+servent à le contenir. Pour allonger la durée de vie des cuves, on
+cherche à minimiser les surfaces de contact avec le bain liquide. En
+particulier, on essaye de maintenir une couche de bain solide le long
+des parois, appelée talus, pour les protéger des attaques corrosives du
+bain liquide. Pour y arriver, on y arrive en cherchant un équilibre
+thermique qui dépend du flux d'énergie au niveau des parois et de la
+convection de la chaleur produite dans le bain par les mouvement des
+fluides. Pour ces différentes raisons, un bonne compréhension et
+maîtrise des écoulements des différents fluides dans une cuve
+d'électrolyse est essentielle à la bonne opération de celle-ci.
 
 
-% structure de la cuve
-D'un point de vue industriel, la réaction a lieu dans une cuve, dont
-la structure schématique est représentée par la figure \fig{pot}. Le
-bain électrolytique, maintenu à l'état liquide à
-\num{950}\si{\celsius} environ \needcite, est contenu dans une cuve,
-dont les parois sont recouvertes d'une épaisseur de briques
-réfractaires jouant le rôle d'isolant thermique, et d'une couche de
-brique de carbone protégeant le contenant des attaques corrosives de
-la cryolite. Au fond de la cuve sont disposées une série de barres
-électriquement conductrices dont le but est de collecter le courant
-électrique. Une cathode, typiquement en carbone fait le contact entre
-les barres collectrices et une couche d'aluminium métallique
-liquide. La cuve est maintenue dans une structure appelée caisson,
-dont le rôles sont multiples. En plus d'offrir un support mécanique à
-l'ensemble, le matériau du caisson est choisi de sorte à écranter
-partiellement les champs d'induction électromagnétique intenses à
-proximité. Ceci permet de diminuer l'intensité des forces de Lorentz
-qui s'exercent sur le fluide, et tend à stabiliser l'écoulement des
-fluides. Finalement, le caisson permet de contrôler plus finement les
-pertes thermiques du système dans des zones clés.
+% caisson ferromagnetique
+L'ensemble de la cuve est placée dans un caisson, dont le matériau est
+choisi pour ses propriétés ferromagnétiques. La présence du caisson
+permet d'écranter une partie du champ d'induction magnétique et
+réduire l'intensité de celui-ci dans les fluides. Les forces de
+Lorentz peuvent ainsi être contrôlées, et diminuer l'intensité des
+vitesses dans les fluides de la cuve. Le caisson permet également de
+contrôler plus finement la dissipation thermique sur les bords de la
+cuve et la formation des talus.
 
+
+
+%% EN RÉÉCRITURE
 Le bain électrolytique est constitué de cryolite (\ce{Na3.AlF6}),
 solide à température ambiante, et d'autres sels en proportions
 inférieures. Les proportions exactes qui font l'objet de secrets
 industriels permettent de ramener le point de fusion de ce mélange à
-environ \num{950}\si{\celsius}. Dans ces conditions, l'aluminium
-métallique étant immiscible dans le bain, l'ensemble forme un système
-bi-fluide séparé par une frontière libre. La légère différence de
-densité entre le métal et le bain assure que, grâce à la gravité,
-l'interface soit essentiellement horizontale.
+environ \num{950}\si{\celsius}.
 
 Le bain électrolytique présente une densité volumique légèrement plus
-faible d'environ \num{10}\% que celle de l'aluminium métallique, ce
-qui lui permet de surnager sur celui-ci. Dans le bain sont maintenues
-deux rangées d'anodes faites de carbone également. Le courant
-électrique provient des anodes et traverse le bain pour atteindre
-l'interface avec le métal liquide pour être finalement collecté par la
-cathode. Cette épaisseur de bain dans lequel a lieu la réaction
-d'électrolyse est appelée ACD\footnote{Acronyme anglais de \em{Anode
-Cathode Distance}}. Dans une cuve industrielle moderne, l'ACD est de
-l'ordre de \num{20}\si{\milli\meter} à \num{20}\si{\milli\meter}. Le
-bain ayant une faible conductivité, on cherche à diminuer au maximum
-cette distance, afin de minimiser les pertes énergétiques par effet
-Joule. Le procédé d'électrolyse étant continu, il faut remplacer
-régulièrement l'alumine dissoute consommée par l'électrolyse. Une
-série d'injecteurs alimentent le bain en oxyde d'aluminium solide sous
-forme de fine poudre. La surface du bain est protégée par une croûte
+faible d'environ \num{10}\% que celle de l'aluminium métallique
+
+
+Dans une cuve industrielle moderne, l'ACD est de
+l'ordre de \num{20}\si{\milli\meter} à \num{20}\si{\milli\meter}.
+
+La surface du bain est protégée par une croûte
 de bain solidifié et de poudre d'alumine. Pour cette raison, les
 injecteurs doivent préalablement percer la croûte avant de pouvoir
 déposer une dose de poudre d'alumine dans le bain. L'alimentation ne
-peut se faire que de manière discontinue. L'ensemble de la cuve est
+peut se faire que de manière discontinue.
+
+L'ensemble de la cuve est
 recouvert par un couvercle qui limite les dissipations thermiques et
 permet la collecte des émanations gazeuses potentiellement toxiques
 résultant de la réaction d'électrolyse, et protège les opérateurs
 travaillant à proximité.
 
+% La réaction d'électrolyse
 Par la réaction d'électrolyse, l'alumine dissoute est transformée en
 aluminium métallique au niveau de l'interface avec le métal liquide,
 qui joue le rôle de cathode. Du côté de l'anode, l'électrolyse produit
@@ -103,8 +179,7 @@ millimétriques qui remontent à la surface pour s'échapper. C'est cette
 production de \ce{CO2} qui provoque l'érosion des anodes.
 
 
-L'ensemble des anodes est fixé sur un pont offrant un support
-mécanique, mais également conducteur électrique. Chaque anode est
+ Chaque anode est
 séparée de ses voisines par un espace de quelques centimètres appelé
 canal. La position verticale de chaque anode peut être ajustée pour
 compenser l'érosion de celle-ci par la réaction
@@ -112,13 +187,10 @@ d'électrolyse. Régulièrement, chaque anode arrivant en fin de vie doit
 être remplacée par une anode neuve. Ceci intervient environ une fois
 par jour et par cuve.
 
-Comme indiqué ci-dessus, de l'alumine doit être ajoutée dans le bain
-régulièrement afin de compenser celle qui a été consommée par la
-réaction d'électrolyse. En raison de la disposition des anodes et de
-la formation de croûte de bain gelée à la surface de celui-ci, la
-poudre d'alumine est injectée par dose de \num{1}\si{\kilo\gram}
+La poudre d'alumine est injectée par dose de \num{1}\si{\kilo\gram}
 environ au niveau des canaux et à intervalle régulier.
 
+% Formation de bain gelé autour des particules froides
 L'alumine se trouve dans un état cristallin, à une température
 d'environ \num{350}\si{\celsius}. Lorsque les particules d'alumine
 entrent en contact avec le bain, une couche de bain solidifié se
@@ -126,6 +198,7 @@ forme immédiatement à la surface de celles-ci, et sont convectée par
 l'écoulement dans le fluide et chute dans le bain sous l'action de
 la gravité.
 
+% Dissolution, agrégats
 Une fois la couche de bain gelé qui enveloppe les particules
 refondues, celles-ci se dissolvent peu à peu. Dans certaines
 conditions, les particules s'agglomèrent et forment des agrégats
@@ -134,6 +207,7 @@ la taille des agrégats est suffisante, il arrive qu'ils pénètrent
 le métal et terminent leur course au fond de la cuve, risquant de
 recouvrir peu à peu la cathode et de l'isoler électriquement.
 
+% Rôle de la température du bain
 La température du bain joue un rôle crucial au niveau du comportement
 de l'alumine nouvellement injectée. Pour des raisons d'économie
 d'énergie, le bain est maintenu aussi proche que possible de la
@@ -144,8 +218,7 @@ important. Le temps nécessaire pour refondre la couche de bain gelé à
 la surface des particules augmente lorsque la surchauffe diminue. Dans
 la limite où la surchauffe est nulle, ce temps devient infini. De
 plus, la réaction de dissolution de l'alumine cristalline dans le bain
-est un processus endothermique. Il faut alors fournir un equantité
+est un processus endothermique. Il faut alors fournir une quantité
 d'énergie thermique non négligeable pour dissoudre les
 particules. Cette énergie est disponible uniquement si la surchauffe
 du bain environnant est suffisante.
-

@@ -1,5 +1,3 @@
-MAKEFLAGS += --no-print-directory
-
 SHELL = /bin/sh
 PDFLATEX = pdflatex
 
@@ -25,14 +23,14 @@ TEX_SOURCES = src/thesis.tex \
 
 all: post-build
 
-force: TEX_SOURCES=
-force: all
+#force: TEX_SOURCES=
+#force: all
 
 pre-build:
-	@$(MAKE) $(MAKEFLAGS) -C media/ all
+	@$(MAKE) -C media/ all
 
 main-build: pre-build
-	@$(MAKE) $(MAKEFLAGS) target
+	@$(MAKE) target
 
 post-build: main-build
 
@@ -44,7 +42,7 @@ pdf/document.pdf:  build/document.pdf
 
 build/document.pdf: $(TEX_SOURCES)
 	@echo "[PDFLATEX]" $@
-	@cd $(dir $<) && $(PDFLATEX) -output-directory=../$(dir $@) -halt-on-error -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT)
+	@cd $(dir $<) && $(PDFLATEX) -output-directory=../$(dir $@) -halt-on-error -interaction nonstopmode -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT)
 #	@cd $(dir $<) && $(PDFLATEX) -output-directory=../$(dir $@) -halt-on-error -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT)
 #	@cd $(dir $<) && $(PDFLATEX) -output-directory=../$(dir $@) -halt-on-error -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT)
 
@@ -55,5 +53,4 @@ biblatex:
 clean:
 	@rm -rf build/*
 	@find . -name "*~" -delete
-
 

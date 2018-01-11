@@ -1,3 +1,3 @@
 all:
-	@$(MAKE) $(MAKEFLAGS) -C introduction all
-	@$(MAKE) $(MAKEFLAGS) -C particles all
+	@$(MAKE) -C introduction/ all
+	@$(MAKE) -C particles/ all

@@ -17,7 +17,8 @@
 \usepackage[version=3]{mhchem}
 \usepackage[toc,page]{appendix}
 \usepackage{siunitx}
-%\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{enumitem}
 
 \input{config-media.tex}
 \input{config-typography.tex}
@@ -25,7 +26,7 @@
 %\input{config-pgfplots.tex}
 
 
-\title{M\'ethodes num\'eriques li\'ees \`a la distribution d'alumine dans une cuve d'\'electrolyse d'aluminium}
+\title{Méthodes numériques liées à la distribution d'alumine dans une cuve d'électrolyse d'aluminium}
 \date{\today}
 \author{Thomas Hilke}
 
@@ -40,8 +41,18 @@
 \label{chap:introduction}
 \input{introduction-chapter.tex}
 
-\chapter{Particules d'alumine dans un bain \'electrolytique}
+\part{Transport et dissolution de particules d'alumine}
+\label{part:alumina}
+
+\chapter{Particules d'alumine dans un bain électrolytique}
 \label{chap:particles}
 \input{particles-chapter.tex}
+
+\chapter{Populations de particules}
+\label{chap:populations}
+\input{populations-chapter.tex}
+
+\part{Approximation d'écoulement dans le bain électrolytique}
+\label{part:fluid}
 
 \end{document}
