@@ -18,6 +18,8 @@ TEX_SOURCES = src/thesis.tex \
   src/notations.tex \
   src/introduction-chapter.tex \
   src/introduction-hall-heroult.tex \
+  src/introduction-aims.tex \
+  src/introduction-organisation.tex \
   src/particles-chapter.tex
 
 
