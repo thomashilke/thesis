@@ -1,0 +1,168 @@
+Dans ce paragraphe nous détaillons les phénomènes physiques qui
+motivent la nécessité de considérer un temps de latence
+préalable au début de la dissolution des grains d'alumine dans le
+bain électrolytique.
+
+On considère une sphère d'électrolyte, placée à l'origine du
+système de coordonnées, de température initiale $\tinj<\tliq$. Cette
+sphère est donc gelée, c'est-à-dire sous forme solide. Le reste de
+l'espace est occupé par le bain électrolytique au repos et de
+température initiale $\tinit > \tliq$.
+
+On s'intéresse à l'évolution de la température au cours du
+temps dans le système formé par la sphère de bain gelé et le
+bain liquide environnant. En particulier, la température de la
+particule étant inférieure à la température du liquidus
+$\tliq$, le bain au voisinage de la surface de la particule va
+commencer par geler. Puis, la température du système s'équilibrant par
+diffusion thermique, cette couche de bain va peu à peu fondre. On
+cherche à déterminer l'évolution au cours du temps de l'épaisseur de
+cette couche de bain gelée.
+
+Soit $R_p$ le rayon de la particule placée à l'origine du
+système de coordonnées, $\electrolytehc$ la chaleur spécifique du bain et
+$\electrolytetdiff$ le coefficient de diffusion thermique du bain.
+
+Soit $f_s(\temperature)$ la fraction solide du bain électrolytique. La
+fraction solide est définie par:
+\begin{equation}
+  f_s(\temperature) = \left\{
+  \begin{array}{ll}
+    0           & \text{ si } \temperature > \tliq,\\
+    \frac{1}{2} & \text{ si } \temperature = \tliq,\\
+    1           & \text{ si } \temperature < \tliq.
+  \end{array}
+  \right.
+\end{equation}
+Le comportement de la fonction $f_s$ au voisinage de $\tliq$ est
+représenté sur le graphique de gauche de la figure
+\ref{fig:solid-fraction-enthalpy}.
+
+\begin{figure}
+  \begin{center}
+    \input{../media/particles/solidfraction/solidfraction.tex}
+    \input{../media/particles/enthalpy/enthalpy.tex}
+    \caption{Gauche: fraction solide du bain $f_s$ en fonction de la
+      température. Droite: Enthalpie du bain électrolytique en
+      fonction de la température.}
+    \label{fig:solid-fraction-enthalpy}
+  \end{center}
+\end{figure}
+
+Les propriétés thermiques du bain électrolytique sont
+caractérisées par la relation entre la température $\temperature$ et
+l'enthalpie $\enthalpy$ qui s'exprime de la manière suivante:
+\begin{equation}
+  \enthalpy(\temperature) = %
+    \int_0^\temperature
+      \electrolytedensity\electrolytehc\intd{s} %
+    + \fusionenthalpy(1 - f_s(\temperature)),
+\end{equation}
+où $\electrolytedensity$ est la densité du bain, $\fusionenthalpy$
+est l'enthalpie de la transition entra la phase solide et liquide, et
+$f_s$ la fraction solide du bain en fonction de la température. Dans
+la suite, on fera l'hypothèse que les paramètres $\electrolytehc$
+et $\electrolytetdiff$ sont constants dans chaque phase.
+Ce choix se justifie par le fait que ces valeurs
+varient peu sur l'intervalle de température qui nous intéresse, et
+on peut se contenter de considérer une valeur moyenne sur cet intervalle.
+
+Le graphique de droite sur la figure \ref{fig:solid-fraction-enthalpy}
+représente le comportement de la fonction $\enthalpy(\temperature)$ au
+voisinage de la température de transition $\tliq$.
+
+Bien que la fonction $\enthalpy$ présente une discontinuité en
+$\temperature = \tliq$, elle est strictement monotone, et on peut
+définir une fonction $\beta(\enthalpy)$ telle que:
+\begin{equation}
+\beta(\enthalpy(\temperature)) = \temperature
+\end{equation}
+pour tout $\temperature$ de la manière suivante:
+\begin{equation}
+  \beta(\enthalpy) = \left\{
+  \begin{array}{ll}
+    \frac{\enthalpy}{\electrolytehc\electrolytedensity} %
+      & \enthalpy < \tliq \electrolytehc\electrolytedensity,\\
+    \tliq %
+      & \tliq \electrolytehc\electrolytedensity < \enthalpy < \tliq \electrolytehc\electrolytedensity + \fusionenthalpy,\\
+    \frac{\enthalpy - \fusionenthalpy}{\electrolytehc\electrolytedensity} %
+      & \tliq\electrolytehc\electrolytedensity + \fusionenthalpy < \enthalpy.\\
+  \end{array}
+  \right.
+\end{equation}
+La fonction $\beta$ est représentée sur la figure \ref{fig:beta}.
+\begin{figure}
+  \begin{center}
+    \input{../media/particles/beta/beta.tex}
+    \caption{Fonction $\beta(\enthalpy)$.}
+    \label{fig:beta}
+  \end{center}
+\end{figure}
+
+Soit $\tinj\in\mathbb R$ la température à laquelle se trouve les
+particules d'alumine au moment de leur injection dans la cuve, et
+$\telectrolyte$ la température du bain électrolytique. La condition
+initiale du système formé par la particule et le bain environnant est
+définie par:
+\begin{equation}
+  \tinit(x) = \left\{
+  \begin{array}{ll}
+    \tinj & \text{ si } \norm{x} < R_p,\\
+    \telectrolyte & \text{ si } \norm{x} \geq R_p.\\
+  \end{array}
+  \right.\label{eq:initial-temperature}
+\end{equation}
+
+\begin{figure}
+  \begin{center}
+    \input{../media/particles/temperature/temperature.tex}
+    \caption{Température initiale du système formé par la
+      particule de bain gelé placée à l'origine du système de
+      coordonnées, et du bain électrolytique environnant.}
+    \label{fig:particle-initial-temperature}
+  \end{center}
+\end{figure}
+La figure \ref{fig:particle-initial-temperature} représente la
+température initiale au voisinage de la particule. En dehors de la
+particule, la température du bain est suffisante pour que celui-ci
+soit dans la phase liquide. Cependant, on suppose que le bain liquide
+est au repos en tout temps.
+
+Soit $\enthalpydensity(t, x)$ la densité d'enthalpie au point $x\in\mathbb
+R^3$ et au temps $t > 0$ dans le système formé par la particule de
+rayon $R_p$ placée à l'origine et le bain électrolytique
+occupant le reste de l'espace. La densité d'enthalpie
+$\enthalpydensity$ est solution du problème suivant:
+\begin{align}
+  &\frac{\partial \enthalpydensity}{\partial t}(t,x) -\div %
+  \parent{\electrolytetdiff\nabla \temperature(t, x)} = 0,& \quad %
+  \forall (t, x) \in [0,\infty)\times \mathbb R^3,\label{eq:stefan-1}\\
+  &\temperature(t, x) = \beta(\enthalpydensity(t, x)), & \quad %
+  \forall (t, x) \in [0,\infty)\times \mathbb R^3,\label{eq:stefan-2}\\
+    &\temperature(0, x) = \tinit(x),& \quad \forall x\in \mathbb R^3.\label{eq:stefan-3}
+\end{align}
+Puisque la condition initiale \ref{eq:initial-temperature} présente
+une symétrie sphérique, et que le système formé par les équations
+(\ref{eq:stefan-1})-(\ref{eq:stefan-3}) est invariant par symétrie
+sphérique, on cherche une solution à symétrie sphérique. On définit
+les fonctions $\enthalpydensityr(t, r)$ et $\temperaturer(t, r)$, la
+densité d'enthalpie et la température au temps $t$ et à distance $r$
+de l'origine.
+
+Les équations (\ref{eq:stefan-1})-(\ref{eq:stefan-3}) se réécrivent en
+fonction de la coordonnée $r$ de la manière suivante:
+\begin{align}
+  &\frac{\partial\enthalpydensityr}{\partial t}(t, r) -
+  \electrolytetdiff \frac{1}{r^2}\frac{\partial}{\partial
+    r}\parent{r^2\frac{\partial \temperaturer}{\partial r}} = 0, &\quad
+  \forall (t, r)\in [0, \infty)\times \rplus,\label{eq:stefan-r-1}\\
+    &\temperaturer(t, r) = \beta(\enthalpydensityr(t, r)), &\quad
+    \forall (t, r)\in [0, \infty)\times \rplus,\label{eq:stefan-r-2}\\
+      &\temperaturer(0, r) = \tinit(r),&\quad \forall r \in \rplus.\label{eq:stefan-r-3}
+\end{align}
+Le problème formé par les équations
+(\ref{eq:stefan-r-1})-(\ref{eq:stefan-r-3}) est un problème de
+Stefan. Dans la section qui suit on décrit le schéma de
+discrétisation, en suivant le travail de Y. Safa \cite{Safa2009}.
+
+\subsection*{Discrétisation du problème de Stefan}

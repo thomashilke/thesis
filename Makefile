@@ -1,10 +1,13 @@
 SHELL = /bin/sh
 PDFLATEX = pdflatex
+PDFLATEXFLAGS = -halt-on-error -interaction nonstopmode -shell-escape
 
 STDOUT_REDIRECT = /dev/null
 ifdef DBG
   STDOUT_REDIRECT = &1
 endif
+
+RUN ?= 1 # The number of times the pdflatex command is run to compile the document
 
 .DEFAULT_GOAL = all
 .PHONY = all target clean pre-build main-build post-build biblatex
@@ -20,7 +23,12 @@ TEX_SOURCES = src/thesis.tex \
   src/introduction-hall-heroult.tex \
   src/introduction-aims.tex \
   src/introduction-organisation.tex \
-  src/particles-chapter.tex
+  src/particles-chapter.tex \
+  src/particles-dissolution.tex \
+  src/particles-fall.tex \
+  src/particles-freeze.tex \
+  src/particles-introduction.tex \
+  src/particles-population-dissolution.tex
 
 
 all: post-build
@@ -44,9 +52,7 @@ pdf/document.pdf:  build/document.pdf
 
 build/document.pdf: $(TEX_SOURCES)
 	@echo "[PDFLATEX]" $@
-	@cd $(dir $<) && $(PDFLATEX) -output-directory=../$(dir $@) -halt-on-error -interaction nonstopmode -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT)
-#	@cd $(dir $<) && $(PDFLATEX) -output-directory=../$(dir $@) -halt-on-error -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT)
-#	@cd $(dir $<) && $(PDFLATEX) -output-directory=../$(dir $@) -halt-on-error -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT)
+	@cd $(dir $<) && for number in `seq 1 $(RUN)`; do $(PDFLATEX) -output-directory=../$(dir $@) $(PDFLATEXFLAGS) -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT); done;
 
 biblatex:
 	@echo "[BIBLATEX] thesis.bcf"

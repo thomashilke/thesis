@@ -14,10 +14,30 @@
 \newtheorem{remarque}{Remarque}
 
 %%% Quantities
-\newcommand{\temperature}{\Theta}
-\newcommand{\concentration}{c}
-\newcommand{\enthalpy}
+\newcommand{\temperature}{\Theta} % temperature du bain en fonction de
+% x et t.
+\newcommand{\temperaturer}{\tilde{\Theta}} % temperature du bain en fonction de x et t.
+\newcommand{\tinj}{T_\text{Inj}} % temperature d'injection des particules
+\newcommand{\tliq}{T_\text{Liq}} % temperature du liquidus du bain
+\newcommand{\tinit}{T_\text{Init}} % temperature initiale du bain
+% (constant ou fonction de x)
+\newcommand{\telectrolyte}{T_\mathrm{e}} % temperature de
+                                % l'electrolyte (liquide)
 
+\newcommand{\electrolytedensity}{\rho_\mathrm{e}}
+\newcommand{\electrolytehc}{C_{p,e}}
+\newcommand{\fusionenthalpy}{\Delta H_\mathrm{sl}}
+\newcommand{\electrolytetdiff}{D_\temperature}
+
+\newcommand{\concentration}{c}
+\newcommand{\enthalpy}{H}
+\newcommand{\enthalpydensity}{h}
+\newcommand{\enthalpydensityr}{\tilde{h}}
+
+
+\newcommand{\rplus}{\mathbb R_+}
+
+\newcommand{\intd}[1]{\,\mathrm d#1}
 
 \chapter*{Notations}
 \addcontentsline{toc}{chapter}{Notations}
