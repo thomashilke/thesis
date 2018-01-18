@@ -13,5 +13,7 @@ set ytics ('$T_\text{inj}$' 350, "$T_\\text{Liq}$" 1100, "$T_\\text{e}$" 1228)
 
 set key bottom right
 
+set style line 2 lt 4 lw 1 dt ' -' linecolor rgb "#009e73"
+
 plot 'tinit.dat' w l title '$T_\text{init}(r)$', \
-     'threshold.dat' w l title '$T_\text{Liq}$'
+     'threshold.dat' w l ls 2 title '$T_\text{Liq}$'

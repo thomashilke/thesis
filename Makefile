@@ -55,8 +55,8 @@ build/document.pdf: $(TEX_SOURCES)
 	@cd $(dir $<) && for number in `seq 1 $(RUN)`; do $(PDFLATEX) -output-directory=../$(dir $@) $(PDFLATEXFLAGS) -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT); done;
 
 biblatex:
-	@echo "[BIBLATEX] thesis.bcf"
-	cd build; biber thesis > biblatex-target.log
+	@echo "[BIBLATEX] document.bcf"
+	cd build; biber document > biblatex-target.log
 
 clean:
 	@rm -rf build/*

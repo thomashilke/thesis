@@ -1,5 +1,6 @@
 
 %%% Math typography
+\newcommand{\ie}{i.e.}
 \renewcommand{\div}{\mathrm{div}}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\parent}[1]{\left( #1 \right)}
@@ -17,22 +18,28 @@
 \newcommand{\temperature}{\Theta} % temperature du bain en fonction de
 % x et t.
 \newcommand{\temperaturer}{\tilde{\Theta}} % temperature du bain en fonction de x et t.
-\newcommand{\tinj}{T_\text{Inj}} % temperature d'injection des particules
-\newcommand{\tliq}{T_\text{Liq}} % temperature du liquidus du bain
-\newcommand{\tinit}{T_\text{Init}} % temperature initiale du bain
+\newcommand{\tinj}{\temperature_\text{Inj}} % temperature d'injection des particules
+\newcommand{\tliq}{\temperature_\text{Liq}} % temperature du liquidus du bain
+\newcommand{\tinit}{\temperature_\text{Init}} % temperature initiale du bain
 % (constant ou fonction de x)
-\newcommand{\telectrolyte}{T_\mathrm{e}} % temperature de
+\newcommand{\telectrolyte}{\temperature_\mathrm{e}} % temperature de
                                 % l'electrolyte (liquide)
 
 \newcommand{\electrolytedensity}{\rho_\mathrm{e}}
 \newcommand{\electrolytehc}{C_{p,e}}
+\newcommand{\electrolyteshc}{C_{p,e,s}}
+\newcommand{\electrolytelhc}{C_{p,e,l}}
 \newcommand{\fusionenthalpy}{\Delta H_\mathrm{sl}}
 \newcommand{\electrolytetdiff}{D_\temperature}
+\newcommand{\electrolytestdiff}{D_{\temperature,s}}
+\newcommand{\electrolyteltdiff}{D_{\temperature,l}}
 
 \newcommand{\concentration}{c}
 \newcommand{\enthalpy}{H}
 \newcommand{\enthalpydensity}{h}
 \newcommand{\enthalpydensityr}{\tilde{h}}
+
+\newcommand{\tlat}{T_\text{Lat}}
 
 
 \newcommand{\rplus}{\mathbb R_+}
