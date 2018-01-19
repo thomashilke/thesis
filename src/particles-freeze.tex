@@ -35,8 +35,7 @@ fraction solide est définie par:
 \begin{equation}
   f_s(\temperature) = \left\{
   \begin{array}{ll}
-    0           & \text{ si } \temperature > \tliq,\\
-    \frac{1}{2} & \text{ si } \temperature = \tliq,\\
+    0           & \text{ si } \temperature \geq \tliq,\\
     1           & \text{ si } \temperature < \tliq.
   \end{array}
   \right.
@@ -96,7 +95,10 @@ on peut se contenter de considérer une valeur moyenne sur cet intervalle.
 
 Le graphique de droite sur la figure \ref{fig:solid-fraction-enthalpy}
 représente le comportement de la fonction $\enthalpy(\temperature)$ au
-voisinage de la température de transition $\tliq$.
+voisinage de la température de transition $\tliq$. La densité de
+l'électrolyte $\electrolytedensity$ est supposée constante pour tout
+$\temperature$. En particulier, on suppose que la transition entre les
+phases solide et liquide a lieu à volume constant.
 
 Bien que la fonction $\enthalpy$ présente une discontinuité en
 $\temperature = \tliq$, elle est strictement monotone, et on peut
@@ -117,13 +119,15 @@ pour tout $\temperature$ de la manière suivante:
   \end{array}
   \right.
 \end{equation}
-La fonction $\beta$ est représentée sur la figure \ref{fig:beta}.
+La fonction $\beta$ est représentée sur la figure \ref{fig:beta}. Pour
+les besoins de la représentation, on a choisi ici $\tliq = 1218\si{\kelvin}$.
 \begin{figure}
   \begin{center}
     \input{../media/particles/beta/beta.tex}
     \caption{Fonction $\beta(\enthalpy)$. On a noté $H_1 =
       \tliq\electrolyteshc\electrolytedensity$ et $H_2 =
-      \tliq\electrolyteshc\electrolytedensity + \fusionenthalpy$.}
+      \tliq\electrolyteshc\electrolytedensity + \fusionenthalpy$, et
+      $\tliq = 1218\si{\kelvin}$.}
     \label{fig:beta}
   \end{center}
 \end{figure}
@@ -148,7 +152,7 @@ la température et la densité d'enthalpie de l'électrolyte au point $x
 
 Soient $\Omega_1(t)\subset \Omega$ et $\Omega_2(t)\subset \Omega$
 des ouverts fonctions du temps $t$, définis de la manière suivante:
-\begin{equation}
+\begin{equation}\label{eq:phase-domains}
   \Omega_1(t) = \cparent{x\in\Omega \mid %
                          \temperature(t, x) < \tliq},\quad %
   \Omega_2(t) = \cparent{x\in\Omega \mid \temperature(t, x) %
@@ -169,7 +173,7 @@ limites de Neumann, tandis que sur la partie du bord
 $\Gamma_\mathrm{D}$ on spécifiera des conditions aux limites de
 Dirichlet. Finalement, on note $\Gamma(t)\subset \Omega$ la frontière
 commune de $\Omega_1(t)$ et $\Omega_2(t)$:
-\begin{equation}
+\begin{equation}\label{eq:phase-frontier}
   \Gamma(t) = \overline \Omega_1(t)\cap\overline \Omega_2(t)\ \forall
   t > 0.
 \end{equation}
@@ -196,10 +200,10 @@ complétées par les conditions aux limites:
   &\temperature(t, x) = \tliq, %
   &\forall (t, x) \in [0,\infty)\times\Gamma(t),\label{eq:heat-transition}\\
     %
-  &\temperature(t, x) = \temperature_\mathrm{D}(t, x), %
+  &\temperature(t, x) = \temperature_\mathrm{D}(x), %
   &\forall (t, x) \in [0,\infty)\times\Gamma_\mathrm{D}(t),\label{eq:heat-dirichlet}\\
     %
-  &\frac{\partial \temperature}{\partial n}(t, x) = \temperature_\mathrm{N}(t, x), %
+  &\frac{\partial \temperature}{\partial \nu}(t, x) = \temperature_\mathrm{N}(x), %
   &\forall (t, x) \in [0,\infty)\times\Gamma_\mathrm{N}(t),\label{eq:heat-neumann}
 \end{align}
 ainsi qu'une condition initiale appropriée à $t = 0$ pour $\temperature$.
@@ -209,13 +213,13 @@ solide satisfait la condition de Stefan. On note $v_\Gamma(t, x)$ la
 vitesse à l'instant $t$ d'une particule astreinte à la surface
 $\Gamma(t)$ au point $x \in \Gamma(t)$. On note $[g]_s^l$ la valeur du
 saut d'une quantité $g$ quelconque définie de part et d'autre de
-l'interface $\Gamma$. On note $n: \Gamma(t)\to \mathbb R^3$ le vecteur
+l'interface $\Gamma$. On note $\nu: \Gamma(t)\to \mathbb R^3$ le vecteur
 unité à la surface $\Gamma(t)$, dirigé vers la phase liquide, \ie,
 $\Omega_2$. La condition de Stefan pour l'interface $\Gamma(t)$
 s'écrit alors:
 \begin{equation}
   \electrolytedensity \fusionenthalpy v_\Gamma = %
-  - \left[\electrolytetdiff\nabla\temperature\right]_s^l\cdot n.%
+  - \left[\electrolytetdiff\nabla\temperature\right]_s^l\cdot \nu.%
   \label{eq:stefan-condition}
 \end{equation}
 La condition (\ref{eq:stefan-condition}) correspond à un bilan
@@ -226,8 +230,14 @@ front de solidification, tandis que le membre de droite correspond à
 la somme des flux d'énergie thermique au niveau du front de
 solidification.
 
+Le problème de Stefan classique consiste à chercher une fonction
+$\temperature:[0,\infty)\times\Omega\to\mathbb R$ et deux
+sous-domaines $\Omega_1,\Omega_2$ qui satisfasse les équations
+(\ref{eq:phase-domains}) et
+(\ref{eq:heat-solid-phase})-(\ref{eq:stefan-condition}).
+
 Le lecteur intéressé trouvera une discussion détaillée des différentes
-formulation des problèmes de Stefan et de leur analyse mathématique
+formulations des problèmes de Stefan et de leurs analyses mathématiques
 dans l'ouvrage de J. Hill \cite{HillStefanProblems}, ainsi que celui
 de L. I. Rubenstein \cite{Rubenstein1971}, par exemple.
 
@@ -242,48 +252,285 @@ pour la densité d'enthalpie $\enthalpydensity$ sous la forme:
   & \frac{\partial \enthalpydensity}{\partial t} %
   - \div\parent{ \nabla \beta(\enthalpydensity)} = 0,%
   & \forall (t, x) \in [0,\infty)\times \Omega,\label{eq:heat-one-phase}\\
-  &\beta(\enthalpydensity) = \temperature_\mathrm{D}, %
+  & \beta(\enthalpydensity) = \temperature_\mathrm{D}, %
   & \forall (t, x) \in [0,\infty)\times \Gamma_\mathrm{D},\label{eq:heat-one-phase-dirichlet}\\
-  &\frac{\partial \beta(\enthalpydensity)}{\partial n} = \temperature_\mathrm{N}, %
+  & \frac{\partial \beta(\enthalpydensity)}{\partial \nu} = \temperature_\mathrm{N}, %
   & \forall (t, x) \in [0,\infty)\times \Gamma_\mathrm{N}.\label{eq:heat-one-phase-neumann}
 \end{align}
-Ici, l'équation (\ref{eq:heat-one-phase}) est à comprendre au sens
-faible. Le lecteur intéressé par une preuve de cette équivalence peut
-consulter le travail de J. Hill \cite{HillStefanProblems}.\footnote{Ou
-plutôt le livre rouge, sur l'étagère en bas au fond à droite de la
+Ici, l'équation (\ref{eq:heat-one-phase}) et les conditions aux
+limites (\ref{eq:heat-one-phase-dirichlet}),
+(\ref{eq:heat-one-phase-neumann}) sont à comprendre au sens faible. Le
+lecteur intéressé par une preuve de cette équivalence peut consulter
+le travail de J. Hill \cite{HillStefanProblems}.\footnote{Ou plutôt le
+livre rouge, sur l'étagère en bas au fond à droite de la
 bibliothèque de mathématique...}
 
 Étant donné une fonction $\enthalpydensity$ qui satisfait les
-équations
-(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), la
-température est obtenue grâce à la fonction $\beta$, \ie,
+équations (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}),
+la température $\temperature$ est définie par la relation
 $\temperature(t, x) = \beta(\enthalpydensity(t, x))$ $\forall (t, x)
-\in [0,\infty)\times\Omega$.
+\in [0,\infty)\times\Omega$. Finalement les domaines $\Omega_1(t)$,
+$\Omega_2(t)$ occupés par les phases solide et liquides et la région
+de transition de phase $\Gamma(t)$ sont définis par les relations
+(\ref{eq:phase-domains}) et (\ref{eq:phase-frontier}).
+
+Cette formulation, qu'on qualifie d'enthalpique, présente l'avantage
+de ne pas devoir résoudre directement des domaines occupés par chacune
+des phases. La région de transition $\Gamma$ est obtenue par un
+post-processing de la densité d'enthalpie locale. Cet aspect est
+déterminant pour le choix du schéma numérique utilisé pour approcher
+la solution du problème de Stefan.
 
 
 % solution exacte: solution de Neumann si $\Omega = \rplus$.
 \subsection*{Solution exacte}
-Pour certains choix des données, le problème (\ref{eq:})-(\ref{eq:}),
-admet une solution exacte. On décrit à présent l'une d'elles,
-découverte en premier par J. Neumann. Cette solution à l'avantage de
-correspondre à une situation physique que l'on peut facilement
-interpréter.
+Un certain nombre de solutions exactes au problème de Stefan
+classique sont connues. On décrit à présent l'une d'elles, découverte en
+premier par J. Neumann. Cette solution a l'avantage de correspondre à
+une situation physique que l'on peut facilement interpréter.
 
-On suppose maintenant que $\electrolytehc(\temperature) = 1$ et
+On considère le problème de Stefan classique formé par les équations
+(\ref{eq:heat-solid-phase})-(\ref{eq:heat-liquid-phase}), et on fixe
+les données de la manière suivante. On fixe
+$\electrolytehc(\temperature) = 1$ et
 $\electrolytetdiff(\temperature)=1$ $\forall\temperature \in \mathbb
 R$, $\electrolytedensity = 1$, $\fusionenthalpy = 1$ et $\tliq =
 0$. On s'intéresse à la température dans un matériau qui occupe la
 demi-droite positive, c'est-à-dire que $\Omega = \rplus$.
 
+On choisit la condition initiale suivante pour la température
+$\temperature$:
+\begin{equation}
+  \temperature(0, x) = 0, \quad \forall x\in\rplus,
+\end{equation}
+et la condition aux limites de Dirichlet sur le bord $\Gamma_\mathrm{D} =
+\cparent{0}$:
+\begin{equation}
+  \temperature(t, 0) = -1, \quad \forall t > 0.
+\end{equation}
+
+On note $X(t) > 0$ la position du front de solidification à l'instant
+$t$. Dans ces conditions, on peut montrer par un calcul algébrique que
+la solution des équations
+(\ref{eq:heat-solid-phase})-(\ref{eq:stefan-condition}) s'écrit:
+\begin{align}
+  & X(t) = \sqrt{2\gamma t},& \forall t > 0,\label{eq:neumann-sol-frontier}\\
+  & \temperature(t, x) = -\gamma\int_{x / \sqrt{2\gamma
+      t}}^1\exp\parent{\frac{\gamma(1 - \xi^2)}{2}}\, \intd{\xi},%
+  & \forall (t, x) \in [0,\infty)\times[0,X(t)),\label{eq:neumann-sol-solid-phase}\\
+    & \temperature(t, x) = 0,
+    & \forall (t, x) \in [0,\infty)\times[X(t), \infty),\label{eq:neumann-sol-liquid-phase}
+\end{align}
+où on a noté $\gamma$ la constante réélle définie comme la solution de
+l'équation transcendante:
+\begin{equation}
+  \gamma \int_0^1\exp\parent{\frac{\gamma(1 - \xi)^2}{2}}\,\intd{\xi}
+  = 1.
+\end{equation}
+
+On trouvera les détails de la dérivation de cette solution, entre
+autres, dans l'ouvrage de J. Hill \cite{HillStefanProblems}.
+
+On calcul une approximation numérique de $\gamma$ à l'aide d'une
+itération de Newton, implémentée avec le logiciel MatLAB. On obtient
+\begin{equation}\label{eq:gamma}
+  \gamma =\num{0.768955338463582}.
+\end{equation}
+
+La solution
+(\ref{eq:neumann-sol-solid-phase})-(\ref{eq:neumann-sol-liquid-phase})
+pour la température $\temperature$ s'écrit de manière explicite
+en vue de son évaluation numérique sous la forme suivante:
+\begin{equation}\label{eq:neumann-sol}
+  \temperature(t, x) = \left\{
+  \begin{array}{ll}
+    -\exp\parent{\frac{\gamma}{2}}\sqrt{\frac{\pi\gamma}{2}} %
+    \parent{\erf{\frac{\gamma}{2}} - \erf{\frac{x}{2\sqrt{t}}}}, %
+    & \text{si } x \leq \sqrt{2\gamma t},\\
+    0 %
+    & \text{sinon,}
+  \end{array}
+  \right.
+\end{equation}
+où la fonction $\erf:\mathbb R\to(-1,1)$ est la fonction d'erreur
+standard définie par:
+\begin{equation}
+  \erf(x) = \frac{1}{\sqrt \pi}\int_0^x \exp\parent{-s^2}\,\intd{s}.
+\end{equation}
+
+La solution exacte (\ref{eq:neumann-sol}) est représentée sur la
+figure \ref{fig:neumann-sol} à l'instant $t = 0.5$, avec $\gamma$
+donné par la relation (\ref{eq:gamma}).
+
+\begin{figure}
+  \begin{center}
+    \input{../media/particles/remelt/neumann-exact.tex}
+    \caption{Solution exacte de Neumann du problème de Stefan classique
+      (\ref{eq:heat-solid-phase})-(\ref{eq:stefan-condition}), évaluée
+      à $t = 0.5$.}
+    \label{fig:neumann-sol}
+  \end{center}
+\end{figure}
+
+D'un point de vue physique, la solution exacte de Neumann correspond à
+la situation suivante. Un matériau, qui présente une transition entre
+les phases solide et liquide à $\tliq = 0$, occupe le demi espace
+$\cparent{(x_1, x_2, x_3)\in \mathbb R^3 \mid x_1 > 0}$. Ce matériau
+est initialement dans l'état liquide à la température $\temperature =
+\tliq$. Au temps initial, on le met en contact sur le bord
+$\cparent{(x_1, x_2, x_3)\in\mathbb R^3 \mid x_1 = 0}$ avec un
+réservoir thermique à température constante $\temperature = -1$. Au
+cours de l'évolution temporelle, un front de transition de phase, de
+liquide à solide, se propage dans le matériau. Pour des raisons de
+symétrie, le front de transition reste en tout temps parallèle au
+bord $\cparent{(x_1, x_2, x_3)\in\mathbb R^3 \mid x_1 = 0}$.
+
+On utilisera cette solution exacte dans la suite pour valider le schéma de
+discrétisation des équations
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), que l'on
+décrit maintenant.
+
 % discrétisation: symétrie sphérique ou plane, discrétisation en temps,
 %  discrétisation en espace.
-\subsection*{Schéma de discrétisation en espace et en temps}
+\subsection*{Schéma de discrétisation en temps}
+Pour obtenir un schéma de discrétisation en temps du problème de
+Stefan, on part de la formulation enthalpique
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), et on
+suit le travail de M. Paolini et al. \cite{Paolini1988}.
 
-% validation numérique: convergence de l'erreur.
+Soit un temps final $T > 0$, $N\in \mathbb \nstar$ le nombre de pas de
+temps. Soit $\tau = T / N$ le pas de temps et $t^n = \tau n$. On note
+$L_\beta$ la constante de Lipschitz de la fonction $\beta$:
+\begin{equation}
+  L_\beta = \sup_{\enthalpy}\abs{\beta(\enthalpy)}.
+\end{equation}
+Soit $\mu$ un paramètre de relaxation fixé, tel que $0 < \mu \leq
+1/L_\beta$.
+
+On note $\temperature^n(x)$ et $\enthalpydensity^n(x)$ les approximation
+de $\temperature(t^n, x)$ et $\enthalpydensity(t^n, x)\ \forall x\in
+\Omega$.  On suppose donnée la densité d'enthalpie initiale $h^0$, et
+on pose $\temperature^0 = \beta(h^0)$. Pour $0 < n \leq N$, on résoud
+successivement les équations:
+\begin{align}
+  &\temperature^{n+1} - \frac{\tau}{\mu} \Delta \temperature^{n+1} = %
+  \beta\parent{\enthalpydensity^n}, & \text{dans } \Omega,\label{eq:chernoff-heat}\\
+  &\temperature^{n+1}(x) = \temperature_{\mathrm D}(t^{n+1}, x), &
+  \forall x\in%
+  \Gamma_\mathrm{D},\label{eq:chernoff-dirichlet}\\
+  &\frac{\partial\temperature^{n+1}}{\partial \nu}(x) = %
+  \temperature_\mathrm{N}(t^{n+1}, x), %
+  & \forall x \in \Gamma_\mathrm{N},\label{eq:chernoff-neumann}
+\end{align}
+avec la correction pour la densité d'enthalpie à chaque pas de temps:
+\begin{equation}\label{eq:chernoff-update}
+\enthalpydensity^{n+1} = \enthalpydensity^{n} +
+\mu\parent{\temperature^{n+1} - \beta(\enthalpydensity^{n})}, \quad
+\text{dans } \Omega.
+\end{equation}
+
+Ce schéma numérique basé sur la formule de Chernoff
+(\ref{eq:chernoff-update}) a été proposé en premier par M. Paolini
+\cite{Paolini1988}. On décrit maintenant la discrétisation en
+espace des équations (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}).
+
+
+\subsection*{Discrétisation en espace}
+On considère deux cas particuliers qui permettent de réduire
+la complexité du calcul de la solution.
+
+Si $\delta > 0$, on dénote par $M_\delta$ un maillage du domaine
+$\Omega$ tel que le diamètre des éléments de $M_\delta$ soit borné par
+$\delta$.
+
+Formulation faible:
+\begin{equation}
+  \int_\Omega \temperature v\,\intd{x} + \frac{\tau}{\mu} %
+  \int_\Omega \nabla \temperature \nabla v\,\intd{x} - %
+  \int_{\Gamma_\mathrm{N}} \temperature_\mathrm{N}v\,\intd{x} %
+  = 0,
+\end{equation}
+
+https://fr.wikipedia.org/wiki/Int%C3%A9grale_multiple#Changements_de_variables_usuels
+
+Soit $\Phi:[0,\infty)\times[0,2\pi]\times[0,\pi)\to\mathbb R^3$ le
+changement de variable en coordonnées sphériques défini par:
+\begin{equation}
+  \Phi(r, \psi, \phi) = \begin{pmatrix}
+    r\cos\psi\sin\phi\\
+    r\sin\psi\sin\phi\\
+    r\cos\phi
+  \end{pmatrix}.
+\end{equation}
+Le jacobien de $\Phi$ est donné par
+\begin{equation}
+  \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
+\end{equation}
+
+Lorsque $\Omega \subset \mathbb R^3$ et que les données du
+problème de Stefan
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann})
+dépendent uniquement de la coordonnée $x_1$, on cherchera une solution
+$h$ qui ne dépende que de $x_1$, \ie, une solution qui présente la
+même symétrie que les données.
+
+De même, lorsque $\Omega \subset \mathbb R^3$ et que les données du
+problème de Stefan
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann})
+présentent une symétrie sphérique, on cherchera une solution
+$h$ qui ne dépende que de la distance à l'origine $r$.
+
+Ces deux hypothèses permettent, dans un cas comme dans l'autre de
+réduire la formulation élément finis associée aux équations
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}) à un
+problème unidimensionnel.
+
+
+
 \subsection*{Validation numérique}
+Pour valider l'implémentation du schéma numérique
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}), on évalue la
+convergence de l'erreur entre la solution exacte définie par la
+relation (\ref{eq:neumann-sol}) et $\temperature^N_\delta$,
+l'approximation de la température à l'instant $T$. On fixe $\mu =
+L_\beta = 1$. On choisit $\Omega = [0, 1] \subset \rplus$ et $T =
+0.5$. On choisit $N$ dans l'intervalle $[100, 12800]$, et $\delta =
+O(\tau)$.
 
-% application: formation et refonte de bain gele autour d'une particule.
+\begin{figure}
+  \begin{center}
+    \input{../media/particles/remelt/neumann-convergence-h.tex}
+    \caption{Erreur $L^2$ entre la solution exacte de Neumann et
+      l'approximation numérique $\temperature^N_\delta$}
+    \label{fig:neumann-convergence}
+  \end{center}
+\end{figure}
 
+On constate sur la figure \ref{fig:neumann-convergence} que l'erreur
+$L^2$ entre la solution exacte et l'approximation numérique converge
+vers 0, avec un ordre approximatif $O(h^{3/4})$.
+
+
+
+
+% application: formation et refonte de bain gele autour d'une
+% particule.
+\subsection*{Formation de gel autour d'une particule}
+Dans cette partie, on applique la méthode numérique
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-heat-neumann}) au calcul de
+la formation de gel autour d'une particule de bain gelé.
+
+On donne dans le tableau \ref{tab:freeze-physical-parameters} la
+valeur des différents paramètres physique liés aux propriétés
+thermiques du bain électrolytique.
+
+Puisqu'on s'intéresse à une particule sphérique, on fait l'hypothèse
+que les données du problème présentent une symétrie sphérique. Ainsi,
+on décrite l'ensemble des données en fonction de la distance à
+l'origine $r$. De plus, on cherche la température $\temperature$ dans
+l'électrolyte en fonction de la coordonnée $r$. Par abus de notation
+et pour éviter de surcharger les notation, on réutilise les mêmes
+symbols, mais explicitant la coordonnée $r$.
 
 Soit $\tinj\in\mathbb R$ la température à laquelle se trouve les
 particules d'alumine au moment de leur injection dans la cuve, et
@@ -291,12 +538,12 @@ $\telectrolyte$ la température du bain électrolytique. La condition
 initiale du système formé par la particule et le bain environnant est
 définie par:
 \begin{equation}
-  \tinit(x) = \left\{
+  \tinit(r) = \left\{
   \begin{array}{ll}
-    \tinj & \text{ si } \norm{x} < R_p,\\
-    \telectrolyte & \text{ si } \norm{x} \geq R_p,\\
+    \tinj & \text{ si } r < R_p,\\
+    \telectrolyte & \text{ si } r \geq R_p,\\
   \end{array}
-  \right.\quad \forall x\in\mathbb R^3.\label{eq:initial-temperature}
+  \right.\quad \forall r\in \rplus .\label{eq:initial-temperature}
 \end{equation}
 
 La figure \ref{fig:particle-initial-temperature} représente la
@@ -315,39 +562,6 @@ est au repos en tout temps.
   \end{center}
 \end{figure}
 
-Soit $\enthalpydensity(t, x)$ la densité d'enthalpie au point
-$x\in\mathbb R^3$ et au temps $t > 0$ dans le système formé par la
-particule de rayon $R_p$ placée à l'origine et le bain électrolytique
-occupant le reste de l'espace. La densité d'enthalpie
-$\enthalpydensity$ est solution du problème suivant:
-\begin{align}
-  &\frac{\partial \enthalpydensity}{\partial t}(t,x) -\div %
-  \parent{\electrolytetdiff\nabla \temperature(t, x)} = 0,& \quad %
-  \forall (t, x) \in [0,\infty)\times \mathbb R^3,\label{eq:stefan-1}\\
-  &\temperature(t, x) = \beta(\enthalpydensity(t, x)), & \quad %
-  \forall (t, x) \in [0,\infty)\times \mathbb R^3,\label{eq:stefan-2}\\
-    &\temperature(0, x) = \tinit(x),& \quad \forall x\in \mathbb R^3.\label{eq:stefan-3}
-\end{align}
-Puisque la condition initiale (\ref{eq:initial-temperature}) présente
-une symétrie sphérique, et que le système formé par les équations
-(\ref{eq:stefan-1})-(\ref{eq:stefan-3}) est invariant par symétrie
-sphérique, on cherche une solution à symétrie sphérique. On définit
-les fonctions $\enthalpydensityr(t, r)$ et $\temperaturer(t, r)$, la
-densité d'enthalpie et la température au temps $t$ et à distance $r$
-de l'origine.
-
-Les équations (\ref{eq:stefan-1})-(\ref{eq:stefan-3}) se réécrivent en
-fonction de la coordonnée $r$ de la manière suivante:
-\begin{align}
-  &\frac{\partial\enthalpydensityr}{\partial t}(t, r) -
-  \frac{1}{r^2}\frac{\partial}{\partial
-    r}\parent{\electrolytetdiff r^2\frac{\partial \temperaturer}{\partial r}} = 0, &\quad
-  \forall (t, r)\in [0, \infty)\times \rplus,\label{eq:stefan-r-1}\\
-    &\temperaturer(t, r) = \beta(\enthalpydensityr(t, r)), &\quad
-    \forall (t, r)\in [0, \infty)\times \rplus,\label{eq:stefan-r-2}\\
-      &\temperaturer(0, r) = \tinit(r),&\quad \forall r \in \rplus.\label{eq:stefan-r-3}
-\end{align}
-
 On note $R_f$ la distance entre l'origine et la position du front de
 solidification, définie par la relation:
 \begin{equation}
@@ -365,11 +579,29 @@ zéro:
   R_g(\tlat).
 \end{equation}
 
-Le problème formé par les équations
-(\ref{eq:stefan-r-1})-(\ref{eq:stefan-r-3}) est un problème de
-Stefan. Dans la section qui suit on décrit le schéma de discrétisation
-utilisé, en suivant le travail de Y. Safa \cite{Safa2005}.
+On considère une particule de bain solidifié de rayon initial $R_0
+=$\num{40}, \num{60}, \num{80}\si{\micro\meter}. La figure
+\ref{fig:freeze-radius} présente l'évolution du rayon de la
+particule
 
+\begin{figure}
+\begin{center}
+  \input{../media/particles/remelt/frozen-layer-sur2-5.tex}
+  \input{../media/particles/remelt/frozen-layer-sur5.tex}
+  \input{../media/particles/remelt/frozen-layer-sur10.tex}
+  \caption{Evolution du rayon de la sphère de bain gelé pour des
+    température de surchauffe de \num{2.5}\si{\kelvin},
+    \num{5}\si{\kelvin} et \num{10}\si{\kelvin} et des particules de
+    rayons initiaux $r_0 = $\num{40}\si{\micro\meter},
+    \num{60}\si{\micro\meter} et \num{80}\si{\micro\meter}.}
+  \label{fig:freeze-radius}
+\end{center}
+\end{figure}
 
-\subsection*{Discrétisation du problème de Stefan}
-Soit
+La température initiale de la particule est $T_\text{inj} =
+423.15\si{\kelvin}$.  Dans le cas le plus défavorable où $T -
+T_\text{Liq} = 2.5\si{\kelvin}$ et $r_0 = 80\si{\micro\meter}$, le
+temps nécessaire pour refondre entièrement la couche de gel est de
+l'ordre de 120\si{\milli\second}.
+
+\subsection*{Conclusion}
