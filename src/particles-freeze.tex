@@ -451,7 +451,7 @@ Formulation faible:
   = 0,
 \end{equation}
 
-https://fr.wikipedia.org/wiki/Int%C3%A9grale_multiple#Changements_de_variables_usuels
+%https://fr.wikipedia.org/wiki/Int%C3%A9grale_multiple#Changements_de_variables_usuels
 
 Soit $\Phi:[0,\infty)\times[0,2\pi]\times[0,\pi)\to\mathbb R^3$ le
 changement de variable en coordonnées sphériques défini par:
@@ -466,6 +466,19 @@ Le jacobien de $\Phi$ est donné par
 \begin{equation}
   \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
 \end{equation}
+
+On note $\tilde \temperature = \temperature \circ \Phi$ et $\tilde
+\enthalpydensity = \enthalpydensity \circ \Phi$ les fonctions
+température et densité d'enthalpie en coordonnées sphérique.
+\begin{equation}
+\tilde\temperature(r,\psi,\phi) = \temperature(\Phi())
+\end{equation}
+
+
+On fait l'hypothèse que les fonctions température $\temperature$ et la
+densité d'enthalpie $\enthalpydensity$ ont une symétrie sphérique,
+\ie, dans un système de coordonnées sphériques $(r,\psi,\phi)$,
+elles ne dépendent que de la coordonnée $r$.
 
 Lorsque $\Omega \subset \mathbb R^3$ et que les données du
 problème de Stefan
