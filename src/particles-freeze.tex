@@ -439,21 +439,30 @@ espace des équations (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}).
 
 
 \subsection*{Discrétisation en espace}
+On cherche maintenant une solution du système d'équations à symétrie
+sphérique
+
+La formulation faible du système d'équations
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) consiste $\forall
+n\leq N$ à cherche une fonction $\temperature^{n+1}$ telle que pour
+toute fonction test $v$ on aie:
+\begin{equation}
+  \int_\Omega \temperature v\,\intd{x} + \frac{\tau}{\mu} %
+  \int_\Omega \nabla \temperature \nabla v\,\intd{x} - %
+  \int_{\Gamma_\mathrm{N}} \temperature_\mathrm{N}v\,\intd{x} %
+  = 0.
+\end{equation}
 On considère deux cas particuliers qui permettent de réduire
 la complexité du calcul de la solution.
+
+On fait maintenant l'hypothèse que la solution recherchée
+$\temperature^{n+1}$ est à symétrie sphérique. Dans ce cadre,
 
 Si $\delta > 0$, on dénote par $M_\delta$ un maillage du domaine
 $\Omega$ tel que le diamètre des éléments de $M_\delta$ soit borné par
 $\delta$.
 
-On cherche maintenant une solution du système d'équations à symétrie
-sphérique
-\begin{equation}
-  \int_\Omega \temperature v\,\intd{x} + \frac{\tau}{\mu} %
-  \int_\Omega \nabla \temperature \nabla v\,\intd{x} - %
-  \int_{\Gamma_\mathrm{N}} \temperature_\mathrm{N}v\,\intd{x} %
-  = 0,
-\end{equation}
+
 
 
 %https://en.wikipedia.org/wiki/Del_in_cylindrical_and_spherical_coordinates
