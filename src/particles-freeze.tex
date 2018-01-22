@@ -1,11 +1,14 @@
 % introduction: dans cette section, on introduit le problème de Stefan
 %  pour une particule isolée dans un bain électrolytique infini
-\subsection*{Introduction}
 Dans cette section nous détaillons et étudions numériquement les
-phénomènes physiques qui motivent la nécessité de considérer un temps
-de latence préalable au début de la dissolution des grains d'alumine
-dans le bain électrolytique.
-
+phénomènes physiques qui sont responsables du temps de latence
+préalable au début de la dissolution des grains d'alumine dans le bain
+électrolytique. Dans ce but, on considère un modèle de Stefan pour
+traiter le problème de la transition de phase dans le bain
+électrolytique environnant une région de bain solidifiée. Pour
+approcher numériquement l'évolution de la région de transition de
+phase autour de la particule de bain, on fera l'hypothèse d'une
+symétrique sphérique de la solution.
 
 % description du système: particule et bain, symétrie sphérique,
 %  caractérisation des matériaux.
@@ -321,7 +324,7 @@ la solution des équations
     & \temperature(t, x) = 0,
     & \forall (t, x) \in [0,\infty)\times[X(t), \infty),\label{eq:neumann-sol-liquid-phase}
 \end{align}
-où on a noté $\gamma$ la constante réélle définie comme la solution de
+où on a noté $\gamma$ la constante réelle définie comme la solution de
 l'équation transcendante:
 \begin{equation}
   \gamma \int_0^1\exp\parent{\frac{\gamma(1 - \xi)^2}{2}}\,\intd{\xi}
@@ -410,7 +413,7 @@ Soit $\mu$ un paramètre de relaxation fixé, tel que $0 < \mu \leq
 On note $\temperature^n(x)$ et $\enthalpydensity^n(x)$ les approximation
 de $\temperature(t^n, x)$ et $\enthalpydensity(t^n, x)\ \forall x\in
 \Omega$.  On suppose donnée la densité d'enthalpie initiale $h^0$, et
-on pose $\temperature^0 = \beta(h^0)$. Pour $0 < n \leq N$, on résoud
+on pose $\temperature^0 = \beta(h^0)$. Pour $0 < n \leq N$, on résout
 successivement les équations:
 \begin{align}
   &\temperature^{n+1} - \frac{\tau}{\mu} \Delta \temperature^{n+1} = %
@@ -443,7 +446,8 @@ Si $\delta > 0$, on dénote par $M_\delta$ un maillage du domaine
 $\Omega$ tel que le diamètre des éléments de $M_\delta$ soit borné par
 $\delta$.
 
-Formulation faible:
+On cherche maintenant une solution du système d'équations à symétrie
+sphérique
 \begin{equation}
   \int_\Omega \temperature v\,\intd{x} + \frac{\tau}{\mu} %
   \int_\Omega \nabla \temperature \nabla v\,\intd{x} - %
@@ -451,7 +455,10 @@ Formulation faible:
   = 0,
 \end{equation}
 
+
+%https://en.wikipedia.org/wiki/Del_in_cylindrical_and_spherical_coordinates
 %https://fr.wikipedia.org/wiki/Int%C3%A9grale_multiple#Changements_de_variables_usuels
+
 
 Soit $\Phi:[0,\infty)\times[0,2\pi]\times[0,\pi)\to\mathbb R^3$ le
 changement de variable en coordonnées sphériques défini par:
@@ -465,6 +472,15 @@ changement de variable en coordonnées sphériques défini par:
 Le jacobien de $\Phi$ est donné par
 \begin{equation}
   \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
+\end{equation}
+
+Par hypothèse de symétrie, la température $\tilde\temperature$ ne
+dépend pas des coordonnées $\psi$ et $\phi$.
+
+\begin{equation}
+\int_\Omega \temperature(r)
+v(r)r^2\sin\phi\intd{r}\intd{\psi}\intd{\phi}
++\frac{\tau}{\mu}\int_\Omega
 \end{equation}
 
 On note $\tilde \temperature = \temperature \circ \Phi$ et $\tilde
@@ -530,12 +546,35 @@ vers 0, avec un ordre approximatif $O(h^{3/4})$.
 % particule.
 \subsection*{Formation de gel autour d'une particule}
 Dans cette partie, on applique la méthode numérique
-(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-heat-neumann}) au calcul de
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) au calcul de
 la formation de gel autour d'une particule de bain gelé.
 
 On donne dans le tableau \ref{tab:freeze-physical-parameters} la
 valeur des différents paramètres physique liés aux propriétés
 thermiques du bain électrolytique.
+
+\begin{table}
+  \begin{center}
+    \caption{Paramètres physiques qui interviennent dans le
+      phénomène de formation de gel autour de particules.}
+    \label{tab:freeze-physical-parameters}
+  \begin{tabularx}{\textwidth}{@{}lllX@{}}
+    \toprule
+    Quantité          & Valeur     & Unité                           & Description \\
+    \midrule
+    $\electrolytedensity$         & \num{2130} & \si{\kg\per\cubic\meter}        & Masse volumique du bain électrolytique\\
+    $\electrolyteshc$ & \num{} & \si{\joule\per\kilo\gram\per\kelvin} & Chaleur spécifique de  l'électrolyte dans la phase solide,\\
+    $\electrolytelhc$ & \num{} & \si{\joule\per\kilo\gram\per\kelvin} & Chaleur spécifique de
+    l'électrolyte dans la phase liquide,\\
+    $\tinj$ & \num{423.15} & \si{\kelvin} & Température de la
+    particule de bain gelé au moment de l'injection\\
+    $\tliq$ & \num{1223.2} & \si{\kelvin} & Température du liquidus de
+    l'électrolyte\\
+    $\electrolytetdiff$ & \num{2.0} & \si{\joule\per\second\per\meter\per\kelvin} & Conductivité thermique de l'électrolyte \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+\end{table}
 
 Puisqu'on s'intéresse à une particule sphérique, on fait l'hypothèse
 que les données du problème présentent une symétrie sphérique. Ainsi,
@@ -543,7 +582,7 @@ on décrite l'ensemble des données en fonction de la distance à
 l'origine $r$. De plus, on cherche la température $\temperature$ dans
 l'électrolyte en fonction de la coordonnée $r$. Par abus de notation
 et pour éviter de surcharger les notation, on réutilise les mêmes
-symbols, mais explicitant la coordonnée $r$.
+symboles, mais explicitant la coordonnée $r$.
 
 Soit $\tinj\in\mathbb R$ la température à laquelle se trouve les
 particules d'alumine au moment de leur injection dans la cuve, et
@@ -592,17 +631,12 @@ zéro:
   R_g(\tlat).
 \end{equation}
 
-On considère une particule de bain solidifié de rayon initial $R_0
-=$\num{40}, \num{60}, \num{80}\si{\micro\meter}. La figure
-\ref{fig:freeze-radius} présente l'évolution du rayon de la
-particule
-
 \begin{figure}
 \begin{center}
   \input{../media/particles/remelt/frozen-layer-sur2-5.tex}
   \input{../media/particles/remelt/frozen-layer-sur5.tex}
   \input{../media/particles/remelt/frozen-layer-sur10.tex}
-  \caption{Evolution du rayon de la sphère de bain gelé pour des
+  \caption{Évolution du rayon de la sphère de bain gelé pour des
     température de surchauffe de \num{2.5}\si{\kelvin},
     \num{5}\si{\kelvin} et \num{10}\si{\kelvin} et des particules de
     rayons initiaux $r_0 = $\num{40}\si{\micro\meter},
@@ -610,11 +644,51 @@ particule
   \label{fig:freeze-radius}
 \end{center}
 \end{figure}
+On considère une particule de bain solidifié de rayon initial $R_0 =$
+\num{40}\si{\micro\meter}, \num{60}\si{\micro\meter} et
+\num{80}\si{\micro\meter}. La surchauffe du bain électrolytique est
+définie ici comme la différence entre la température initiale du bain
+$\telectrolyte$ et la température de liquidus $\tliq$. La figure
+\ref{fig:freeze-radius} présente l'évolution du rayon de la particule
+pour trois surchauffes différentes du bain électrolytique environnant.
+
+On constate que le temps nécessaire à refondre le bain gelé
+diminue avec la surchauffe. De même, le temps de refonte diminue avec
+la taille de la particule.
 
 La température initiale de la particule est $T_\text{inj} =
-423.15\si{\kelvin}$.  Dans le cas le plus défavorable où $T -
+423.15\si{\kelvin}$. Dans le cas le plus défavorable où $T -
 T_\text{Liq} = 2.5\si{\kelvin}$ et $r_0 = 80\si{\micro\meter}$, le
 temps nécessaire pour refondre entièrement la couche de gel est de
 l'ordre de 120\si{\milli\second}.
 
-\subsection*{Conclusion}
+Dans les calculs présentés ici, on a fait plusieurs hypothèses
+simplificatrices. On a supposé que le fluide environnant est au
+repos, ce qui n'est certainement pas le cas dans une cuve
+d'électrolyse industrielle. Les forces de Lorentz et la formation de
+bulles de gaz agitent les fluides, et créent des turbulences qui sont,
+entre autres, de l'échelle des particules \cite{Rochat2016}. Une
+agitation de l'électrolyte au voisinage d'une particule accélère le
+transport de l'énergie thermique, et tend à accélérer la refonte du
+bain gelé.
+
+Pour simplifier le modèle, nous avons étudié la formation de gel
+autour d'une particule sphérique de bain solidifiée. Bien entendu,
+dans une cuve d'électrolyse industrielle on injecte des particules
+particules d'alumine à basse température, plutôt que des particule de
+bain gelé. Cependant, les propriétés thermiques des deux systèmes sont
+proches, ce qui justifie cette approximation.
+
+Lors de l'injection d'une dose de particules d'alumine, l'hypothèse
+d'une particule isolée dans un bain infini au repos n'est plus
+vérifiée. Les différentes particules qui constituent la dose
+interagissent thermiquement entre elles par l'intermédiaire du bain
+environnant. Ce comportement explique la raison pour laquelle
+l'hypothèse de particules isolée mène à des temps typique de
+formation et refonte de gel largement inférieurs aux valeurs
+recommandées par exemple dans le travail de V. Dassylva-Raymond \cite{Dassylva2015}.
+
+Selon la recommandation de V. Dassylva-Raymond \cite{Dassylva2015}, on
+choisira, dans la suite, pour le temps de latence d'une dose de
+particules injectées dans le bain une valeur uniforme $\tlat =
+1\si{\second}$, indépendante du rayon.
