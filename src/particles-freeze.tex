@@ -434,38 +434,46 @@ $\abs{\Gamma_\mathrm{N}} = 0$.
 
 
 \subsection*{Discrétisation en espace}
-On donne maintenant la discrétisation du problème faible
-(\ref{eq:weak-form-spher-coord}) par une méthode de Galerkin. Soit un
-réel $\delta$ tel que $0 < \delta < \rmax$, et une subdivision
-$\mathcal T_\delta$ de l'intervalle $[0, \rmax]$, telle que pour tout
-élément $K\in\mathcal T_\delta$ son diamètre $\diam(K)$ soit borné par
-$\delta$.
-
-On définit l'espace éléments finis
-\begin{equation}
-V_\delta = \cparent{v \in C^0(0, \rmax)\mid v\vert_K \in \mathbb
-  P_1(K)\ \forall K\in\mathcal T_h},
-\end{equation}
-où $\mathbb P_1(K)$ est l'espace des polynômes de degré 1 sur
-l'intervalle $K$.
-
-Pour tout $n \leq N$, on note $\tilde \temperature_\delta^{n+1} \in
-V_\delta$ une approximation de la fonction $\tilde \temperature_\delta^{n+1}$.
-L'approximation de Galerkin du problème faible (\ref{eq:weak-form-spher-coord})
-consiste à chercher une fonction $\tilde \temperature_\delta^{n+1} \in
-V_\delta$ telle que la relation
-\begin{multline}\label{eq:galerkin-weak-form-spher-coord}
-  4\pi\int_0^{\rmax} \tilde \temperature_\delta^{n+1}\tilde v_\delta r^2\,\intd{r}
-  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\partial %
-    \tilde \temperature_\delta^{n+1}}{\partial r} \frac{\partial \tilde v_\delta}{\partial %
-    r}r^2\,\intd{r} \\
-  - \frac{\abs{\Gamma_N}}{\rmax^2}\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v_\delta(\rmax) %
-  = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity_\delta^n)\tilde v_\delta r^2\,\intd{r},
-\end{multline}
-soit vérifiée pour tout $v_\delta \in V_\delta$. Les intégrales qui
+On considère une subdivision uniforme $0 = r_0 < r_1 < \dots < r_{N_r}
+= \rmax$ de l'intervalle $[0, \rmax]$, et on note $\delta$ taille des
+intervalles, \ie, $\delta = r_{i+1} - r_i$ $\forall i = 0,1,\dots,N_r
+- 1$. Pour discrétiser le problème faible
+(\ref{eq:weak-form-spher-coord}) on utilise une méthode éléments finis
+Lagrange continue, linéaire par morceau. Les intégrales qui
 interviennent dans l'expression
 (\ref{eq:galerkin-weak-form-spher-coord}) sont approchées
 numériquement par une formule de quadrature de Gauss à 3 points.
+
+
+%%On donne maintenant la discrétisation du problème faible
+%%(\ref{eq:weak-form-spher-coord}) par une méthode de Galerkin. Soit un
+%%réel $\delta$ tel que $0 < \delta < \rmax$, et une subdivision
+%%$\mathcal T_\delta$ de l'intervalle $[0, \rmax]$, telle que pour tout
+%%élément $K\in\mathcal T_\delta$ son diamètre $\diam(K)$ soit borné par
+%%$\delta$.
+%%
+%%On définit l'espace éléments finis
+%%\begin{equation}
+%%V_\delta = \cparent{v \in C^0(0, \rmax)\mid v\vert_K \in \mathbb
+%%  P_1(K)\ \forall K\in\mathcal T_h},
+%%\end{equation}
+%%où $\mathbb P_1(K)$ est l'espace des polynômes de degré 1 sur
+%%l'intervalle $K$.
+%%
+%%Pour tout $n \leq N$, on note $\tilde \temperature_\delta^{n+1} \in
+%%V_\delta$ une approximation de la fonction $\tilde \temperature_\delta^{n+1}$.
+%%L'approximation de Galerkin du problème faible (\ref{eq:weak-form-spher-coord})
+%%consiste à chercher une fonction $\tilde \temperature_\delta^{n+1} \in
+%%V_\delta$ telle que la relation
+%%\begin{multline}\label{eq:galerkin-weak-form-spher-coord}
+%%  4\pi\int_0^{\rmax} \tilde \temperature_\delta^{n+1}\tilde v_\delta r^2\,\intd{r}
+%%  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\partial %
+%%    \tilde \temperature_\delta^{n+1}}{\partial r} \frac{\partial \tilde v_\delta}{\partial %
+%%    r}r^2\,\intd{r} \\
+%%  - \frac{\abs{\Gamma_N}}{\rmax^2}\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v_\delta(\rmax) %
+%%  = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity_\delta^n)\tilde v_\delta r^2\,\intd{r},
+%%\end{multline}
+%%soit vérifiée pour tout $v_\delta \in V_\delta$.
 
 \subsection*{Solution exacte}
 Un certain nombre de solutions exactes au problème de Stefan
