@@ -284,8 +284,189 @@ post-processing de la densité d'enthalpie locale. Cet aspect est
 déterminant pour le choix du schéma numérique utilisé pour approcher
 la solution du problème de Stefan.
 
+% discrétisation: symétrie sphérique ou plane, discrétisation en temps,
+%  discrétisation en espace.
+\subsection*{Schéma de discrétisation en temps}
+Pour obtenir un schéma de discrétisation en temps du problème de
+Stefan, on part de la formulation enthalpique
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), et on
+suit le travail de M. Paolini et al. \cite{Paolini1988}.
 
-% solution exacte: solution de Neumann si $\Omega = \rplus$.
+Soit un temps final $T > 0$, $N\in \mathbb \nstar$ le nombre de pas de
+temps. Soit $\tau = T / N$ le pas de temps et $t^n = \tau n$. On note
+$L_\beta$ la constante de Lipschitz de la fonction $\beta$:
+\begin{equation}
+  L_\beta = \sup_{\enthalpy}\abs{\beta(\enthalpy)}.
+\end{equation}
+Soit $\mu$ un paramètre de relaxation fixé, tel que $0 < \mu \leq
+1/L_\beta$.
+
+On note $\temperature^n(x)$ et $\enthalpydensity^n(x)$ les approximation
+de $\temperature(t^n, x)$ et $\enthalpydensity(t^n, x)\ \forall x\in
+\Omega$.  On suppose donnée la densité d'enthalpie initiale $h^0$, et
+on pose $\temperature^0 = \beta(h^0)$. Pour $0 < n \leq N$, on résout
+successivement les équations:
+\begin{align}
+  &\temperature^{n+1} - \frac{\tau}{\mu} \Delta \temperature^{n+1} = %
+  \beta\parent{\enthalpydensity^n}, & \text{dans } \Omega,\label{eq:chernoff-heat}\\
+  &\temperature^{n+1}(x) = \temperature_{\mathrm D}(t^{n+1}, x), &
+  \forall x\in%
+  \Gamma_\mathrm{D},\label{eq:chernoff-dirichlet}\\
+  &\frac{\partial\temperature^{n+1}}{\partial \nu}(x) = %
+  \temperature_\mathrm{N}(t^{n+1}, x), %
+  & \forall x \in \Gamma_\mathrm{N},\label{eq:chernoff-neumann}
+\end{align}
+avec la correction pour la densité d'enthalpie à chaque pas de temps:
+\begin{equation}\label{eq:chernoff-update}
+\enthalpydensity^{n+1} = \enthalpydensity^{n} +
+\mu\parent{\temperature^{n+1} - \beta(\enthalpydensity^{n})}, \quad
+\text{dans } \Omega.
+\end{equation}
+
+Ce schéma numérique basé sur la formule de Chernoff
+(\ref{eq:chernoff-update}) a été proposé en premier par M. Paolini
+\cite{Paolini1988}. On décrit maintenant la discrétisation en
+espace des équations (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}).
+
+
+\subsection*{Formulation du schéma de Chernoff en coordonnées sphériques}
+Soit $\Phi:[0,\infty)\times[0,2\pi)\times[0,\pi)\to\mathbb R^3$ le
+changement de variable de coordonnées sphériques en coordonnées
+cartésiennes défini par:
+\begin{equation}
+  \Phi(r, \psi, \phi) = \begin{pmatrix}
+    r\cos\psi\sin\phi\\
+    r\sin\psi\sin\phi\\
+    r\cos\phi
+  \end{pmatrix}.
+\end{equation}
+Le jacobien de $\Phi$ est donné par:
+\begin{equation}\label{eq:spherical-jacobian}
+  \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
+\end{equation}
+Pour toute fonction $f:\mathbb R^3\to\mathbb R$, on note la fonction
+associée en coordonnées sphérique $\tilde
+f:[0,\infty)\times[0,2\pi)\times[0,\pi)\to\mathbb R$ définie par:
+\begin{equation}
+  \tilde f(r, \psi, \phi) = \parent{f \circ \Phi}(r, \psi, \phi).
+\end{equation}
+
+On dit qu'une fonction $f:\mathbb R^3\to\mathbb R$ est à symétrie
+sphérique si la fonction $\tilde f$ ne dépend que de la coordonnée
+$r$, c'est-à-dire que
+\begin{equation}\label{eq:spherical-symmetry}
+  \frac{\partial \tilde f}{\partial \psi} = 0 %
+  \quad \text{et} \quad %
+  \frac{\partial \tilde f}{\partial \phi} = 0.
+\end{equation}
+Par abus de notation, si une fonction possède une symétrie
+sphérique on omettra les coordonnées $\psi$ et $\phi$ et on
+l'identifiera à une fonction définie sur le domaine $\rplus$.
+
+Enfin, on rappelle que le gradient $\nabla f$ en coordonnées
+sphérique s'écrit:
+\begin{equation}\label{eq:spherical-gradient}
+  \tilde\nabla \tilde f = %
+  \frac{\partial \tilde f}{\partial r} \hat e_r %
+  + \frac{1}{r}\frac{\partial \tilde f}{\partial \psi}\hat e_\psi %
+  + \frac{1}{r\sin\psi}\frac{\partial \tilde f}{\partial \phi} \hat e_\phi,
+\end{equation}
+où les vecteurs orthonormés $\hat e_r$, $\hat e_\psi$ et $\hat
+e_\phi$ forment la base standard associées au système de
+coordonnées sphérique.
+
+On se donne un réel $\rmax > 0$ et le domaine $\Omega = \mathcal B(0,
+\rmax) \subset \mathbb R^3$ la boule ouverte de centre $0$ de rayon
+$\rmax$. On suppose maintenant que les données du problème de Stefan
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), \ie, les
+fonctions $\temperature_\mathrm{D}$, $\temperature_\mathrm{N}$ ainsi
+que la condition initiale $\tinit$ pour la température, sont à
+symétrie sphérique:
+\begin{align}
+  \frac{\partial \tilde \temperature_{\mathrm{D}}}{\partial \psi} = \frac{\partial \tilde \temperature_{\mathrm{D}}}{\partial \phi} = 0,\quad
+  \frac{\partial \tilde \temperature_{\mathrm{N}}}{\partial \psi} = \frac{\partial \tilde \temperature_{\mathrm{N}}}{\partial \phi} = 0,\quad
+  \frac{\partial \tinitr}{\partial \psi} = \frac{\partial \tinitr}{\partial \phi} = 0.
+\end{align}
+
+La subdivision du bord $\Gamma_\mathrm{D}$, $\Gamma_\mathrm{N}$ doit
+également satisfaire la condition de symétrie. Par conséquent, on a
+soit $\Gamma_\mathrm{D} = \partial\mathcal B(0,\rmax)$ et
+$\Gamma_\mathrm{N} = \emptyset$, soit $\Gamma_\mathrm{D} = \emptyset$
+et $\Gamma_\mathrm{N} = \partial\mathcal B(0,\rmax)$.
+
+Sous ces hypothèses, on cherche une solution au problème de Stefan
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}) en
+utilisant le schéma de Chernoff
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}) qui soit également
+à symétrie sphérique.
+
+La formulation faible du système d'équations
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) consiste $\forall
+n\leq N$ à chercher une fonction $\temperature^{n+1}\in H_0^1(\Omega)$
+à symétrie sphérique telle que la relation:
+\begin{equation}\label{eq:weak-form-cart-coord}
+  \int_\Omega \temperature^{n+1} v\,\intd{x} + \frac{\tau}{\mu} %
+  \int_\Omega \nabla \temperature^{n+1} \nabla v\,\intd{x} - %
+  \int_{\Gamma_\mathrm{N}} \temperature^{n+1}_\mathrm{N} v\,\intd{\sigma} %
+  = \int_\Omega \beta(\enthalpydensity^n)v\,\intd{x}
+\end{equation}
+soit vérifiée pour toute fonction test $v\in H_0^1(\Omega)$ à symétrie
+sphérique.
+
+On réecrit l'expression (\ref{eq:weak-form-cart-coord}) en formulant
+les intégrales en coordonnées sphériques. En utilisant
+(\ref{eq:spherical-jacobian}), (\ref{eq:spherical-symmetry}),
+(\ref{eq:spherical-gradient}) et en intégrant par rapport aux
+coordonnées $\psi$ et $\phi$ on obtient:
+\begin{multline}\label{eq:weak-form-spher-coord}
+  4\pi\int_0^{\rmax} \tilde \temperature^{n+1}\tilde v r^2\,\intd{r}
+  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\partial %
+    \tilde \temperature^{n+1}}{\partial r} \frac{\partial \tilde v}{\partial %
+    r}r^2\,\intd{r} \\
+  - \frac{\abs{\Gamma_N}}{\rmax^2}\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v(\rmax) %
+  = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity^n)\tilde v r^2\,\intd{r},
+\end{multline}
+où on a noté $\abs{\Gamma_\mathrm{N}}$ la mesure de la partie du bord
+$\Gamma_\mathrm{N}$. Lorsque $\Gamma_\mathrm{N} = \partial
+\mathcal B(0, \rmax)$, on a $\abs{\Gamma_\mathrm{N}} = 4\pi\rmax^2$,
+et, bien entendu, lorsque $\Gamma_\mathrm{N} = \emptyset$ on a
+$\abs{\Gamma_\mathrm{N}} = 0$.
+
+
+\subsection*{Discrétisation en espace}
+On donne maintenant la discrétisation du problème faible
+(\ref{eq:weak-form-spher-coord}) par une méthode de Galerkin. Soit un
+réel $\delta$ tel que $0 < \delta < \rmax$, et une subdivision
+$\mathcal T_\delta$ de l'intervalle $[0, \rmax]$, telle que pour tout
+élément $K\in\mathcal T_\delta$ son diamètre $\diam(K)$ soit borné par
+$\delta$.
+
+On définit l'espace éléments finis
+\begin{equation}
+V_\delta = \cparent{v \in C^0(0, \rmax)\mid v\vert_K \in \mathbb
+  P_1(K)\ \forall K\in\mathcal T_h},
+\end{equation}
+où $\mathbb P_1(K)$ est l'espace des polynômes de degré 1 sur
+l'intervalle $K$.
+
+Pour tout $n \leq N$, on note $\tilde \temperature_\delta^{n+1} \in
+V_\delta$ une approximation de la fonction $\tilde \temperature_\delta^{n+1}$.
+L'approximation de Galerkin du problème faible (\ref{eq:weak-form-spher-coord})
+consiste à chercher une fonction $\tilde \temperature_\delta^{n+1} \in
+V_\delta$ telle que la relation
+\begin{multline}\label{eq:galerkin-weak-form-spher-coord}
+  4\pi\int_0^{\rmax} \tilde \temperature_\delta^{n+1}\tilde v_\delta r^2\,\intd{r}
+  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\partial %
+    \tilde \temperature_\delta^{n+1}}{\partial r} \frac{\partial \tilde v_\delta}{\partial %
+    r}r^2\,\intd{r} \\
+  - \frac{\abs{\Gamma_N}}{\rmax^2}\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v_\delta(\rmax) %
+  = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity_\delta^n)\tilde v_\delta r^2\,\intd{r},
+\end{multline}
+soit vérifiée pour tout $v_\delta \in V_\delta$. Les intégrales qui
+interviennent dans l'expression
+(\ref{eq:galerkin-weak-form-spher-coord}) sont approchées
+numériquement par une formule de quadrature de Gauss à 3 points.
+
 \subsection*{Solution exacte}
 Un certain nombre de solutions exactes au problème de Stefan
 classique sont connues. On décrit à présent l'une d'elles, découverte en
@@ -392,138 +573,6 @@ On utilisera cette solution exacte dans la suite pour valider le schéma de
 discrétisation des équations
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), que l'on
 décrit maintenant.
-
-% discrétisation: symétrie sphérique ou plane, discrétisation en temps,
-%  discrétisation en espace.
-\subsection*{Schéma de discrétisation en temps}
-Pour obtenir un schéma de discrétisation en temps du problème de
-Stefan, on part de la formulation enthalpique
-(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), et on
-suit le travail de M. Paolini et al. \cite{Paolini1988}.
-
-Soit un temps final $T > 0$, $N\in \mathbb \nstar$ le nombre de pas de
-temps. Soit $\tau = T / N$ le pas de temps et $t^n = \tau n$. On note
-$L_\beta$ la constante de Lipschitz de la fonction $\beta$:
-\begin{equation}
-  L_\beta = \sup_{\enthalpy}\abs{\beta(\enthalpy)}.
-\end{equation}
-Soit $\mu$ un paramètre de relaxation fixé, tel que $0 < \mu \leq
-1/L_\beta$.
-
-On note $\temperature^n(x)$ et $\enthalpydensity^n(x)$ les approximation
-de $\temperature(t^n, x)$ et $\enthalpydensity(t^n, x)\ \forall x\in
-\Omega$.  On suppose donnée la densité d'enthalpie initiale $h^0$, et
-on pose $\temperature^0 = \beta(h^0)$. Pour $0 < n \leq N$, on résout
-successivement les équations:
-\begin{align}
-  &\temperature^{n+1} - \frac{\tau}{\mu} \Delta \temperature^{n+1} = %
-  \beta\parent{\enthalpydensity^n}, & \text{dans } \Omega,\label{eq:chernoff-heat}\\
-  &\temperature^{n+1}(x) = \temperature_{\mathrm D}(t^{n+1}, x), &
-  \forall x\in%
-  \Gamma_\mathrm{D},\label{eq:chernoff-dirichlet}\\
-  &\frac{\partial\temperature^{n+1}}{\partial \nu}(x) = %
-  \temperature_\mathrm{N}(t^{n+1}, x), %
-  & \forall x \in \Gamma_\mathrm{N},\label{eq:chernoff-neumann}
-\end{align}
-avec la correction pour la densité d'enthalpie à chaque pas de temps:
-\begin{equation}\label{eq:chernoff-update}
-\enthalpydensity^{n+1} = \enthalpydensity^{n} +
-\mu\parent{\temperature^{n+1} - \beta(\enthalpydensity^{n})}, \quad
-\text{dans } \Omega.
-\end{equation}
-
-Ce schéma numérique basé sur la formule de Chernoff
-(\ref{eq:chernoff-update}) a été proposé en premier par M. Paolini
-\cite{Paolini1988}. On décrit maintenant la discrétisation en
-espace des équations (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}).
-
-
-\subsection*{Discrétisation en espace}
-On cherche maintenant une solution du système d'équations à symétrie
-sphérique
-
-La formulation faible du système d'équations
-(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) consiste $\forall
-n\leq N$ à cherche une fonction $\temperature^{n+1}$ telle que pour
-toute fonction test $v$ on aie:
-\begin{equation}
-  \int_\Omega \temperature v\,\intd{x} + \frac{\tau}{\mu} %
-  \int_\Omega \nabla \temperature \nabla v\,\intd{x} - %
-  \int_{\Gamma_\mathrm{N}} \temperature_\mathrm{N}v\,\intd{x} %
-  = 0.
-\end{equation}
-On considère deux cas particuliers qui permettent de réduire
-la complexité du calcul de la solution.
-
-On fait maintenant l'hypothèse que la solution recherchée
-$\temperature^{n+1}$ est à symétrie sphérique. Dans ce cadre,
-
-Si $\delta > 0$, on dénote par $M_\delta$ un maillage du domaine
-$\Omega$ tel que le diamètre des éléments de $M_\delta$ soit borné par
-$\delta$.
-
-
-
-
-%https://en.wikipedia.org/wiki/Del_in_cylindrical_and_spherical_coordinates
-%https://fr.wikipedia.org/wiki/Int%C3%A9grale_multiple#Changements_de_variables_usuels
-
-
-Soit $\Phi:[0,\infty)\times[0,2\pi]\times[0,\pi)\to\mathbb R^3$ le
-changement de variable en coordonnées sphériques défini par:
-\begin{equation}
-  \Phi(r, \psi, \phi) = \begin{pmatrix}
-    r\cos\psi\sin\phi\\
-    r\sin\psi\sin\phi\\
-    r\cos\phi
-  \end{pmatrix}.
-\end{equation}
-Le jacobien de $\Phi$ est donné par
-\begin{equation}
-  \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
-\end{equation}
-
-Par hypothèse de symétrie, la température $\tilde\temperature$ ne
-dépend pas des coordonnées $\psi$ et $\phi$.
-
-\begin{equation}
-\int_\Omega \temperature(r)
-v(r)r^2\sin\phi\intd{r}\intd{\psi}\intd{\phi}
-+\frac{\tau}{\mu}\int_\Omega
-\end{equation}
-
-On note $\tilde \temperature = \temperature \circ \Phi$ et $\tilde
-\enthalpydensity = \enthalpydensity \circ \Phi$ les fonctions
-température et densité d'enthalpie en coordonnées sphérique.
-\begin{equation}
-\tilde\temperature(r,\psi,\phi) = \temperature(\Phi())
-\end{equation}
-
-
-On fait l'hypothèse que les fonctions température $\temperature$ et la
-densité d'enthalpie $\enthalpydensity$ ont une symétrie sphérique,
-\ie, dans un système de coordonnées sphériques $(r,\psi,\phi)$,
-elles ne dépendent que de la coordonnée $r$.
-
-Lorsque $\Omega \subset \mathbb R^3$ et que les données du
-problème de Stefan
-(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann})
-dépendent uniquement de la coordonnée $x_1$, on cherchera une solution
-$h$ qui ne dépende que de $x_1$, \ie, une solution qui présente la
-même symétrie que les données.
-
-De même, lorsque $\Omega \subset \mathbb R^3$ et que les données du
-problème de Stefan
-(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann})
-présentent une symétrie sphérique, on cherchera une solution
-$h$ qui ne dépende que de la distance à l'origine $r$.
-
-Ces deux hypothèses permettent, dans un cas comme dans l'autre de
-réduire la formulation élément finis associée aux équations
-(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}) à un
-problème unidimensionnel.
-
-
 
 \subsection*{Validation numérique}
 Pour valider l'implémentation du schéma numérique
