@@ -13,14 +13,25 @@ symétrique sphérique de la solution.
 % description du système: particule et bain, symétrie sphérique,
 %  caractérisation des matériaux.
 \subsection{Un particule de bain solide}
-On considère une sphère d'électrolyte, placée à l'origine du système
+Commençons par remarquer que la chaleur spécifique $\aluminahc$
+de l'alumine solide et sa densité $\aluminadensity$ conduit à une
+capacité thermique massique $\aluminadensity\aluminahc$ presque
+égale à celle du bain électrolytique
+$\electrolytedensity\electrolytehc$. L'écart entre ces deux
+capacités thermiques étant de \num{}\%, nous remplacerons les
+caractéristiques thermiques de l'alumine solide par celle du bain
+électrolytique pour simplifier le modèle de solidification et
+liquéfaction dudit bain autour d'une particule d'alumine solide
+injectée dans ce bain.
+
+On considère une particule sphérique, placée à l'origine du système
 de coordonnées, de température initiale $\tinj<\tliq$. Cette sphère
 est donc gelée, c'est-à-dire sous forme solide. Le reste de l'espace
 est occupé par le bain électrolytique à l'état liquide, au repos, et
 de température initiale $\tinit > \tliq$.
 
 On s'intéresse à l'évolution de la température au cours du
-temps dans le système formé par la sphère de bain gelé et le
+temps dans le système formé par la particule et le
 bain liquide environnant. En particulier, la température de la
 particule étant inférieure à la température du liquidus
 $\tliq$, le bain au voisinage de la surface de la particule va
@@ -101,7 +112,7 @@ représente le comportement de la fonction $\enthalpy(\temperature)$ au
 voisinage de la température de transition $\tliq$. La densité de
 l'électrolyte $\electrolytedensity$ est supposée constante pour tout
 $\temperature$. En particulier, on suppose que la transition entre les
-phases solide et liquide a lieu à volume constant.
+phases solide et liquide à $\electrolytedensity$ constant.
 
 Bien que la fonction $\enthalpy$ présente une discontinuité en
 $\temperature = \tliq$, elle est strictement monotone, et on peut
@@ -151,7 +162,12 @@ Soit $\Omega$ un domaine occupé par du bain électrolytique, que l'on
 choisit égal à un sous-ensemble de $\mathbb R$ ou $\mathbb R^3$ selon
 le contexte. On note $\temperature(t, x)$ et $\enthalpydensity(t, x)$
 la température et la densité d'enthalpie de l'électrolyte au point $x
-\in \Omega$ et à l'instant $t > 0$.
+\in \Omega$ et à l'instant $t > 0$. La densité d'enthalpie
+$\enthalpydensity$ est liée à la température par la relation
+\begin{equation}
+  \temperature(t, x) = \beta(\enthalpydensity(t, x)) \quad 0\leq t\leq
+  T,\ x\in\Omega.
+\end{equation}
 
 Soient $\Omega_1(t)\subset \Omega$ et $\Omega_2(t)\subset \Omega$
 des ouverts fonctions du temps $t$, définis de la manière suivante:
@@ -330,6 +346,23 @@ espace des équations (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}).
 
 
 \subsection*{Formulation du schéma de Chernoff en coordonnées sphériques}
+La formulation faible du système d'équations
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) consiste $\forall
+n\leq N$ à chercher une fonction $\temperature^{n+1}:\Omega\to\mathbb R$
+à telle que la relation:
+\begin{equation}\label{eq:weak-form-cart-coord}
+  \int_\Omega \temperature^{n+1} v\,\intd{x} + \frac{\tau}{\mu} %
+  \int_\Omega \nabla \temperature^{n+1} \nabla v\,\intd{x} - %
+  \int_{\Gamma_\mathrm{N}} \temperature^{n+1}_\mathrm{N} v\,\intd{\sigma} %
+  = \int_\Omega \beta(\enthalpydensity^n)v\,\intd{x}
+\end{equation}
+soit vérifiée pour toute fonction test $v:\Omega\to\mathbb R$ à
+symétrie sphérique.
+
+On tire parti de la symétrie sphérique du système formé par la
+particule et le bain environnant en reformulant maintenant le
+problème (\ref{eq:weak-form-cart-coord}) en coordonnées sphériques.
+
 Soit $\Phi:[0,\infty)\times[0,2\pi)\times[0,\pi)\to\mathbb R^3$ le
 changement de variable de coordonnées sphériques en coordonnées
 cartésiennes défini par:
@@ -338,42 +371,26 @@ cartésiennes défini par:
     r\cos\psi\sin\phi\\
     r\sin\psi\sin\phi\\
     r\cos\phi
-  \end{pmatrix}.
+  \end{pmatrix},
 \end{equation}
-Le jacobien de $\Phi$ est donné par:
+dont le jacobien de $\Phi$ est donné par:
 \begin{equation}\label{eq:spherical-jacobian}
   \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
 \end{equation}
-Pour toute fonction $f:\mathbb R^3\to\mathbb R$, on note la fonction
-associée en coordonnées sphérique $\tilde
-f:[0,\infty)\times[0,2\pi)\times[0,\pi)\to\mathbb R$ définie par:
-\begin{equation}
-  \tilde f(r, \psi, \phi) = \parent{f \circ \Phi}(r, \psi, \phi).
-\end{equation}
+On note $\hat e_r$, $\hat e_\psi$ et $\hat e_\phi$ les vecteurs de la
+base standard orthonormée associée au système de coordonnée sphérique.
 
 On dit qu'une fonction $f:\mathbb R^3\to\mathbb R$ est à symétrie
-sphérique si la fonction $\tilde f$ ne dépend que de la coordonnée
-$r$, c'est-à-dire que
+sphérique s'il existe une fonction $\tilde f:\mathbb
+\rplus\to\mathbb R$ telle que
 \begin{equation}\label{eq:spherical-symmetry}
-  \frac{\partial \tilde f}{\partial \psi} = 0 %
-  \quad \text{et} \quad %
-  \frac{\partial \tilde f}{\partial \phi} = 0.
+  f(x_1, x_2, x_3) = \tilde f\parent{\sqrt{x_1^2 + x_2^2 + x_3^2}}.
 \end{equation}
-Par abus de notation, si une fonction possède une symétrie
-sphérique on omettra les coordonnées $\psi$ et $\phi$ et on
-l'identifiera à une fonction définie sur le domaine $\rplus$.
-
-Enfin, on rappelle que le gradient $\nabla f$ en coordonnées
-sphérique s'écrit:
+Le gradient de la fonctions $f$ en coordonnées sphérique s'écrit selon
+$\tilde f$:
 \begin{equation}\label{eq:spherical-gradient}
-  \tilde\nabla \tilde f = %
-  \frac{\partial \tilde f}{\partial r} \hat e_r %
-  + \frac{1}{r}\frac{\partial \tilde f}{\partial \psi}\hat e_\psi %
-  + \frac{1}{r\sin\psi}\frac{\partial \tilde f}{\partial \phi} \hat e_\phi,
+  \tilde\nabla\tilde f = \frac{\mathrm d\tilde f}{\mathrm dr}\hat e_r.
 \end{equation}
-où les vecteurs orthonormés $\hat e_r$, $\hat e_\psi$ et $\hat
-e_\phi$ forment la base standard associées au système de
-coordonnées sphérique.
 
 On se donne un réel $\rmax > 0$ et le domaine $\Omega = \mathcal B(0,
 \rmax) \subset \mathbb R^3$ la boule ouverte de centre $0$ de rayon
@@ -381,18 +398,9 @@ $\rmax$. On suppose maintenant que les données du problème de Stefan
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), \ie, les
 fonctions $\temperature_\mathrm{D}$, $\temperature_\mathrm{N}$ ainsi
 que la condition initiale $\tinit$ pour la température, sont à
-symétrie sphérique:
-\begin{align}
-  \frac{\partial \tilde \temperature_{\mathrm{D}}}{\partial \psi} = \frac{\partial \tilde \temperature_{\mathrm{D}}}{\partial \phi} = 0,\quad
-  \frac{\partial \tilde \temperature_{\mathrm{N}}}{\partial \psi} = \frac{\partial \tilde \temperature_{\mathrm{N}}}{\partial \phi} = 0,\quad
-  \frac{\partial \tinitr}{\partial \psi} = \frac{\partial \tinitr}{\partial \phi} = 0.
-\end{align}
-
-La subdivision du bord $\Gamma_\mathrm{D}$, $\Gamma_\mathrm{N}$ doit
-également satisfaire la condition de symétrie. Par conséquent, on a
-soit $\Gamma_\mathrm{D} = \partial\mathcal B(0,\rmax)$ et
-$\Gamma_\mathrm{N} = \emptyset$, soit $\Gamma_\mathrm{D} = \emptyset$
-et $\Gamma_\mathrm{N} = \partial\mathcal B(0,\rmax)$.
+symétrie sphérique, c'est-à-dire qu'il existe des fonctions $\tilde
+\temperature_\mathrm{D}$, $\tilde\temperature_\mathrm{N}$ et $\tinitr$
+telles que définies par la relation (\ref{eq:spherical-symmetry}).
 
 Sous ces hypothèses, on cherche une solution au problème de Stefan
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}) en
@@ -400,49 +408,53 @@ utilisant le schéma de Chernoff
 (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}) qui soit également
 à symétrie sphérique.
 
-La formulation faible du système d'équations
-(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) consiste $\forall
-n\leq N$ à chercher une fonction $\temperature^{n+1}\in H_0^1(\Omega)$
-à symétrie sphérique telle que la relation:
-\begin{equation}\label{eq:weak-form-cart-coord}
-  \int_\Omega \temperature^{n+1} v\,\intd{x} + \frac{\tau}{\mu} %
-  \int_\Omega \nabla \temperature^{n+1} \nabla v\,\intd{x} - %
-  \int_{\Gamma_\mathrm{N}} \temperature^{n+1}_\mathrm{N} v\,\intd{\sigma} %
-  = \int_\Omega \beta(\enthalpydensity^n)v\,\intd{x}
-\end{equation}
-soit vérifiée pour toute fonction test $v\in H_0^1(\Omega)$ à symétrie
-sphérique.
+La subdivision du bord $\Gamma_\mathrm{D}$, $\Gamma_\mathrm{N}$ doit
+également satisfaire la condition de symétrie sphérique. On distingue alors les
+deux seuls cas possibles:
+soit le bord de Dirichlet $\Gamma_\mathrm{D} = \partial\mathcal
+B(0,\rmax)$, soit le bord de Neumann $\Gamma_\mathrm{N} =
+\partial\mathcal B(0,\rmax)$.
 
-On réecrit l'expression (\ref{eq:weak-form-cart-coord}) en formulant
-les intégrales en coordonnées sphériques. En utilisant
-(\ref{eq:spherical-jacobian}), (\ref{eq:spherical-symmetry}),
-(\ref{eq:spherical-gradient}) et en intégrant par rapport aux
-coordonnées $\psi$ et $\phi$ on obtient:
-\begin{multline}\label{eq:weak-form-spher-coord}
+Dans le premier cas, la formulation faible de l'équation
+(\ref{eq:weak-form-cart-coord}) en coordonnées sphériques consiste à
+chercher une fonction $\tilde \temperature^{n+1}:[0,\rmax] \to \mathbb
+R$, $\tilde\temperature^{n+1}(\rmax) =
+\tilde\temperature_{\mathrm{D}}^{n+1}$ telle que:
+\begin{multline}\label{eq:weak-form-spher-coord-dirichlet}
   4\pi\int_0^{\rmax} \tilde \temperature^{n+1}\tilde v r^2\,\intd{r}
-  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\partial %
-    \tilde \temperature^{n+1}}{\partial r} \frac{\partial \tilde v}{\partial %
+  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\mathrm d %
+    \tilde \temperature^{n+1}}{\mathrm d r} \frac{\mathrm d \tilde v}{\mathrm d %
+    r}r^2\,\intd{r}  %
+  = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity^n)\tilde v r^2\,\intd{r}
+\end{multline}
+pour toute fonction $\tilde v:[0,\rmax]\to\mathbb R$, $\tilde v(\rmax)
+= 0$.
+
+Dans le deuxième cas, la formulation faible de l'équation
+(\ref{eq:weak-form-cart-coord}) en coordonnées sphériques consiste à
+chercher une fonction $\tilde \temperature^{n+1}:[0,\rmax] \to \mathbb
+R$, telle que:
+\begin{multline}\label{eq:weak-form-spher-coord-neumann}
+  4\pi\int_0^{\rmax} \tilde \temperature^{n+1}\tilde v r^2\,\intd{r}
+  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\mathrm d %
+    \tilde \temperature^{n+1}}{\mathrm d r} \frac{\mathrm d \tilde v}{\mathrm d %
     r}r^2\,\intd{r} \\
-  - \frac{\abs{\Gamma_N}}{\rmax^2}\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v(\rmax) %
+  - 4\pi\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v(\max) %
   = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity^n)\tilde v r^2\,\intd{r},
 \end{multline}
-où on a noté $\abs{\Gamma_\mathrm{N}}$ la mesure de la partie du bord
-$\Gamma_\mathrm{N}$. Lorsque $\Gamma_\mathrm{N} = \partial
-\mathcal B(0, \rmax)$, on a $\abs{\Gamma_\mathrm{N}} = 4\pi\rmax^2$,
-et, bien entendu, lorsque $\Gamma_\mathrm{N} = \emptyset$ on a
-$\abs{\Gamma_\mathrm{N}} = 0$.
-
+pour toute fonction $\tilde v:[0,\rmax]\to\mathbb R$.
 
 \subsection*{Discrétisation en espace}
-On considère une subdivision uniforme $0 = r_0 < r_1 < \dots < r_{N_r}
-= \rmax$ de l'intervalle $[0, \rmax]$, et on note $\delta$ taille des
-intervalles, \ie, $\delta = r_{i+1} - r_i$ $\forall i = 0,1,\dots,N_r
-- 1$. Pour discrétiser le problème faible
-(\ref{eq:weak-form-spher-coord}) on utilise une méthode éléments finis
-Lagrange continue, linéaire par morceau. Les intégrales qui
-interviennent dans l'expression
-(\ref{eq:galerkin-weak-form-spher-coord}) sont approchées
-numériquement par une formule de quadrature de Gauss à 3 points.
+On considère une subdivision uniforme de l'intervalle $[0, \rmax]$, et
+on note $\delta$ taille des éléments de la subdivision. Pour
+discrétiser les problèmes faibles
+(\ref{eq:weak-form-spher-coord-dirichlet}),
+(\ref{eq:weak-form-spher-coord-neumann}) on utilise une méthode
+éléments finis Lagrange, continue et linéaire par morceau. Les
+intégrales qui interviennent dans les expressions
+(\ref{eq:weak-form-spher-coord-dirichlet}),
+(\ref{eq:weak-form-spher-coord-neumann}) sont approchées numériquement
+par une formule de quadrature de Gauss à 3 points.
 
 
 %%On donne maintenant la discrétisation du problème faible
@@ -475,7 +487,7 @@ numériquement par une formule de quadrature de Gauss à 3 points.
 %%\end{multline}
 %%soit vérifiée pour tout $v_\delta \in V_\delta$.
 
-\subsection*{Solution exacte}
+\subsection*{Un test exacte du problème de Stefan à symétrie plane}
 Un certain nombre de solutions exactes au problème de Stefan
 classique sont connues. On décrit à présent l'une d'elles, découverte en
 premier par J. Neumann. Cette solution a l'avantage de correspondre à
@@ -589,8 +601,11 @@ convergence de l'erreur entre la solution exacte définie par la
 relation (\ref{eq:neumann-sol}) et $\temperature^N_\delta$,
 l'approximation de la température à l'instant $T$. On fixe $\mu =
 L_\beta = 1$. On choisit $\Omega = [0, 1] \subset \rplus$ et $T =
-0.5$. On choisit $N$ dans l'intervalle $[100, 12800]$, et $\delta =
-O(\tau)$.
+0.5$. On impose des conditions aux limites de Dirichlet sur le bord de
+$\Omega$, \ie, $\Gamma_\mathrm{D} = \cparent{0, 1}$. On se donne
+$\temperature_\mathrm{D}(0) = -1$ et $\temperature_\mathrm{D}(1) =
+0$. On choisit le pas de temps $\tau$ dans l'intervalle
+$[\num{3.9e-5}, \num{5e-3}]$, et $\delta = O(\tau)$.
 
 \begin{figure}
   \begin{center}
@@ -624,21 +639,19 @@ thermiques du bain électrolytique.
     \caption{Paramètres physiques qui interviennent dans le
       phénomène de formation de gel autour de particules.}
     \label{tab:freeze-physical-parameters}
-  \begin{tabularx}{\textwidth}{@{}lllX@{}}
-    \toprule
-    Quantité          & Valeur     & Unité                           & Description \\
-    \midrule
-    $\electrolytedensity$         & \num{2130} & \si{\kg\per\cubic\meter}        & Masse volumique du bain électrolytique\\
-    $\electrolyteshc$ & \num{} & \si{\joule\per\kilo\gram\per\kelvin} & Chaleur spécifique de  l'électrolyte dans la phase solide,\\
-    $\electrolytelhc$ & \num{} & \si{\joule\per\kilo\gram\per\kelvin} & Chaleur spécifique de
-    l'électrolyte dans la phase liquide,\\
-    $\tinj$ & \num{423.15} & \si{\kelvin} & Température de la
-    particule de bain gelé au moment de l'injection\\
-    $\tliq$ & \num{1223.2} & \si{\kelvin} & Température du liquidus de
-    l'électrolyte\\
-    $\electrolytetdiff$ & \num{2.0} & \si{\joule\per\second\per\meter\per\kelvin} & Conductivité thermique de l'électrolyte \\
-    \bottomrule
-  \end{tabularx}
+    \begin{tabularx}{\textwidth}{@{}lllX@{}}
+      \toprule
+      Quantité              & Valeur       & Unité                                       & Description \\
+      \midrule
+      $\electrolytedensity$ & \num{2130}    & \si{\kg\per\cubic\meter}                    & Masse volumique du bain électrolytique \\
+      $\electrolyteshc$     & \num{1403}    & \si{\joule\per\kilo\gram\per\kelvin}        & Chaleur spécifique de l'électrolyte dans la phase solide \\
+      $\electrolytelhc$     & \num{1861.3}  & \si{\joule\per\kilo\gram\per\kelvin}        & Chaleur spécifique de l'électrolyte dans la phase liquide \\
+      $\fusionenthalpy$     & \num{5.508e5} & \si{\joule\per\kilo\gram}                   & Chaleur latente de transition de phase solide-liquide \\
+      $\tinj$               & \num{423.15}  & \si{\kelvin}                                & Température de la particule de bain gelé au moment de l'injection \\
+      $\tliq$               & \num{1223.15}  & \si{\kelvin}                                & Température du liquidus de l'électrolyte \\
+      $\electrolytetdiff$   & \num{2}     & \si{\joule\per\second\per\meter\per\kelvin} & Conductivité thermique de l'électrolyte \\
+      \bottomrule
+    \end{tabularx}
 \end{center}
 \end{table}
 
