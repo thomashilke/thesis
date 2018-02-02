@@ -1,6 +1,6 @@
 SHELL = /bin/sh
 PDFLATEX = pdflatex
-PDFLATEXFLAGS = -halt-on-error -interaction nonstopmode -shell-escape
+PDFLATEXFLAGS = -halt-on-error -interaction nonstopmode -shell-escape -synctex=1
 
 STDOUT_REDIRECT = /dev/null
 ifdef DBG
