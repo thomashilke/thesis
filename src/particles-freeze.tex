@@ -1,7 +1,7 @@
 % introduction: dans cette section, on introduit le problème de Stefan
 %  pour une particule isolée dans un bain électrolytique infini
 Dans cette section nous détaillons et étudions numériquement les
-phénomènes physiques qui sont responsables du temps de latence
+phénomènes thermiques qui sont responsables du temps de latence
 préalable au début de la dissolution des grains d'alumine dans le bain
 électrolytique. Dans ce but, on considère un modèle de Stefan pour
 traiter le problème de la transition de phase dans le bain
@@ -69,8 +69,10 @@ la région de transition de phase définis par:
 \end{align}
 
 Soit $\electrolytedensity$ la densité du bain que l'on suppose
-constante. Soient $\electrolytehc$, $\electrolytetdiff$ la chaleur
-spécifique le coefficient de diffusion thermique du bain,
+constante. En particulier, on suppose que la transition entre les
+phases solide et liquide a lieu à densité constante.
+Soient $\electrolytehc$, $\electrolytetdiff$ la chaleur
+spécifique et le coefficient de diffusion thermique du bain,
 respectivement. Dans la suite, on fera l'hypothèse que les paramètres
 $\electrolytehc$ et $\electrolytetdiff$ sont des fonctions de la
 température $\temperature$, mais constants dans chaque phase,
@@ -113,16 +115,15 @@ l'interface $\Gamma$ défini par:
   \epsilon\nu) \quad \text{ sur } \Gamma.
 \end{equation}
 
-On suppose que l'interface entre les phases liquide est solide
-satisfait la condition de Stefan. On note $v_\Gamma(t, x)$ la vitesse
-de l'interface $\Gamma(t)$. La condition de Stefan pour l'interface
-$\Gamma(t)$ s'écrit alors:
+A l'interface $\Gamma(t)$ entre les phases liquide est solide, on suppose que
+la condition de Stefan est vérifiée. On note $v_\Gamma(t, x)$ la vitesse
+de l'interface $\Gamma(t)$. La condition de Stefan s'écrit alors:
 \begin{equation}
   \jump{\electrolytetdiff\nabla\temperature \cdot \nu} %
-  = - \fusionenthalpy v_\Gamma,
+  = - \fusionenthalpy v_\Gamma\quad\text{sur }\Gamma(t),\ \forall t\in[0,\infty),
   \label{eq:stefan-condition}
 \end{equation}
-où $\fusionenthalpy$ est la est l'enthalpie par unité de volume
+où $\fusionenthalpy$ est l'enthalpie par unité de volume
 libérée lors de la transition de la phase solide à liquide du
 bain électrolytique.
 
@@ -140,12 +141,8 @@ $\Gamma_\mathrm{D}\subset \partial \Omega$ telle que
 $\Gamma_\mathrm{N}\cap \Gamma_\mathrm{D} = \emptyset$ et
 $\Gamma_\mathrm{N}\cup \Gamma_\mathrm{D} = \partial \Omega$, et les
 fonctions $\temperature_\mathrm{D}:\Gamma_\mathrm{D}\to\mathbb R$ et
-$\temperature_\mathrm{N}:\Gamma_\mathrm{N}\to\mathbb R$.
-
-La partie du bord $\Gamma_\mathrm{N}$ correspond aux conditions au
-limites de Neumann, tandis que sur la partie du bord
-$\Gamma_\mathrm{D}$ correspond aux conditions aux limites de
-Dirichlet. Les équations (\ref{eq:heat-solid-phase}),
+$\temperature_\mathrm{N}:\Gamma_\mathrm{N}\to\mathbb R$. Les équations
+(\ref{eq:heat-solid-phase}), (\ref{eq:heat-liquid-phase}) et
 (\ref{eq:stefan-condition}) sont complétées par les conditions aux
 limites:
 \begin{align}
@@ -163,7 +160,7 @@ $\temperature$.
 
 Le problème de Stefan classique consiste à chercher une fonction
 $\temperature:[0,\infty)\times\Omega\to\mathbb R$ et deux
-  sous-domaines $\Omega_1,\Omega_2$ qui satisfasse les équations
+  sous-domaines $\Omega_1,\Omega_2$ qui satisfassent les équations
   (\ref{eq:phase-domains}) et
   (\ref{eq:heat-solid-phase})-(\ref{eq:stefan-condition}).
 
@@ -225,10 +222,7 @@ fraction solide du bain en fonction de la température.
 
 Le graphique de droite sur la figure \ref{fig:solid-fraction-enthalpy}
 représente le comportement de la fonction $\enthalpy(\temperature)$ au
-voisinage de la température de transition $\tliq$. La densité de
-l'électrolyte $\electrolytedensity$ est supposée constante pour tout
-$\temperature$. En particulier, on suppose que la transition entre les
-phases solide et liquide à $\electrolytedensity$ constant.
+voisinage de la température de transition $\tliq$.
 
 Bien que la fonction $\enthalpy$ présente une discontinuité en
 $\temperature = \tliq$, elle est strictement monotone, et on peut
@@ -281,31 +275,14 @@ telles que:
 Les fonctions $\tinit$, $\temperature_\mathrm{D}$ et
 $\temperature_\mathrm{N}$ ont été définies au paragraphe précédent, et
 $\beta$ est définie par la relation (\ref{eq:beta}). L'équation
-(\ref{eq:heat-one-phase}) est à comprendre au sens faible.
-
-%%Étant donnée une fonction $\enthalpydensity$ qui satisfait les
-%%équations (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}),
-%%la température $\temperature$ est définie par la relation
-%%$\temperature(t, x) = \beta(\enthalpydensity(t, x))$ $\forall (t, x)
-%%\in [0,\infty)\times\Omega$. Finalement les domaines $\Omega_1(t)$,
-%%  $\Omega_2(t)$ occupés par les phases solide et liquides et la région
-%%  de transition de phase $\Gamma(t)$ sont définis par les relations
-%%  (\ref{eq:phase-domains}) et (\ref{eq:phase-frontier}).
-
-%%Étant données les fonctions $\enthalpydensity$, $\temperature$
-%%solutions du problème
-%%(\ref{eq:heat-one-phase})-(\ref{eq:heat-initial-condition}), les
-%%phases solide $\Omega_1(t)$ et liquide $\Omega_2(t)$ sont définies par
-%%la relation (\ref{eq:phase-domains}). La région de transition de phase
-%%est définie par la relation (\ref{eq:phase-frontier}).
-
-Plus précisément, on peut montrer que si $\enthalpydensity$ et
+(\ref{eq:heat-one-phase}) est à comprendre au sens faible. Plus
+précisément, on peut montrer que si $\enthalpydensity$ et
 $\temperature$ sont solutions faibles de
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-temperature-enthalpy}) et si
-$\enthalpydensity$ et $\temperature$ sont suffisamment régulières
-dans $\Omega_1(t)$ et $\Omega_2(t)$ définis par
-(\ref{eq:phase-domains}), alors $\temperature$ satisfait
-(\ref{eq:heat-solid-phase}), (\ref{eq:heat-liquid-phase}) et (\ref{eq:stefan-condition}).
+$\enthalpydensity$ et $\temperature$ sont suffisamment régulières dans
+$\Omega_1(t)$ et $\Omega_2(t)$ définis par (\ref{eq:phase-domains}),
+alors $\temperature$ satisfait (\ref{eq:heat-solid-phase}),
+(\ref{eq:heat-liquid-phase}) et (\ref{eq:stefan-condition}).
 
 %%Si $\temperature$ est suffisamment régulière dans $\Omega$, alors la
 %%condition (\ref{eq:temperature-condition}) ainsi que les équations
@@ -323,18 +300,26 @@ et soit $\Gamma_{tx}$ dans l'espace-temps:
 \begin{equation}
   \Gamma_{tx} = \cparent{(t, x) \in \Lambda\mid x \in \Gamma(t)}.
 \end{equation}
-Soit $\nu_{tx}$ la normale unité à $\Gamma_{tx}$, on note $\nu_t$,
-$\nu_x$ les composantes temporelles et spatiales de $\nu_{tx}$, \ie,
-$\nu_{tx} = (\nu_t, \nu_x)^t$. Soit $\enthalpydensity$, $\temperature$
-solutions faibles du problème de Stefan
+Soit $\nu_{tx}$ la normale unité à $\Gamma_{tx}$ dirigée vers
+$\Lambda_2$, on note $\nu_t$, $\nu_x$ les composantes temporelles et
+spatiales de $\nu_{tx}$, \ie, $\nu_{tx} = (\nu_t, \nu_x)^t$. Soit
+$\enthalpydensity$, $\temperature$ solutions faibles du problème de
+Stefan
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-temperature-enthalpy}). On
 note le $v = (\enthalpydensity, -\electrolytetdiff\nabla
 \temperature)^t$. L'équation (\ref{eq:heat-one-phase}) s'écrit donc:
 \begin{equation}\label{eq:space-time-divergence}
   \Div v = 0 \quad\text{ dans }\Lambda,
 \end{equation}
-où $\Div = (\frac{\partial}{\partial t}, \nabla)$.
-
+où $\Div = (\frac{\partial}{\partial t}, \nabla)$. Alors si
+$\temperature$ est suffisamment régulière dans
+$\Lambda_1\cap\Lambda_2$, $\temperature$ est solution forte de
+(\ref{eq:heat-solid-phase}), (\ref{eq:heat-liquid-phase}). De plus,
+on doit avoir:
+\begin{equation}
+  \jump{v\cdot \nu_{tx}} = 0 \quad \text{sur } \Gamma_{tx},
+\end{equation}
+ce qui est équivalent à (\ref{eq:stefan-condition}).
 
 
 %%Au sens faible,
@@ -381,9 +366,10 @@ où $\Div = (\frac{\partial}{\partial t}, \nabla)$.
 Le lecteur intéressé par les aspects fonctionnels liés à cette
 équivalence peut consulter le travail de travail de thèse de
 P.-A. Gremaud \cite{Gremaud1991}, ou l'ouvrage de J. Hill
-\cite{HillStefanProblems}.\footnote{Ou plutôt le livre rouge, sur
-l'étagère en bas au fond à droite de la bibliothèque de
-mathématique...}
+\cite{HillStefanProblems}.
+%\footnote{Ou plutôt le livre rouge, sur
+%l'étagère en bas au fond à droite de la bibliothèque de
+%mathématique...}
 
 % discrétisation: symétrie sphérique ou plane, discrétisation en temps,
 %  discrétisation en espace.
@@ -432,7 +418,7 @@ Ce schéma numérique basé sur la formule de Chernoff
 espace des équations (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}).
 
 
-\paragraph{Formulation du schéma de Chernoff en coordonnées sphériques}
+\paragraph{Formulations faibles en coordonnées sphériques}
 La formulation faible du système d'équations
 (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) consiste $\forall
 n\leq N$ à chercher une fonction $\temperature^{n+1}:\Omega\to\mathbb R$
@@ -450,26 +436,27 @@ On tire parti de la symétrie sphérique du système formé par la
 particule et le bain environnant en reformulant maintenant le
 problème (\ref{eq:weak-form-cart-coord}) en coordonnées sphériques.
 
-Soit $\Phi:[0,\infty)\times[0,2\pi)\times[0,\pi)\to\mathbb R^3$ le
-changement de variable de coordonnées sphériques en coordonnées
-cartésiennes défini par:
-\begin{equation}
-  \Phi(r, \psi, \phi) = \begin{pmatrix}
-    r\cos\psi\sin\phi\\
-    r\sin\psi\sin\phi\\
-    r\cos\phi
-  \end{pmatrix},
-\end{equation}
-dont le jacobien de $\Phi$ est donné par:
-\begin{equation}\label{eq:spherical-jacobian}
-  \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
-\end{equation}
-On note $\hat e_r$, $\hat e_\psi$ et $\hat e_\phi$ les vecteurs de la
-base standard orthonormée associée au système de coordonnée sphérique.
+%%Soit $\Phi:[0,\infty)\times[0,2\pi)\times[0,\pi)\to\mathbb R^3$ le
+%%changement de variable de coordonnées sphériques en coordonnées
+%%cartésiennes défini par:
+%%\begin{equation}
+%%  \Phi(r, \psi, \phi) = \begin{pmatrix}
+%%    r\cos\psi\sin\phi\\
+%%    r\sin\psi\sin\phi\\
+%%    r\cos\phi
+%%  \end{pmatrix},
+%%\end{equation}
+%%dont le jacobien de $\Phi$ est donné par:
+%%\begin{equation}\label{eq:spherical-jacobian}
+%%  \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
+%%\end{equation}
+%%On note $\hat e_r$, $\hat e_\psi$ et $\hat e_\phi$ les vecteurs de la
+%%base standard orthonormée associée au système de coordonnée sphérique.
 
-On dit qu'une fonction $f:\mathbb R^3\to\mathbb R$ est à symétrie
-sphérique s'il existe une fonction $\tilde f:\mathbb
-\rplus\to\mathbb R$ telle que
+On note d'un tilde la composante radiale d'une fonction à symétrie
+sphérique, c'est-à-dire que si une fonction $f:\mathbb
+R^3\to\mathbb R$ est à symétrie sphérique, alors on note $\tilde
+f:\mathbb \rplus\to\mathbb R$ la fonction telle que
 \begin{equation}\label{eq:spherical-symmetry}
   \tilde f\parent{\sqrt{x_1^2 + x_2^2 + x_3^2}} = f(x_1, x_2,
   x_3)\quad \forall(x_1, x_2,x_3)\in\mathbb R^3.
@@ -527,10 +514,13 @@ R$, telle que:
   + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\mathrm d %
     \tilde \temperature^{n+1}}{\mathrm d r} \frac{\mathrm d \tilde v}{\mathrm d %
     r}r^2\,\intd{r} \\
-  - 4\pi\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v(\max) %
+  - 4\pi\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v(\max)\rmax^2%
   = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity^n)\tilde v r^2\,\intd{r},
 \end{multline}
-pour toute fonction $\tilde v:[0,\rmax]\to\mathbb R$.
+pour toute fonction $\tilde v:[0,\rmax]\to\mathbb R$. Les facteurs
+$r^2$ et $4\pi$ qui interviennent dans les intégrants de ces deux dernières
+formes faibles proviennent respectivement de l'élément de volume en
+coordonnées sphériques et de l'intégrale sur la surface de la sphère.
 
 \paragraph{Discrétisation en espace}
 On considère une subdivision uniforme de l'intervalle $[0, \rmax]$, et
@@ -576,6 +566,15 @@ par une formule de quadrature de Gauss à 3 points.
 %%soit vérifiée pour tout $v_\delta \in V_\delta$.
 
 \paragraph{Un test exacte du problème de Stefan à symétrie plane}
+On propose de valider l'implémentation du schéma numérique de
+discrétisation des formes faibles
+(\ref{eq:weak-form-spher-coord-dirichlet}),
+(\ref{eq:weak-form-spher-coord-neumann}) et du schéma de
+discrétisation en temps
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}) en étudiant la
+convergence de l'erreur entre une solution exacte au problème de
+Stefan classique et son approximation numérique.
+
 Un certain nombre de solutions exactes au problème de Stefan
 classique sont connues. On décrit à présent l'une d'elles, découverte en
 premier par J. Neumann. Cette solution a l'avantage de correspondre à
@@ -624,7 +623,7 @@ On trouvera les détails de la dérivation de cette solution, entre
 autres, dans l'ouvrage de J. Hill \cite{HillStefanProblems}.
 
 On calcul une approximation numérique de $\gamma$ à l'aide d'une
-itération de Newton, implémentée avec le logiciel MatLAB. On obtient
+itération de Newton, implémentée avec le logiciel MatLAB\textregistered. On obtient
 \begin{equation}\label{eq:gamma}
  %\gamma =\num{0.768955338463582}.
   \gamma =\num{0.768955}.
@@ -688,15 +687,18 @@ Pour valider l'implémentation du schéma numérique
 (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}), on évalue la
 convergence de l'erreur entre la solution exacte définie par la
 relation (\ref{eq:neumann-sol}) et $\temperature^N_\delta$,
-l'approximation de la température à l'instant $T$. On fixe $\mu =
-L_\beta = 1$. On choisit $\Omega = [0, 1] \subset \rplus$ et $T =
-0.5$. On impose des conditions aux limites de Dirichlet sur le bord de
+l'approximation de la température à l'instant $T$. Remarquons que
+puisque la solution de Neumann correspond à un problème spatial avec
+une symétrie plane, on omet les facteurs $r^2$ dans la forme faible
+(\ref{eq:weak-form-spher-coord-dirichlet}). On fixe $\mu = L_\beta =
+1$. On choisit $\Omega = [0, 1] \subset \rplus$ et $T = 0.5$. On
+impose des conditions aux limites de Dirichlet sur le bord de
 $\Omega$, \ie, $\Gamma_\mathrm{D} = \cparent{0, 1}$. On se donne
 $\temperature_\mathrm{D}(0) = -1$ et $\temperature_\mathrm{D}(1) =
 0$. On choisit le pas de temps $\tau$ dans l'intervalle
 $[\num{3.9e-5}, \num{5e-3}]$, et $\delta = O(\tau)$.
 
-\begin{figure}
+\begin{figure}[h]
   \begin{center}
     \input{../media/particles/remelt/neumann-convergence-h.tex}
     \caption{Erreur $L^2$ entre la solution exacte de Neumann et
@@ -716,12 +718,11 @@ vers 0, avec un ordre approximatif $O(h^{3/4})$.
 % particule.
 \paragraph{Formation de gel autour d'une particule}
 Dans cette partie, on applique la méthode numérique
-(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) au calcul de
-la formation de gel autour d'une particule de bain gelé.
-
-On donne dans le tableau \ref{tab:freeze-physical-parameters} la
-valeur des différents paramètres physique liés aux propriétés
-thermiques du bain électrolytique.
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) au calcul de la
+formation de gel autour d'une particule de bain gelé.  On donne dans
+le tableau \ref{tab:freeze-physical-parameters} la valeur des
+différents paramètres physique liés aux propriétés thermiques du bain
+électrolytique.
 
 \begin{table}
   \begin{center}
@@ -744,15 +745,15 @@ thermiques du bain électrolytique.
 \end{center}
 \end{table}
 
-Puisqu'on s'intéresse à une particule sphérique, on fait l'hypothèse
-que les données du problème présentent une symétrie sphérique. Ainsi,
-on décrite l'ensemble des données en fonction de la distance à
-l'origine $r$. De plus, on cherche la température $\temperature$ dans
-l'électrolyte en fonction de la coordonnée $r$. Par abus de notation
-et pour éviter de surcharger les notation, on réutilise les mêmes
-symboles, mais explicitant la coordonnée $r$.
+%%Puisqu'on s'intéresse à une particule sphérique, on fait l'hypothèse
+%%que les données du problème présentent une symétrie sphérique. Ainsi,
+%%on décrite l'ensemble des données en fonction de la distance à
+%%l'origine $r$. De plus, on cherche la température $\temperature$ dans
+%%l'électrolyte en fonction de la coordonnée $r$. Par abus de notation
+%%et pour éviter de surcharger les notation, on réutilise les mêmes
+%%symboles, mais explicitant la coordonnée $r$.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \begin{center}
     \input{../media/particles/temperature/temperature.tex}
     \caption{Température initiale du système formé par la particule de
@@ -769,7 +770,7 @@ cuve. Soit $\telectrolyte$ la température du bain électrolytique. La
 condition initiale du système formé par la particule et le bain
 environnant est définie par:
 \begin{equation}
-  \tinit(r) = \left\{
+  \tinitr(r) = \left\{
   \begin{array}{ll}
     \tinj & \text{ si } r < R_p,\\
     \telectrolyte & \text{ si } r \geq R_p,\\
@@ -841,23 +842,26 @@ agitation de l'électrolyte au voisinage d'une particule accélère le
 transport de l'énergie thermique, et tend à accélérer la refonte du
 bain gelé.
 
-Pour simplifier le modèle, nous avons étudié la formation de gel
-autour d'une particule sphérique de bain solidifiée. Bien entendu,
-dans une cuve d'électrolyse industrielle on injecte des particules
-particules d'alumine à basse température, plutôt que des particule de
-bain gelé. Cependant, les propriétés thermiques des deux systèmes sont
-proches, ce qui justifie cette approximation.
+%%Pour simplifier le modèle, nous avons étudié la formation de gel
+%%autour d'une particule sphérique de bain solidifiée. Bien entendu,
+%%dans une cuve d'électrolyse industrielle on injecte des particules
+%%particules d'alumine à basse température, plutôt que des particule de
+%%bain gelé. Cependant, les propriétés thermiques des deux systèmes sont
+%%proches, ce qui justifie cette approximation.
 
-Lors de l'injection d'une dose de particules d'alumine, l'hypothèse
-d'une particule isolée dans un bain infini au repos n'est plus
-vérifiée. Les différentes particules qui constituent la dose
-interagissent thermiquement entre elles par l'intermédiaire du bain
-environnant. Ce comportement explique la raison pour laquelle
-l'hypothèse de particules isolée mène à des temps typique de
-formation et refonte de gel largement inférieurs aux valeurs
-recommandées par exemple dans le travail de V. Dassylva-Raymond \cite{Dassylva2015}.
+Pour des particules d'alumine suffisamment isolées dans le bain
+électrolytique suite à leur injection, on conclut que les temps
+caractéristiques du temps de latence du à la présence de gel à
+la surface des particules sont largement inférieurs à la seconde. De
+plus, les phénomènes précités d'agitation du fluide et de
+chute verticale des particules, négligés dans ce modèle, tendent à
+diminuer ces temps caractéristiques.
 
-Selon la recommandation de V. Dassylva-Raymond \cite{Dassylva2015}, on
-choisira, dans la suite, pour le temps de latence d'une dose de
-particules injectées dans le bain une valeur uniforme $\tlat =
-1\si{\second}$, indépendante du rayon.
+Pour ces raisons, dans la suite de ce travail on négligera la
+formation de gel à la surface des particules d'alumine. Cependant,
+selon les recommandation de V. Dassylva-Raymond \cite{Dassylva2015}, on
+choisira, dans la suite, un temps de latence pour chaque dose de
+particules injectées dans le bain uniforme $\tlat =
+1\si{\second}$, indépendante du rayon. Ce temps de latence se justifie
+par un effet collectif de toutes les particules d'une dose sur la
+température du bain environnant.
