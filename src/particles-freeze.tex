@@ -22,9 +22,9 @@ liquéfaction dudit bain autour d'une particule d'alumine solide
 injectée dans ce bain.
 
 % Choix des parametre thermiques constants dans chaque phase
-Ce choix se justifie par le fait que ces valeurs varient peu sur
-l'intervalle de température qui nous intéresse, et on peut se
-contenter de considérer une valeur moyenne sur cet intervalle.
+%Ce choix se justifie par le fait que ces valeurs varient peu sur
+%l'intervalle de température qui nous intéresse, et on peut se
+%contenter de considérer une valeur moyenne sur cet intervalle.
 
 % description du système: particule et bain, symétrie sphérique,
 %  caractérisation des matériaux.
@@ -181,7 +181,7 @@ formulation, qu'on qualifie d'{\em enthalpique},
 remplace le problème de frontière libre du problème de Stefan
 classique par un problème parabolique non-linéaire dégénéré. L'un des
 avantages et de ne pas avoir à suivre explicitement l'interface
-$\Gamma$.L'interface $\Gamma$ est obtenue après calcul par un
+$\Gamma$. L'interface $\Gamma$ est obtenue après calcul par un
 ``post-processing''.
 
 Soit $f_s(\temperature)$ la fraction solide du bain électrolytique. La
@@ -213,7 +213,7 @@ Les propriétés thermiques du bain électrolytique sont
 caractérisées par la relation entre la température $\temperature$ et
 l'enthalpie par unité de masse $\enthalpy$ qui s'exprime de la manière
 suivante:
-\begin{equation}
+\begin{equation}\label{eq:enthalpy}
   \enthalpy(\temperature) = %
     \int_0^\temperature
       \electrolytedensity\electrolytehc\intd{s} %
@@ -406,7 +406,7 @@ On note $\temperature^n(x)$ et $\enthalpydensity^n(x)$ les approximation
 de $\temperature(t^n, x)$ et $\enthalpydensity(t^n, x)\ \forall x\in
 \Omega$.  On suppose donnée la densité d'enthalpie initiale $h^0$, et
 on pose $\temperature^0 = \tinit$, $\enthalpydensity^0 = \enthalpy(\tinit)$,
-avec $\enthalpy$ donnée par (\ref{eq:}). Pour $0 < n \leq N$, on résout
+avec $\enthalpy$ donnée par (\ref{eq:enthalpy}). Pour $0 < n \leq N$, on résout
 successivement les équations:
 \begin{align}
   &\temperature^{n+1} - \frac{\tau}{\mu} \div\parent{
