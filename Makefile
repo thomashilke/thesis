@@ -30,11 +30,9 @@ TEX_SOURCES = src/thesis.tex \
   src/particles-introduction.tex \
   src/particles-population-dissolution.tex
 
+BIB_SOURCES = $(wildcard refs/*.bib)
 
 all: post-build
-
-#force: TEX_SOURCES=
-#force: all
 
 pre-build:
 	@$(MAKE) -C media/ all
@@ -44,15 +42,20 @@ main-build: pre-build
 
 post-build: main-build
 
+
 target: pdf/document.pdf
 
 pdf/document.pdf:  build/document.pdf
 	@echo "[CP]" $@
 	@cp $< $@
 
-build/document.pdf: $(TEX_SOURCES)
+build/document.pdf: $(TEX_SOURCES) src/references.bib
 	@echo "[PDFLATEX]" $@
 	@cd $(dir $<) && for number in `seq 1 $(RUN)`; do $(PDFLATEX) -output-directory=../$(dir $@) $(PDFLATEXFLAGS) -jobname=document $(patsubst src/%.tex,%.tex,$<) >$(STDOUT_REDIRECT); done;
+
+src/references.bib: $(BIB_SOURCES)
+	@echo "[CAT] "
+	@cat $(BIB_SOURCES) > $@
 
 biblatex:
 	@echo "[BIBLATEX] document.bcf"
