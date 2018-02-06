@@ -17,7 +17,6 @@ TEX_SOURCES = src/thesis.tex \
   src/config-pgfplots.tex \
   src/config-media.tex \
   src/config-typography.tex \
-  src/graphicspath.tex \
   src/notations.tex \
   src/introduction-chapter.tex \
   src/introduction-hall-heroult.tex \

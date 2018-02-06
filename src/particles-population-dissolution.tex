@@ -1,1 +1,167 @@
+Selon la distribution de tailles des particules d'alumine, une dose de
+\num{1}\si{\kilo\gram} contient typiquement entre \num{1.e+9} et
+\num{1.e+12} particules. Il n'est donc pas envisageable de suivre
+individuellement l'évolution de chacune d'elles dans le bain. En
+suivant le travail de T. Hofer \cite{Hofer2011} on adopte une approche
+statistique et on décrit l'ensemble des particules dans le bain par
+l'intermédiaire d'une distribution continue. On note $n_p(t, r)\intd{r}$ le
+nombre de particules dont le rayon est compris dans l'intervalle $[r,
+  r + \intd{r}]$ à l'instant $t$. En suivant le travail de T. Hofer \cite{Hofer2011}, on suppose que
+cette population $\population$ se dissout selon l'équation
+\begin{align}
+&\frac{\partial \population}{\partial t} - \frac{\partial
+}{\partial r}\parent{f(r,c,\temperature)n_p} = 0\quad \text{si } r > 0,\ t > 0,\label{eq:population-pde}\\
+&n_p(0, r) = n_{p,0}(r) \quad \text{si } r > 0,\label{eq:population-ic}
+\end{align}
+où la vitesse de dissolution $f$ est donnée par l'expression
+(\ref{eq:dissolution-velocity}) et $n_{p,0}$ est une distribution de
+particules initiale donnée.
 
+Supposons maintenant que $\concentration$ et $\temperature$ sont des
+constantes données. Alors
+$\dissolutionrate(\concentration,\temperature)$ est un réel fixé, et
+on omettra d'indiquer ses arguments dans la suite, lorsqu'il n'y a pas
+de risque d'ambiguïté. Dans ces conditions, on peut trouver une
+solution du système d'équations l'équation
+(\ref{eq:population-pde})-(\ref{eq:population-ic}) sous forme
+analytique par la méthode des caractéristiques.
+
+Considérons tout d'abord une particule individuelle de rayon initiale
+$r_0$. Son rayon varie au cours du temps selon l'équation
+(\ref{eq:radius-edo}) que l'on réécrit en explicitant le membre de
+droite:
+\begin{align*}
+  &\frac{\mathrm d r}{\mathrm d t} = -\frac{\dissolutionrate}{r} \quad \text{si } t
+  > 0,\\
+  & r(0) = r_0.
+\end{align*}
+Ainsi, en notant $\dot r = \frac{\mathrm d}{\mathrm dt}$ on obtient:
+\begin{align}
+  &r\dot r = -\dissolutionrate,\nonumber\\
+  &\frac{1}{2}\frac{\mathrm d}{\mathrm dt}r^2 = -\dissolutionrate,\nonumber\\
+  &r^2 = -2\dissolutionrate t + r_0^2,\nonumber\\
+  &r(t) = \sqrt{r_0^2-2\kappa t}.\label{eq:particle-exact}
+\end{align}
+Si $\bar t = \frac{r_0^2}{2\dissolutionrate}$ on obtient $r(\bar
+t) = 0$. La particule de rayon $r_0$ sera dissoute après un temps $\bar
+t = \frac{r_0^2}{2\dissolutionrate}$.
+
+Revenons maintenant à l'équation pour la population de particule
+$\population$. On a:
+\begin{equation}\label{eq:population-pde-2}
+  \frac{\partial n_p}{\partial t} -
+  \frac{\dissolutionrate}{r}\frac{\partial n_p}{\partial r} +
+  \frac{\dissolutionrate}{r^2}n_p = 0.
+\end{equation}
+\newcommand{\rcharacteristic}{R_{(\bar t, \bar r)}}
+Si, dans le plan $(t, r)$ on fixe $t = \bar t > 0$, $r = \bar r > 0$,
+l'équation de la courbe caractéristique $\rcharacteristic$ qui passe par $(\bar t,
+\bar r)$ est donnée par
+\begin{equation*}
+\frac{\mathrm d}{\mathrm dt}R_{(\bar t, \bar r)}(t) =
+-\frac{\dissolutionrate}{R_{(\bar t, \bar r)}(t)}.
+\end{equation*}
+Ainsi $R_{(\bar t, \bar r)}(t) = \sqrt{\bar r^2 - 2\dissolutionrate (t
+  - \bar t)}$, en vertu de (\ref{eq:particle-exact}). Notons $N_p(t) =
+n_p(t, R_{(\bar t, \bar r)}(t))$ la valeur de $n_p$ sur cette
+caractéristique. En dérivant par rapport à $t$ et en utilisant
+(\ref{eq:population-pde-2}) on a
+\begin{align*}
+  \frac{\mathrm d}{\mathrm dt}N_p(t) %
+  &= \frac{\partial n_p}{\partial t}(t, \rcharacteristic(t)) %
+  + \frac{\partial}{\partial r}n_p(t,\rcharacteristic(t)) %
+    \frac{\mathrm d}{\mathrm dt}\rcharacteristic(t)\\
+  &= \frac{\partial n_p}{\partial t}(r, \rcharacteristic) - \frac{\dissolutionrate}{\rcharacteristic}\frac{\partial}{\partial r} n_p(t, \rcharacteristic(t))\\
+  &= -\frac{\dissolutionrate}{R_{(\bar t, \bar r)}^2(t)}N_p(t). %
+\end{align*}
+Ainsi
+\begin{equation*}
+  \frac{1}{N_p(t)}\frac{\mathrm d}{\mathrm dt}N_p(t) =
+  -\frac{\dissolutionrate}{R^2_{(\bar t, \bar r)}(t)}
+\end{equation*}
+qui implique que
+\begin{equation*}
+  \frac{\mathrm d}{\mathrm dt}\ln(N_p(t)) =
+  -\frac{\dissolutionrate}{\parent{\bar r^2 - 2\dissolutionrate (t - \bar t)}}.
+\end{equation*}
+En intégrant on obtient
+\begin{equation*}
+  \ln(N_p(t)) = \frac{1}{2}\ln\parent{\bar r^2 -
+    2\dissolutionrate\parent{t - \bar t}} + D
+\end{equation*}
+et donc
+$N_p(t) = \parent{\bar r^2 - 2\dissolutionrate\parent{t - \bar t}}^{1/2} \exp(D)$. Si $t = 0$, on a:
+\begin{equation*}
+  N_p(0) = \exp(D)\sqrt{\bar r^2 +
+    2\dissolutionrate \bar t} = n_{p,0}(R(0)) = n_{p,0}(\sqrt{\bar r^2 +
+    2\dissolutionrate \bar t})
+\end{equation*}
+Ainsi
+$\exp(D) = \frac{n_{p,0}\parent{\sqrt{\bar r^2 + 2\dissolutionrate \bar t\,}}}{\sqrt{\bar r^2 + 2\dissolutionrate \bar t\,}}$
+et
+\begin{equation*}
+  N_p(t) = \frac{n_{p,0}(\sqrt{\bar r^2 + 2\dissolutionrate \bar
+      t})}{\sqrt{\bar r^2 + 2\dissolutionrate \bar t\,}}\parent{\bar r^2 -
+    2\dissolutionrate \parent{t - \bar t}}^{1/2}.
+\end{equation*}
+Clairement
+$N_p(\bar t) = n_p(\bar t, \bar r)$
+et donc
+\begin{equation}\label{eq:population-exact-solution}
+  n_p(\bar t, \bar r) = \bar r\frac{n_{p,0}(\sqrt{\bar r^2 +
+      2\dissolutionrate \bar t})}{\sqrt{\bar r^2+2\dissolutionrate \bar t}}.
+\end{equation}
+
+\begin{remarque}\label{rem:population-exact-step}
+  Supposons connu $n_p(\bar t - \Delta t, r)$. Nous avons ainsi
+  \begin{equation*}
+    R_{(\bar t, \bar r)}(\bar t - \Delta t) = \sqrt{\bar r^2 +
+      2\dissolutionrate \Delta t\,}.
+  \end{equation*}
+  Puisque $N_p(t) = C\parent{\bar r^2 - 2\dissolutionrate\parent{t -
+      \bar t}}^{1/2}$, alors
+  \begin{equation*}
+N_p(\bar t - \Delta t) = C\parent{\bar r^2 + 2\dissolutionrate \Delta
+  t} = n_p\parent{t - \Delta t, \sqrt{\bar r^2 + 2\dissolutionrate
+    \Delta t\,}}.
+  \end{equation*}
+  Ainsi
+  \begin{equation*}
+    C = \frac{n_p(t - \Delta t, \sqrt{\bar r^2 + 2\dissolutionrate
+        \Delta t})}{\bar r^2 + 2\dissolutionrate\Delta t}
+  \end{equation*}
+  et donc
+  \begin{equation*}
+    N(t) = \frac{n_p(t - \Delta t, \sqrt{\bar r^2 + 2\dissolutionrate
+        \Delta t})}{\bar r^2 + 2\dissolutionrate\Delta t}\parent{\bar
+      r^2 - 2\dissolutionrate\parent{t - \bar t}}^{1/2}.
+  \end{equation*}
+  Puisque $N(\bar t) = n_p(\bar t, \bar r)$, on obtient
+  \begin{equation*}
+    n_p(\bar t, \bar r) = \bar r\frac{n_p(t - \Delta t, \sqrt{\bar
+        r^2 + 2\dissolutionrate \Delta t})}{\sqrt{\bar r^2 +
+        2\dissolutionrate \Delta t}}.
+  \end{equation*}
+\end{remarque}
+
+Dans cette partie nous avons présenté le modèle décrit l'évolution d'une
+distribution de particules qui se dissout dans un bain électrolytique
+selon la fonction (\ref{eq:dissolution-velocity}). On a montré que
+l'évolution de la population $n_p$ s'exprime sous forme exacte,
+donnée par (\ref{eq:population-exact-solution}), pour
+autant que la concentration $c$ et la température $\temperature$
+sont maintenue constante.
+
+Nous utiliserons le résultat de la remarque
+\ref{rem:population-exact-step} lors de la discusssion de la
+discrétisation du modèle de transport et dissolution complet dans le
+chapitre \ref{chap:populations}.
+
+La section suivante tient lieu de conclusion ce chapitre, et discute
+de la sédimentation des particules d'alumine dans le bain sous
+l'action de la force de gravité.
+
+%%\paragraph{Approximation numérique}
+%%Soit $T>0$ le temps final, $N \in \mathbb N^*$ le nombre de pas de
+%%temps, $\tau = \frac{T}{N}$, $\Delta r = \frac{\rmax}{M}$,
+%%$t_i = i \tau$, $r_j = j\Delta r$ constantes
