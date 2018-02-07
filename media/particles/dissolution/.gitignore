@@ -1,0 +1,6 @@
+*.eps
+*-eps-converted-to.pdf
+*.tex
+error.dat
+slope.dat
+timelapse.dat

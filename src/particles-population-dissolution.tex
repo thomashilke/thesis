@@ -1,15 +1,15 @@
 Selon la distribution de tailles des particules d'alumine, une dose de
-\num{1}\si{\kilo\gram} contient typiquement entre \num{1.e+9} et
-\num{1.e+12} particules. Il n'est donc pas envisageable de suivre
-individuellement l'évolution de chacune d'elles dans le bain. En
-suivant le travail de T. Hofer \cite{Hofer2011} on adopte une approche
-statistique et on décrit l'ensemble des particules dans le bain par
-l'intermédiaire d'une distribution continue. On note $n_p(t, r)\intd{r}$ le
-nombre de particules dont le rayon est compris dans l'intervalle $[r,
-  r + \intd{r}]$ à l'instant $t$. En suivant le travail de T. Hofer \cite{Hofer2011}, on suppose que
-cette population $\population$ se dissout selon l'équation
+\num{1}\si{\kilo\gram} contient typiquement entre $10^9$ et $10^{12}$
+particules. Il n'est donc pas envisageable de suivre individuellement
+l'évolution de chacune d'elles dans le bain. On adopte une approche
+statistique \cite{Hofer2011} et on décrit l'ensemble des particules
+présentes dans le bain par l'intermédiaire d'une distribution
+continue. On note $n_p(t, r)\intd{r}$ le nombre de particules dont le
+rayon est compris dans l'intervalle $[r, r + \intd{r}]$ à l'instant
+$t$. On suppose que cette population $\population$ se dissout selon
+l'équation
 \begin{align}
-&\frac{\partial \population}{\partial t} - \frac{\partial
+&\frac{\partial \population}{\partial t} + \frac{\partial
 }{\partial r}\parent{f(r,c,\temperature)n_p} = 0\quad \text{si } r > 0,\ t > 0,\label{eq:population-pde}\\
 &n_p(0, r) = n_{p,0}(r) \quad \text{si } r > 0,\label{eq:population-ic}
 \end{align}
@@ -35,7 +35,7 @@ droite:
   > 0,\\
   & r(0) = r_0.
 \end{align*}
-Ainsi, en notant $\dot r = \frac{\mathrm d}{\mathrm dt}$ on obtient:
+Ainsi, en notant $\dot r = \frac{\mathrm dr}{\mathrm dt}$ on obtient:
 \begin{align}
   &r\dot r = -\dissolutionrate,\nonumber\\
   &\frac{1}{2}\frac{\mathrm d}{\mathrm dt}r^2 = -\dissolutionrate,\nonumber\\
@@ -113,7 +113,16 @@ et donc
 \end{equation}
 
 \begin{remarque}\label{rem:population-exact-step}
-  Supposons connu $n_p(\bar t - \Delta t, r)$. Nous avons ainsi
+  La solution (\ref{eq:population-exact-solution}) est exacte pour
+  autant que le taux de dissolution $\dissolutionrate$ soit constant
+  sur l'intervalle de temps $[0, T]$. Cependant, si $\dissolutionrate$
+  est constant sur le sous-intervalle $[\bar t - \Delta t, \bar t]$ et
+  que la distribution de particules $\population$ est connue au temps
+  $\bar t - \Delta t$, alors on exprime facilement $\population$ au
+  temps $\bar t$.
+
+  En effet, supposons connu $n_p(\bar t - \Delta t, r)$ $\forall
+  r$. Nous avons ainsi
   \begin{equation*}
     R_{(\bar t, \bar r)}(\bar t - \Delta t) = \sqrt{\bar r^2 +
       2\dissolutionrate \Delta t\,}.
@@ -138,30 +147,118 @@ N_p(\bar t - \Delta t) = C\parent{\bar r^2 + 2\dissolutionrate \Delta
   \end{equation*}
   Puisque $N(\bar t) = n_p(\bar t, \bar r)$, on obtient
   \begin{equation*}
-    n_p(\bar t, \bar r) = \bar r\frac{n_p(t - \Delta t, \sqrt{\bar
+    n_p(\bar t, \bar r) = \bar r\frac{n_p(\bar t - \Delta t, \sqrt{\bar
         r^2 + 2\dissolutionrate \Delta t})}{\sqrt{\bar r^2 +
         2\dissolutionrate \Delta t}}.
   \end{equation*}
 \end{remarque}
 
-Dans cette partie nous avons présenté le modèle décrit l'évolution d'une
-distribution de particules qui se dissout dans un bain électrolytique
-selon la fonction (\ref{eq:dissolution-velocity}). On a montré que
-l'évolution de la population $n_p$ s'exprime sous forme exacte,
-donnée par (\ref{eq:population-exact-solution}), pour
-autant que la concentration $c$ et la température $\temperature$
-sont maintenue constante.
+\paragraph{Approximation numérique} Pour discrétiser l'équation
+(\ref{eq:population-pde}) on procède comme dans Hofer \cite{Hofer2011}
+et on utilise une méthode de caractéristique \cite{Pironneau1989}.
 
-Nous utiliserons le résultat de la remarque
-\ref{rem:population-exact-step} lors de la discusssion de la
-discrétisation du modèle de transport et dissolution complet dans le
-chapitre \ref{chap:populations}.
+Soit $T > 0$ le temps final et soit $N\in \mathbb N^*$ le nombre de
+pas de temps. Soient $\Delta t = T/N$ et $t_n = n\tau$, $n = 0,1,
+\dots, N$ une subdivision uniforme de $[0, T]$. De plus on suppose
+donnée une suite de nombres $\dissolutionrate^n \geq 0$, $n = 0, 1,
+\dots, N - 1$. Le nombre $\dissolutionrate^n$ est la valeur du taux de
+dissolution sur l'intervalle de temps $[t^n, t^{n+1}]$.
+
+Soit $\rmax > 0$ et $M \in \mathbb N^*$ le nombre de subdivisions de
+l'intervalle $[0, \rmax]$. Soient $\Delta r = \rmax/M$ et $r_j =
+j\Delta r$ une subdivision de $[0, \rmax]$.
+
+Pour que le problème soit bien posé sur le domaine $(0,
+\rmax)$ et puisque la vitesse de dissolution $f$ est négative, on
+considère en plus la condition limite sur le bord entrant $r = \rmax$:
+\begin{equation*}
+  n_p(t, \rmax) = 0,\quad\forall t \in [0, T].
+\end{equation*}
+
+Notons $n_{p,j}^n$ l'approximation de $\population(t_n, r_j)$ que l'on
+suppose connue pour $j = 1,2, \dots, M$. Les valeurs $n_{p,j}^{n+1}$
+sont calculées de la manière suivante. On utilise $\dissolutionrate^n$
+comme taux de dissolution sur l'intervalle de temps $[t^n,
+  t^{n+1}]$. Soit $R_j^n = \sqrt{r_j^2 + 2\dissolutionrate^n \Delta
+  t}$ la position à l'instant $t_n$ de la caractéristique passant par le point
+$(t_{n+1}, r_j)$. Soit $s_j^n \in \mathbb N$
+l'indice tel que $r_{s_j^n} < R_j^n \leq r_{s_j^n + 1}$. Alors en
+utilisant le résultat de la remarque \ref{rem:population-exact-step}
+on pose pour $j = 1,\dots, M-1$
+\begin{equation}\label{eq:population-characteristic-scheme}
+  n_{p,j}^{n+1} = \left\{
+  \begin{array}{ll}
+    \parent{\frac{r_{s_j^n + 1} - R_j^n}{\Delta r}
+      n_{p,s_j^n}^n + \frac{R_j^n - r_{s_j^n}}{\Delta r} n_{p,s_j^n +
+        1}^n} \displaystyle\frac{r_j}{\sqrt{r_j^2 + 2\dissolutionrate^n \Delta
+        t}},&\text{ si } s_j < M,\\
+    0, & \text{ sinon.}
+  \end{array}
+  \right.
+\end{equation}
+
+
+\begin{figure}[h]
+  \begin{center}
+    %\input{../media/particles/dissolution/timelapse-0.tex}
+    \input{../media/particles/dissolution/timelapse-1.tex}
+    %\input{../media/particles/dissolution/timelapse-2.tex}
+    \input{../media/particles/dissolution/timelapse-3.tex}
+    %\input{../media/particles/dissolution/timelapse-4.tex}
+    \input{../media/particles/dissolution/timelapse-5.tex}
+    %\input{../media/particles/dissolution/timelapse-6.tex}
+    \input{../media/particles/dissolution/timelapse-7.tex}
+    %\input{../media/particles/dissolution/timelapse-8.tex}
+    \input{../media/particles/dissolution/timelapse-9.tex}
+    %\input{../media/particles/dissolution/timelapse-10.tex}
+    \input{../media/particles/dissolution/timelapse-11.tex}
+  \end{center}
+  \begin{center}
+    \caption{Solution exacte $n_p$ et approximation numérique avec
+      $\Delta r = 1/64$, $\Delta t = \num{1.46e-2}$ à différents
+      temps. La condition initiale est donnée par
+      (\ref{eq:population-test-ic}.). En vert: solution exacte. En
+      violet: approximation numérique.}
+    \label{fig:population-timelapse}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \input{../media/particles/dissolution/dissolution-convergence.tex}
+    \caption{Convergence de l'erreur $L^2(0, \rmax)$ entre $n_p(T, .)$
+    et l'interpolant de Lagrange des approximations $n_{p,j}^N$ aux
+    noeuds $r_j$. Le pas de temps est choisit tel que $\Delta t =
+    O(\Delta r)$.}
+    \label{fig:population-convergence}
+  \end{center}
+\end{figure}
+\paragraph{Validation numérique} On propose maintenant de valider
+l'implémentation du schéma numérique
+(\ref{eq:population-characteristic-scheme}) en étudiant la
+convergence de l'erreur entre une solution exacte et son approximation
+numérique.
+
+On fixe $\rmax = \num{100}\si{\micro\meter}$, $T = 5\si{\second}$ et
+le taux de dissolution
+$\dissolutionrate^n = \num{0.5e-9}$ pour tout $n$ tel que $0\leq n\leq
+N-1$. On choisit la distribution de particules initiale
+\begin{equation}\label{eq:population-test-ic}
+  n_{p,0}(r) = \exp\parent{1 - \frac{1}{1 - \frac{16}{\rmax^2}\parent{r - \frac{\rmax^2}{2}}}}.
+\end{equation}
+Alors la solution exact $n_p(t, r)$ est donnée par l'expression
+(\ref{eq:population-exact-solution}). On note $e_{\population}$ l'erreur
+$L^2(0,\rmax)$ entre la solution exacte et l'interpolant de Lagrange
+de l'approximation $n_{p,j}^N$ sur la subdivision
+$\cparent{r_j}_{j=0}^M$. La figure \ref{fig:population-timelapse}
+illustre la solution et l'approximation numérique à différent
+instants. La figure \ref{fig:population-convergence} présente
+l'erreur $e_{\population}$ pour $\Delta r = 1/32$, $1/64$, $1/128$, $1/256$, $1/512$,
+$1/1024$, $1/2048$ et $1/4096$. On a choisit $\Delta t = O(\Delta r)$ de sorte que
+$\tau = \num{2.92e-2}$ lorsque $\Delta r = 1/32$.
+L'erreur est comparée à une droite de pente 1. On conclut que l'erreur
+de l'approximation numérique est un $O(\Delta r)$.
 
 La section suivante tient lieu de conclusion ce chapitre, et discute
 de la sédimentation des particules d'alumine dans le bain sous
 l'action de la force de gravité.
-
-%%\paragraph{Approximation numérique}
-%%Soit $T>0$ le temps final, $N \in \mathbb N^*$ le nombre de pas de
-%%temps, $\tau = \frac{T}{N}$, $\Delta r = \frac{\rmax}{M}$,
-%%$t_i = i \tau$, $r_j = j\Delta r$ constantes

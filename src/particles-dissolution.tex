@@ -1,106 +1,111 @@
-Dans cette section, nous nous intéressons à la modélisation de
-la dissolution d'une particules d'alumine individuelle dans un bain
+Dans cette section, nous nous intéressons à la modélisation de la
+dissolution d'une unique particule d'alumine dans un bain
 électrolytique. On suppose que cette particule, après avoir été
-injectée à température $\tinj$, s'est maintenant réchauffée et se
-trouve à la même température $\temperature$ que le bain environnant.
+injectée à température $\tinj$, s'est réchauffée et se trouve à la
+même température $\temperature$ que le bain environnant.
 
-On donne ci-dessous un aperçu de la compléxité du phénomène de
-dissolution des particules d'alumine dans le bain
-électrolytique. C'est un sujet qui a déjà fait l'objet de nombreux
-travaux de recherche, voir par exemple \cite{Dassylva2015},
-\cite{Kvande1986}, \cite{Gerlach1975}, \cite{Solheim1995}. La
-taille initiale des particules qui forme une dose est comprise pour la
-plupart entre $\num{20}\si{\micro\meter}$ et
-$\num{100}\si{\micro\meter}$. Ces particules sont seulement
-approximativement sphériques. Elles sont le résultat de
-l'agglomération de micro-cristaux et peuvent présenter une porosité
-importante, jusqu'à \num{75}\%. Cette porosité joue un rôle sur la
-capacité du bain à mouiller la surface de la particule, et à permettre
-sa dissolution. De même, si les particules sont suffisamment fines
-celle-ci deviennent volatiles et sont facilement soufflées loin du
-trou d'injection par les gaz s'en échappant. Si ces particules fines
-atteignent malgré tout l'électrolyte, celui-ci a du mal à les mouiller
-et a permettre leur dissolution. A l'inverse, des particules trop
-grandes sont trop longues à dissoudre et risquent de sédimenter au
-fond de la cuve.
+La problématique de la dissolution de l'alumine dans le bain d'une
+cuve d'électrolyse d'aluminium est un phénomène complexe. Ce sujet a
+déjà fait l'objet de nombreux travaux de recherche, voir par exemple
+\cite{Dassylva2015}, \cite{Kvande1986}, \cite{Gerlach1975},
+\cite{Solheim1995}.
 
-L'alumine a une forte affinité avec l'eau
+La taille initiale des particules qui forme une dose est comprise pour
+la plupart entre $\num{20}\si{\micro\meter}$ et
+$\num{100}\si{\micro\meter}$ \cite{Fini2017}. Si les particules sont
+trop fines celle-ci deviennent suffisamment volatiles pour être
+soufflées loin du trou d'injection par les gaz s'en échappant. Si
+elles atteignent malgré tout l'électrolyte, celui-ci a du mal à les
+mouiller et à permettre leur dissolution. A l'inverse, des particules
+trop grandes sont trop longues à dissoudre et risquent de sédimenter
+au fond de la cuve.
+
+Les particules d'alumine sont le résultat de l'agglomération de
+micro-cristaux et peuvent présenter une porosité importante, jusqu'à
+\num{75}\%. Cette porosité joue un rôle sur la capacité du bain à
+mouiller la surface de la particule et à permettre sa dissolution.
+
+L'oxyde d'aluminium a une forte affinité avec l'eau
 \cite{Patterson2001}. Lorsque les particules entrent en contact avec
-le l'électrolyte en fusion, le gaz qui résulte de la désorption des
+l'électrolyte en fusion, le gaz qui résulte de la désorption des
 molécule d'eau crée une forte agitation qui favorise la dispersion et
 la dissolution des particules. Par exemple, Haverkamp et
 al. \cite{Haverkamp1994} ont montré que le temps de dissolution de
 particules d'alumine hydratées peut être jusqu'à \num{40}\% plus
-faible par rapport à des particules sèches.
+faible par rapport à des particules sèches. La formation d'agrégats
+et de radeaux est également réduite.
 
-La dissolution de l'oxyde d'aluminium l'électrolyte est une réaction
+La dissolution de l'oxyde d'aluminium dans l'électrolyte est une réaction
 endothermique. La vitesse de cette réaction dépend de la chimie du
 bain, \ie, des concentrations respectives des différentes espèces qui
-le constitue, et de la surchauffe du bain à proximité et de la
-particule. La température du liquidus $\tliq$, dont dépend la
-surchauffe, est elle-même fonction de la concentration d'alumine
-dissoute et des autres espèces chimiques. La concentration de
-saturation de l'alumine $\csat$ dépend aussi de la température de
-l'électrolyte.
-
-Finalement, l'écoulement des fluide à proximité de la surface de la
-particule peut influencer sa dissolution. Au niveau microscopique,
-deux mécanismes entrent en compétition au niveau de la surface de la
-particule d'alumine. Il y a d'une part la réaction de dissolution
-elle-même qui consiste à détacher une molécule d'\ce{Al2O3} et à
-former différents complexes avec les ions \ce{AlF6^{3-}}
-\cite{Haupin1995}, \cite{Kvande1986}, et d'autre part le mécanisme de
-diffusion moléculaire qui transporte l'alumine dissoute loin de la
-particule. La diffusion moléculaire est essentielle pour maintenir la
-concentration à la surface de la particule inférieure à la
-concentration de saturation $\csat$ et permettre la réaction de
-dissolution. Clairement, si la concentration est saturée dans
-l'ensemble du bain, la dissolution ne peut pas avoir lieu. La réaction
-de dissolution étant elle-même endothermique, elle est contrôlée par
-la disponibilité d'énergie sous forme thermique à proximité de la
-particule, \ie, de la surchauffe du bain.
+le constitue et de la surchauffe du bain à proximité de la
+particule. Au niveau microscopique, deux mécanismes entrent en
+compétition au voisinage de la surface de la particule d'alumine. Il y a
+d'une part la réaction de dissolution elle-même qui consiste à
+détacher une molécule d'\ce{Al2O3} et à former différents complexes
+avec les ions \ce{AlF6^{3-}} \cite{Haupin1995}, \cite{Kvande1986}, et
+d'autre part le mécanisme de diffusion moléculaire qui transporte
+l'alumine dissoute loin de la particule. La diffusion moléculaire est
+essentielle pour maintenir la concentration à la surface de la
+particule inférieure à la concentration de saturation $\csat$ et
+permettre la réaction de dissolution. Clairement, si la concentration
+est saturée dans l'ensemble du bain, la dissolution ne peut pas avoir
+lieu. La réaction de dissolution étant elle-même endothermique, elle
+est contrôlée par la disponibilité d'énergie sous forme thermique à
+proximité de la particule, \ie, de la surchauffe du bain.
 
 Dans cette section, on propose un modèle qui décrive la vitesse de
-dissolution d'une particule dans le bain d'une cuve d'électrolyse
-d'aluminium, basé sur le travail de thèse de T. Hofer
+dissolution d'une unique particule d'alumine dans le bain d'une cuve
+d'électrolyse d'aluminium, basé sur le travail de thèse de T. Hofer
 \cite{Hofer2011}.
 
-On fait l'hypothèse que les particules d'alumine sont des sphères
-parfaites et non poreuses. On négligera la possible hydratation de
-l'alumine qui les constituent et son effet sur leur dissolution. Dans
-le travail de T. Hofer \cite{Hofer2011}, la vitesse de dissolution
-d'une particule est une fonction $f$ qui décrit la variation de son
-rayon et qui qui dépend d'une part de son rayon actuel $r$, et d'autre
-part de la concentration locale $c$. Dans ce travail, nous
-considèrerons en plus l'influence de la température locale de
-l'électrolyte $\temperature$ sur sa vitesse de dissolution,
-c'est-à-dire que
+On fait l'hypothèse que les conditions d'exploitation de la cuve
+d'électrolyse varient peu au cours du temps, c'est-à-dire que la
+concentration des différentes espèces chimiques sont constantes au
+cours du temps, à l'exception de la concentration d'alumine. On
+suppose que la concentration d'alumine reste dans un intervalle qui
+permette de négliger les variations de la température du liquidus
+$\tliq$ \cite{Skybakmoen1997}. De même, on suppose des variations de températures
+suffisamment faible pour se permettre de négliger son influence sur
+la concentration de saturation de l'alumine $\csat$.
+
+Enfin, on négligera la possible hydratation de l'alumine qui constitue
+la particule et son influence sur sa dissolution puisqu'en pratique
+celle-ci est généralement maintenue inférieure à \num{1}\% et que sont
+effet est pricipalement d'aider à la dispersion des particules
+\cite{Fini2017}.
+
+On suppose que cette particule est une sphère parfaite, non
+poreuses, et qu'elle est complètement mouillée par le bain, \ie, que
+la totalité de sa surface soit en contact avec de l'électrolyte. Dans le
+travail \cite{Hofer2011}, la vitesse de dissolution d'une particule
+est une fonction $f$ qui décrit la variation de son rayon et qui qui
+dépend d'une part de son rayon actuel $r$, et d'autre part de la
+concentration locale $c$. Dans le présent travail, nous considèrerons
+en plus l'influence de la température locale de l'électrolyte
+$\temperature$ sur sa vitesse de dissolution, c'est-à-dire que
 \begin{equation}\label{eq:radius-edo}
   \frac{\mathrm dr}{\mathrm dt} = f(r, \concentration, \temperature).
 \end{equation}
-
-On fait l'hypothèse que la dissolution des particules est
-contrôlée par la diffusion de la concentration dans l'électrolyte et
-que la concentration de saturation $\csat$ est indépendante de la
-température $\temperature$ de l'électrolyte.
-
-En suivant le travail de T. Hofer \cite{Hofer2011}, on propose
-d'écrire la fonction $f$ comme
+On propose d'écrire la fonction $f$ comme
 \begin{equation}\label{eq:dissolution-velocity}
   f(r, c, \temperature) = -\frac{\dissolutionrate(c, \temperature)}{r},
 \end{equation}
-où $\dissolutionrate$ est le taux de dissolution. Le facteur $1/r$ est
-lié à l'hypothèse que la diffusion de la concentration contrôle
-dissolution, comme l'ont montré Wang et Flanagan \cite{Wang1999}.
+où $\dissolutionrate$ est le taux de dissolution qui modélise les
+aspects liés à la réaction de dissolution uniquement. Le facteur $1/r$
+est lié à la géométrie sphérique de la particule et à l'hypothèse que
+la diffusion de la concentration contrôle la dissolution, comme l'ont
+montré Wang et Flanagan \cite{Wang1999}.
 
-Clairement, le taux de dissolution $\dissolutionrate$ doit être
-maximal lorsque $c = 0$, et s'annuler lorsque l'électrolyte est saturé
-en alumine, \ie, lorsque $c = \csat$. De même, lorsque le bain se
-trouve à la température du liquidus $\tliq$, il n'y a pas d'énergie
-thermique à disposition pour la réaction de dissolution, et donc
-$\dissolutionrate$ doit s'annuler si $\temperature = \tliq$. A
-l'inverse, $\dissolutionrate$ doit être maximal lorsque
-$\temperature\gg\tliq$.
+On suppose que la concentration de saturation $\csat$ est donnée, de
+même que la température du liquidus $\tliq$. Clairement, le taux de
+dissolution $\dissolutionrate$ doit être maximal lorsque $c = 0$, et
+s'annuler lorsque l'électrolyte est saturé en alumine, \ie, lorsque $c
+= \csat$. De même, lorsque le bain se trouve à la température du
+liquidus $\tliq$, il n'y a pas d'énergie thermique à disposition pour
+la réaction de dissolution, et donc $\dissolutionrate$ doit s'annuler
+si $\temperature = \tliq$. A l'inverse, $\dissolutionrate$ doit être
+maximal lorsque $\temperature\gg\tliq$.
 
 Motivé par ces dernières considérations, on propose la forme suivante
 pour l'expression du taux de dissolution:
@@ -122,8 +127,10 @@ de dissolution limite $K$ est tel que
 \begin{equation}
   \lim_{\temperature \to\infty}\dissolutionrate(0, \temperature) = K.
 \end{equation}
-La figure \ref{fig:diss-rate} illustre la relation entre le taux de
-dissolution et la température dans le cas où la concentration locale
+Le paramètre $\tcrit$ caractérise l'intervalle dans lequel la
+température à une influence sur la vitesse de dissolution. La figure
+\ref{fig:diss-rate} illustre la relation entre le taux de dissolution
+et la température dans le cas où la concentration locale
 $\concentration = 0$ et le taux de dissolution limite $K = 1$.
 
 \begin{figure}[h]
@@ -138,6 +145,7 @@ $\concentration = 0$ et le taux de dissolution limite $K = 1$.
   \end{center}
 \end{figure}
 
-La vitesse de dissolution $f$ décrite ci-dessus constitue la base qui
-permet la description de l'évolution d'une population de particules
-dans un bain électrolytique qui fait l'objet de la section suivante.
+La vitesse de dissolution $f$ décrite ci-dessus forme la base qui
+permet la description de l'évolution d'une population constituée de
+particules de tailles différentes dans un bain électrolytique, et qui
+fait l'objet de la section suivante.
