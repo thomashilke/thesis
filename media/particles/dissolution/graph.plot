@@ -12,7 +12,7 @@ set terminal epslatex size 11.25cm,6.05cm color colortext 10 #standalone
 set output 'dissolution-convergence.tex'
 
 set xlabel '$\Delta r$ [\si{\meter}]'
-set ylabel '$\norm{n_{p,\Delta r} - n_p}_{L^2(0,\rmax)}$'
+set ylabel '$\norm{n_{p,\Delta r}^N - n_p(T, .)}_{L^2(0,\rmax)}$'
 
 set xtics format '%3.0e'
 set ytics format '%3.0e'
@@ -27,4 +27,4 @@ set key spacing 1.5
 
 plot \
 'slope.dat' u 1:2 w l title 'Pente 1',\
-'error.dat' u 1:2 w lp title 'Erreur $\norm{n_{p,\Delta r} - n_p}_{L^2(0, \rmax)}$'
+'error.dat' u 1:2 w lp title '$\norm{n_{p,\Delta r}^N - n_p(T, .)}_{L^2(0, \rmax)}$'

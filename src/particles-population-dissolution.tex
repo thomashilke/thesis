@@ -30,11 +30,13 @@ Considérons tout d'abord une particule individuelle de rayon initiale
 $r_0$. Son rayon varie au cours du temps selon l'équation
 (\ref{eq:radius-edo}) que l'on réécrit en explicitant le membre de
 droite:
-\begin{align*}
-  &\frac{\mathrm d r}{\mathrm d t} = -\frac{\dissolutionrate}{r} \quad \text{si } t
-  > 0,\\
-  & r(0) = r_0.
-\end{align*}
+\begin{align}\label{eq:radius-edo-cst-diss-rate}
+  \begin{array}{l}
+    \displaystyle\frac{\mathrm d r}{\mathrm d t}(t) = -\displaystyle\frac{\dissolutionrate}{r(t)} \quad \text{si } t
+    > 0,\\[0.5\normalbaselineskip]
+    r(0) = r_0.
+  \end{array}
+\end{align}
 Ainsi, en notant $\dot r = \frac{\mathrm dr}{\mathrm dt}$ on obtient:
 \begin{align}
   &r\dot r = -\dissolutionrate,\nonumber\\
@@ -93,7 +95,7 @@ et donc
 $N_p(t) = \parent{\bar r^2 - 2\dissolutionrate\parent{t - \bar t}}^{1/2} \exp(D)$. Si $t = 0$, on a:
 \begin{equation*}
   N_p(0) = \exp(D)\sqrt{\bar r^2 +
-    2\dissolutionrate \bar t} = n_{p,0}(R(0)) = n_{p,0}(\sqrt{\bar r^2 +
+    2\dissolutionrate \bar t} = n_{p,0}(\rcharacteristic(0)) = n_{p,0}(\sqrt{\bar r^2 +
     2\dissolutionrate \bar t})
 \end{equation*}
 Ainsi
@@ -119,7 +121,7 @@ et donc
   est constant sur le sous-intervalle $[\bar t - \Delta t, \bar t]$ et
   que la distribution de particules $\population$ est connue au temps
   $\bar t - \Delta t$, alors on exprime facilement $\population$ au
-  temps $\bar t$.
+  temps $\bar t$ en fonction de $\population$ au temps $\bar t - \dt$.
 
   En effet, supposons connu $n_p(\bar t - \Delta t, r)$ $\forall
   r$. Nous avons ainsi
@@ -131,18 +133,18 @@ et donc
       \bar t}}^{1/2}$, alors
   \begin{equation*}
 N_p(\bar t - \Delta t) = C\parent{\bar r^2 + 2\dissolutionrate \Delta
-  t} = n_p\parent{t - \Delta t, \sqrt{\bar r^2 + 2\dissolutionrate
+  t}^{1/2} = n_p\parent{t - \Delta t, \sqrt{\bar r^2 + 2\dissolutionrate
     \Delta t\,}}.
   \end{equation*}
   Ainsi
   \begin{equation*}
     C = \frac{n_p(t - \Delta t, \sqrt{\bar r^2 + 2\dissolutionrate
-        \Delta t})}{\bar r^2 + 2\dissolutionrate\Delta t}
+        \Delta t})}{\parent{\bar r^2 + 2\dissolutionrate\Delta t}^{1/2}}
   \end{equation*}
   et donc
   \begin{equation*}
     N(t) = \frac{n_p(t - \Delta t, \sqrt{\bar r^2 + 2\dissolutionrate
-        \Delta t})}{\bar r^2 + 2\dissolutionrate\Delta t}\parent{\bar
+        \Delta t})}{\parent{\bar r^2 + 2\dissolutionrate\Delta t}^{1/2}}\parent{\bar
       r^2 - 2\dissolutionrate\parent{t - \bar t}}^{1/2}.
   \end{equation*}
   Puisque $N(\bar t) = n_p(\bar t, \bar r)$, on obtient
@@ -155,7 +157,7 @@ N_p(\bar t - \Delta t) = C\parent{\bar r^2 + 2\dissolutionrate \Delta
 
 \paragraph{Approximation numérique} Pour discrétiser l'équation
 (\ref{eq:population-pde}) on procède comme dans Hofer \cite{Hofer2011}
-et on utilise une méthode de caractéristique \cite{Pironneau1989}.
+et on utilise une méthode des caractéristiques \cite{Pironneau1989}.
 
 Soit $T > 0$ le temps final et soit $N\in \mathbb N^*$ le nombre de
 pas de temps. Soient $\Delta t = T/N$ et $t_n = n\tau$, $n = 0,1,
@@ -182,7 +184,10 @@ comme taux de dissolution sur l'intervalle de temps $[t^n,
   t^{n+1}]$. Soit $R_j^n = \sqrt{r_j^2 + 2\dissolutionrate^n \Delta
   t}$ la position à l'instant $t_n$ de la caractéristique passant par le point
 $(t_{n+1}, r_j)$. Soit $s_j^n \in \mathbb N$
-l'indice tel que $r_{s_j^n} < R_j^n \leq r_{s_j^n + 1}$. Alors en
+l'indice tel que $r_{s_j^n} < R_j^n \leq r_{s_j^n + 1}$. Pour obtenir
+une approximation de $\population(t_n, R_j^n)$ on interpole
+linéairement les valeurs de $n_{p,s_j^n}^n$ et
+$n_{p,s_j^n+1}^n$. Ainsi en
 utilisant le résultat de la remarque \ref{rem:population-exact-step}
 on pose pour $j = 1,\dots, M-1$
 \begin{equation}\label{eq:population-characteristic-scheme}
@@ -227,9 +232,9 @@ on pose pour $j = 1,\dots, M-1$
   \begin{center}
     \input{../media/particles/dissolution/dissolution-convergence.tex}
     \caption{Convergence de l'erreur $L^2(0, \rmax)$ entre $n_p(T, .)$
-    et l'interpolant de Lagrange des approximations $n_{p,j}^N$ aux
-    noeuds $r_j$. Le pas de temps est choisit tel que $\Delta t =
-    O(\Delta r)$.}
+      et la reconstruction linéaire par morceau des approximations
+      $n_{p,j}^N$ sur la subdivision $\cparent{r_j}_{j = 0}^M$. Le pas
+      de temps est choisit tel que $\Delta t = O(\Delta r)$.}
     \label{fig:population-convergence}
   \end{center}
 \end{figure}
@@ -247,18 +252,25 @@ N-1$. On choisit la distribution de particules initiale
   n_{p,0}(r) = \exp\parent{1 - \frac{1}{1 - \frac{16}{\rmax^2}\parent{r - \frac{\rmax^2}{2}}}}.
 \end{equation}
 Alors la solution exact $n_p(t, r)$ est donnée par l'expression
-(\ref{eq:population-exact-solution}). On note $e_{\population}$ l'erreur
-$L^2(0,\rmax)$ entre la solution exacte et l'interpolant de Lagrange
-de l'approximation $n_{p,j}^N$ sur la subdivision
-$\cparent{r_j}_{j=0}^M$. La figure \ref{fig:population-timelapse}
-illustre la solution et l'approximation numérique à différent
-instants. La figure \ref{fig:population-convergence} présente
-l'erreur $e_{\population}$ pour $\Delta r = 1/32$, $1/64$, $1/128$, $1/256$, $1/512$,
-$1/1024$, $1/2048$ et $1/4096$. On a choisit $\Delta t = O(\Delta r)$ de sorte que
-$\tau = \num{2.92e-2}$ lorsque $\Delta r = 1/32$.
-L'erreur est comparée à une droite de pente 1. On conclut que l'erreur
-de l'approximation numérique est un $O(\Delta r)$.
+(\ref{eq:population-exact-solution}). On note $n_{p,\Delta r}^N$ la
+reconstruction continue linéaire par morceau des valeurs $n_{p,j}^N$
+sur la subdivision $\cparent{r_j}_{j=0}^M$, c'est-à-dire que
+\begin{equation}
+  n_{p,\Delta r}^N(r) = n_{p,j}^N + \frac{r - r_j}{\Delta
+    r}\parent{n_{p,j+1}^N - n_{p,j}^N}\quad \text{si } r\in[r_j, r_{j+1}].
+\end{equation}
+On considère l'erreur $L^2(0,\rmax)$ entre la solution exacte
+$\population(T, .)$ et $n_{p,\Delta r}$. La figure
+\ref{fig:population-timelapse} illustre la solution et l'approximation
+numérique à différents instants. La figure
+\ref{fig:population-convergence} présente l'erreur $\norm{n_p(T, .) -
+  n_{p,\Delta r}^N}_{L^2(0,\rmax)}$ pour $\Delta r = 1/32$, $1/64$,
+$1/128$, $1/256$, $1/512$, $1/1024$, $1/2048$ et $1/4096$. On a
+choisit $\Delta t = \alpha\Delta r$ avec $\alpha =
+\num{0.934}$. L'erreur est comparée à une droite de pente 1. On
+constate que l'erreur de l'approximation numérique est un $O(\Delta
+r)$.
 
-La section suivante tient lieu de conclusion ce chapitre, et discute
+La section suivante tient lieu de conclusion de ce chapitre, et discute
 de la sédimentation des particules d'alumine dans le bain sous
 l'action de la force de gravité.

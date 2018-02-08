@@ -1,1 +1,112 @@
+La densité de l'alumine $\aluminadensity$ qui constitue les particules
+est de \num{3960}\si{\kilo\gram\per\cubic\meter} soit environ deux
+fois supérieure à celle du bain électrolytique $\electrolytedensity$,
+qui est de \num{2130}\si{\kilo\gram\per\cubic\meter}. Une particule
+d'alumine placée dans un bain électrolytique animé par un écoulement
+stationnaire subit ainsi l'effet de trois forces
+distinctes. D'une part, cette particule est entraînée dans le fluide
+par l'intermédiaire d'une force de traînée $\dragforce$. Cette force
+est opposée à la vitesse relative de la particule par rapport au
+fluide. D'autre part, cette particule est entrainée vers le fond de
+la cuve par la force de gravité $\gravityforce$, à laquelle s'oppose
+la force d'Archimède $\buoyancyforce$.
 
+Dans cette section, nous nous proposons d'évaluer l'importance des
+forces de gravité et d'Archimède devant la force de traînée. Dans ce
+but, on considère une particule d'alumine sphérique de rayon initial
+$r_0$ placée dans un bain électrolytique au repos. On suppose que la
+température du bain $\temperature$ et la concentration d'alumine
+$\concentration$ sont maintenue constantes au cours du temps. On
+suppose de plus que mouvement du fluide autour de la particule
+n'influence pas sa dissolution. Alors, la variation du rayon $r$ de la
+particule au cours du temps est décrite par l'équation
+(\ref{eq:radius-edo-cst-diss-rate}). Comme on l'a vu dans la section
+\ref{sec:particle-population-dissolution}, le rayon à l'instant $t$
+est donné par
+\begin{equation}\label{eq:radius}
+  r(t) = \sqrt{r_0^2 - 2\dissolutionrate t},
+\end{equation}
+où $\dissolutionrate$ est le taux de dissolution, constant au cours du
+temps. Clairement pour
+\begin{equation}
+  T = \frac{r_0^2}{2\dissolutionrate}
+\end{equation}
+on obtient $r(T) = 0$, \ie, la particule est complètement dissoute
+au temps $T$.
+
+On modélise la particule d'alumine, supposée non poreuse, par un point
+matériel de volume $V(t) = \frac{4}{3}\pi r^3(t)$. On travaille dans
+le référentiel de la Terre, et on suppose qu'elle se déplace
+verticalement dans ce référentiel. On note $x(t)\in \mathbb R$ sa
+position selon un système de coordonnées vertical à l'instant $t\in
+[0,T]$ et $\dot x(t) = \frac{\mathrm dx}{\mathrm dt}(t)$ sa
+vitesse. La particule étant sphérique, on propose d'approximer la
+force de traînée par la loi de Stokes. Si $v$ est la vitesse de la
+particule par rapport au fluide, lui-même au repos dans le
+référentiel, on a
+\begin{equation}
+\dragforce(r, v) = -6\pi\mu r v.
+\end{equation}
+Ici on a noté $\mu$ la viscosité dynamique de l'électrolyte. Il est
+connu que cette approximation est valide pour autant que le nombre de
+Reynolds de l'écoulement $\reynolds$ soit suffisamment faible, \ie,
+$\reynolds \lesssim 1$. On montrera a posteriori que cette condition
+est en général satisfaite pour des particules d'alumine qui sont
+typiquement injectées dans le bain électrolytique.
+
+Les forces de gravité $\gravityforce$ et d'Archimède $\buoyancyforce$
+en fonction du rayon $r$ de la particule sont données respectivement
+par
+\begin{equation}
+\gravityforce(r) = -\frac{4}{3}\pi r^3 \aluminadensity g
+\quad\text{et}\quad
+\buoyancyforce(r) = \frac{4}{3}\pi r^3 \electrolytedensity g
+\end{equation}
+où $g = 9.81$ est l'accélération de la gravité.
+
+L'équation du mouvement de la particule s'obtient à l'aide de la
+deuxième loi de Newton qui lie la somme des forces à l'impulsion $p =
+m\dot x$:
+\begin{equation}
+\frac{\mathrm dp}{\mathrm dt}(t) = \dragforce(r(t), \dot x(t)) + \gravityforce(r(t)) + \buoyancyforce(r(t))
+\end{equation}
+soit
+\begin{equation}\label{eq:mvt}
+  \frac{\mathrm d}{\mathrm dt}\parent{\aluminadensity V(t)x(t)} =
+  \frac{4}{3}\pi r^3\parent{\electrolytedensity - \aluminadensity}g -
+  6\pi\electrolyteviscosity r(t)\dot x(t).
+\end{equation}
+
+En utilisant la relation (\ref{eq:radius}), nous avons
+\begin{equation}\label{eq:volume-variation}
+  \frac{\mathrm d}{\mathrm dt}V(t) = -4\pi \dissolutionrate r(t).
+\end{equation}
+En remplaçant (\ref{eq:volume-variation}) dans l'égalité
+(\ref{eq:mvt}), en tenant compte du fait que $V(t) = \frac{4}{3}\pi
+r^3(t)$, puis en divisant par $\pi r(t)$ nous obtenons
+\begin{equation}
+\aluminadensity \frac{4}{3}r^2(t)\frac{\mathrm d^2}{\mathrm dx^2}x(t)
+= g\parent{\aluminadensity - \electrolytedensity}\frac{4}{3}r^2(t) -
+\parent{6\electrolyteviscosity - 4\aluminadensity
+  \dissolutionrate}\frac{\mathrm dx}{\mathrm dt}.
+\end{equation}
+En utilisant successivement (\ref{}), (\ref{}) et (\ref{}), et en
+intégrant l'équation (\ref{}) sur l'intervalle de temps $[0, T]$, nous
+obtenons
+\begin{equation}
+\parent{6\electrolyteviscosity - 4\aluminadensity\dissolutionrate}x(T)
+= g\parent{\aluminadensity -
+  \electrolytedensity}\frac{r_0^4}{3\dissolutionrate}-\aluminadensity\frac{4}{3}\int_0^T\parent{r_0^2
+- 2\dissolutionrate t}\frac{\mathrm d^2}{\mathrm dt^2}x(t)\,\intd{t}.
+\end{equation}
+
+
+
+% Si la force d'archimede est importante devant la force de trainee,
+% alors le fait que le fluide n'est pas au repos et que le gradient de
+% p n'est pas strictement vertical peut avoir une importance.
+%
+% Ensuite, si le temps caracteristique de l'acceleration initiale de
+% la particule avant d'atteindre une vitesse limite controlee par la
+% force de trainee est importante, alors l'approximation de dire que
+% les particules sont transportees par le fluide est fausse.
