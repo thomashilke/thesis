@@ -1,6 +1,8 @@
 \usepackage{adjustbox,xcolor}
-%\usepackage[right]{showlabels,rotating}
-\usepackage[final,right]{showlabels,rotating}
+%\usepackage{showframe}
+
+\usepackage[right]{showlabels,rotating}
+%\usepackage[final,right]{showlabels,rotating}
 
 \renewcommand{\showlabelfont}{\tiny\ttfamily\color{magenta}}
 \renewcommand{\showlabelsetlabel}[1]
@@ -15,3 +17,7 @@
 \newcommand{\fig}[1]{\ref{fig:#1}}
 \newcommand{\eq}[1]{(\ref{eq:#1})}
 \newcommand{\needcite}{\footnote{Citation needed}}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+%\newcolumntype{Z}{>{\centering\arraybackslash}X}
+\newcolumntype{Z}{>{\raggedleft\arraybackslash}X}
