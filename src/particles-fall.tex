@@ -28,7 +28,7 @@ est donné par
 \end{equation}
 où $\dissolutionrate$ est le taux de dissolution, constant au cours du
 temps. Clairement pour
-\begin{equation}
+\begin{equation}\label{eq:final-time}
   T = \frac{r_0^2}{2\dissolutionrate}
 \end{equation}
 on obtient $r(T) = 0$, \ie, la particule est complètement dissoute
@@ -92,7 +92,7 @@ r^3(t)$, puis en divisant par $\pi r(t)$ nous obtenons
 \parent{6\electrolyteviscosity - 4\aluminadensity
   \dissolutionrate}\frac{\mathrm dx}{\mathrm dt}.
 \end{equation}
-En utilisant successivement (\ref{}), (\ref{}) et (\ref{}), et en
+En utilisant (\ref{eq:radius}), (\ref{eq:radius}) et en
 intégrant l'équation (\ref{}) sur l'intervalle de temps $[0, T]$, nous
 obtenons
 \begin{equation}\label{eq:mvt-integration-1}
@@ -133,22 +133,22 @@ x(T) = \frac{g\parent{\electrolytedensity -
 
 La valeur des paramètres physiques qui correspondent à une particule
 d'alumine dans un bain et qui interviennent dans l'équation
-(\ref{eq:particle-terminal-position}) sont synthétises dans le tableau
+(\ref{eq:particle-terminal-position}) sont synthétisées dans le tableau
 \ref{tab:fall-physical-parameters}. Contrairement à l'hypothèse admise
 ici, le bain d'une cuve d'électrolyse est animé par une forte
 agitation. Ces turbulences correspondent à une viscosité équivalente
 $\electrolyteturbviscosity$ qui caractérise l'écoulement moyenné au
 cours du temps. Dans le bain d'une installation industrielle, cette
 viscosité turbulente est typiquement de l'ordre de
-\num{1}\si{\kilo\gram\per\meter\per\second} à
+\num{1} à
 \num{10}\si{\kilo\gram\per\meter\per\second}, et domine donc largement
 la viscosité physique du fluide. Pour cette raison nous considérons
 des viscosité dans l'intervalle $[\num{0.5e-3}, \num{10}]$.
 
-Souvent, les doses de particules d'alumine ne sont en général pas
-délicatement déposées à la surface du bain; les particules sont
-lâchées depuis une hauteur par rapport à la surface du bain qui varie
-entre \num{20}\si{\centi\meter} et \num{40}\si{\centi\meter}. On
+Les doses de particules d'alumine ne sont en général pas délicatement
+déposées à la surface du bain; les particules sont lâchées depuis une
+hauteur qui varie entre \num{20}\si{\centi\meter} et
+\num{40}\si{\centi\meter} par rapport à la surface du bain. On
 modélise cette condition à l'aide de la vitesse initiale $v_0$. La
 vitesse verticale atteinte par une masse en chute libre dans le champ
 de pesanteur terrestre sur une hauteur $L$ et initialement au repos
@@ -164,9 +164,9 @@ considérerons des vitesses initiales $v_0$ entre \num{0} et
       viscosité dynamique $\electrolyteviscosity$
       [\si{\kilo\gram\per\meter\per\second}].}
     \label{tab:fall-results}
-    \begin{tabularx}{\textwidth}{@{}lXXX@{}}
+    \begin{tabularx}{\textwidth}{@{}lXXXX@{}}
       \toprule
-      & $\electrolyteviscosity = \num{0.01}$ & $\electrolyteviscosity = \num{0.1}$ & $\electrolyteviscosity = \num{1}$ \\
+      & $\electrolyteviscosity = \num{0.5e-3}$ & $\electrolyteviscosity = \num{1e-2}$ & $\electrolyteviscosity = \num{1e-1}$ & $\electrolyteviscosity = \num{1}$ \\
       \midrule
       \input{../media/particles/fall/results.tex}
       \bottomrule
@@ -174,11 +174,70 @@ considérerons des vitesses initiales $v_0$ entre \num{0} et
   \end{center}
 \end{table}
 
-
-Le tableau \ref{tab:fall-physical-parameters} présente la profondeur
-terminale de la particule d'alumine en fonction des conditions
+Le tableau \ref{tab:fall-results} présente la profondeur
+terminale de la particule d'alumine donnée par la relation
+(\ref{eq:particle-terminal-position}) en fonction des conditions
 initiales $r_0$, $v_0$ et la viscosité dynamique du fluide
-$\electrolyteviscosity$.
+$\electrolyteviscosity$. Lorsque $\electrolyteviscosity =
+\num{0.5e-3}$, c'est-à-dire que la particule est placée dans un fluide
+immobile, une profondeur maximale de \num{20} \si{\centi\meter}
+environ est atteinte lorsque $r_0 = \num{80}$ \si{\micro\meter} et
+avec une vitesse initiale $v_0 = \num{3}$ \si{\meter\per\second}. La
+profondeur maximale lorsque le rayon initial est inférieur à
+\num{60} \si{\micro\meter} est systématiquement inférieure à
+\num{1} \si{\centi\meter}.
+
+Si on suppose maintenant que le fluide est turbulent, la viscosité
+effective de l'écoulement moyen est supérieure à la viscosité
+physique du bain. Cette situation correspond aux trois dernières
+colonnes à droite du tableau \ref{tab:fall-results}. Dans ce cas, on
+constate que la profondeur maximale est systématiquement de l'ordre de
+\num{1}\si{\milli\meter}, ou inférieure.
+
+Le bain électrolytique d'une cuve n'est jamais au repos, en
+particulier dans les canaux où le fluide est agité par les bulles de
+gaz qui résultent de l'électrolyse et qui remontent à la surface du
+bain. Dans la suite de ce travail, nous ferons l'hypothèse que
+l'injection des doses de particules d'alumine ne perturbe pas
+l'écoulement du bain. Dans ce cadre, nous négligerons l'effet de la
+force de gravité sur la trajectoire des particules.
+
+Nous concluons cette section par deux remarques qui traitent d'une
+part de la validité de la loi de Stokes pour la force de traînée, et
+d'autre part de l'importance de la vitesse initiale de la particule
+sur la profondeur terminale de la particule.
+
+%%\begin{remarque}
+%%  (Sur le fait qu'on peut negliger le terme de reaction dans
+%%  l'equation du mouvement)
+%%\end{remarque}
+
+%%\begin{remarque}
+%%  Le temps caracteristique du transitoire pour atteindre la vitesse
+%%  du fluide doit etre faible devant les autres temps
+%%  caracteristiques pour que l'approximation de dire que les
+%%  particules sont transportee par les lignes de courant du fluide
+%%  est une bonne approximation.
+%%\end{remarque}
+
+\begin{remarque}
+  En considérant la relation (\ref{eq:particle-terminal-position}), on
+  peut évaluer l'effet de la vitesse initiale de la particule sur sa
+  position terminale. Les contributions des deux termes à droite de
+  l'égalité (\ref{eq:particle-terminal-position}) sont identiques
+  lorsque la vitesse initiale est telle que
+  \begin{equation}
+    v_0 = \frac{g}{4\dissolutionrate}\frac{\aluminadensity -
+      \electrolytedensity}{\aluminadensity} r_0^2.
+  \end{equation}
+  Pour une particule de rayon initial $r_0 = \num{80}$
+  \si{\micro\meter}, cette vitesse initiales est de $v_0 = \num{14.5}$
+  \si{\meter\per\second}, ce qui correspond à une hauteur de chute
+  libre d'environ \num{10} \si{\meter}. On conclut que, dans une cuve
+  d'électrolyse industrielle typique, la vitesse initiales des
+  particules suffisamment dispersées qui pénètrent dans le bain est
+  négligeable sur leur profondeur de pénétration.
+\end{remarque}
 
 \begin{remarque}
   Le nombre de Reynolds d'une sphère de rayon $r$ en mouvement
@@ -212,36 +271,4 @@ $\electrolyteviscosity$.
   \si{\micro\meter}, soit $\reynolds = 0.16$. Ce résultat justifie
   l'utilisation de la loi de Stokes pour modéliser la force de traînée
   de la particule.
-\end{remarque}
-
-%%\begin{remarque}
-%%  (Sur le fait qu'on peut negliger le terme de reaction dans
-%%  l'equation du mouvement)
-%%\end{remarque}
-
-%%\begin{remarque}
-%%  Le temps caracteristique du transitoire pour atteindre la vitesse
-%%  du fluide doit etre faible devant les autres temps
-%%  caracteristiques pour que l'approximation de dire que les
-%%  particules sont transportee par les lignes de courant du fluide
-%%  est une bonne approximation.
-%%\end{remarque}
-
-\begin{remarque}
-  En considérant la relation (\ref{eq:particle-terminal-position}), on
-  peut évaluer l'effet de la vitesse initiale de la particule sur sa
-  position terminale. Les contributions des deux termes à droite de
-  l'égalité (\ref{eq:particle-terminal-position}) sont identiques
-  lorsque la vitesse initiale est telle que
-  \begin{equation}
-    v_0 = \frac{g}{4\dissolutionrate}\frac{\aluminadensity -
-      \electrolytedensity}{\aluminadensity} r_0^2.
-  \end{equation}
-  Pour une particule de rayon initial $r_0 = \num{80}$
-  \si{\micro\meter}, cette vitesse initiales est de $v_0 = \num{14.5}$
-  \si{\meter\per\second}, ce qui correspond à une hauteur de chute
-  libre d'environ \num{10} \si{\meter}. On conclut que, dans une cuve
-  d'électrolyse industrielle typique, la vitesse initiales des
-  particules suffisamment dispersées qui pénètrent dans le bain est
-  négligeable sur leur profondeur de pénétration.
 \end{remarque}
