@@ -1,0 +1,120 @@
+Une cuve d'électrolyse d'aluminium industrielle est caractérisée par
+le fait que plusieurs phénomènes physiques entrent en jeu et
+intéragissent sur à des échelles similaires. Tout d'abord, le courant
+électrique continu qui traverse une cuve d'électrolyse industrielle
+moderne est de l'ordre de \num{500} \si{\kilo\ampere} à \num{1}
+\si{\mega\ampere}. Une telle intensité de courant génère d'une part un
+champs d'induction magnétique qui affecte l'opération de la
+cuve, mais également de ses voisines de série. D'autre part, la chute
+de potentiel d'environ \num{4} \si{\volt} à travers les électrodes et
+les fluides provoque la dissipation de grandes quantités d'énergie
+sous forme thermique. Cette production chaleur est nécessaire car elle
+permet de maintenir le bain électrolytique sous forme
+liquide. Cependant, une surchauffe trop importante est détrimentale
+pour une cuve, qui risque alors de subir une usure et une fin de vie
+prématurée.
+
+Au niveau de la cathode en carbone, qui forme le fond de la cuve, la
+réaction d'électrolyse
+\begin{equation}
+\cee{Al^{3+} + 3e^- -> Al}
+\end{equation}
+produit de l'aluminium sous forme métallique. L'aluminium métallique étant
+peu soluble dans l'électrolyte, liquide à la température
+d'opération d'une cuve et de densité légèrement supérieure à celle de
+l'électrolyte, il forme une couche de métal en fusion au fond de la
+cuve. C'est alors la surface du métal en fusion qui joue
+véritablement le rôle de cathode, sur laquelle prend a lieu
+réaction d'électrolyse.
+
+Le bain électrolytique et le métal liquide sont traversés par
+l'ensemble du courant électrique et, en présence du champs d'induction
+magnétique, subissent une force de Lorentz qui les met en
+mouvement. L'écoulement dans les fluides est bénéfique. Il permet de
+transporter la chaleur à l'extérieur du système plus rapidement que
+par conduction pure, homogénéise la distribution de la température et
+la composition chimique dans l'ensemble du bain et facilite le
+transport et la dispersion les particules d'alumine injectées à
+intervalles réguliers dans le bain.
+
+Cependant, il est crucial que l'interface bain-métal soit aussi stable
+que possible. Pour des raisons d'économie d'énergie, la distance
+moyenne entre le fond des anodes\footnote{Le fond des anodes est
+  définie comme la partie de la surface des anodes faisant face vers
+le bas, en direction de la cathode.} et l'interface est réduite
+autant que possible. Dans une cuve moderne, cette distance est de
+l'ordre de \num{2} à \num{4}\si{\centi\meter}. Si les écoulements
+dans les fluides deviennent trop rapides, des turbulences se forment qui
+viennent perturber la forme de l'interface. De plus, le système
+magnétohydrodynamique formé par le circuit électrique, le champ
+d'induction magnétique et les deux fluides peut devenir, sous
+certaines conditions, physiquement instable, c'est-à-dire que de
+petites perturbations du système sont amplifiées par elles-mêmes. De
+telles instabilité affecteent la forme de l'interface bain-métal, et
+leur occurence présente un défi qui à déjà fait l'objet de
+nombreux travaux de recherche. Le lecteur intéressé se réferera
+par exemple à \cite{}, \cite{} ou encore \cite{}.
+
+Le métal liquide ayant une conductivité supérieure à celle du
+bain électrolytique, le contact entre les anodes et la nappe de
+métal crée un court-circuit. Les court-circuits diminuent le rendement du
+procédé et peuvent créer des défauts à la surface des anodes qui
+affectent l'opération de la cuve à long terme.
+
+
+De l'alumine doit être injectée régulièrement dans le bain
+électrolytique, sous forme de poudre, pour compléter l'alumine
+dissoute consommée par la réaction d'électrolyse. Puisque la majeur
+partie du bain est recouverte par les blocs anodiques et en raison de
+la présence de la croûte qui protège sa surface libre, l'injection de
+poudre d'alumine ne peut avoir lieu que en quelques points d'injection
+distribués le long du canal central. Dans une cuve industrielle, le
+nombre de points d'injection est typiquement compris entre 4 et 6. La
+dispersion et le transport des particules d'alumine, et de la
+concentration d'alumine qui résulte de leur dissolution dépend
+crucialement de la présence et de la force de l'écoulement dans le
+bain électrolytique. De nombreux travaux de recherche ont pour
+objectif la modélisation et l'approximation numérique des écoulement
+dans le bain et le métal d'une cuve d'électrolyse industrielle. Dans
+ce travail, nous utiliserons les résultats de S. Pain \cite{Pain2006},
+G. Steiner \cite{Steiner2009} et J. Rochat \cite{Rochat2016} à cette
+fin. Le modèle d'écoulement proposé dans \cite{Steiner2009} consiste à
+considérer système couplé formé par le problème du potentiel
+électrique dans les conducteurs, par les équations de Maxwell dans le
+vide, dans le caisson ferromagnétique, dans le bain électrolytique et
+dans le métal, et finalement par des équations de Navier-Stokes dans
+chaque fluide. Dans ce probème, l'interface bain-métal est une
+inconnue. Les écoulements dans les fluides sont turbulents. Les
+structures des écoulements dont la taille est inférieure à la
+résolution de la grille de discrétisation sont moélisés par un modèle
+de longueur de mélange de Smagorinski \cite{Rochat2016}. Dans ce
+chapitre nous utiliserons ce modèle pour obtenir une approximation de
+la vitesse d'écoulement stationnaire $u_h$ et une approximation de la
+densité de courant électrique stationnaire $j_h$ dans le bain
+électrolytique d'une cuve d'électrolyse industrielle.
+
+Ce travail porte sur la modélisation des particules d'alumine
+injectées dans le bain et leur dissolution. On suivra l'approche
+adoptée par T. Hofer \cite{Hofer2011} et on représentera les
+particules sous la forme d'une distribution en taille et en espace
+$\population$. Cette population évolue d'une part dans le bain par
+le biais de la vitesse d'écoulement $u$ de celui-ci, et d'autre part par
+la dissolution des particules au cours du temps, en fonction de la
+concentration d'alumine locale dans le bain et de sa température telle
+que décrite par la vitesse de dissolution $f$ introduite dans la
+section \ref{sec:particle-dissolution}. En plus de la densité de
+particule $\population$, nous modéliserons la concentration d'alumine
+dissoute $c$ et la température $\temperature$ dans le bain, puisque
+la dissolution des particules en dépend.
+
+Dans la section \ref{sec:populations-model}, nous introduisons les
+les équations qui décrivent l'évolutions de la densité de
+particules $n_p$, la concentration d'alumine $c$ et la température
+du bain $\temperature$. Dans la section
+\ref{sec:populations-discretisation} la disctrétisation en temps du
+système formé par les équations pour $\population$, $\concentration$
+et $\temperature$ introduites dans
+\ref{sec:populations-model}. Finalement, dans la section
+\ref{sec:populations-industriel} nous considérons et discutons
+l'application du modèle de transport et dissolution de particules
+d'alumine au cas d'une cuve d'électrolyse industrielle AP32.

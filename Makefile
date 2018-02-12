@@ -27,7 +27,12 @@ TEX_SOURCES = src/thesis.tex \
   src/particles-fall.tex \
   src/particles-freeze.tex \
   src/particles-introduction.tex \
-  src/particles-population-dissolution.tex
+  src/particles-population-dissolution.tex \
+  src/populations-chapter.tex \
+  src/populations-introduction.tex \
+  src/populations-discretisation.tex \
+  src/populations-model.tex \
+  src/populations-industriel.tex
 
 BIB_SOURCES = $(wildcard refs/*.bib)
 
