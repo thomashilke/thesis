@@ -47,10 +47,10 @@ Dans une cuve industrielle, de l'alumine en poudre doit être injectées
 à intervalles réguliers dans le bain. Nous modélisons ces injections
 sous la forme d'une série d'évènements instantanés, successifs dans le
 temps. Soient $K$ le nombre total d'injections, et un ensemble de $K$
-réels $\tau_k$ tels que $0\leq \tau_k < T$ $\forall k$, les instants
+réels $\tau^k$ tels que $0\leq \tau^k < T$ $\forall k$, les instants
 auxquels surviennent chaque injection. Soient pour toute injection $k
 = 1,2, \dots, K$ la distribution initiale de particule
-$S_k:\Omega\times\rplus\to\mathbb R$ issue de l'injection $k$,
+$S^k:\Omega\times\rplus\to\mathbb R$ issue de l'injection $k$,
 supposée donnée.
 
 On note $n_p^k(t, x, r)$, $k = 1, 2, \dots, K$ la densité en taille et
@@ -66,14 +66,14 @@ section \ref{sec:particle-freeze}. Chaque population de particule
 $n_p^k$, $k = 1, 2,\dots, K$ satisfait $x\in\Omega,\ r\in\rplus$ les
 équations
 \begin{align}
-  &n_p^k(t, x, r) = 0, & 0\leq t < \tau_k,\label{eq:population-pre-injection}\\
-  &n_p^k(\tau_k, x, r) = S_k(x, r),\label{eq:population-injection}\\
+  &n_p^k(t, x, r) = 0, & 0\leq t < \tau^k,\label{eq:population-pre-injection}\\
+  &n_p^k(\tau^k, x, r) = S_k(x, r),\label{eq:population-injection}\\
   &\frac{\partial n_p^k}{\partial t} + (u(x) + w(r))\cdot \nabla n_p^k
-  = 0, &\tau_k < t \leq \tau_k +
+  = 0, &\tau^k < t \leq \tau^k +
   \tlat,\label{eq:population-transport}\\
   &\frac{\partial n_p^k}{\partial t} + (u(x) + w(r))\cdot \nabla n_p^k
   + \frac{\partial}{\partial r} \parent{f(r, \concentration,
-    \temperature) n_p^k} = 0, &\tau_k + \tlat < t \leq \tend.\label{eq:population-dissolution}
+    \temperature) n_p^k} = 0, &\tau^k + \tlat < t \leq \tend.\label{eq:population-dissolution}
 \end{align}
 où l'opérateur $\nabla = (\partial_{x_1}, \partial_{x_2},
 \partial_{x_3})^t$. La vitesse de dissolution $f$ qui intervient dans
@@ -129,23 +129,23 @@ bain électrolytique est proportionnelle à la densité de courant
 source de la concentration d'alumine $\dot q_1$ associé à la
 consommation par la réaction d'électrolyse
 \begin{equation}
-  \dot q_1(x) = -\frac{I[\ce{Al2O3}]}{6\faraday} %
+  q_1(x) = -\frac{I[\ce{Al2O3}]}{6\faraday} %
   \frac{\abs{j(x)}}{\int_\Omega\abs{j(x)}\,\intd{x}}
 \end{equation}
 de sorte à avoir la consommation totale sur $\Omega$
 \begin{equation}
-  \int_\Omega \dot q_1(x)\,\intd{x} = -M.
+  \int_\Omega q_1(x)\,\intd{x} = -M.
 \end{equation}
 
 \paragraph{Dissolution des particules d'alumine}
 La masse perdue par la population de particules d'alumine
 $\population$ vient contribuer à la concentration d'alumine
-dissoute. On définit $\dot q_2$ le terme source de la concentration
+dissoute. On définit $q_2$ le terme source de la concentration
 qui représente l'apport dû à la dissolution des particules de la
 manière suivante. Si $t \in [0, T]$, on note $\bar k(t)$ le plus grand
 entier tel que $\tau_{\bar k} + \tlat < t$. Alors on définit
 \begin{equation}
-  \dot q_2(t, x) = -\sum_{k = 1}^{\bar
+  q_2(t, x) = -\sum_{k = 1}^{\bar
     k(t)}\frac{4\pi\aluminadensity}{[\ce{Al2O3}]}\int_{\rplus}n_p^k(t,
   x, r)f(r, \concentration(t, x), \temperature(t, x))r^2\,\intd{r}.
 \end{equation}
@@ -163,7 +163,7 @@ concentration d'alumine dissoute dans le bain, supposée donnée. Alors
 concentration $\concentration$ doit satisfaire l'équation
 \begin{equation}\label{eq:concentration}
   \frac{\partial \concentration}{\partial t}(t, x) + u(x)\cdot\nabla \concentration(t, x) - \cdiffusivity(x)
-  \Delta \concentration(t, x) = \dot q_1(x) + \dot q_2(t, x),\quad \forall
+  \Delta \concentration(t, x) = q_1(x) + q_2(t, x),\quad \forall
   x\in\Omega,\ t\in (0, T).
 \end{equation}
 Puisque qu'il ne peut y avoir de flux de masse d'alumine à travers le
@@ -171,36 +171,37 @@ bord du domaine $\Omega$, la concentration doit satisfaire la
 condition aux limites de Neumann homogène
 \begin{equation}\label{eq:c-bc}
   \frac{\partial \concentration}{\partial \nu}(t, x) = 0 \quad  \quad
-  \forall\ x\in\partial \Omega,\ t\in[0, T].
+  \forall x\in\partial \Omega,\ t\in[0, T].
 \end{equation}
 
-\paragraph{Termes source de la température du bain}
+\paragraph{Termes sources de la température du bain}
 On fait l'hypothèse que le bain électrolytique est isolé
 thermiquement, c'est-à-dire qu'il n'y a pas de flux d'énergie
 thermique à travers le bord du domaine occupé par le bain.
 
 L'énergie thermique du bain provient de trois sources
 distinctes. Premièrement, les particules d'alumine sont injectées avec
-une température $\tinj < \temperature$. De l'énergie thermique est
-prélevée dans le bain pour rétablir l'équilibre thermique entre le
-bain et les particules. On note $p_1(t, x)$ la densité de puissance
-thermique extraite du bain pour réchauffer les particules, que l'on
-définit par
+une température $\tinj < \temperature$, la température locale du
+bain. De l'énergie thermique est prélevée dans le bain pour rétablir
+l'équilibre thermique entre celui-ci et les particules. On note $p_1(t,
+x)$ la densité de puissance thermique extraite du bain pour réchauffer
+les particules, que l'on définit par
 \begin{equation}\label{eq:power-heating}
   p_1(t, x) = -\parent{\tinit-\tinj}\sum_{k = 1}^{K}\dirac(t -
-  \tau_k)\int_{\rplus}\aluminahc\aluminadensity\frac{4}{3}\pi r^3 S_k(x, r)\,\intd{r}
+  \tau_k)\int_{\rplus}\aluminadensity\aluminahc\frac{4}{3}\pi r^3 S^k(x, r)\,\intd{r}
 \end{equation}
-où $\dirac$ est une masse de Dirac.
+où $\dirac$ est une masse de Dirac et $\tinit$ la température
+initiale du bain.
 
 Deuxièmement, la réaction de dissolution de la poudre d'alumine est
 endothermique. On note $p_2(t, x)$ la densité de puissance thermique
 utilisée par la réaction, que l'on définit pour tout $x\in\Omega$ et
 $t\in[0, T]$ par
 \begin{equation}
-p_2(t, x) = - \aluminadissolutionenthalpy \dot q_2(t, x),
+p_2(t, x) = - \aluminadissolutionenthalpy q_2(t, x),
 \end{equation}
 où $\aluminadissolutionenthalpy$ est l'enthalpie molaire nécessaire à
-la dissolution de l'alumine. On rappelle que $\dot q_2(t, .)$ est le
+la dissolution de l'alumine. On rappelle que $q_2(t, .)$ est le
 débit molaire par unité de volume d'alumine dissoute à l'instant $t$.
 
 Et troisièmement, la résistivité électrique de l'électrolyte engendre
@@ -238,7 +239,7 @@ $\electrolytehc$ la densité et la chaleur spécifique de du bain
 \frac{\partial \temperature}{\partial t}(t, x) +
 u(x)\cdot\nabla\temperature - \electrolytetdiff(x)\Delta
 \temperature(t, x) =
-\frac{1}{\electrolytedensity\electrolytehc}\sum_{n = 1}^{3}p_n(t, x),
+\frac{1}{\electrolytedensity\electrolytehc}\sum_{i = 1}^{3}p_i(t, x),
 \quad \forall x\in\Omega,\ t\in(0, T).
 \end{equation}
 De plus, et conformément à l'hypothèse d'isolation thermique, la température
@@ -253,7 +254,7 @@ Le problème de transport et dissolution d'alumine en fonction de la
 température consiste à chercher des fonctions $n_p^k:(0,
 T)\times\Omega\times\rplus\to \mathbb R$, $c:(0, T)\times\mathbb R\to
 \mathbb R$ et $\temperature:(0, T)\times\mathbb R\to\mathbb R$ qui
-satisfont les équations (\ref{eq:population-pre-injection}) à
+satisfont les équations couplées (\ref{eq:population-pre-injection}) à
 (\ref{eq:population-dissolution}), (\ref{eq:concentration}) et
 (\ref{eq:temperature}) ainsi que les conditions aux limites
 (\ref{eq:np-bc}), (\ref{eq:c-bc}) et (\ref{eq:t-bc}), auxquelles on
