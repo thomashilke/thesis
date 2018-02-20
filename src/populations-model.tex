@@ -56,7 +56,7 @@ supposée donnée.
 On note $n_p^k(t, x, r)$, $k = 1, 2, \dots, K$ la densité en taille et
 en espace de particule issues de l'injection $k$ dans le bain
 électrolytique à l'instant $t \in [0, T]$. Autrement dit, la quantité
-$n_p^k(t, x, r)\intd{x}\intd{r}$ représente le nombre de particule, à
+$n_p^k(t, x, r)\intd{x}\intd{r}$ représente le nombre de particules, à
 l'instant $t$, dans le volume infinitésimal $\intd{x}$ autour du point
 $x\in\Omega$ et dont la taille est comprise dans l'intervalle $[r,
   r+\intd{r}]$. Soit $\tlat \geq 0$ le temps de latence avant que les
@@ -118,8 +118,7 @@ traversant la cuve, le débit total d'alumine dissoute consommée $M$ en
   M = \frac{I[\ce{Al2O3}]}{6\faraday}
 \end{equation}
 où $F = \num{96485.33}$ \si{\coulomb\per\mol} est la constante de
-Faraday et [\ce{Al2O3}] $ = \num{0.102}$ \si{\kilo\gram\per\mol} la
-masse molaire de l'alumine. Le facteur \num{6} provient du fait qu'il
+Faraday. Le facteur \num{6} provient du fait qu'il
 faut \num{6} électrons pour réduire une molécule d'\ce{Al2O3}, et
 produire deux molécules d'aluminium métallique \ce{Al}.
 
@@ -129,8 +128,8 @@ bain électrolytique est proportionnelle à la densité de courant
 source de la concentration d'alumine $\dot q_1$ associé à la
 consommation par la réaction d'électrolyse
 \begin{equation}
-  q_1(x) = -\frac{I[\ce{Al2O3}]}{6\faraday} %
-  \frac{\abs{j(x)}}{\int_\Omega\abs{j(x)}\,\intd{x}}
+  q_1(x) = -\frac{I}{6\faraday} %
+  \frac{\abs{j(x)}}{\displaystyle\int_\Omega\abs{j(x)}\intd{x}}
 \end{equation}
 de sorte à avoir la consommation totale sur $\Omega$
 \begin{equation}
@@ -149,9 +148,10 @@ entier tel que $\tau_{\bar k} + \tlat < t$. Alors on définit
     k(t)}\frac{4\pi\aluminadensity}{[\ce{Al2O3}]}\int_{\rplus}n_p^k(t,
   x, r)f(r, \concentration(t, x), \temperature(t, x))r^2\,\intd{r}.
 \end{equation}
-L'ensemble des indices $\cparent{k}_{k = 1}^{\bar k(t)}$ représente
-l'ensemble des population de particules $n_p^k$ qui se dissolvent dans
-le bain à l'instant $t\in[0, T]$.
+où [\ce{Al2O3}] $ = \num{0.102}$ \si{\kilo\gram\per\mol} la masse
+molaire de l'alumine. L'ensemble des indices $\cparent{k}_{k =
+  1}^{\bar k(t)}$ représente l'ensemble des population de particules
+$n_p^k$ qui se dissolvent dans le bain à l'instant $t\in[0, T]$.
 
 \paragraph{Concentration d'alumine dissoute}
 La concentration d'alumine dissoute $\concentration$ est transportée
@@ -209,7 +209,7 @@ provoque la conversion d'une partie de l'énergie électrique en énergie
 thermique par effet Joule. Cette source d'énergie thermique $p_3$ par
 effet Joule dépend de la densité de courant stationnaire $j$ et
 s'écrit
-\begin{equation}
+\begin{equation}\label{eq:p3}
 p_3(x) = \sigma\parent{j\cdot j}.
 \end{equation}
 où le nombre réel $\sigma > 0$ est la conductivité du bain que l'on
@@ -259,6 +259,10 @@ satisfont les équations couplées (\ref{eq:population-pre-injection}) à
 (\ref{eq:temperature}) ainsi que les conditions aux limites
 (\ref{eq:np-bc}), (\ref{eq:c-bc}) et (\ref{eq:t-bc}), auxquelles on
 ajoutera des conditions initiales appropriées.
+
+\begin{remarque}
+
+\end{remarque}
 
 La section suivante traite de la discrétisation en temps de ce
 système d'équations.

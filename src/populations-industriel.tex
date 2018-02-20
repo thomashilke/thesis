@@ -61,13 +61,13 @@ métal, qui interviennent environ une fois par jour.
       \caption{Éléments à proximité des fluides}
       \label{fig:ap32-geometry-elements}
     \end{subfigure}
-
+%
     \begin{subfigure}[b]{0.49\textwidth}
       \includegraphics[width=\textwidth]{../media/populations/ap32-mesh-components/print/bath.png}
       \caption{Bain électrolytique}
       \label{fig:ap32-geometry-electrolyte}
     \end{subfigure}
-
+%
     \caption{Géométrie des éléments importants à proximité
       du bain électrolytique dans une cuve AP32
       (fig. \ref{fig:ap32-geometry-elements}), et détail du volume
@@ -120,9 +120,9 @@ surface libre du bain avant chaque injection. Ce trou se rebouche
 rapidement, et pour cette raison l'injection d'alumine ne peut pas
 avoir lieu continûment.
 
-Pour maintenir un rendement maximum, éviter l'émission de gaz
-fluorés et minimiser le nombre d'effets d'anodes, il est crucial que
-la concentration d'oxyde d'aluminium dissout dans le bain soit
+Pour maintenir un rendement énergétique maximum, éviter l'émission de
+gaz fluorés et éviter l'occurence des effets d'anodes, il est crucial
+que la concentration d'oxyde d'aluminium dissout dans le bain soit
 maintenu dans un intervalle très précis. Malheureusement, pour de
 nombreuses raisons il est impossible de maintenir un bilan précis de
 la quantité d'alumine dans le bain en fonction de ce qui est injecté
@@ -135,8 +135,8 @@ réactions chimiques parasites viennent, entre autres, grever ce bilan.
 Pour contourner cette difficulté, les opérateurs exploitent le fait
 que la resistivité du bain électrolytique dépend de la concentration
 d'alumine dissoute, et atteint un minimum à la concentration optimale
-$\csat \approx$ \num{3}\% masse. En mesurant la chute de potentiel
-électrique à travers le bain électrolytique, on maintient la
+$\concentration \approx$ \num{3}\% masse. En mesurant la chute de
+potentiel électrique à travers le bain électrolytique, on maintient la
 concentration d'alumine dissoute au voisinage de la concentration
 optimale en alternant une phase de sur-alimentation en alumine et une
 phase de sous-alimentation. Durant la phase de sur-alimentation, la
@@ -209,18 +209,137 @@ stationnaire proposé par S. Steiner \cite{Steiner2009}, J. Rochat
 \ref{sec:populations-introduction}. La figure \ref{fig:ap32-flow-acd}
 représente la vitesse d'écoulement ainsi calculée par le logiciel
 Alucell dans le bain électrolytique de la cuve AP32, dans
-l'ACD. L'écoulement dans les fluides forme deux tourbillons principaux
-qui tournent en sens opposés. Deux petits tourbillons se forment dans
-les coins avals. Les vitesse maximales de l'écoulement (\num{5}
-\si{\centi\meter\per\second} environ) sont atteinte dans le canal
-central au niveau des extrémités de la cuve, ainsi que le long de la
-parois amont, de part et d'autre de la cuve. Dans le reste du bain et
-en particulier sous les anodes la vitesse d'écoulement dépasse
-rarement \num{2} \si{\centi\meter\per\second}. La figure
+l'ACD. Lorsque la densité de courant électrique est répartie
+uniformément sur toutes les anodes, l'écoulement dans les fluides
+forme deux tourbillons principaux qui tournent en sens opposés. Deux
+petits tourbillons se forment dans les coins avals. Les vitesse
+maximales de l'écoulement (\num{5} \si{\centi\meter\per\second}
+environ) sont atteinte dans le canal central au niveau des extrémités
+de la cuve, ainsi que le long de la parois amont, de part et d'autre
+de la cuve. Dans le reste du bain et en particulier sous les anodes la
+vitesse d'écoulement dépasse rarement \num{2}
+\si{\centi\meter\per\second}. La figure
 \ref{fig:ap32-flow-streamlines} illustre les lignes de courant de
 l'écoulement dans le bain. On remarque les lignes de courant
 s'engagent volontiers dans les canaux latéraux et dans le bain en
 pourtour des rangées d'anodes.
+
+\paragraph{Conditions sur l'injection et l'effet Joule}
+Le schéma numérique proposé dans la section
+\ref{sec:populations-discretisation} est conçu de manière à conserver
+exactement d'une part la masse d'alumine dans les populations de
+particules $\population$ et concentration d'alumine dissoute
+$\concentration$, et d'autre part la quantité d'énergie thermique liée
+à la température du bain $\temperature$. Pour des raisons déjà
+évoquées, ces bilans ne sont pas exactement respectés dans une cuve
+industrielle réelle, et il faut en général injecter un peu plus d'alumine
+que ce qui est consommé par la réaction d'électrolyse. Quand à
+l'énergie thermique, nous avons supposé que le bain est isolé
+thermiquement, alors que dans une cuve réelle une quantité non
+négligeable d'énergie s'échappe par le métal, les parois latérales de
+la cuve, les anodes, la surface du bain et par le \ce{CO2} qui
+s'échappe dans l'atmosphère.
+
+Pour éviter que la masse totale d'alumine dans la cuve croisse sans
+limite au cours du temps, il faut s'assurer que dans un état pseudo
+stationnaire, la masse d'alumine reste proche de la masse d'alumine
+initialement présente dans le bain. En d'autres termes, si $M_n$ est
+la masse totale d'alumine dans le bain à l'instant $t_n$ telle que
+définie dans la section (\ref{sec:populations-discretisation}), alors
+on demande à ce que
+\begin{equation}
+\lim_{n\to\infty} \frac{M_{n+1} - M_{0}}{t_n} = 0,
+\end{equation}
+c'est-à-dire que
+\begin{equation}
+  \frac{I[\cee{Al2O3}]}{6F}
+  =\lim_{n\to \infty}\frac{1}{t_{n+1}}\ \sum_{\mathclap{\substack{k\\ p^k + 1\leq n +
+        1}}}\ \int_\Omega\aluminadensity S^k \frac{4}{3}\pi r^3\intd{r}\intd{x}.
+\end{equation}
+Il faut donc choisir la masse des doses d'alumine injectées $S^k$, $k
+= 1, 2,\dots$ et les temps d'injection $\tau^k$, $k = 1,2,\dots$ de
+sorte à ce que le débit de masse de poudre d'alumine moyen au cours du
+temps soit égal à $\frac{I[\cee{Al2O3}]}{6F}$, c'est-à-dire
+\num{56.382e-3}\si{\kilo\gram\per\second}.
+
+\begin{figure}
+  \begin{center}
+    \input{../media/populations/anode-configuration/anode-configuration.pdf_tex}
+    \caption{Vue schématique de la partie supérieure du bain
+      électrolytique. Les blocs rectangulaires représentent
+      l'emplacement des anodes, tandis que les cercles marquent
+      l'emplacement des injecteurs disposés le long du canal central.}
+    \label{fig:anode-configuration}
+  \end{center}
+\end{figure}
+
+La cuve AP32 possède 4 injecteurs placés au-dessus du canal central,
+numérotés de 1 à 4, dans le sens de la coordonnée $x$ croissante (voir
+la figure \ref{fig:anode-configuration}). Les paramètres qui
+définissent chaque injecteurs sont regroupé dans la table
+\ref{tab:injectors}.
+
+\begin{table}
+  \begin{center}
+    \caption{Paramètres caractérisant les 4 injecteurs de la cuve AP32.}
+    \label{tab:injectors}
+    \begin{tabularx}{\textwidth}{@{}rrrrZ@{}}
+      \toprule
+      Injecteur & Position & Première injection & Intervalle d'injection & Masse de dose\\
+      \midrule
+      \#1         & \num{-4.4}\si\meter & \num{16}\si\second & \num{16}\si\second  & \num{0.225}\si{\kilo\gram} \\
+      \#2         & \num{-1.6}\si\meter & \num{32}\si\second & \num{32}\si\second  & \num{0.451}\si{\kilo\gram} \\
+      \#3         & \num{ 1.6}\si\meter & \num{48}\si\second & \num{48}\si\second  & \num{0.676}\si{\kilo\gram} \\
+      \#4         & \num{ 4.4}\si\meter & \num{64}\si\second & \num{24}\si\second  & \num{0.338}\si{\kilo\gram} \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+\end{table}
+La masse des doses dans le tableau \ref{tab:injectors} est choisie de
+telle sorte à ce que l'ensemble des 4 injecteurs injecte 25\% de la
+masse d'alumine en moyenne. La forme des densité de particules
+initiales $S^k$ est décrite dans \cite{Hofer2011}. Plus précisément,
+la forme spatiale de chaque $S^k$ est une fonction lisse à support
+compact centrée autour du point d'injection de l'injecteur
+correspondant. La distribution en rayon initiale est approximée par
+par une loi log-normale basée sur des mesures expérimentales. Puisque
+le rapport des périodes d'injection des 4 injecteurs sont des nombres
+rationnels, on peut définir une périodes globale liée à l'ensemble des
+4 injecteurs. Étant données les périodes d'injections reportées dans le tableau
+\ref{tab:injectors}, le cycle d'injection global est périodique après une
+transition initiale de \num{64}\si\second, avec une période
+de \num{192}\si\second. La figure \ref{fig:injections} représente les
+injections qui ont lieu durant les \num{192} premières secondes de la
+simulation.
+
+\begin{figure}
+  \begin{center}
+    \input{../media/populations/cadence/cadence.tex}
+    \caption{Temps d'injections des différents injecteurs de la cuve
+      AP32. Chaque cercle représente une injection. Chaque ligne
+      correspond à l'un des 4 injecteurs.}
+    \label{fig:injections}
+  \end{center}
+\end{figure}
+
+On détermine maintenant une condition sur la conductivité
+électrique $\conductivity$, issue d'un argument similaire sur
+l'énergie thermique du bain. Pour que l'énergie thermique du bain
+reste proche de l'énergie thermique initiale, on demande à ce que
+\begin{equation}
+  \lim_{n\to\infty}\frac{\electrolytedensity\electrolytehc\displaystyle\int_\Omega\parent{\temperature_{n+1}
+    - \temperature_0}\intd{x}}{t_{n+1}} = 0,
+\end{equation}
+ce qui correspond à la condition
+\begin{eqnarray*}
+  \conductivity \int_\Omega j\cdot j\intd{x} &=&
+  \aluminahc\parent{\tinit - \tinj}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ p^k +
+  1 \leq n + 1}}}\int_\Omega\int_0^\infty\aluminadensity
+  \frac{4}{3}\pi r^3 S^k\intd{r}\intd{x} \\
+  &&+ \frac{\aluminadissolutionenthalpy}{[\cee{Al2O3}]}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}\intd{r}\intd{x}
+\end{eqnarray*}
+en considérant (\ref{eq:energy-mass-balance}).
+
 
 \paragraph{Conditions initiales et paramètres du modèle}
 % concentration initiale, température initiale
@@ -232,28 +351,36 @@ pourtour des rangées d'anodes.
 % Ne pas oublier: S_k, \tau_k, D_c, D_\temperature, \sigma, N et T.
 
 
+
+
 \begin{table}
   \begin{center}
-    \caption{Paramètres physiques qui interviennent dans la chute
-      d'une particule d'alumine dans un bain électrolytique.}
+    \caption{Paramètres physiques et paramètres liés à la cuve AP32
+      qui interviennent dans le transport et la dissolution de poudre
+      d'alumine.}
     \label{tab:fall-physical-parameters}
     \begin{tabularx}{\textwidth}{@{}lllX@{}}
       \toprule
       Quantité                         & Valeur        & Unités                                      & Description \\
       \midrule
-      $\electrolytedensity$            & \num{2130}    & \si{\kg\per\cubic\meter}                    & Masse volumique du bain électrolytique           \\
-      $\aluminadensity$                & \num{3960}    & \si{\kg\per\cubic\meter}                    & Masse volumique de l'oxyde d'aluminium           \\
-      $\electrolytehc$                 & \num{2130}    & \si{\kg\per\cubic\meter}                    & Chaleur spécifique du bain électrolytique        \\
-      $\aluminahc$                     & \num{3960}    & \si{\kg\per\cubic\meter}                    & Chaleur spécifique de l'oxyde d'aluminium        \\
-      $g$                              & \num{9.81}    & \si{\meter\per\square\second}               & Accélération de la gravité terrestre             \\
-      $I$                              & \num{320000}  & \si{\ampere}                                & Courant électrique total                         \\\relax
-      [\ce{Al2O3}]                     & \num{0.102}   & \si{\kilo\gram\per\mol}                     & Masse molaire de l'oxyde d'aluminium             \\
-      $\tinit$                         & \num{0}       & \si{\kelvin}                                & Température initiale du bain électrolytique      \\
-      $\tinj$                          & \num{0}       & \si{\kelvin}                                & Température d'injection des particules d'alumine \\
-      $\aluminadissolutionenthalpy$    & \num{0}       & \si{\joule\per\kilo\gram\per}               & Enthalpie de dissolution de l'oxyde d'aluminium  \\
-      $\conductivity$                  & \num{0}       & \si{\siemens\per\meter}                     & Conductivité électrique du bain électrolytique   \\
-      $\electrolytelaminarviscosity$   & \num{2e-3}    & \si{\kilo\gram\per\meter\per\second}        & Viscosité laminaire du bain électrolytique       \\
-      $\electrolyteturbulentviscosity$ & \num{2e-3}    & \si{\kilo\gram\per\meter\per\second}        & Viscosité turbulente du bain électrolytique      \\
+      $\electrolytedensity$            & \num{2130}    & \si{\kg\per\cubic\meter}                    & Masse volumique du bain électrolytique                       \\
+      $\aluminadensity$                & \num{3960}    & \si{\kg\per\cubic\meter}                    & Masse volumique de l'oxyde d'aluminium                       \\
+      $\electrolytehc$                 & \num{2945}    & \si{\joule\per\kilo\gram\per\kelvin}        & Chaleur spécifique du bain électrolytique liquide            \\
+      $\aluminahc$                     & \num{1200}    & \si{\joule\per\kilo\gram\per\kelvin}        & Chaleur spécifique de l'oxyde d'aluminium                    \\
+      $g$                              & \num{9.81}    & \si{\meter\per\square\second}               & Accélération de la gravité terrestre                         \\
+      $I$                              & \num{320000}  & \si{\ampere}                                & Courant électrique total                                     \\
+      $\faraday$                       & \num{96485.33}& \si{\coulomb\per\mol}                       & Constante de Faraday                                         \\
+      $\faradayyield$                  & \num{94.5}    & \%                                          & Rendement de Faraday de l'électrolyse                        \\\relax
+      [\ce{Al2O3}]                     & \num{0.102}   & \si{\kilo\gram\per\mol}                     & Masse molaire de l'oxyde d'aluminium                         \\
+      $\tinit$                         & \num{1223}    & \si{\kelvin}                                & Température initiale du bain électrolytique                  \\
+      $\tinj$                          & \num{423}     & \si{\kelvin}                                & Température d'injection des particules d'alumine             \\
+      $\aluminadissolutionenthalpy$    & \num{5.3e5}   & \si{\joule\per\kilo\gram}                   & Enthalpie de dissolution de l'oxyde d'aluminium              \\
+      $\conductivity$                  & \num{0}       & \si{\siemens\per\meter}                     & Conductivité électrique du bain électrolytique               \\
+%     $\electrolytelaminarviscosity$   & \num{2e-3}    & \si{\kilo\gram\per\meter\per\second}        & Viscosité laminaire du bain électrolytique                   \\
+%     $\electrolyteturbulentviscosity$ & \num{2e-3}    & \si{\kilo\gram\per\meter\per\second}        & Viscosité turbulente du bain électrolytique                  \\
+      $\electrolytecmdiff$             & \num{5e-4}    & \si{\squared\meter\per\second}              & Diffusivité moléculaire de l'alumine dissoute dans le bain   \\
+      $\electrolytectdiff$             & \num{5e-4}    & \si{\squared\meter\per\second}              & Diffusivité turbulente de l'alumine dissoute dans le bain    \\
+      $\csat$                          & \num{7.8}     & w\%                                         & Concentration de saturation de l'alumine dissoute            \\
       \bottomrule
     \end{tabularx}
   \end{center}
