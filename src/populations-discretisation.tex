@@ -123,7 +123,7 @@ Le terme source $p_2$ qui correspond à la puissance thermique
 nécessaire à la dissolution des particules est discrétisé en
 utilisant $q_{2,n+1}$:
 \begin{equation}\label{eq:p2-discret}
-p_{2,n+1} = -\aluminadissolutionenthalpy q_{2,n+1}.
+p_{2,n+1} = -[\cee{Al2O3}]\aluminadissolutionenthalpy q_{2,n+1}.
 \end{equation}
 
 L'équation (\ref{eq:splitting-dissolution}) est discrétisé selon $r$
@@ -255,7 +255,7 @@ on a
 +\dt\electrolytedensity\electrolytehc\parent{\int_\Omega
   u\cdot\nabla\temperature_{n+1}\intd{x} - \int_\Omega
   \div\parent{\electrolytetdiff\nabla\temperature_{n+1}}} \\
-= \dt\sum_{i=1}^2\int_\Omega p_{x,n+1}\intd{x} + \int_\Omega p_3\intd{x}.
+= \dt\sum_{i=1}^2\int_\Omega p_{x,n+1}\intd{x} + \dt\int_\Omega p_3\intd{x}.
 \end{multline}
 En utilisant le théorème de la divergence, et en utilisant le fait que
 $\div u = 0$ dans $\Omega$, que $\frac{\partial
@@ -266,15 +266,18 @@ $\partial \Omega$ il reste
 \end{equation}
 En remplaçant les expressions (\ref{eq:p1-discret}), (\ref{eq:p2-discret}) et (\ref{eq:p3}) pour le termes sources $p_{1,n+1}$, $p_{2,n+1}$ et $p_3$ on obtient
 \begin{eqnarray*}
-  \electrolytedensity\electrolytehc\int_\Omega\parent{\temperature_{n+1} - \temperature_n}\intd{x} &=& \dt \conductivity\int_\Omega j\cdot j\intd{x}\\
+  \electrolytedensity\electrolytehc\int_\Omega\parent{\temperature_{n+1} - \temperature_n}\intd{x} &=& \frac{\dt}{ \conductivity}\int_\Omega j\cdot j\intd{x}\\
   && - \aluminahc\parent{\tinit - \tinj}\sum_{\mathclap{\substack{k\\ p^k + 1 = n+1}}}\int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3 S^k\intd{r}\intd{x}\\
-  && + \frac{\aluminadissolutionenthalpy}{[\cee{Al2O3}]}\sum_{\mathclap{\substack{k\\ q^k < n+1}}} \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,n+1}^k-n_{p,n}^k}\intd{r}\intd{x}.
+  && + {\aluminadissolutionenthalpy}\sum_{\mathclap{\substack{k\\ q^k < n+1}}} \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,n+1}^k-n_{p,n}^k}\intd{r}\intd{x}.
 \end{eqnarray*}
 A nouveau par récurrence sur $n$ on obtient
 \begin{eqnarray}
-  \electrolytedensity\electrolytehc\int_\Omega\parent{\temperature_{n+1} - \temperature_0}\intd{x} &=& t_{n+1} \conductivity\int_\Omega j\cdot j\intd{x}\nonumber\\
+  \electrolytedensity\electrolytehc\int_\Omega\parent{\temperature_{n+1} - \temperature_0}\intd{x} &=& \frac{t_{n+1}}{\conductivity}\int_\Omega j\cdot j\intd{x}\nonumber\\
   && - \aluminahc\parent{\tinit - \tinj}\sum_{\mathclap{\substack{k\\ p^k + 1 \leq n+1}}}\int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3 S^k\intd{r}\intd{x}\nonumber\\
-  && + \frac{\aluminadissolutionenthalpy}{[\cee{Al2O3}]}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}\intd{r}\intd{x},\label{eq:energy-mass-balance}
+  && + {\aluminadissolutionenthalpy}\sum_{m =
+    0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}}
+  \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi
+  r^3\parent{n_{p,m+1}^k-n_{p,m}^k}\intd{r}\intd{x},\nonumber\\ \label{eq:energy-mass-balance}
 \end{eqnarray}
 c'est-à-dire que l'énergie thermique du bain
 $\electrolytedensity\electrolytehc\int_\Omega\temperature_{n}\intd{x}$

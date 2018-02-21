@@ -210,7 +210,7 @@ thermique par effet Joule. Cette source d'énergie thermique $p_3$ par
 effet Joule dépend de la densité de courant stationnaire $j$ et
 s'écrit
 \begin{equation}\label{eq:p3}
-p_3(x) = \sigma\parent{j\cdot j}.
+p_3(x) = \frac{j\cdot j}{\conductivity}.
 \end{equation}
 où le nombre réel $\sigma > 0$ est la conductivité du bain que l'on
 suppose constante dans tout $\Omega$.
@@ -228,13 +228,14 @@ suppose constante dans tout $\Omega$.
 \paragraph{Température du bain}
 Tout comme la concentration d'alumine, la température du bain
 électrolytique $\temperature$ est transportée par la vitesse
-d'écoulement $u$, et diffuse dans le bain. La diffusion est due à la
-diffusion thermique au niveau moléculaire, et à une diffusion liée aux
-turbulences de l'écoulement. Soit $\electrolytetdiff:\Omega\to\mathbb
+d'écoulement $u$, et diffuse dans le bain. Cette diffusion est due à
+la l'agitation moléculaire d'une part, et à aux turbulences de
+l'écoulement d'autre part. Soit $\electrolytetdiff:\Omega\to\mathbb
 R^*_+$ la diffusivité de la température dans le bain, supposée
 donnée. Comme précédemment on a noté $\electrolytedensity$,
 $\electrolytehc$ la densité et la chaleur spécifique de du bain
-électrolytique. Alors la température $\temperature$ doit satisfaire l'équation
+électrolytique. Alors la température $\temperature$ doit satisfaire
+l'équation
 \begin{equation}\label{eq:temperature}
 \frac{\partial \temperature}{\partial t}(t, x) +
 u(x)\cdot\nabla\temperature - \electrolytetdiff(x)\Delta
