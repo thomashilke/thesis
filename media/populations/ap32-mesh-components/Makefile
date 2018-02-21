@@ -1,5 +1,5 @@
 
-IMG = bath.png full.png metal-bath-anodes-cathode-bus-bars.png metal-bath-anodes-cathode.png metal-bath-anodes.png metal-bath-cathode.png metal-bath.png metal.png
+IMG = bath.png bath-mesh.png full.png metal-bath-anodes-cathode-bus-bars.png metal-bath-anodes-cathode.png metal-bath-anodes.png metal-bath-cathode.png metal-bath.png metal.png
 
 TARGETS = $(foreach img,$(IMG),$(addprefix print/,$(img)))
 
