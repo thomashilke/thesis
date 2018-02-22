@@ -425,6 +425,7 @@ tableau \ref{tab:dissolution-physical-parameters}.
       $\tinj$                          & \num{423}     & \si{\kelvin}                                & Température d'injection des particules d'alumine                \\
       $\tliq$                          & \num{1219}    & \si{\kelvin}                                & Température du liquidus du bain électrolytique                  \\
       $\tcrit$                         & \num{1219.86} & \si{\kelvin}                                & Température critique de dissolution dans le bain électrolytique \\
+      $K$                              & \num{0.5e-09} & \si{\square\meter\per\second}               & Taux de dissolution des particules d'alumine                    \\
       $\aluminadissolutionenthalpy$    & \num{5.3e5}   & \si{\joule\per\kilo\gram}                   & Enthalpie de dissolution de l'oxyde d'aluminium                 \\
       $\conductivity$                  & \num{0}       & \si{\siemens\per\meter}                     & Conductivité électrique du bain électrolytique                  \\
 %     $\electrolytelaminarviscosity$   & \num{2e-3}    & \si{\kilo\gram\per\meter\per\second}        & Viscosité laminaire du bain électrolytique                      \\
@@ -500,16 +501,108 @@ unités physique sont rapportées dans la table
 Le maillage du domaine $\Omega$ est obtenu en même temps que les
 champs $u$ et $j$ par la méthode déjà évoquée plus haut proposée par
 \cite{Steiner2009}, \cite{Rochat2016}. On peut voir sur la figure
-\ref{fig:bath-mesh} un aperçu du maillage de $\Omega$ qui correspond
-à l'une des extrémités de la cuve. Le maillage est fortement
-anisotrope, avec des rapports d'aspect d'environ \num{25} dans
-l'ACD. Le diamètre des mailles est compris entre
-\num{38}\si{\centi\meter} (aux extrémités de la cuve) et
-\num{9}\si{\centi\meter} (dans l'ACD et les canaux). Le maillage
-comporte \num{282240} éléments tetraédriques. On choisit le nombre de
-discrétisation des rayons des particules $M = 5$ et $\dr = \num{40}$
-\si{\micro\meter}. Enfin on fixe $\dt = 1$ \si{\second} et $T =
-\num{10000}$ \si{\second}.
+\ref{fig:bath-mesh} un aperçu du maillage de $\Omega$ qui correspond à
+l'une des extrémités de la cuve. Le maillage est fortement anisotrope,
+avec des rapports d'aspect d'environ \num{25} dans l'ACD. Le diamètre
+des mailles est compris entre \num{38}\si{\centi\meter} (aux
+extrémités de la cuve) et \num{9}\si{\centi\meter} (dans l'ACD et les
+canaux). Le maillage comporte \num{282240} éléments tetraédriques. On
+choisit le nombre de discrétisation des rayons des particules $M = 5$
+et $\dr = \num{40}$ \si{\micro\meter}. Enfin on fixe $\dt = 1$
+\si{\second} et $T = \num{10000}$ \si{\second}, le temps auquel on
+veut évaluer la concentration.
 
 
-\paragraph{Solution de référence}
+\paragraph{Solution de référence} Afin d'évaluer l'effet de la
+température de l'électrolyte sur la dissolution de la poudre
+d'alumine, nous commençons par présenter un calcul pour lequel les
+particule d'alumine ne chute pas dans le bain, \ie, $w = 0$, pour
+lequel les particules commencent à se dissoudre instantanément,
+c'est-à-dire que $\tlat = 0$, et pour lequel la
+vitesse de dissolution ne dépend pas de température du bain
+$\temperature$. Plus précisément, la vitesse de dissolution définie
+par (\ref{eq:dissolution-rate}) est remplacée par
+\begin{equation}
+  \dissolutionrate(c, \temperature)= \left\{
+  \begin{array}{ll}
+    K\displaystyle\frac{\csat - \concentration}{\csat} &\quad \text{si } 0\leq
+    \concentration \leq \csat,\\
+    0& \quad \text{sinon}.
+  \end{array}
+  \right.
+\end{equation}
+Cette situation est équivalente à supposer que la température du
+bain $\temperature$ reste largement supérieure à la température
+critique $\tcrit$ au cours du calcul, de sorte à ce que le terme
+exponentiel dans (\ref{eq:dissolution-rate}) soit proche de zéro.
+
+Un des objectifs recherchés par les opérateurs de cuve
+industrielles est de minimiser les écarts de concentration autour de
+la concentration d'alumine dissoute optimale. Pour évaluer le champ
+de concentration par rapport à cet objectif, nous proposons de
+représenter la variance  du champ de concentration
+$c$ dans $\Omega$ au cours du temps définie par:
+\begin{equation}
+  \Var_c(t) = \sqrt{\int_\Omega\parent{\concentration(t, x) - \bar \concentration(t)}^2\intd{x}},
+\end{equation}
+où $\bar \concentration$ est la moyenne de $\concentration$ sur
+$\Omega$:
+\begin{equation}
+  \bar \concentration(t) = \frac{1}{\abs{\Omega}}\int_\Omega c(t, x)\intd{x}
+\end{equation}
+et $\abs{\Omega}$ est le volume de $\Omega$. Clairement, la situation
+idéale où la concentration d'alumine est uniforme dans tout
+l'électrolyte correspond à une variance de $\concentration$ nulle. A
+l'inverse, plus $\concentration$ s'écarte de sa valeur moyenne, plus
+sa variance est importante.
+
+La valeur de $\Var_\concentration$ au cours du temps offre un moyen
+d'évaluer si le système a atteint l'état stationnaire périodique
+recherché. Bien entendu ce n'est qu'une condition nécessaire, la
+variance d'une fonction stationnaire est elle-même stationnaire, mais
+l'inverse n'est pas nécessairement vrai. En pratique on prend soins de
+vérifier que la différence en norme $L^2$ à deux instants successifs
+séparés par la période du cycle d'injection global $P$ est inférieure
+à \num{1}\%. Pour tous les calculs présenté dans cette partie, la
+solution satisfait ce critère pour $T = \num{10000}$ \si{\second}.
+
+\begin{figure}
+  \begin{center}
+    \input{../media/populations/variances/variance-control.tex}
+    \caption{Evolution de $\Var_\concentration$ au cours du temps sur
+      l'intervalle $[0, T]$.}
+    \label{fig:alumin-control-var}
+  \end{center}
+\end{figure}
+
+La figure \ref{fig:alumin-control-var} représente l'évolution de
+la variance de la concentration au cours du temps. On remarque une
+phase initiale lorsque $t\in[0,500]$, au cours de laquelle la variance
+croît rapidement. Cette croissance ralenti quand la concentration
+approche de l'état stationnaire, et à partir de $t \approx
+\num{4500}$ \si{\second} nous pouvons considérer que la
+concentration est dans un état stationnaire et périodique. Les
+fluctuation de $\Var_\concentration$ que l'on peut observer sur la
+figure \ref{fig:alumin-control-val} sont dues aux injections de poudre
+d'alumine dans le bain. Immédiatement après l'injection, la
+dissolution des particules provoque un accroissement rapide de la
+concentration d'alumine dissoute localement autour du point
+d'injection. Lorsque la dose est totalement dissoute, ce pique de
+concentration est atténué par la diffusion de la concentration
+dans l'électrolyte. Cet effet se traduit par un accroissement de la
+variance de la concentration immédiatement après l'injection d'une
+dose, puis par une décroissance de la variance.
+
+Cependant, ces variations de la concentration dans l'état
+stationnaire sont très localisées autour des points d'injection; dans
+le reste du bain électrolytique, les variations de la concentration
+restent de l'ordre de \num{1}\%.
+
+Puisque, lorsque l'état stationnaire périodique est atteint, la
+concentration varie peu quelle que soit la phase du cycle d'injection
+global, nous pouvons nous permettre de visualiser la distribution de
+la concentration dans le bain électrolytique à un instant
+arbitraire du cycle d'injection global. Le temps $T = \num{10000}$
+\si{\second} auquel la solution est évaluée correspond donc à environ
+\num{51} périodes du cycle d'injection global, sans compter la phase
+transitoire initiale de \num{64} \si{\second}.
