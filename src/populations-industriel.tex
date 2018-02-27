@@ -7,27 +7,15 @@ exploite la technologie de cuve d'électrolyse AP
 Technology\texttrademark\ développée par RioTinto. Les premières cuves
 basées sur la technologie AP ont été mises en production au début des
 années 1990, et plus de \num{4000} d'entre elles fonctionnent encore
-actuellement en production \cite{RiotintoAP30}. Nous commençons par
-présenter le design et le mode d'opération de la cuve AP32. Nous
-détaillerons ensuite le choix des différentes données qui
-interviennent dans modèle numérique proposé dans la section
+actuellement dans les halles de productions à travers le monde
+\cite{RiotintoAP30}.
+
+Nous commençons par présenter le design et le mode d'opération de la
+cuve AP32. Nous détaillerons ensuite le choix des différentes données
+qui interviennent dans modèle numérique proposé dans la section
 \ref{sec:populations-discretisation} et dans le cadre de la cuve
 AP32. Finalement, nous présenterons une sélection de résultats
 numériques obtenus.
-
-
-% detail des aspects importants de l'operation d'une cuve
-% d'electrolyse:
-%  - geometrie de la cuve (taille, nombre d'anodes, epaisseur de bain
-%    et de metal,
-%  - alimentation electrique
-%  - etat stationnaire de l'ecoulement, interface. remarque sur les
-%    talus.
-%  - control de la concentration d'alumine
-%  - schema d'injection periodique, position des injecteurs
-%  - calcul de la conductivite sigma du bain
-%  - conditions initiales
-%  - informations sur le post-processing et la visualisation.
 
 \paragraph{Géométrie de la cuve AP32} La structure de la cuve AP32
 occupe au sol une longueur d'environ \num{17} \si{\meter} et une
@@ -42,13 +30,13 @@ d'environ \num{17} \si{\centi\meter}, tandis que l'épaisseur maximale
 du bain électrolytique, au niveau des canaux entre les blocs
 anodiques, est d'environ \num{20} \si{\centi\meter}. La figure
 \ref{fig:ap32-geometry-electrolyte} illustre le volume occupé par le
-bain dans lequel on s'intéresse à la concentration d'alumine, en
-orange. Les indentation rectangulaire à la surface de celui-ci
-correspondent au volume occupé par les anodes partiellement
+bain dans lequel nous nous intéressons à déterminer la concentration
+d'alumine, en orange. Les indentation rectangulaire à la surface de
+celui-ci correspondent au volume occupé par les anodes partiellement
 immergées. L'ACD est typiquement de l'ordre de \num{3}
-\si{\centi\meter}. Ces différentes épaisseurs varient d'un point à
-l'autre de la cuve à cause des écoulements dans les fluides, de la
-déformation de l'interface bain-métal et des irrégularités à la
+\si{\centi\meter}. Ces différentes épaisseurs des fluides varient d'un
+point à l'autre de la cuve à cause des écoulements dans les fluides,
+de la déformation de l'interface bain-métal et des irrégularités à la
 surface des anodes. De plus, le volume de métal liquide varie
 constamment, d'une part à cause du produit de la réaction
 d'électrolyse, et d'autre part à cause des opérations de siphonnage du
@@ -85,7 +73,7 @@ Le plan anodique est composée de deux rangées de 10 anodes chacune,
 représentées en noir sur la figure \ref{fig:ap32-geometry-elements}. La
 surface du plan anodique est d'environ \num{40.3} \si{\square\meter}
 et seulement \num{25}\% de la surface du bain est libre, le reste
-étant recouvert par les anodes. La cuve est conçu pour que
+étant recouvert par les anodes. La cuve est conçue pour que
 l'électrolyte soit traversé par un courant électrique total $I = $
 \num{320000} \si{\ampere}, ce qui correspond à une densité de courant
 d'environ \num{0.8} \si{\ampere\per\square\centi\meter} à la surface
@@ -111,19 +99,19 @@ cuve AP32 a une durée de vie d'environ 30 jours, après quoi elle doit
 
 Pour compenser l'alumine dissoute qui est consommée par la réaction
 d'électrolyse, il faut injecter en moyenne au cours du temps $56.3$
-\si{\gram\per\second} de poudre d'alumine. Comme déjà mentionné
-dans la section \ref{sec:introduction-hall-heroult}, la poudre
-d'alumine est déposée à la surface du bain dans le canal central par
-une série d'injecteurs dont la position est fixe. Un piqueur vient
-percer mécaniquement un trou dans la croûte et créer un accès à la
-surface libre du bain avant chaque injection. Ce trou se rebouche
-rapidement, et pour cette raison l'injection d'alumine ne peut pas
+\si{\gram\per\second} de poudre d'alumine. Comme déjà mentionné dans
+la section \ref{sec:introduction-hall-heroult}, la poudre d'alumine
+est déposée à la surface du bain dans le canal central par une série
+d'injecteurs dont la position est fixe. Un piqueur vient percer
+mécaniquement un trou dans la croûte et créer un accès à la surface
+libre du bain avant chaque injection. Ce trou se rebouche rapidement,
+et pour cette raison l'injection de la poudre d'alumine ne peut pas
 avoir lieu continûment.
 
 Pour maintenir un rendement énergétique maximum, éviter l'émission de
 gaz fluorés et éviter l'occurence des effets d'anodes, il est crucial
 que la concentration d'oxyde d'aluminium dissout dans le bain soit
-maintenu dans un intervalle très précis. Malheureusement, pour de
+maintenue dans un intervalle très précis. Malheureusement, pour de
 nombreuses raisons il est impossible de maintenir un bilan précis de
 la quantité d'alumine dans le bain en fonction de ce qui est injecté
 et de ce qui est consommé. En effet, l'environnement rend difficile la
@@ -203,7 +191,7 @@ indépendemment pour chaque injecteur.
 
 \paragraph{Calcul de l'écoulement dans le bain} Une approximation de vitesse
 d'écoulement du bain $u$ et de la densité de courant $j$ dans la cuve
-AP32 est obtenue par l'intermédiaire du modèle multiphysique
+AP32 est obtenue par l'intermédiaire du modèle multi-physique
 stationnaire proposé par S. Steiner \cite{Steiner2009}, J. Rochat
 \cite{Rochat2016} déjà introduit dans la section
 \ref{sec:populations-introduction}. La figure \ref{fig:ap32-flow-acd}
@@ -346,7 +334,7 @@ membre de droite de (\ref{eq:energy-condition}) est égal à
 en vertu de (\ref{eq:injection-mass-condition}). Pour que le deuxième
 terme du membre de droite de (\ref{eq:energy-condition}) converge, il
 est suffisant que chaque population $k\geq 1$ se dissolve en un temps
-fini donné quelque soit $k$. Plus précisement, les populations $n_p^k$
+fini donné quelque soit $k$. Plus précisément, les populations $n_p^k$
 se dissolvent en un temps fini s'il existe un entier positif $q'$ tel
 que $n_{p,n}^k = 0$ pour tout $n > q^k + q'$.
 
@@ -354,8 +342,9 @@ Le cas échéant on peut télescoper la somme sur $k$ et en remarquant que
 \begin{equation*}
   \int_\Omega n_{p,q^k}^k\intd{x} = \int_\Omega S^k\intd{x}
 \end{equation*}
-pour tout $k \leq 1$ et pour tout $r > 0$, le deuxième terme du
-membre de droite de (\ref{eq:energy-condition}) se réduit à
+pour tout $k \leq 1$ et pour tout $r > 0$ lorsque la vitesse de chute
+$w = 0$, le deuxième terme du membre de droite de
+(\ref{eq:energy-condition}) se réduit à
 \begin{equation*}
   {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ p^k +
   1 \leq n + 1}}}\int_\Omega\int_0^\infty\aluminadensity
@@ -377,7 +366,7 @@ relation, c'est-à-dire que
 stationnaire du bain $u$ obtenue par la méthode introduite dans
 \cite{Steiner2009}, \cite{Rochat2016} est la vitesse moyenne d'un
 écoulement turbulent. Les structures turbulentes du fluide sont
-décritent par un modèle de longueur de mélange de Smagorinsky
+décrites par un modèle de longueur de mélange de Smagorinsky
 \cite{Rochat2016}. Dans le modèle de Smagorinsky, les structures
 turbulentes de l'écoulement se traduise par une viscosité de
 l'écoulement moyen $u$ proportionnelle au tenseur des déformation de
@@ -419,19 +408,20 @@ tableau \ref{tab:dissolution-physical-parameters}.
       $g$                              & \num{9.81}       & \si{\meter\per\square\second}               & Accélération de la gravité terrestre                            \\
       $I$                              & \num{320000}     & \si{\ampere}                                & Courant électrique total                                        \\
       $\faraday$                       & \num{96485.33}   & \si{\coulomb\per\mol}                       & Constante de Faraday                                            \\
-      $\faradayyield$                  & \num{94.5}       & \%                                          & Rendement de Faraday de l'électrolyse                           \\\relax
+      $\faradayyield$                  & \num{0.945}       & []                                          & Rendement de Faraday de l'électrolyse                           \\\relax
       [\ce{Al2O3}]                     & \num{0.102}      & \si{\kilo\gram\per\mol}                     & Masse molaire de l'oxyde d'aluminium                            \\
       $\tinit$                         & \num{1223}       & \si{\kelvin}                                & Température initiale du bain électrolytique                     \\
       $\tinj$                          & \num{423}        & \si{\kelvin}                                & Température d'injection des particules d'alumine                \\
-      $\tliq$                          & \num{1219}       & \si{\kelvin}                                & Température du liquidus du bain électrolytique                  \\
-      $\tcrit$                         & \num{1219.86}    & \si{\kelvin}                                & Température critique de dissolution dans le bain électrolytique \\
+      $\tliq$                          & \num{1218}       & \si{\kelvin}                                & Température du liquidus du bain électrolytique                  \\
+      $\tcrit$                         & \num{1218.86}    & \si{\kelvin}                                & Température critique de dissolution dans le bain électrolytique \\
       $K$                              & \num{0.5e-09}    & \si{\square\meter\per\second}               & Taux de dissolution des particules d'alumine                    \\
       $\aluminadissolutionenthalpy$    & \num{5.3e5}      & \si{\joule\per\kilo\gram}                   & Enthalpie de dissolution de l'oxyde d'aluminium                 \\
-      $\conductivity$                  & \approx\num{900} & \si{\siemens\per\meter}                     & Conductivité électrique du bain électrolytique                  \\
+      $\conductivity$                  & $\approx$ \num{900} & \si{\siemens\per\meter}                     & Conductivité électrique du bain électrolytique                  \\
 %     $\electrolytelaminarviscosity$   & \num{2e-3}       & \si{\kilo\gram\per\meter\per\second}        & Viscosité laminaire du bain électrolytique                      \\
 %     $\electrolyteturbulentviscosity$ & \num{2e-3}       & \si{\kilo\gram\per\meter\per\second}        & Viscosité turbulente du bain électrolytique                     \\
       $\electrolytemoldiff$            & \num{5e-4}       & \si{\squared\meter\per\second}              & Diffusivité moléculaire dans le bain                            \\
       $\electrolyteturbdiff$           & \num{5e-4}       & \si{\squared\meter\per\second}              & Diffusivité turbulente dans le bain                             \\
+      $\electrolyteviscosity$          & \num{2e-3}       & \si{\kilo\gram\per\meter\per\second}        & Viscosité laminaire du bain électrolytique                      \\
       $\csat$                          & \num{1689.7}     & \si{\mol\per\cubic\meter}                   & Concentration de saturation de l'alumine dissoute               \\
       $\csatwp$                        & \num{7.8}        & w\%                                         & Concentration de saturation de l'alumine dissoute               \\
       $\cinit$                         & \num{635.3}      & \si{\mol\per\cubic\meter}                   & Concentration initiale de l'alumine dissoute                    \\
@@ -445,7 +435,7 @@ tableau \ref{tab:dissolution-physical-parameters}.
   température}
 Les conditions initiales des population de particules $n_p^k$ sont
 données implicitement dans la description du modèle par la
-relation (\ref{eq:splitting-np1-init}). Plus précisement, aucune
+relation (\ref{eq:splitting-np1-init}). Plus précisément, aucune
 particule n'est présente dans le bain électrolytique à $t = 0$, et
 donc $n_p(0, x,r) = 0$ pour $r>0$ et $x\in\Omega$.
 
@@ -474,7 +464,7 @@ soient égales aux conditions optimales d'opération de la cuve AP32:
 Le paramètre $\tinit$ est reporté dans la table
 \ref{tab:dissolution-physical-parameters}. La concentration initiale
 $\cinit$ en \si{\mol\per\cubic\meter} s'exprime en fonction de la
-concentation initiale $\concentration_{\text{init},\%\mathrm w}$ en \% masse à
+concentration initiale $\concentration_{\text{init},\%\mathrm w}$ en \% masse à
 l'aide de la formule:
 \begin{equation*}
   \cinit = \frac{\cinitwp \cdot
@@ -569,8 +559,10 @@ solution satisfait ce critère pour $T = \num{10000}$ \si{\second}.
 \begin{figure}
   \begin{center}
     \input{../media/populations/variances/variance-control.tex}
-    \caption{Evolution de $\Var_\concentration$ au cours du temps sur
-      l'intervalle $[0, T]$.}
+    \caption{Évolution de $\Var_\concentration$ au cours du temps sur
+      l'intervalle $[0, T]$ dans le bain électrolytique de la cuve
+      AP32 lorsque la température n'est pas prise en compte dans la
+      vitesse de dissolution des particules.}
     \label{fig:alumin-control-var}
   \end{center}
 \end{figure}
@@ -583,7 +575,7 @@ approche de l'état stationnaire, et à partir de $t \approx
 \num{4500}$ \si{\second} nous pouvons considérer que la
 concentration est dans un état stationnaire et périodique. Les
 fluctuation de $\Var_\concentration$ que l'on peut observer sur la
-figure \ref{fig:alumin-control-val} sont dues aux injections de poudre
+figure \ref{fig:alumin-control-var} sont dues aux injections de poudre
 d'alumine dans le bain. Immédiatement après l'injection, la
 dissolution des particules provoque un accroissement rapide de la
 concentration d'alumine dissoute localement autour du point
@@ -594,15 +586,313 @@ variance de la concentration immédiatement après l'injection d'une
 dose, puis par une décroissance de la variance.
 
 Cependant, ces variations de la concentration dans l'état
-stationnaire sont très localisées autour des points d'injection; dans
+stationnaire sont très localisées autour des points d'injection. Dans
 le reste du bain électrolytique, les variations de la concentration
 restent de l'ordre de \num{1}\%.
 
 Puisque, lorsque l'état stationnaire périodique est atteint, la
-concentration varie peu quelle que soit la phase du cycle d'injection
-global, nous pouvons nous permettre de visualiser la distribution de
-la concentration dans le bain électrolytique à un instant
-arbitraire du cycle d'injection global. Le temps $T = \num{10000}$
-\si{\second} auquel la solution est évaluée correspond donc à environ
-\num{51} périodes du cycle d'injection global, sans compter la phase
+concentration varie peu au cours du cycle d'injection global, nous
+pouvons nous permettre de visualiser la distribution de la
+concentration dans le bain électrolytique à un instant arbitraire du
+cycle d'injection global. Le temps $T = \num{10000}$ \si{\second}
+auquel la solution est évaluée correspond donc à environ \num{51}
+périodes du cycle d'injection global, sans compter la phase
 transitoire initiale de \num{64} \si{\second}.
+
+\begin{figure}[h]
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+          hide axis,
+          colorbar,
+          scale only axis,
+          height=0.41\rasterimagewidth,,
+          width=\rasterimagewidth,
+          colorbar horizontal,
+          point meta min=2.38,
+          point meta max=4.21,
+          colorbar style={
+            title=Concentration $c$ [\%w],
+            width=7.4cm,
+            height=0.3cm,
+            xtick={2.38, 2.50, 3.00, 3.50, 4.00, 4.21},
+            xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/fixed zerofill,
+              /pgf/number format/precision=2
+            },
+            scaled x ticks = false,
+            at={(0.5\rasterimagewidth,0.4cm)},
+            anchor=north
+          }
+        ]
+        \addplot [] coordinates {(0,0)};
+        \node (myfirstpic) at (0,0) {\includegraphics[width=\rasterimagewidth]{{../media/populations/application/print/alumina-control-2.38-4.21}.png}};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{Concentration d'alumine dissoute dans à $t =
+      \num{10000}$ \si{\second} dans l'ACD de la cuve AP32, lorsque la
+    température n'est pas prise en compte dans la vitesse de
+    dissolution des particules.}
+    \label{fig:ap32-alumina-wo-t}
+  \end{center}
+\end{figure}
+
+On s'intéresse à la distribution de la concentration d'alumine là où a
+lieu la réaction d'électrolyse, c'est-à-dire essentiellement dans
+l'ACD. On se contente donc de visualiser la distribution de la
+concentration d'alumine dans cette zone. Dans le domaine $\Omega$
+occupé par l'électrolyte, l'ACD est maintenue constante avec $3.2$
+\si{\centi\meter} d'épaisseur sur l'ensemble de l'interface. Pour
+visualiser la concentration d'alumine dissoute dans l'ACD, on évalue
+$\concentration$ sur une surface fictive placée dans l'électrolyte,
+parallèle à l'interface et à une distance égale à la moitié de
+l'ACD. La figure \ref{fig:ap32-alumina-wo-t} présente la distribution de la
+concentration d'alumine dans le bain électrolytique.
+
+On remarque sur la figure \ref{fig:ap32-alumina-wo-t} que la
+concentration atteint des maximums locaux aux voisinages des points
+d'injection, ce qui montre que l'essentiel de la poudre d'alumine se
+dissout dans ces régions. Cette alumine dissoute est ensuite
+transportée par l'écoulement. Les deux injecteurs de gauche alimentent
+le tourbillon de gauche, tandis que les deux injecteurs de droite
+alimentent essentiellement le tourbillon de droite. Les régions du bain
+sous-alimentées sont les coins en aval, où la concentration descend
+en dessous de \num{3} \%w et où l'écoulement est
+caractérisé par la présence de petits tourbillons isolés. La région
+centrale en amont des points d'injections est remarquablement uniforme
+avec une concentration proche de \num{3} \%w.
+
+
+Nous consacrons maintenant le reste de cette partie au
+modèle de transport et dissolution d'alumine qui dépend de la
+température du bain dans le bain de la cuve AP32, et l'on étudie
+l'influence des nouveaux paramètres que ce modèle introduit,
+en particulier le temps de latence $\tlat$, la température initial du
+bain $\tinit$, la température critique $\tcrit$ et la vitesse de
+chute des particules dans le bain $w$.
+
+
+% Sensibilité par rapport a la latence de dissolution
+\paragraph{Sensibilité par rapport au temps de latence}
+Nous avons montré dans le paragraphe \ref{sec:particle-freeze} que le
+temps de latence qui précède le début de la dissolution d'une
+particule lâchée dans le bain d'une cuve d'électrolyse est de l'ordre
+de \num{1e-1} \si{\second}. Ce temps caractéristique est
+négligeable devant le temps de dissolution qui est au minimum de
+\num{10} \si{\second} pour le choix de paramètres reportés dans la
+table \ref{tab:dissolution-physical-parameters}.
+
+Cependant, lors de l'injection d'une dose d'alumine typique, les
+particules ne peuvent plus être suffisamment dispersées pour que
+les hypothèses du modèle introduit dans la section
+\ref{sec:particle-freeze} soient satisfaites, et c'est l'effet
+collectif de l'ensemble des particules qui prédomine. Selon
+\cite{Dassylva2015}, toutes les particules d'une dose subissent un
+temps de latence de l'ordre de \num{1} \si{\second} quel que soit leur
+taille.
+
+Nous proposons maintenant de déterminer si la distribution de
+concentration dans le bain électrolytique est sensible au temps de
+latence de dissolution des particule lors de leur injection. Dans ce
+but, nous présentons les résultats de 4 calculs du champ de
+concentration d'alumine dissoute $c$ dans le bain électrolytique de
+la cuve AP32 avec le modèle de transport et dissolution de
+particules en fonction de la température du bain, avec les
+paramètres reportés dans la table
+\ref{tab:dissolution-physical-parameters} à l'exception du temps de
+latence $\tlat$ pour lequel nous fixons successivement $\tlat = $
+\numlist{1;2;5;10} secondes.
+
+\input{populations-figures-tlat.tex}
+
+La figure \ref{fig:dissolution-alumin-influence-tlat} présente la
+distribution de concentration d'alumine dissoute dans l'ACD de la cuve
+AP32 à $T = $ \num{10000} \si{\second} pour les différentes valeurs
+de $\tlat$ croissantes de haut en bas.
+
+Les quatre champs de concentration présentés sur la figure
+\ref{fig:dissolution-alumin-influence-tlat} sont très similaires. Les
+maximums et les minimum de la concentration d'alumine sont atteint
+sont les mêmes et apparaissent aux mêmes endroits. On remarque
+malgré tout de petites modification de la distribution d'alumine
+dissoute au voisinage des points d'injection. On observe par exemple
+autour du point d'injection \#2 que la concentration est plus diffuse
+lorsque $\tlat$ croît.
+
+Nous nous intéressons maintenant à l'effet de la température
+initiale du bain sur la distribution de la concentration d'alumine dissoute.
+
+% Sensibilité par rapport a la surchauffe du bain
+\paragraph{Sensibilité par rapport à la surchauffe initiale du bain}
+La vitesse de dissolution des particules dans l'électrolyte
+(\ref{eq:dissolution-velocity}) dépend de la température locale de
+celui-ci. Comme précisé plus haut dans cette section, sous
+l'hypothèse que chaque dose de particules se dissout entièrement
+en un temps fini, le terme source d'énergie par effet Joule est
+construit de sorte à maintenir une quantité d'énergie thermique
+constante en moyenne dans le temps. En l'absence de transition de
+phase dans l'électrolyte, cela signifie que la température moyenne au
+cours du temps de celui-ci est maintenue constante. Par conséquent,
+une température initiale du bain $\tinit$ plus élevée résulte en une
+température $\temperature$ dans l'état stationnaire périodique plus
+élevée en moyenne au cours d'une période du cycle d'injection global.
+
+\input{populations-figures-tinit.tex}
+
+Nous proposons d'évaluer la sensibilité de la dissolution d'alumine
+dans le bain électrolytique en fonction de la température de celui-ci
+en faisant varier la température initiale du bain. On note $\tsur$ la
+température de surchauffe initiale du bain au-dessus de sa température de
+liquidus:
+\begin{equation}
+  \tsur = \tinit - \tliq.
+\end{equation}
+La figure \ref{fig:dissolution-alumin-influence-sur} présente la distribution
+de la concentration d'alumine dissoute $c$ dans l'ACD de la cuve AP32
+issue de quatre calculs, pour lesquels les paramètres sont reportés
+dans la table \ref{tab:dissolution-physical-parameters}, à
+l'exception de la température initiale du bain $\tinit$. La
+température initiale du bain est fixée à $\tinit = \tliq + \tsur$ avec $\tsur = $ \numlist{1;2;5;10} kelvin.
+
+Les champs de concentration sur la figure
+\ref{fig:dissolution-alumin-influence-sur} correspondent de haut en
+bas à des température de surchauffe $\tsur$ croissante. On remarque
+en particulier sur le dernier champ de concentration de cette figure,
+qui correspond à $\tsur = $ \num{10} \si{\kelvin}, la similarité avec la
+solution de référence illustrée sur la figure
+\ref{fig:ap32-alumina-wo-t} pour laquelle la température ne joue pas
+de rôle dans la dissolution des particules. Les valeurs maximales
+atteinte par la concentration d'alumine dissoute sont cependant plus faibles.
+
+Le premier champ de concentration de la figure
+\ref{fig:dissolution-alumin-influence-sur} correspond à une
+température de surchauffe $\tsur =$ \num{1} \si{\kelvin} et s'écarte
+significativement de la solution de référence. La concentration
+d'alumine dissoute est homogène au point de ne plus pouvoir
+distinguer la position des injecteurs.
+
+La dissolution des particules d'alumine dépend d'une part du fait que
+la température de l'électrolyte dans leur voisinage doit être
+supérieur à la température du liquidus $\tliq$, et d'autre part de la
+taille de la région de transition entre le régime de dissolution
+contrôlé par la diffusion de l'énergie thermique et le régime de
+dissolution contrôlé par la diffusion de l'alumine dissoute à
+proximité de la surface des particules. La transition entre ces deux
+régimes est contrôlée par le paramètre $\tcrit$. Dans le paragraphe
+suivant nous proposons d'évaluer la distribution de concentration dans
+le bain électrolytique en fonction du paramètre $\tcrit$.
+
+
+\clearpage
+% Sensibilité par rapport au modèle de dépendence (tcrit, exp vs heaviside)
+\paragraph{Sensibilité par rapport à la température critique de transition}
+\input{populations-figures-tcrit.tex}
+
+Dans la limite où $\tcrit - \tliq$ devient grand, on voit facilement
+dans l'expression (\ref{eq:dissolution-rate}) que le taux de
+dissolution des particules, et donc leur vitesse de dissolution,
+devient nulle dans l'intervalle de température que le bain
+électrolytique peut raisonnablement admettre. Par conséquent, si la
+valeur de $\tcrit - \tliq$ est trop élevée, le temps dissolution des
+particules peut devenir arbitrairement long, ce qui n'est pas réaliste
+dans le cas d'une cuve d'électrolyse d'aluminium industrielle.
+
+A l'inverse, en prenant la limite $\tcrit \to  \tliq$, le taux de
+dissolution (\ref{eq:dissolution-rate}) s'écrit:
+\begin{equation}
+  \dissolutionrate(\concentration,\temperature) = \left\{
+  \begin{array}{ll}
+  K \displaystyle\frac{\csat - \concentration}{\csat}& \text{ si } \temperature
+  \geq \tliq\text{ et } 0\leq \concentration \leq \csat,\\
+  0 &  \text{ sinon.}
+  \end{array}
+  \right.
+\end{equation}
+En d'autres termes, la dissolution des particules est contrôlée
+uniquement par la concentration locale $\concentration$ si
+$\temperature \geq \tliq$, et ne se dissolvent pas sinon.
+
+Nous présentons maintenant la distribution de concentration d'alumine
+dissoute dans le bain de la cuve AP32 dans l'état stationnaire
+périodique résultant de deux calculs. Comme précédemment, l'ensemble
+des paramètres du modèle de transport et dissolution est reporté dans
+la table \ref{tab:dissolution-physical-parameters}. Pour le premier
+calcul on fixe $\tcrit = \tliq$, et le taux de dissolution est donné par
+(\ref{eq:dissolution-rate-zero-tcrit}). Pour le deuxième calcul on
+fixe $\tcrit = \tliq + 0.86$ \si{\kelvin}.
+
+La figure \ref{fig:dissolution-alumin-influence-exp-heaviside}
+présente la concentration d'alumine dans l'ACD de la cuve AP32 à $t =
+\num{10000}$ \si{\second}, lorsque l'état stationnaire périodique est
+atteint. Le premier champ de concentration correspond au cas où
+$\tcrit = \tliq$, tandis que le deuxième champ de concentration
+correspond au cas où $\tcrit = \tliq + 0.86$ \si{\kelvin}. Même si
+l'on parvient à observer de petites variations entre ces deux
+solution, en particulier dans le coin aval droite et autour du point
+d'injection \#4, ces deux champs de concentration sont indistinguables
+l'un de l'autre.
+
+Finalement, nous nous penchons sur l'effet de la chute
+gravitationnelle des particules d'alumine sur le champ de
+concentration d'alumine dissoute.
+
+% Sensibilité par rapport a la vitesse de chute dans le bain
+\paragraph{Effet de la vitesse de chute des particules sur leur
+  dissolution}
+\input{populations-figures-w.tex}
+
+Nous avons déterminé, dans la section \ref{sec:particle-fall}, vitesse
+de chute et la profondeur maximale atteinte dans le fluide de
+particules soumisent à la gravité et à une force de traînée
+de Stokes. Dans le cas le plus favorable, certaine particules peuvent
+chuter de plusieurs centimètre dans le bain électrolytique avant de se
+dissoudre complètement.
+
+Dans ce dernier paragraphe, nous proposons de comparer deux calculs
+qui illustrent l'effet de la chute des particules dans le bain sur la
+concentration d'alumine dissoute dans celui-ci.
+
+Pour le premier calcul, qui joue le rôle de point de référence, les
+paramètres sont reporté dans la table
+\ref{tab:dissolution-physical-parameters} et nous annulons
+l'accélération de la gravité $g = 0$, ce qui donne lieu à une vitesse
+de chute strictement nulle, soit $w(r) = 0$ pour tout $r>0$. De plus,
+l'injection des dose d'alumine a lieu dans le canal central comme
+indiqué sur la figure \ref{fig:injections}, au niveau de l'ACD.
+
+Pour le deuxième calcul la valeur de $g$ est restaurée, telle que
+donnée dans la table \ref{tab:dissolution-physical-parameters} et la
+vitesse de chute des particules est donnée par l'expression
+\ref{eq:fall-velocity}. Cependant, les points d'injections sont
+déplacé verticalement vers le haut du canal.
+
+Nous avons montré dans la section \ref{sec:particle-fall} que les
+profondeurs maximales atteinte par le particules lorsque la viscosité
+du fluide est supérieure ou égale à \num{1e-2}
+\si{\kilo\gram\per\meter\per\second} sont de l'ordre du
+millimètre. Or, la taille verticale des mailles dans les canaux ne
+permette pas de capturer des effets de cette amplitude. Pour cette raison,
+nous choisissons pour le paramètre de viscosité $\electrolyteviscosity$, qui
+intervient dans la définition (\ref{eq:fall-velocity}), la viscosité
+laminaire du fluide, soit $\electrolyteviscosity = $ \num{2e-3}
+\si{\kilo\gram\per\meter\per\second}. Cette valeur de la viscosité
+donne lieu à des profondeurs de chute maximale de l'ordre de
+quelques centimètres.
+
+
+La figure \ref{fig:sedimentation-comparaison} représente les champs de
+concentration dans l'ACD de la cuve AP32 obtenus par ces deux calculs,
+évalué à $t = \num{10000}$ \si{\second}, lorsque l'état stationnaire
+périodique est atteint.
+
+On remarque quelques différence entre les deux solutions,
+essentiellement au niveau des points d'injection. Les valeur maximales
+de la concentration d'alumine dissoute à proximité des points
+d'injection \#1, \#3 et \#4 sont plus grandes lorsque lorsque la chute
+des particules est négligée. On constate l'effet inverse pour
+l'injecteur \#2: la concentration d'alumine dissoute sous cet
+injecteur atteint un maximum local plus marqué lorsque la chute des
+particules est pris en compte.
+
+Nous concluons cette partie par une discussion de ces résultats.

@@ -4,6 +4,7 @@ all:
 	@$(MAKE) -C cadence all;
 	@$(MAKE) -C anode-configuration all;
 	@$(MAKE) -C variances all;
+	@$(MAKE) -C application all;
 
 clean:
 	@$(MAKE) -C ap32-mesh-components clean;
@@ -11,3 +12,4 @@ clean:
 	@$(MAKE) -C cadence clean;
 	@$(MAKE) -C anode-configuration clean;
 	@$(MAKE) -C variances clean;
+	@$(MAKE) -C application clean;

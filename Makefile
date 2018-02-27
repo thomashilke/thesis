@@ -32,7 +32,12 @@ TEX_SOURCES = src/thesis.tex \
   src/populations-introduction.tex \
   src/populations-discretisation.tex \
   src/populations-model.tex \
-  src/populations-industriel.tex
+  src/populations-industriel.tex \
+  src/populations-figures-tcrit.tex \
+  src/populations-figures-tinit.tex \
+  src/populations-figures-tlat.tex \
+  src/populations-figures-w.tex \
+  src/populations-conclusion.tex
 
 BIB_SOURCES = $(wildcard refs/*.bib)
 

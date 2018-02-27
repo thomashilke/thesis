@@ -14,10 +14,10 @@ dissolution d'alumine en fonction de la température. On a $\forall k =
 \end{align}
 et
 \begin{align}
-  & \frac{\partial \concentration}{\partial t} + u(x)\cdot\nabla \concentration - \cdiffusivity(x) \Delta \concentration = q_1 + q_2,
+  & \frac{\partial \concentration}{\partial t} + u(x)\cdot\nabla \concentration - \div\parent{\cdiffusivity(x) \nabla \concentration} = q_1 + q_2,
   & \forall t\in (0, T),\label{eq:mdl-eq-4}\\
 %
-  & \frac{\partial \temperature}{\partial t} + u(x)\cdot\nabla\temperature - \electrolytetdiff(x)\Delta \temperature = \frac{1}{\electrolytedensity\electrolytehc}\sum_{i = 1}^{3}p_i,
+  & \frac{\partial \temperature}{\partial t} + u(x)\cdot\nabla\temperature - \div\parent{\electrolytetdiff(x)\nabla \temperature} = \frac{1}{\electrolytedensity\electrolytehc}\sum_{i = 1}^{3}p_i,
   & \forall t\in(0, T)\label{eq:mdl-eq-5}
 \end{align}
 dans $\Omega$.
@@ -34,9 +34,10 @@ En suivant l'approche adoptée dans \cite{Hofer2011}, on propose de
 discrétiser les équations (\ref{eq:mdl-eq-1}) à (\ref{eq:mdl-eq-5})
 par une méthode de splitting en temps de la façon suivante. Soit
 l'entier $N$, le nombre de pas de temps et $\dt = T/N$ un pas de temps
-uniforme. Soient $t_n = n\dt$, $n = 0, 1, \dots, N$, une subdivision de
-l'intervalle de temps $[0, T]$. On note $n_{p,n}^k$ une approximation
-de $n_p^k(t_n, ., .)$, $n_{p,n}$ de $n_p(t_n, ., .)$, $\concentration_n$ une approximation de
+uniforme. Soient $t_n = n\dt$, $n = 0, 1, \dots, N$, une subdivision
+de l'intervalle de temps $[0, T]$. On note $n_{p,n}^k$ une
+approximation de $n_p^k(t_n, ., .)$, $n_{p,n}$ une approximation de
+$n_p(t_n, ., .)$, $\concentration_n$ une approximation de
 $\concentration(t_n, .)$ et $\temperature_n$ une approximation de
 $\temperature(t_n, .)$. Si $k$ et l'indice de l'injection d'une
 population de particules, on définit $p^k$ et $q^k$ les plus grands
@@ -49,7 +50,7 @@ l'injection de la population $k$, et $q_k$ est le dernier pas de temps
 qui précède le début de la dissolution de la population $k$. Bien
 entendu, si $\tlat = 0$ alors $p_k = q_k$.
 
-Etant donnés $n_{p,n}^k$ $\forall k=1, 2, \dots, K$,
+Étant donnés $n_{p,n}^k$ $\forall k=1, 2, \dots, K$,
 $\concentration_n$ et $\temperature_n$, on pose
 \begin{align}
   & n_{p,n+1}^k = 0, &&\text{si } 1\leq n + 1 < p^k + 1,\label{eq:splitting-np1-init}\\
@@ -71,10 +72,10 @@ dans $\Omega$ et pour tout $r > 0$. Puis, si $n$ est tel que $q^k < n
 dans $\Omega$ et pour tout $r > 0$. Et finalement
 \begin{align}
 &\frac{\concentration_{n+1} - \concentration_{n}}{\dt} + u\cdot\nabla
-\concentration_{n+1} - \cdiffusivity \Delta \concentration_{n+1} = q_1
+\concentration_{n+1} - \div\parent{\cdiffusivity \nabla \concentration_{n+1}} = q_1
 + q_{2,n+1},\label{eq:splitting-c} \\
 &\frac{\temperature_{n+1} - \temperature_{n}}{\dt} + u\cdot\nabla
-\temperature_{n+1} - \electrolytetdiff \Delta \temperature_{n+1} =
+\temperature_{n+1} - \div\parent{\electrolytetdiff \nabla \temperature_{n+1}} =
 \frac{1}{\electrolytedensity \electrolytehc}\parent{\sum_{i =
     1}^2p_{i,n+1} + p_3}\label{eq:splitting-t}
 \end{align}
@@ -85,11 +86,11 @@ discrétisés $q_{2,n+1}$, $p_{i,n+1}$, $i = 1,2$.
 Le terme source $q_{2}$ qui apparaît dans l'équation
 (\ref{eq:mdl-eq-4}) correspond à la masse d'alumine qui est transférée
 entre les particules qui se dissolvent et l'alumine dissoute par unité
-de temps. Afin de permettre une conservation de la masse d'alumine
-exacte par le schéma numérique entre les champs $n_p$ et $c$, nous
+de temps. Afin de permettre une conservation exacte de la masse d'alumine
+par le schéma numérique entre les champs $n_p$ et $c$, nous
 tirons parti du splitting en temps des équations (\ref{eq:mdl-eq-3})
 et (\ref{eq:mdl-eq-4}) \cite{Hofer2011}. Plus précisement, grâce au
-splitting en temps, les quantités $n_{p,n+1}^k$, $k = 1, 2, \dots, K$
+splitting en temps, les quantités $n_{p,n+1}^k$ et $\bar{\bar n}_{p,n+1}^k$, $k = 1, 2, \dots, K$
 sont indépendentes de $c_{n+1}$. On pose alors
 \begin{equation}\label{eq:q2}
   q_{2,n+1}(x) = -\frac{1}{\dt} \sum_{\substack{1\leq k\leq K\\ q^k < n+1}}
@@ -135,26 +136,25 @@ L'équation (\ref{eq:splitting-dissolution}) est discrétisé selon $r$
 d'advection-diffusion et sont discrétisées en espace selon la
 méthode adoptée dans \cite{Hofer2011}. La discrétisation est basée
 sur des éléments finis stabilisée par la méthode SUPG
-\cite{Quarteroni2008}. La section suivant traite de l'application de
-ce modèle numérique à une cuve d'électrolyse d'aluminium industrielle.
+\cite{Quarteroni2008}.
 
 \paragraph{Propriétés de conservation du schéma de discrétisation}
 Nous établissons maintenant le bilan de masse d'alumine dans les
 champs $n_{p,n+1}^k$, $k = 1,\dots, K$ et $c_{n+1}$ à l'instant
 $t_{n+1}$ dans le cas particulier ou la vitesse de sédimentation des
 particules est nulles, \ie, lorsque $w(r)$ = 0. On note la masse
-d'alumine à l'instant $t_{n+1}$ dans la population $k$
+de particules d'alumine dans la population $k$ à l'instant $t_{n+1}$
 \begin{equation}\label{eq:np-masse-def}
   N_{p,n+1}^k = \int_\Omega\int_0^\infty \aluminadensity
   n_{p,n+1}^k\frac{4}{3}\pi r^3\intd{r}\intd{x},
 \end{equation}
-la masse totale de particules à l'instant $t_{n+1}$, $N_{p,n+1} =
+la masse totale de particules d'alumine à l'instant $t_{n+1}$, $N_{p,n+1} =
 \sum_{k = 1}^K N_{p,n+1}^k$, la masse d'alumine dissoute à l'instant $t_{n+1}$
 \begin{equation}\label{eq:c-masse-def}
   C_{n+1} = [\cee{Al2O3}]\int_\Omega c_n\intd{x}
 \end{equation}
-et $M_{n+1} = N_{p,n+1} + C_n$, la masse totale d'alumine dans le
-bain. En vertu des équations (\ref{eq:splitting-np1-init}) à
+et la masse totale d'alumine dans le bain $M_{n+1} = N_{p,n+1} +
+C_n$. En vertu des équations (\ref{eq:splitting-np1-init}) à
 (\ref{eq:splitting-dissolution}), l'accoissement de la masse d'alumine
 de la population $k$ entre les instants $t_{n}$ et $t_{n + 1}$ s'écrit
 \begin{equation}\label{eq:np-accr}
@@ -190,7 +190,7 @@ en vertu de (\ref{eq:np-accr}). En intégrant les expression (\ref{eq:splitting-
 (\ref{eq:splitting-np2-w}) sur $\Omega$, en utilisant le théorème
 de la divergence et en se rappelant que $\div u = 0$ dans $\Omega$,
 que $u\cdot\nu = 0$ sur $\partial \Omega$ et que $\frac{\partial
-  n_{p,n+1}}{\partial \nu} = 0$ sur $\partial \Omega$ on montre que
+  n_{p,n+1}}{\partial \nu} = 0$ sur $\partial \Omega$, on obtient que
 \begin{equation}\label{eq:np-masse-2}
   \int_\Omega \bar{\bar n}_{p,n+1}^k\intd{x} = \int_\Omega n_{p,n}\intd{x}.
 \end{equation}
@@ -283,8 +283,8 @@ c'est-à-dire que l'énergie thermique du bain
 $\electrolytedensity\electrolytehc\int_\Omega\temperature_{n}\intd{x}$
 dépend uniquement de l'énergie thermique initiale, de l'intensité de
 l'effet Joule, de la masse des doses d'alumine injectées
-antérieurement à l'instant $t_n$ et de la masse de particule
-d'alumine qui s'est dissoute durant l'intervalle de temps $[0, t_n]$.
+antérieurement à l'instant $t_n$ et de la masse de particule d'alumine
+dissoute durant l'intervalle de temps $[0, t_n]$.
 
 \begin{remarque}
   Les bilans de masse (\ref{eq:alumina-mass-balance}) et
@@ -296,14 +296,17 @@ d'alumine qui s'est dissoute durant l'intervalle de temps $[0, t_n]$.
 \end{remarque}
 
 \begin{remarque}
-Les bilans de masse et d'énergie ci-dessus ont été dérivés à partir du
-modèle de transport et dissolution semi-discrétisé. Pour que ces
-bilans restent valables pour le problème discrétisé en temps et en
-espace, il est essentiel que la discrétisation en espace des équations
-d'advection-diffusion (\ref{eq:splitting-np1-u}),
-(\ref{eq:splitting-np2-u}), (\ref{eq:splitting-np2-w}),
-(\ref{eq:splitting-c}) (\ref{eq:splitting-t}) conservent exactement
-les intégrales de $n_{p,n}$, $\concentration_n$ et
-$\temperature_n$. Cette condition est garantie par le schéma de
-discrétisation proposé dans \cite{Hofer2011} que l'on utilise ici.
+  Les bilans de masse et d'énergie ci-dessus ont été dérivés à partir du
+  modèle de transport et dissolution semi-discrétisé. Pour que ces
+  bilans restent valables pour le problème discrétisé en temps et en
+  espace, il est essentiel que la discrétisation en espace des équations
+  d'advection-diffusion (\ref{eq:splitting-np1-u}),
+  (\ref{eq:splitting-np2-u}), (\ref{eq:splitting-np2-w}),
+  (\ref{eq:splitting-c}) (\ref{eq:splitting-t}) conservent exactement
+  les intégrales de $n_{p,n}$, $\concentration_n$ et
+  $\temperature_n$. Cette condition est garantie par le schéma de
+  discrétisation proposé dans \cite{Hofer2011} que l'on utilise ici.
 \end{remarque}
+
+La section suivant traite de l'application de ce modèle numérique à
+une cuve d'électrolyse d'aluminium industrielle.

@@ -28,7 +28,7 @@ particule soumise à la force de traînée de Stokes. Cette force dépend
 du rayon des particule. Ce transport gravitationnel des particule, qui
 a lieu dans l'ensemble du bain, est modélisé par un champ $w(r):
 \Omega\times[0, \infty)\to\mathbb R^3$ défini par
-\begin{equation}
+\begin{equation}\label{eq:fall-velocity}
   w(r) =
   -\frac{2g\parent{\aluminadensity -
       \electrolytedensity}}{9\electrolyteviscosity} r^2 \hat e_3
@@ -261,9 +261,9 @@ satisfont les équations couplées (\ref{eq:population-pre-injection}) à
 (\ref{eq:np-bc}), (\ref{eq:c-bc}) et (\ref{eq:t-bc}), auxquelles on
 ajoutera des conditions initiales appropriées.
 
-\begin{remarque}
+%\begin{remarque}
 
-\end{remarque}
+%\end{remarque}
 
 La section suivante traite de la discrétisation en temps de ce
 système d'équations.
