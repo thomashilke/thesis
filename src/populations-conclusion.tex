@@ -1,21 +1,21 @@
 Dans cette partie, nous avons proposé un modèle de transport et
 dissolution des particules d'alumine dans le bain électrolytique d'une
 cuve d'électrolyse d'aluminium. La dissolution des particules dépend
-de leur taille et de la concentration d'alumine dissoute dans leur
-voisinage, et de la température du bain électrolytique d'autre
-part. Nous avons proposé un schéma numérique pour approcher la densité
-de particules $n_p$, concentration d'alumine dissoute $c$ et la
-température de l'électrolyte $\temperature$ dans le bain
-électrolytique basé sur un splitting en temps des différentes
-équations, et une méthode élément fini Lagrange continue, linéaire par
-morceau décrite dans \cite{Hofer2011} pour la discrétisation en
-espace. Nous avons ensuite appliqué ce modèle au cas de la cuve
-industrielle AP32 et calculé la distribution du champ de concentration
-$c$ dans le bain électrolytique jusqu'à ce que le système atteigne un
-état stationnaire périodique. Nous avons évalué le comportement de
-cette distribution de concentration stationnaire en fonction des
-nouveaux paramètres introduits par ce modèle par rapport au travail de
-T. Hofer \cite{Hofer2011}.
+de leur taille, de la concentration d'alumine dissoute dans leur
+voisinage, et de la température du bain électrolytique. Nous avons
+proposé un schéma numérique pour approcher la densité de particules
+$n_p$, concentration d'alumine dissoute $c$ et la température de
+l'électrolyte $\temperature$ dans le bain électrolytique basé sur un
+splitting en temps des différentes équations, et une méthode élément
+fini Lagrange continue, linéaire par morceau décrite dans
+\cite{Hofer2011} pour la discrétisation en espace. Nous avons ensuite
+appliqué ce modèle au cas de la cuve industrielle AP32 et calculé la
+distribution du champ de concentration $c$ dans le bain électrolytique
+jusqu'à ce que le système atteigne un état stationnaire
+périodique. Nous avons évalué le comportement de cette distribution de
+concentration stationnaire en fonction des nouveaux paramètres
+introduits par ce modèle par rapport au travail de T. Hofer
+\cite{Hofer2011}.
 
 Tout d'abord, nous avons montré que le temps de latence de dissolution
 des particules a un impact négligeable sur la distribution de
@@ -36,47 +36,47 @@ Remarquons enfin qu'ici nous avons supposé que l'ensemble des
 particules qui constituent une dose d'alumine pénètrent et se
 dispersent dans le bain électrolytique. Dans une cuve industrielle, il
 peut arriver qu'une partie des particules s'agglomèrent après être
-entrée en contact avec le bain, et forme ce qu'on appelle des agrégats
+entrées en contact avec le bain, et forment ce qu'on appelle des agrégats
 \cite{Dassylva2015}. Ces agrégats mettent un temps, assimilé à un
 temps de latence, nettement plus long à se dissoudre et par conséquent
-peuvent être transportées par écoulement du bain sur des distance bien
-plus grandes. La description formation de ces agrégats et leur
+peuvent être transportés par l'écoulement du bain sur des distances bien
+plus grandes. La description de la formation de ces agrégats et leur
 déplacement dans le bain, la modélisation des phénomènes
-thermochimiques qui on lieu en leur sein et la dissolution des
+thermochimiques qui ont lieu en leur sein et la dissolution des
 particules qui les constituent est un sujet complexe qui sort du cadre
 de ce travail, et nous laissons à d'autres le loisir de l'aborder.
 
 Nous nous sommes ensuite intéressé à la dissolution des particules
 dans le bain électrolytique en fonction de sa température de
 surchauffe $\tsur$. C'est très certainement le paramètre le plus
-important du modèle de transport et dissolution d'alumine, et qu'il
-faut choisir avec soin. Il est clair que si la température du bain
+important du modèle de transport et dissolution d'alumine, qu'il faut
+choisir avec soin. Il est clair que si la température du bain
 $\temperature$ est proche de la température de liquidus $\tliq$, une
-petite perturbation est suffisante pour $\temperature$ soit
-inférieure à $\tliq$. Une telle perturbation intervient lorsque des
-particules d'alumine extraient de l'énergie thermique du bain pour
+petite perturbation est suffisante pour $\temperature$ soit inférieure
+à $\tliq$. Une telle perturbation intervient lorsque des particules
+d'alumine extraient l'énergie thermique du bain pour se réchauffer et
 se dissoudre. Dans une telle situation, la dissolution est fortement
-ralentie, et les particules sont transportées sur de longues
-distance, typiquement plusieurs mètres avant de se dissoudre
-complètement. Les particules peuvent alors déposer de la masse sous
-forme d'alumine dissoute dans une plus grande région, ce qui contribue
-à influencer et modifier significativement la distribution de
-l'alumine dissoute dans le bain électrolytique. A l'inverse, plus la
-température de surchauffe du bain est élevée, \ie, plus la
-température du bain s'écarte de la température du liquidus, plus la
-perturbation nécessaire à ce que la température du bain passe
-en-dessous de $\tliq$ est importante. A partir d'une certaine limite,
-l'énergie nécessaire à réchauffer et dissoudre une dose
-d'alumine ne constitue plus une perturbation suffisante. Dans ce cas,
-la température ne joue essentiellement plus de rôle dans la
-dissolution des particules d'alumine. Cette constatation rejoint les
-observation faites sur des cuves industrielles. En effet, lorsque la
-température de surchauffe est grande, les doses d'alumine se dissolvent
-plus facilement que lorsque la surchauffe est faible. La difficulté
-est de trouver un équilibre pour que l'alumine se dissolve
-suffisamment vite pour que la concentration dans le bain soit
-contrôlable, tout en maintenant une surchauffe aussi faible que
-possible pour minimiser les pertes énergétiques.
+ralentie, et les particules sont transportées sur de longues distances,
+typiquement plusieurs mètres avant de se dissoudre complètement. Les
+particules peuvent alors déposer de la masse sous forme d'alumine
+dissoute dans une plus grande région, ce qui contribue à influencer et
+modifier significativement la distribution de l'alumine dissoute dans
+le bain électrolytique. A l'inverse, plus la température de surchauffe
+du bain est élevée, \ie, plus la température du bain s'écarte de la
+température du liquidus, plus la perturbation nécessaire à ce que la
+température du bain passe en-dessous de $\tliq$ est importante. A
+partir d'une certaine limite, l'énergie nécessaire à réchauffer et
+dissoudre une dose d'alumine ne constitue plus une perturbation
+suffisante. Dans ce cas, la température ne joue essentiellement plus
+de rôle dans la dissolution des particules d'alumine. Cette
+constatation rejoint les observation faites sur des cuves
+industrielles. En effet, lorsque la température de surchauffe est
+grande, les doses d'alumine se dissolvent plus facilement que lorsque
+la surchauffe est faible. La difficulté est de trouver un équilibre
+pour que l'alumine se dissolve suffisamment vite pour que la
+concentration dans le bain soit contrôlable, tout en maintenant une
+surchauffe aussi faible que possible pour minimiser les pertes
+énergétiques.
 
 Au niveau microscopique, la réaction de dissolution des particules est
 contrôlé par deux mécanismes. Pour que la dissolution puisse avoir
@@ -101,21 +101,21 @@ $\tliq$.
 Finalement, nous avons étudié l'effet de la chute gravitationnelle des
 particule dans le bain sur la distribution de la concentration
 d'alumine dissoute. La chute des particules apportent des variations
-notable de la concentration uniquement autour des points d'injection,
+notables de la concentration uniquement autour des points d'injection,
 qui sont de toute manière soumis à des fluctuations importantes, due
-aux injections qui interviennent à intervalles régulier au cours du
+aux injections qui interviennent à intervalles réguliers au cours du
 cycle global d'injection. De plus, les vitesses de chute des
 particules sont très certainement surestimées dans notre
 modèle. L'écoulement dans le canal central, dans lequel ont lieu les
-injection de particules, est turbulent. Cet écoulement turbulent se
+injections de particules, est turbulent. Cet écoulement turbulent se
 traduit par une viscosité effective ressenties par les particules qui
 est certainement supérieure à la viscosité laminaire de
 l'électrolyte. Les profondeurs maximales atteintes par les particules
-dans ce cas sont alors de l'ordre du millimètre ou inférieur. En
+dans ce cas sont alors de l'ordre du millimètre ou inférieure. En
 suivant les mêmes arguments qui nous ont conduit à ne pas considérer
 de temps de latence, nous pouvons raisonnablement négliger la chute
-des particules dans le bain électrolytique et sont effet sur la
-concentration de l'alumine.
+des particules dans le bain électrolytique et son effet sur la
+distribution de la concentration de l'alumine.
 
 Dans cette partie, nous avons supposé que la température de liquidus de
 l'électrolyte $\tliq$ ne dépend pas de la chimie du bain, et en

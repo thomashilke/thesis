@@ -255,8 +255,9 @@ temps soit égal à $\frac{I[\cee{Al2O3}]}{6F}$, c'est-à-dire
     \input{../media/populations/anode-configuration/anode-configuration.pdf_tex}
     \caption{Vue schématique de la partie supérieure du bain
       électrolytique. Les blocs rectangulaires représentent
-      l'emplacement des anodes, tandis que les cercles marquent
-      l'emplacement des injecteurs disposés le long du canal central.}
+      l'emplacement des anodes, tandis que les cercles indiqués par
+      les flèches et numérotés marquent l'emplacement des injecteurs
+      disposés le long du canal central.}
     \label{fig:anode-configuration}
   \end{center}
 \end{figure}
@@ -320,11 +321,13 @@ reste proche de l'énergie thermique initiale, on demande à ce que
 \end{equation}
 ce qui correspond à la condition
 \begin{eqnarray}
-  \conductivity \int_\Omega j\cdot j\intd{x} &=&
+  \frac{1}{\conductivity} \int_\Omega j\cdot j\intd{x} &=&
   \aluminahc\parent{\tinit - \tinj}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ p^k +
   1 \leq n + 1}}}\int_\Omega\int_0^\infty\aluminadensity
   \frac{4}{3}\pi r^3 S^k\intd{r}\intd{x}\nonumber \\
-  &&+ {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}\intd{r}\intd{x}\label{eq:energy-condition}
+  &&+
+       {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}\intd{r}\intd{x}\nonumber\\
+       \label{eq:energy-condition}
 \end{eqnarray}
 en considérant (\ref{eq:energy-mass-balance}). Le premier terme du
 membre de droite de (\ref{eq:energy-condition}) est égal à
@@ -377,12 +380,12 @@ deux réels $\electrolytemoldiff$, $\electrolyteturbdiff$ pour tout
 $x\in\Omega$ de la manière suivante:
 \begin{align}
   \electrolytetdiff(x) =  \electrolytecdiff(x) = \electrolytemoldiff +
-  \electrolyteturbdiff\parent{2\sum_{i,j}\mathcal E_{ij}(x)\mathcal E_{ij}(x)}^{1/2},
+  \electrolyteturbdiff\parent{2\sum_{i,j}\straintensor_{ij}(x)\straintensor_{ij}(x)}^{1/2},
 \end{align}
-où $\mathcal E_{ij}$, $i, j = 1,2,3$ est le tenseur des déformation
+où $\straintensor_{ij}$, $i, j = 1,2,3$ est le tenseur des déformation
 de l'écoulement défini par
 \begin{equation}
-  \mathcal E_{ij} = \frac{1}{2}\parent{\frac{\partial u_i}{\partial
+  \straintensor_{ij} = \frac{1}{2}\parent{\frac{\partial u_i}{\partial
       x_j} + \frac{\partial u_j}{\partial x_i}}.
 \end{equation}
 Les valeurs du paramètre $\electrolytemoldiff$, associé à la diffusion
@@ -774,7 +777,7 @@ distinguer la position des injecteurs.
 
 La dissolution des particules d'alumine dépend d'une part du fait que
 la température de l'électrolyte dans leur voisinage doit être
-supérieur à la température du liquidus $\tliq$, et d'autre part de la
+supérieure à la température du liquidus $\tliq$, et d'autre part de la
 taille de la région de transition entre le régime de dissolution
 contrôlé par la diffusion de l'énergie thermique et le régime de
 dissolution contrôlé par la diffusion de l'alumine dissoute à
@@ -800,7 +803,7 @@ dans le cas d'une cuve d'électrolyse d'aluminium industrielle.
 
 A l'inverse, en prenant la limite $\tcrit \to  \tliq$, le taux de
 dissolution (\ref{eq:dissolution-rate}) s'écrit:
-\begin{equation}
+\begin{equation}\label{eq:dissolution-rate-zero-tcrit}
   \dissolutionrate(\concentration,\temperature) = \left\{
   \begin{array}{ll}
   K \displaystyle\frac{\csat - \concentration}{\csat}& \text{ si } \temperature
@@ -822,14 +825,14 @@ calcul on fixe $\tcrit = \tliq$, et le taux de dissolution est donné par
 (\ref{eq:dissolution-rate-zero-tcrit}). Pour le deuxième calcul on
 fixe $\tcrit = \tliq + 0.86$ \si{\kelvin}.
 
-La figure \ref{fig:dissolution-alumin-influence-exp-heaviside}
+La figure \ref{fig:dissolutions-influence-exp-heaviside}
 présente la concentration d'alumine dans l'ACD de la cuve AP32 à $t =
 \num{10000}$ \si{\second}, lorsque l'état stationnaire périodique est
 atteint. Le premier champ de concentration correspond au cas où
 $\tcrit = \tliq$, tandis que le deuxième champ de concentration
 correspond au cas où $\tcrit = \tliq + 0.86$ \si{\kelvin}. Même si
 l'on parvient à observer de petites variations entre ces deux
-solution, en particulier dans le coin aval droite et autour du point
+solutions, en particulier dans le coin aval droite et autour du point
 d'injection \#4, ces deux champs de concentration sont indistinguables
 l'un de l'autre.
 
@@ -844,10 +847,10 @@ concentration d'alumine dissoute.
 
 Nous avons déterminé, dans la section \ref{sec:particle-fall}, vitesse
 de chute et la profondeur maximale atteinte dans le fluide de
-particules soumisent à la gravité et à une force de traînée
-de Stokes. Dans le cas le plus favorable, certaine particules peuvent
-chuter de plusieurs centimètre dans le bain électrolytique avant de se
-dissoudre complètement.
+particules soumisent à la gravité et à une force de traînée de
+Stokes. Dans le cas le plus favorable, les particules de plus grande
+taille peuvent chuter de plusieurs centimètres dans le bain
+électrolytique avant de se dissoudre complètement.
 
 Dans ce dernier paragraphe, nous proposons de comparer deux calculs
 qui illustrent l'effet de la chute des particules dans le bain sur la
@@ -865,34 +868,35 @@ Pour le deuxième calcul la valeur de $g$ est restaurée, telle que
 donnée dans la table \ref{tab:dissolution-physical-parameters} et la
 vitesse de chute des particules est donnée par l'expression
 \ref{eq:fall-velocity}. Cependant, les points d'injections sont
-déplacé verticalement vers le haut du canal.
+déplacés verticalement vers le haut du canal.
 
 Nous avons montré dans la section \ref{sec:particle-fall} que les
-profondeurs maximales atteinte par le particules lorsque la viscosité
+profondeurs maximales atteintes par les particules lorsque la viscosité
 du fluide est supérieure ou égale à \num{1e-2}
 \si{\kilo\gram\per\meter\per\second} sont de l'ordre du
 millimètre. Or, la taille verticale des mailles dans les canaux ne
-permette pas de capturer des effets de cette amplitude. Pour cette raison,
-nous choisissons pour le paramètre de viscosité $\electrolyteviscosity$, qui
-intervient dans la définition (\ref{eq:fall-velocity}), la viscosité
-laminaire du fluide, soit $\electrolyteviscosity = $ \num{2e-3}
+permet pas de capturer des effets de cette amplitude. Pour cette
+raison, nous choisissons pour le paramètre de viscosité
+$\electrolyteviscosity$, qui intervient dans la définition
+(\ref{eq:fall-velocity}), la viscosité laminaire du fluide, soit
+$\electrolyteviscosity = $ \num{2e-3}
 \si{\kilo\gram\per\meter\per\second}. Cette valeur de la viscosité
-donne lieu à des profondeurs de chute maximale de l'ordre de
-quelques centimètres.
-
+donne lieu à des profondeurs de chute maximale de particule dans le
+bain de l'ordre de quelques centimètres.
 
 La figure \ref{fig:sedimentation-comparaison} représente les champs de
 concentration dans l'ACD de la cuve AP32 obtenus par ces deux calculs,
 évalué à $t = \num{10000}$ \si{\second}, lorsque l'état stationnaire
 périodique est atteint.
 
-On remarque quelques différence entre les deux solutions,
+On remarque quelques différences entre les deux solutions,
 essentiellement au niveau des points d'injection. Les valeur maximales
 de la concentration d'alumine dissoute à proximité des points
 d'injection \#1, \#3 et \#4 sont plus grandes lorsque lorsque la chute
 des particules est négligée. On constate l'effet inverse pour
 l'injecteur \#2: la concentration d'alumine dissoute sous cet
 injecteur atteint un maximum local plus marqué lorsque la chute des
-particules est pris en compte.
+particules est pris en compte. Dans le reste du bain, la distribution
+de concentration est similaire entre les deux calculs.
 
 Nous concluons cette partie par une discussion de ces résultats.

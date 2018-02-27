@@ -162,8 +162,8 @@ $\cdiffusivity:\Omega\to\mathbb R^*_+$ la diffusivité de la
 concentration d'alumine dissoute dans le bain, supposée donnée. Alors
 concentration $\concentration$ doit satisfaire l'équation
 \begin{equation}\label{eq:concentration}
-  \frac{\partial \concentration}{\partial t}(t, x) + u(x)\cdot\nabla \concentration(t, x) - \cdiffusivity(x)
-  \Delta \concentration(t, x) = q_1(x) + q_2(t, x),\quad \forall
+  \frac{\partial \concentration}{\partial t}(t, x) + u(x)\cdot\nabla \concentration(t, x) - \div\parent{\cdiffusivity(x)
+  \nabla \concentration(t, x)} = q_1(x) + q_2(t, x),\quad \forall
   x\in\Omega,\ t\in (0, T).
 \end{equation}
 Puisque qu'il ne peut y avoir de flux de masse d'alumine à travers le
@@ -238,8 +238,8 @@ $\electrolytehc$ la densité et la chaleur spécifique de du bain
 l'équation
 \begin{equation}\label{eq:temperature}
 \frac{\partial \temperature}{\partial t}(t, x) +
-u(x)\cdot\nabla\temperature - \electrolytetdiff(x)\Delta
-\temperature(t, x) =
+u(x)\cdot\nabla\temperature - \div\parent{\electrolytetdiff(x)\nabla
+\temperature(t, x)} =
 \frac{1}{\electrolytedensity\electrolytehc}\sum_{i = 1}^{3}p_i(t, x),
 \quad \forall x\in\Omega,\ t\in(0, T).
 \end{equation}
@@ -260,10 +260,6 @@ satisfont les équations couplées (\ref{eq:population-pre-injection}) à
 (\ref{eq:temperature}) ainsi que les conditions aux limites
 (\ref{eq:np-bc}), (\ref{eq:c-bc}) et (\ref{eq:t-bc}), auxquelles on
 ajoutera des conditions initiales appropriées.
-
-%\begin{remarque}
-
-%\end{remarque}
 
 La section suivante traite de la discrétisation en temps de ce
 système d'équations.

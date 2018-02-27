@@ -37,7 +37,11 @@ TEX_SOURCES = src/thesis.tex \
   src/populations-figures-tinit.tex \
   src/populations-figures-tlat.tex \
   src/populations-figures-w.tex \
-  src/populations-conclusion.tex
+  src/populations-conclusion.tex \
+  src/fourier-chapter.tex \
+  src/fourier-discretisation.tex \
+  src/fourier-introduction.tex \
+  src/fourier-model.tex
 
 BIB_SOURCES = $(wildcard refs/*.bib)
 
