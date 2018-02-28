@@ -301,20 +301,26 @@ mouvement laminaire.
   exactement les lignes de courant de l'écoulement.
 \end{remarque}
 
-%%\begin{remarque}
-%%  On considère finalement une particule d'alumine de rayon $r_0$
-%%  supposé constant au cours du temps, et soumise à la force de
-%%  gravité $\gravityforce$ et d'Archimède $\buoyancyforce$. Alors
-%%  l'équation du mouvement (\ref{eq:mvt}) se résoud à nouveau exactement,
-%%  et la vitesse de la particule au cours du temps s'écrit
-%%  \begin{equation}
-%%    \dot x(t) =\frac{2r_0^2\parent{\aluminadensity -
-%%        \electrolytedensity} g}{9\electrolyteviscosity}\parent{1 -
-%%      \exp\parent{-\frac{9\electrolyteviscosity}{2\aluminadensity r_0^2}t}}
-%%  \end{equation}
-%%  et donc
-%%  \begin{equation}
-%%    \lim_{t\to\infty}\dot x(t) = \frac{2r_0^2\parent{\aluminadensity -
-%%    \electrolytedensity} g}{9\electrolyteviscosity}
-%%  \end{equation}
-%%\end{remarque}
+\begin{figure}
+ \begin{center}
+    \begin{subfigure}[b]{0.49\textwidth}
+      \input{../media/particles/trajectories/particle_fall.tex}
+      \caption{Trajectoire des particules dans le fluide.}
+      \label{fig:particle-trajectories-a}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+      \input{../media/particles/trajectories/particle_fall_zoom.tex}
+      \caption{Zoom sur la phase d'accélération initiale.}
+      \label{fig:particle-trajectories-b}
+    \end{subfigure}
+
+    \caption{Trajectoires de particules de rayon initial
+      $r_0 = $ \numlist{40;60;80} \si{\micro\meter}. Chaque
+    particule est placée à l'origine avec une vitesse nulle
+    au temps $t = 0$. Les trajectoires sont intégrées jusqu'à ce que
+    les particules soient complètement dissoutes, c'est-à dire sur l'intervalle
+    de temps $\left[0, \frac{r_0^2}{2\dissolutionrate}\right]$. Notez
+    les différentes échelles sur les deux graphiques.}
+    \label{fig:particle-trajectories}
+ \end{center}
+\end{figure}
