@@ -1,0 +1,141 @@
+\begin{proposition}\label{prop:existance-unicite-1}
+  Pour $k > 0$ fixé, le problème de chercher $u_{i,k}\in H_0^1(\Lambda),\ i =
+  1,2,3,\ p_k^0 \in L_0^2(\Lambda)$ et $C_k\in\mathbb R$, qui satisfont
+  les équations
+  (\ref{eq:stokes-fourier-weak-1})-(\ref{eq:stokes-fourier-weak-5})
+  pour tout $v_1$, $v_2$, $v_3$ $\in H_0^1(\Lambda)$ et $q\in
+  L^2(\Lambda)$ admet une et une seule solution.
+\end{proposition}
+
+\begin{proof}
+  Soit $g\in L_0^2(\Lambda)$ et résolvont le problème
+  suivant. Trouver $u_1$, $u_2\in H_0^1(\Lambda)$ et $p\in
+  L_0^2(\Lambda)$ qui satisfont:
+
+  \begin{align}
+    &\mu\int_\Lambda \parent{\nabla u_1\cdot \nabla v_1 %
+                            + \beta_k^2 u_1 v_1}\,\mathrm dx_1\mathrm dx_2 %
+    - \int_\Lambda p\frac{\partial v_1}{\partial x_1} %
+    = \int_\Lambda f_{1,k} v\, \mathrm dx_1\mathrm dx_2,\label{eq:t-weak-form-1}\\
+    %
+    &\mu\int_\Lambda \parent{\nabla u_2\cdot \nabla v_2 %
+                            + \beta_k^2 u_2 v_2}\,\mathrm dx_1\mathrm dx_2 %
+    - \int_\Lambda p\frac{\partial v_2}{\partial x_2} %
+    = \int_\Lambda f_{2,k} v\, \mathrm dx_1\mathrm dx_2,\label{eq:t-weak-form-2}\\
+    %
+    &\int_\Lambda \parent{\frac{\partial u_1}{\partial x_1} %
+                         + \frac{\partial u_2}{\partial x_2}} q \, \mathrm dx_1\mathrm dx_2 %
+    + \beta_k \int_\Lambda g q\,\mathrm dx_1\mathrm dx_2 %
+    = 0,\label{eq:t-weak-form-3}
+  \end{align}
+  pour toutes fonctions tests $v_1,v_2\in H_0^1(\Lambda)$ et $q\in
+  L_0^2(\Lambda)$. Il est bien connu que la condition:
+  \begin{equation}\label{eq:inf-sup}
+    \inf_{q\in L_0^2(\Lambda)} %
+    \sup_{v\in H_0^1(\Lambda)} %
+    \frac{\displaystyle\int_\Lambda q\div(v)\,\mathrm dx_1\mathrm dx_2}%
+         {\norm{q}_{L_0^2}\norm{v}_{H_0^1}}> 0
+  \end{equation}
+  est vraie et qu'elle implique que le problème
+  (\ref{eq:t-weak-form-1})-(\ref{eq:t-weak-form-2}) admet une solution
+  unique $(u_1, u_2, p)$ qui dépend bien évidemment de $g$. De
+  plus on a:
+  \begin{equation}\label{eq:t-estim-1}
+    \norm{u_1}_{H_0^1} %
+    + \norm{u_2}_{H_0^1} %
+    + \norm{p}_{L_0^2} %
+    \leq K\parent{\norm{f_{1,k}}_{L^2} %
+    + \norm{f_{2,k}}_{L^2} %
+    + \norm{g}_{L^2}}
+  \end{equation}
+  où ici $K$ est une constante indépendante de $f_{1,k}$, $f_{2,k}$,
+  $f_{3,k}$ et $g$. Soit maintenant $u \in H_0^1(\Lambda)$ qui satisfait:
+  \begin{equation}\label{eq:t-u-def}
+    \electrolyteviscosity\int_\Lambda \parent{\nabla u\cdot \nabla v %
+                         + \beta_k ^2 uv}\,\mathrm dx_1\mathrm dx_2 %
+    = \beta_k\int_\Lambda pv\,\mathrm dx_1\mathrm dx_2 %
+    + \int_\Lambda f_{3,k}v\,\mathrm dx_1\mathrm dx_2,%
+    \quad \forall v\in H_0^1(\Lambda).
+  \end{equation}
+  Clairement, $u$ existe et est unique. Ici encore $u$ dépend de $g$
+  puisque $p$ en dépend. On a
+  \begin{equation}\label{eq:t-estim-2}
+\norm{u}_{H_0^1} \leq K\parent{\norm{p}_{L^2_0} + \norm{f_{3,k}}_{H^1_0}}
+  \end{equation}
+  et avec (\ref{eq:t-estim-1})
+  \begin{equation}\label{eq:t-estim-3}
+    \norm{u}_{H_0^1} %
+    \leq K\parent{\norm{f_{1,k}}_{L^2_0} %
+      + \norm{f_{2,k}}_{L^2_0} %
+      + \norm{f_{3,k}}_{L^2_0} %
+      + \norm{g}_{L^2_0}}.
+  \end{equation}
+  Soit encore $w \in H_0^1(\Lambda)$, indépendant de $g$, qui satisfait
+  \begin{equation}\label{eq:t-w-def}
+    \mu \int_\Lambda \parent{\nabla w\cdot\nabla v %
+      + \beta_k^2 wv}\,\mathrm dx_1\mathrm dx_2 %
+    = \beta_k \int_\Lambda v\,\mathrm dx_1\mathrm dx_2 %
+    \quad \forall v\in H_0^1(\Lambda).
+  \end{equation}
+  On définit $C\in\mathrm R$ par:
+  \begin{equation}\label{eq:t-c-def}
+    C = \frac{\displaystyle\int_\Lambda u\,\mathrm dx_1\mathrm dx_2}%
+             {\displaystyle\int_\Lambda w\,\mathrm dx_1\mathrm dx_2}
+  \end{equation}
+  et $u_3\in H_0^1(\Lambda)$ par:
+  \begin{equation}\label{eq:t-u3-def}
+    u_3 = u + Cw.
+  \end{equation}
+  Ainsi on aura bien évidemment
+  \begin{equation}
+    \int_\Lambda u_3\,\mathrm dx_1\mathrm dx_2 = 0,
+  \end{equation}
+  et en utilisant (\ref{eq:t-u-def}), (\ref{eq:t-w-def}),
+  (\ref{eq:t-u3-def}) on obtient
+  \begin{equation}
+    \mu\int_\Lambda \parent{\nabla u_3\cdot \nabla v %
+                            + \beta_k^2 u_3 v}\,\mathrm dx_1\mathrm dx_2 %
+    = \beta_k\int_\Lambda \parent{p + C}v \,\mathrm dx_1\mathrm dx_2 %
+    + \int_\Lambda f_{3,k}v\,\mathrm dx_1\mathrm dx_2, %
+    \quad v\in H_0^1(\Lambda).
+  \end{equation}
+  La fonction $w$ est indépendante de $f_{i,k}$, $i = 1,2,3$ et
+  $g$. Ainsi (\ref{eq:t-c-def}) implique que $\abs{C}\leq
+  K\norm{u}_{L^2}$, et en utilisant (\ref{eq:t-estim-3}) et
+  (\ref{eq:t-u3-def}) on a:
+  \begin{equation}\label{eq:t-estim-4}
+    \norm{u_3}_{H^1} %
+    \leq K\parent{\norm{f_{1,k}}_{L^2} %
+      + \norm{f_{2,k}}_{L^2} %
+      + \norm{f_{3,k}}_{L^2} %
+      + \norm{g}_{L^2}}.
+  \end{equation}
+  Pour terminer on définit l'opérateur:
+  \begin{equation}
+    T: g\in L_0^2(\Lambda)\to T(g)\doteqdot u_3\in L_0^2(\Lambda).
+  \end{equation}
+  On vérifie, en utilisant l'inégalité (\ref{eq:t-estim-4}), que
+  $T$ est un opérateur compact et borné. En utilisant le
+  théorème de Leray-Schauder, l'opérateur $T$ a au moins un
+  point fixe, et donc il existe $\hat g\in L_0^2(\Lambda)$ tel que
+  $\hat g = T(\hat g)$.
+
+  Si, pour cette fonction $\hat g$, à laquelle lui correspondent
+  $u_1,\ u_2,\ p$, $C$ et $u_3 = T(\hat g) = \hat g$, nous posons
+  $u_{1,k} = u_1$, $u_{2,k} = u_2$, $u_{3,k} = u_3$, $p_k^0 = p$ et
+  $C_k = C$,
+  alors nous vérifions que les équations
+  (\ref{eq:stokes-fourier-weak-1}) à
+  (\ref{eq:stokes-fourier-weak-5}) sont satisfaites. Ainsi le
+  problème
+  (\ref{eq:stokes-fourier-weak-1})-(\ref{eq:stokes-fourier-weak-5}) a
+  au moins une solution $(u_{1,k},u_{2,k},u_{3,k},p_k^0,C_k)$.  Pour
+  montrer l'unicité de cette solution, il suffit de sommer les
+  équations (\ref{eq:stokes-fourier-weak-1}) à
+  (\ref{eq:stokes-fourier-weak-5}) avec $f_{1,k} = f_{2,k} = f_{3,k} =
+  0$ et $v_1 = u_{1,k}$, $v_2 = u_{2,k}$, $v_3 = u_{3,k}$, $q =
+  p_{k}^0$ pour voir que la solution triviale du problème linéaire
+  homogène
+  (\ref{eq:stokes-fourier-weak-1})-(\ref{eq:stokes-fourier-weak-5})
+  est unique.
+\end{proof}
