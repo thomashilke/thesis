@@ -1,0 +1,91 @@
+\section{Introduction}
+Le code disponible dans ce package impl\'emente le mod\`ele de chute
+de particule sph\'erique dans un fluide visqueux au repos. Le code est
+\'ecrit dans le language \texttt{GNU Octave} et a \'et\'e test\'e avec
+la version 4.2.1. Ce document d\'ecrit les \`equations qui
+mod\'elisent la trajectoire verticale des particules sph\'erique dans
+le fluide, et d\'ecrit la proc\'edure pour ex\'ecuter le code et
+obtenir les r\'esultats.
+
+\section{Mod\`ele math\'ematique}
+La dynamique d'une particule sph\'erique dans un fluide visqueux au
+repos et soumis \`a l'acc\'el\'eration de la gravit\'e est d\'ecrite
+par la deuxi\`eme loi de Newton. En appliquant cette loi on obtient
+une \'equation diff\'erentielle ordinaire du deuxi\`eme ordre, dont la
+solution est unique \`a condition de sp\'ecifier deux conditions
+initiales.
+
+On se place dans le r\'ef\'erentiel de la Terre, et on consid\`ere un
+syst\`eme de coordonn\'ees unidimensionnel vertical, orient\'e vers le
+haut. On note $x(t)$ la coordonn\'ee de la particule dans ce syst\`eme
+au cours du temps, $\dot x(t)$ sa vitesse et enfin $\ddot x(t)$ sont
+acc\'el\'eration.
+
+La particule sph\'erique est d\'ecrite par son rayon $r$. Le rayon de
+la particule \'evolue au cours du temps selon l'expression:
+\begin{equation}
+  r(t) = \sqrt{r_0 - 2 K t},
+\end{equation}
+o\`u $r_0 > 0$ est sont rayon initial et $K$ le taux de
+dissolution. On s'int\'eresse \`a la trajectoire de cette particule
+pour $t \in [0, r_0/(2K)]$.
+
+Soit $\rhoal$ la densit\'e de la particule, et $\rhoe$ celle du
+fluide. La masse $m$ de la particule s'\'ecrit:
+\begin{equation}
+  m(r) = \frac{4}{3}\pi r^3 \rhoal.
+\end{equation}
+
+Dans ce syst\`eme de coordonn\'ee, la force de gravit\'e est donn\'ee par
+\begin{equation}
+  F_g(r) = -\frac{4}{3}\pi r^3 \rhoal g,
+\end{equation}
+la force d'Archim\`ede est donn\'ee par:
+\begin{equation}
+  F_A(r) = \frac{4}{3}\pi r^3 \rhoe g
+\end{equation}
+et on note la force de tra\^in\'ee $F_D(r, \dot x)$. L'expression de
+$F_D$ est non triviale, et on se r\'ef\'erera au code (\texttt{ferguson/lib/force.m}) et au manuscrit
+de th\`ese de T.Foetisch (\`a para\^itre) pour les d\'etails de la
+d\'erivation et l'expression explicite. Cette force est d\'eriv\'ee
+d'une expression propos\'ee par \cite{Ferguson2004}.
+
+La deuxi\`eme loi de Newton s'\'ecrit:
+\begin{equation}\label{eq:newton}
+  m(r(t))\ddot x(t) = F_A(r(t)) + F_g(r(t)) + F_D(r(t), \dot x(t)),
+\end{equation}
+et on consid\`ere les conditions initiales:
+\begin{equation}
+  x(0) = 0,\quad \dot x(0) = 0.
+\end{equation}
+
+\section{Ex\'ecution et r\'esultats}
+Le code de ce package (\texttt{app.m}) impl\'emente dans le language \texttt{GNU
+  Octave} une m\'ethode num\'erique pour int\'egrer l'\'equation
+(\ref{eq:newton}), \`a l'aide de l'int\'egrateur \texttt{ode45}, afin
+de s'abstraire des questions de convergence et de garantir une
+certaine erreur.
+
+Pour ex\'ecuter ce script il faut se placer dans le dossier
+\texttt{ferguson/} et de lancer:
+\begin{lstlisting}[frame=single, language={},basicstyle=\ttfamily\footnotesize]
+  [user@localhost ~/dev/ferguson> octave app.m
+\end{lstlisting}
+
+Le code calcule la trajectoire d'un ensemble de 5 particules dont les
+rayons initiaux sont compris entre $100\si{\micro\meter}$ et
+$200\si{\micro\meter}$, et stocke les resultats dans le fichier
+\texttt{ASCII} \texttt{particle\_fall.dat}.
+
+Le contenu de ce fichier peut \^etre visualis\'e \`a l'aide de
+\texttt{GNUPlot}. Un script \texttt{particle\_fall.plot} est
+\'egalement mis \`a disposition pour g\'en\'erer les figures qui sont
+consign\'ee dans le manuscrit de th\`ese.
+
+Toutes ces fonctionnalit\'es sont mises \`a disposition par
+l'interm\'ediaire d'un fichier \texttt{Makefile}. Pour ex\'ecuter le
+code et g\'en\'erer les figures, il suffit de lancer:
+\begin{lstlisting}[frame=single,language={},basicstyle=\ttfamily\footnotesize]
+  [user@localhost ~/dev/ferguson> make
+\end{lstlisting}
+

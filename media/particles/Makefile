@@ -7,6 +7,7 @@ all:
 	@cd diss-rate; $(MAKE) all
 	@cd dissolution; $(MAKE) all
 	@cd fall; $(MAKE) all
+	@cd trajectories; $(MAKE) all
 
 clean:
 	@cd solidfraction; $(MAKE) clean
@@ -17,3 +18,4 @@ clean:
 	@cd diss-rate; $(MAKE) clean
 	@cd dissolution; $(MAKE) clean
 	@cd fall; $(MAKE) clean
+	@cd trajectories; $(MAKE) clean
