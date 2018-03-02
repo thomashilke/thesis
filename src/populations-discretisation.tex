@@ -1,6 +1,6 @@
 On répète ici, par soucis de clarté, le système d'équations aux
 dérivées partielles qui correspondent au modèle de transport et
-dissolution d'alumine en fonction de la température. On a $\forall k =
+dissolution d'alumine en fonction de la température (\ref{eq:}). On a $\forall k =
 1, 2, \dots, K$
 \begin{align}
   & n_p^k(t, x, r) = 0,
@@ -10,7 +10,7 @@ dissolution d'alumine en fonction de la température. On a $\forall k =
   & \tau^k < t \leq \tau^k + \tlat,\label{eq:mdl-eq-2}\\
 %
   & \frac{\partial n_p^k}{\partial t} + \parent{u(x) + w(r)}\cdot \nabla  n_p^k + \frac{\partial }{\partial r}\parent{f(r, \concentration, \temperature)n_p^k} = 0,
-  & \tau^k + \tliq < t \leq \tend,\label{eq:mdl-eq-3}
+  & \tau^k + \tlat < t \leq \tend,\label{eq:mdl-eq-3}
 \end{align}
 et
 \begin{align}

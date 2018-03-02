@@ -7,7 +7,8 @@
 \usepackage{amsmath,amsfonts,amssymb,amsopn,amsthm}
 \usepackage{graphicx,fancyhdr,xcolor}
 %\usepackage[showframe,a4paper,top=22mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
-\usepackage[a4paper,top=22mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
+%\usepackage[a4paper,top=22mm,bottom=28mm,inner=35mm,outer=25mm]{geometry}
+\usepackage[paperheight=275mm,paperwidth=195mm,top=22mm,bottom=28mm,inner=35mm,outer=25mm]{geometry} % official thesis paper format
 \usepackage{tikz}
 \usepackage{epstopdf}
 \usepackage{tabularx}
@@ -22,6 +23,7 @@
 \usepackage{multicol}
 \usepackage{enumitem}
 \usepackage{mathtools}
+\usepackage{layout}
 
 \input{config-media.tex}
 \input{config-typography.tex}
@@ -39,26 +41,34 @@
 \author{Thomas Hilke}
 
 \begin{document}
+%\layout{}
+\frontmatter
 \maketitle
+
+\input{resume.tex}
+\input{abstract.tex}
+\input{dedication.tex}
+\input{thanks.tex}
 
 \tableofcontents
 
 \input{notations.tex}
 
+\mainmatter
 \chapter{Introduction}
 \label{chap:introduction}
-%\input{introduction-chapter.tex}
+\input{introduction-chapter.tex}
 
 \part{Transport et dissolution de particules d'alumine}
 \label{part:alumina}
 
 \chapter{Particules d'alumine dans un bain électrolytique}
 \label{chap:particles}
-%\input{particles-chapter.tex}
+\input{particles-chapter.tex}
 
 \chapter{Populations de particules}
 \label{chap:populations}
-%\input{populations-chapter.tex}
+\input{populations-chapter.tex}
 
 \part{Approximation d'écoulement dans le bain électrolytique}
 \label{part:fluid}
@@ -68,5 +78,7 @@
 \input{fourier-chapter.tex}
 
 \printbibliography[heading=bibintoc]
+
+\input{curriculum.tex}
 
 \end{document}

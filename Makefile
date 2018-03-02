@@ -41,7 +41,12 @@ TEX_SOURCES = src/thesis.tex \
   src/fourier-chapter.tex \
   src/fourier-discretisation.tex \
   src/fourier-introduction.tex \
-  src/fourier-model.tex
+  src/fourier-model.tex \
+  src/abstract.tex \
+  src/resume.tex \
+  src/dedication.tex \
+  src/thanks.tex \
+  src/curriculum.tex
 
 BIB_SOURCES = $(wildcard refs/*.bib)
 

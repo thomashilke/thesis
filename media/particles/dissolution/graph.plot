@@ -4,6 +4,8 @@
 # 10 x 6.18
 # 7.5 x 4.63
 
+# with the official thesis format, \textwidth = 384pt = 13.54cm (height = 8.37cm)
+
 #set terminal epslatex size 15cm,9.37cm color colortext 10 #standalone
 set terminal epslatex size 11.25cm,6.05cm color colortext 10 #standalone
 #set terminal epslatex size 10cm,6.18cm color colortext 10 #standalone

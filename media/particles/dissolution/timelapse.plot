@@ -9,7 +9,7 @@
 #set terminal epslatex size 10cm,6.18cm color colortext 10 #standalone
 
 #set terminal epslatex size 7.5cm,4.63cm color colortext 10 #standalone
-set terminal epslatex size 7.0cm,4.00cm color colortext 10 #standalone
+set terminal epslatex size 6.5cm,4.00cm color colortext 10 #standalone
 
 set xtics format '%3.0f'
 set xtics (0, 20, 40, 60, 80, 100)

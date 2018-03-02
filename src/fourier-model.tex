@@ -6,28 +6,45 @@ géométrique de la cuve d'électrolyse
 \begin{equation}
   \Omega = \Lambda \times (0,\thickness).
 \end{equation}
-On suppose que le domaine $\Omega$ est occupé par un fluide
-incompressible de viscosité $\mu$. Étant donné un champ de forces
-$f:\Omega\to \mathbb R^3$, on suppose que la vitesse $u:\Omega \to
-\mathbb R^3$ et la pression $p:\Omega \to \mathbb R$ du fluide
-satisfont le système de Stokes:
+On suppose que le domaine $\Omega$ est occupé par l'électrolyte, un
+fluide newtonien incompressible de viscosité $\mu$. Le tenseur de
+viscosité est symétrique \cite{Landau1987}, et le tenseur des
+contraintes visqueuses est donné par
+\begin{equation}
+  \mathcal T_{i,j} = 2\electrolyteviscosity_{i,j} \straintensor_{i,j}
+\end{equation}
+où le tenseur des contraintes $\straintensor$ s'écrit en fonction de
+la vitesse d'écoulement u:
+\begin{equation}
+  \straintensor_{i,j} = \frac{1}{2}\parent{\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}}.
+\end{equation}
+Étant donné un champ de forces $f:\Omega\to \mathbb R^3$, on suppose
+que la vitesse d'écoulement $u:\Omega \to \mathbb R^3$ et la pression
+$p:\Omega \to \mathbb R$ du fluide satisfont le système de Stokes
 \begin{align}
-  &- \div(\mu\nabla u) + \nabla p = f,\label{eq:stokes-u}\\
+  &- \div(\mathcal T) + \nabla p = f,\label{eq:stokes-u}\\
   &\div u = 0.\label{eq:stokes-p}
 \end{align}
 Dans la suite nous notons $u = (u_1, u_2, u_3)$ et $f = (f_1, f_2,
-f_3)$. La vitesse du fluide satisfait des conditions aux limites
-d'adhérence sur les faces latérales et des conditions de glissement
-total sur les faces horizontales, c'est-à-dire que
+f_3)$. L'écoulement $u$ satisfait les conditions aux limites suivantes.
+Sur les faces latérales, la vitesse satisfait la condition
+d'adhérence
+\begin{equation}
+  u(x_1, x_2, x_3) = 0\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
+  \text{ et } x_3\in(0, \thickness).\label{eq:stokes-bc-1}
+\end{equation}
+Sur les faces horizontales supérieures et inférieures, la vitesse
+d'écoulement satisfait une condition de glissement total
 \begin{align}
-  &u(x_1, x_2, x_3) = 0 &\text{ si } (x_1, x_2) \in \partial \Lambda%
-  \text{ et } x_3\in(0, \thickness),\label{eq:stokes-bc-1}\\
-%
-  &u_3(x_1, x_2, x_3) = 0 &\text{ si } (x_1, x_2) \in \Lambda \text{ et } x_3 = 0 \text{ ou } x_3 = \thickness,\label{eq:stokes-bc-2}\\
-%
-  &\frac{\partial u_1}{\partial x_3}(x_1, x_2, x_3) = \frac{\partial u_2}{\partial x_3}(x_1, x_2, x_3) = 0 &\text{ si }
-  (x_1, x_2) \in \Lambda \text{ et } x_3 = 0 \text { ou } x_3 = \thickness.\label{eq:stokes-bc-3}
+  &u_3(x_1, x_2, x_3) = 0&\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
+  \quad\text{ et }\quad x_3 = 0 \text{ ou } x_3 = \thickness,\\
+  &\left[ \mathcal T\cdot \nu \right]\cdot\tau = 0&\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
+  \quad\text{ et }\quad x_3 = 0 \text{ ou } x_3 = \thickness,
 \end{align}
+et pour tout vecteur $\tau$ tangent au bord de $\Omega$. Cette
+condition correspond à demander à ce que le fluide ne sorte pas par les
+faces horizontales de $\Omega$ et que la contrainte visqueuse tangentielle du
+fluide s'annule sur ces faces.
 
 \paragraph{Décomposition en séries de Fourier}
 Pour résoudre le système d'équation (\ref{eq:stokes-u}),
@@ -108,7 +125,7 @@ Leurs décomposition en série de Fourier selon la variable $x_3$ s'écrivent:
 \begin{align}
   &U_i(x_1, x_2, x_3) = u_{i,0}(x_1, x_2) %
                        + \sum_{k > 0} u_{i,k}(x_1, x_2)%
-                       \cos\parent{\frac{\pi k}{\thickness}x_3}, \quad i = 1, 2,\label{eq:fourier-coeff-def-1}\\
+                       \cos\parent{\frac{\pi k}{\thickness}x_3}, &\quad i = 1, 2,\label{eq:fourier-coeff-def-1}\\
   &U_3(x_1, x_2, x_3) = \sum_{k > 0} u_{3,k}(x_1, x_2)%
                         \sin\parent{\frac{\pi k}{\thickness}x_3},\label{eq:fourier-coeff-def-2}\\
   &P(x_1, x_2, x_3) = p_0(x_1, x_2) %
@@ -116,42 +133,42 @@ Leurs décomposition en série de Fourier selon la variable $x_3$ s'écrivent:
                       \cos\parent{\frac{\pi k}{\thickness}x_3},\label{eq:fourier-coeff-def-3}\\
   &F_i(x_1, x_2, x_3) = f_{i, 0}(x_1, x_2) %
                         + \sum_{k > 0}f_{i,k}(x_1, x_2)%
-                        \cos\parent{\frac{\pi k}{\thickness}x_3}, \quad i = 1,2,\label{eq:fourier-coeff-def-4}\\
+                        \cos\parent{\frac{\pi k}{\thickness}x_3}, &\quad i = 1,2,\label{eq:fourier-coeff-def-4}\\
   &F_3(x_1, x_2, x_3) = \sum_{k > 0}f_{3,k}(x_1,x_2)%
                         \sin\parent{\frac{\pi k}{\thickness}x_3}.\label{eq:fourier-coeff-def-5}
 \end{align}
 En identifiant les différents modes, on obtient pour $k = 0$:
 \begin{align}
-  -\mu \Delta_{x_1, x_2}u_{1, 0} + \frac{\partial p_0}{\partial x_1} %
-  &= f_{1,0},\label{eq:fourier-fund-1}\\
+  &-\mu \Delta_{x_1, x_2}u_{1, 0} + \frac{\partial p_0}{\partial x_1} %
+  = f_{1,0},\label{eq:fourier-fund-1}\\
   %
-  -\mu \Delta_{x_1, x_2}u_{2, 0} + \frac{\partial p_0}{\partial x_2} %
-  &= f_{2,0},\label{eq:fourier-fund-2}\\
+  &-\mu \Delta_{x_1, x_2}u_{2, 0} + \frac{\partial p_0}{\partial x_2} %
+  = f_{2,0},\label{eq:fourier-fund-2}\\
   %
-  \frac{\partial u_{1, 0}}{\partial x_1} +   \frac{\partial u_{2, 0}}{\partial x_2} %
-  &= 0,\label{eq:fourier-fund-3}
+  &\frac{\partial u_{1, 0}}{\partial x_1} +   \frac{\partial u_{2, 0}}{\partial x_2} %
+  = 0,\label{eq:fourier-fund-3}
 \end{align}
 et pour $k = 1, 2, 3,\dots$ :
 \begin{align}
-  - \mu\Delta_{x_1, x_2}u_{1, k}%
+  &- \mu\Delta_{x_1, x_2}u_{1, k}%
   + \mu\parent{\frac{\pi k}{\thickness}}^2 u_{1,k}%
   + \frac{\partial p_k}{\partial x_1} %
-  &= f_{1,k}, \label{eq:fourier-harm-1}\\
+  = f_{1,k}, \label{eq:fourier-harm-1}\\
   %
-  - \mu\Delta_{x_1, x_2}u_{2, k} %
+  &- \mu\Delta_{x_1, x_2}u_{2, k} %
   + \mu\parent{\frac{\pi k}{\thickness}}^2 u_{2,k} %
   + \frac{\partial p_k}{\partial x_2} %
-  &= f_{2,k}, \label{eq:fourier-harm-2} \\
+  = f_{2,k}, \label{eq:fourier-harm-2} \\
   %
-  - \mu\Delta_{x_1, x_2}u_{3, k} %
+  &- \mu\Delta_{x_1, x_2}u_{3, k} %
   + \mu\parent{\frac{\pi k}{\thickness}}^2 u_{3,k} %
   - \frac{\pi k}{\thickness}p_k %
-  &= f_{3,k}, \label{eq:fourier-harm-3}\\
+  = f_{3,k}, \label{eq:fourier-harm-3}\\
   %
-    \frac{\partial u_{1,k}}{\partial x_1} %
+  &  \frac{\partial u_{1,k}}{\partial x_1} %
   + \frac{\partial u_{2,k}}{\partial x_2} %
   + \frac{\pi k}{\thickness} u_{3, k} %
-  &= 0. \label{eq:fourier-incompressibility}
+  = 0. \label{eq:fourier-incompressibility}
 \end{align}
 Les problèmes ci-dessus sont à résoudre dans $\Lambda \subset
 \mathbb R^2$. Naturellement ils nécessitent des
@@ -165,15 +182,15 @@ et le calcul au préalable des coefficients de Fourier du champ de force:
 \begin{align}
   f_{i,0}(x_1, x_2) %
   &= \frac{1}{2\thickness}\int_0^{2\thickness}f_i(x_1, x_2, x_3)%
-  \,\mathrm dx_3,\quad i = 1,2,\label{eq:force-coefficient-1}\\
+  \,\mathrm dx_3,& i = 1,2,\label{eq:force-coefficient-1}\\
   %
   f_{i,k}(x_1, x_2) %
   &= \frac{1}{\thickness}\int_0^{2\thickness}f_i(x_1, x_2, x_3)%
-  \cos\parent{\frac{\pi k}{\thickness}}\,\mathrm dx_3,\quad i = 1,2,\ k > 0,\label{eq:force-coefficient-2}\\
+  \cos\parent{\frac{\pi k}{\thickness}}\,\mathrm dx_3,& i = 1,2,\ k > 0,\label{eq:force-coefficient-2}\\
   %
   f_{3,k}(x_1, x_2)%
   &= \frac{1}{\thickness}\int_0^{2\thickness}f_3(x_1, x_2, x_3)%
-  \sin\parent{\frac{\pi k}{\thickness}}\,\mathrm dx_3,\quad k > 0.\label{eq:force-coefficient-3}
+  \sin\parent{\frac{\pi k}{\thickness}}\,\mathrm dx_3,& k > 0.\label{eq:force-coefficient-3}
 \end{align}
 
 \paragraph{Formulation faible}\label{sec:stokes-fourier-weak}
@@ -218,11 +235,11 @@ L_0^2(\Lambda)$ et les nombres réels $C_k\in\mathbb R$ tels que
   &\int_\Lambda u_{3,k}\,\mathrm dx_1\mathrm dx_2 %
   = 0, \label{eq:stokes-fourier-weak-5}
 \end{align}
-pour toute fonctions $v \in \parent{H^1(\Lambda)}^3$, $q \in
+pour toute fonctions $v_1$, $v_2$, $v_3$ $\in H^1(\Lambda)$, $q \in
 L_0^2(\Lambda)$. Il est bien connu que la formulation variationnelle
 du problème de Stokes
 (\ref{eq:stokes-weak-1}),(\ref{eq:stokes-weak-2}) dans $\Lambda$ admet
-une solution unique \cite{}. La proposition qui suit établi l'existance et
+une solution unique \cite{Temam1977}. La proposition qui suit établi l'existence et
 l'unicité de la solution du problème variationnel
 (\ref{eq:stokes-fourier-weak-1})-(\ref{eq:stokes-fourier-weak-5}) pour
 chacun des coefficients de la série de Fourier.
@@ -232,14 +249,14 @@ chacun des coefficients de la série de Fourier.
 \paragraph{Formulation avec viscosité tensorielle variable}
 Considérons maintenant le problème de Stokes avec une viscosité
 tensorielle et variable. On suppose que le tenseur de viscosité est
-symétrique et est indépendent de la coordonnée verticale $x_3$,
+symétrique et est indépendant de la coordonnée verticale $x_3$,
 c'est-à-dire que $\mu_{i,j} = \mu_{i,j}(x_1, x_2)$, $i,j = 1,2,3$. On
 cherche la vitesse $u$ et la pression $p$ qui vérifient:
 \begin{align}
-  -\div\parent{2\mu\otimes \epsilon(u)} + \nabla p &= f, %
+  &-\div\parent{2\mu\otimes \epsilon(u)} + \nabla p = f, %
   \quad \text{dans } \Omega,\\
   %
-  \div(u) &= 0, %
+  &\div(u) = 0, %
   \quad \text{dans } \Omega,
 \end{align}
 avec les conditions aux limites
@@ -294,7 +311,7 @@ l'indice du mode de Fourier $k$:
   &= f_{3}. \label{eq:stokes-fourier-visc-3}
 \end{align}
 
-En définissant mainenant le tenseur $3\times 3$ des déformations:
+En définissant maintenant le tenseur $3\times 3$ des déformations:
 \begin{equation}\label{eq:stokes-fourier-strain-tensor-3d}
   E(u) = \frac{1}{2} \begin{bmatrix}
     2\displaystyle\frac{\partial u_1}{\partial x_1} %
@@ -352,11 +369,10 @@ permet de traiter le cas ``historique'':
 \end{remarque}
 
 \begin{remarque}
-Le mode fondamental s'obtient en prennant $\beta = 0$, i. e. en
-cherchant $u\in H_0^1(\Lambda)^2$, $p\in L_0^2(\Lambda)$, tels que
+  Le mode fondamental $k = 0$ consiste à chercher  $u_0\in\parent{H_0^1(\Lambda)}^2$, $p_0\in L_0^2(\Lambda)$, tels que
 pour tout $v\in H_0^1(\Lambda)^2$ et $q\in L_0^2(\Lambda)$:
 \begin{align}
-  \int_\Lambda 2\tilde\mu\otimes \tilde E(u):\tilde E(v)\,\mathrm dx_1\mathrm dx_2 %
+  \int_\Lambda 2\tilde\mu\otimes \tilde \straintensor(u_0):\tilde \straintensor(v)\,\mathrm dx_1\mathrm dx_2 %
   - \int_\Lambda p\parent{\frac{\partial v_1}{\partial x_1} %
                           + \frac{\partial v_2}{\partial x_2}}\,\mathrm dx_1\mathrm dx_2 %
   &= \int_\Lambda f\cdot v\,\mathrm dx_1\mathrm dx_2,\\
@@ -367,11 +383,11 @@ pour tout $v\in H_0^1(\Lambda)^2$ et $q\in L_0^2(\Lambda)$:
 \end{align}
 avec:
 \begin{equation}\label{eq:stokes-fourier-strain-tensor-2d}
-  \tilde E(u) = \frac{1}{2}\begin{bmatrix}
-    2 \frac{\partial u_1}{\partial x_1} %
-    & \frac{\partial u_1}{\partial x_2} + \frac{\partial u_2}{\partial x_1}\\
+  \tilde \straintensor(u) = \frac{1}{2}\begin{bmatrix}
+    2 \displaystyle\frac{\partial u_1}{\partial x_1} %
+    & \displaystyle\frac{\partial u_1}{\partial x_2} + \displaystyle\frac{\partial u_2}{\partial x_1}\\
     %
-    \frac{\partial u_1}{\partial x_2} + \frac{\partial u_2}{\partial x_1} %
+    \displaystyle\frac{\partial u_1}{\partial x_2} + \displaystyle\frac{\partial u_2}{\partial x_1} %
     & 2 \frac{\partial u_2}{\partial x_2}
   \end{bmatrix}
 \end{equation}
