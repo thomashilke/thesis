@@ -8,13 +8,13 @@ géométrique de la cuve d'électrolyse
 \end{equation}
 On suppose que le domaine $\Omega$ est occupé par l'électrolyte, un
 fluide newtonien incompressible de viscosité $\mu$. Si $u$ est la
-vitesse de l'écoulement le tenseur des contraintes visqueuses
-\cite{Landau1987} est donné par
+vitesse de l'écoulement, le tenseur des contraintes visqueuses dans le
+fluide \cite{Landau1987} est donné par
 \begin{equation}
-  \mathcal T_{i,j}(u) = 2\electrolyteviscosity_{i,j}
+  \stresstensor_{i,j}(u) = 2\electrolyteviscosity_{i,j}
   \straintensor_{i,j}(u),\quad i,j = 1,2,3.
 \end{equation}
-Ici on a noté $\straintensor$ le tenseur des contraintes qui s'écrit
+Ici on a noté $\straintensor$ le tenseur du taux de déformation du fluide qui s'écrit
 en fonction de la vitesse d'écoulement $u$:
 \begin{equation}
   \straintensor_{i,j}(u) = \frac{1}{2}\parent{\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}},\quad i,j = 1,2,3.
@@ -23,42 +23,37 @@ en fonction de la vitesse d'écoulement $u$:
 que la vitesse d'écoulement $u:\Omega \to \mathbb R^3$ et la pression
 $p:\Omega \to \mathbb R$ du fluide satisfont le système de Stokes
 \begin{align}
-  &- \div(\mathcal T(u)) + \nabla p = f,\label{eq:stokes-u}\\
+  &- \div(\stresstensor(u)) + \nabla p = f,\label{eq:stokes-u}\\
   &\div \parent{u} = 0\label{eq:stokes-p}
 \end{align}
 dans $\Omega$. Dans la suite nous notons $u = (u_1, u_2, u_3)$ et $f =
-(f_1, f_2, f_3)$. De plus, on demande que l'écoulement $u$ satisfasse
+(f_1, f_2, f_3)$. De plus, on demande à ce que l'écoulement $u$ satisfasse
 les conditions aux limites suivantes. Sur les faces latérales, la
 vitesse satisfait la condition d'adhérence
 \begin{equation}
-  u(x_1, x_2, x_3) = 0\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
-  \text{ et } x_3\in(0, \thickness).\label{eq:stokes-bc-1}
+  u = 0\quad \text{ sur } \quad\partial \Lambda\times(0,\thickness).\label{eq:stokes-bc-1}
 \end{equation}
 Sur les faces horizontales supérieures et inférieures, la vitesse
 d'écoulement satisfait une condition de glissement total
 \begin{align}
-  &u_3(x_1, x_2, x_3) = 0&\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
-  \quad\text{ et }\quad x_3 = 0 \text{ ou } x_3 = \thickness,\label{eq:stokes-bc-2}\\
-  &\left[ \mathcal T(u)\cdot \nu \right]\cdot\tau = 0&\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
-  \quad\text{ et }\quad x_3 = 0 \text{ ou } x_3 = \thickness,\label{eq:stokes-bc-3}
+  &u_3(x_1, x_2, x_3) = 0,\label{eq:stokes-bc-2}\\
+  &\stresstensor(u)\cdot \nu = 0\label{eq:stokes-bc-3}
 \end{align}
-et pour tout vecteur $\tau$ tangent au bord de $\Omega$. Cette
-condition correspond à demander à ce que le fluide ne sorte pas par les
-faces horizontales de $\Omega$ et que la contrainte visqueuse tangentielle du
-fluide s'annule sur ces faces. En d'autres termes, il n'y a pas de
-transfert de quantité de mouvement entre le fluide et ces faces en question.
-
-La condition (\ref{eq:stokes-bc-3}) s'écrit en choisissant $\tau =
-(1,0,0)^t$, $\tau = (0,1,0)^t$ et en fonction de $u$ comme
+sur $\partial \Lambda \times\cparent{0,\thickness}$.
+Les conditions (\ref{eq:stokes-bc-2}), (\ref{eq:stokes-bc-3})
+correspondent à demander à ce que le fluide ne pénètre pas les faces
+horizontales de $\partial\Omega$ et à ce que le flux de quantité de
+mouvement à travers ces faces soit nul. En utilisant
+(\ref{eq:stokes-bc-2}), la condition (\ref{eq:stokes-bc-3}) se réécrit
 \begin{equation}
-  \frac{\partial u_1}{\partial x_3} + \frac{\partial u_3}{\partial u_1}
-  = 0\quad \text{ et }\quad \frac{\partial u_2}{\partial x_3} + \frac{\partial u_3}{\partial u_2}
-  = 0.
+\frac{\partial u_1}{\partial x_3}
+  = \frac{\partial u_2}{\partial x_3}
+  = 0\quad \text{ sur }\quad\partial \Lambda \times\cparent{0,\thickness}.
 \end{equation}
 
 \paragraph{Décomposition en séries de Fourier}
 Pour résoudre le système d'équations (\ref{eq:stokes-u}),
-(\ref{eq:stokes-p}) avec les conditions (\ref{eq:stokes-bc-1}) à
+(\ref{eq:stokes-p}) avec les conditions aux limites (\ref{eq:stokes-bc-1}) à
 (\ref{eq:stokes-bc-3}), on exprime les inconnues sous forme de séries
 de Fourier dans la direction $x_3$. Soit le domaine $\Omega^+ = \Lambda
 \times (-\thickness, \thickness)$, on définit les fonctions suivantes
@@ -99,30 +94,31 @@ $\forall (x_1, x_2, x_3)\in \Omega^+$:
     \end{array}
   \right.
 \end{align}
+En vertu de (\ref{eq:stokes-bc-2}) et (\ref{eq:stokes-bc-3}), les
+dérivées selon $x_3$ des fonctions $U_1$, $U_2$ et $U_3$ ainsi définies ne
+présentent pas de masse de Dirac en $x_3 = 0$.
 
-Les dérivées secondes en $x_3$ des fonction $U_1$, $U_2$, $U_3$ ne
-présenteront pas de masse de Dirac en $x_3 = 0$.
-
-Avec les définitions ci-dessus on peut ainsi vérifier que $U$ et $P$
-satisfont les équations
+Avec les définitions ci-dessus on vérifie que $U = (U_1, U_2, U_3)$ et
+$P$ satisfont les équations
 \begin{align}
-  &-\div\parent{\mathcal T(U)} + \Delta P = F& \quad \text{sur }\Omega^+,\\
-  &\div\parent{U} = 0,& \quad \text{sur }\Omega^+.
+  &-\div\parent{\mathcal T(U)} + \Delta P = F,\\
+  &\div\parent{U} = 0
 \end{align}
-
-
-Ainsi on a $U_3(x_1, x_2, 0) = 0\ \forall(x_1, x_2)\in\Lambda$ et les
-conditions de glissement impliquent en $x_3 = 0$ que
+dans $\Omega^+$. De plus on a
 \begin{equation}
-  \frac{\partial
-U_1}{\partial x_3}(x_1,x_2, 0) = \frac{\partial U_2}{\partial
-  x_3}(x_1, x_2, 0) = 0\quad \forall (x_1, x_2) \in \Lambda
+U_3 = 0 \quad\text{ sur } \Lambda\times \cparent{-\thickness} \text{ et } \Lambda\times \cparent{\thickness}
 \end{equation}
-et en $x_3 = \pm\thickness$ que
-\begin{align}
-  &\frac{\partial U_1}{\partial x_3}(x_1, x_2, \thickness) = \frac{\partial U_1}{\partial x_3}(x_1, x_2, -\thickness) = 0,\\
-  &\frac{\partial U_2}{\partial x_3}(x_1, x_2, \thickness) = \frac{\partial U_2}{\partial x_3}(x_1, x_2, -\thickness) = 0.
-\end{align}
+et
+\begin{equation}
+  \frac{\partial U_i}{\partial x_3} = 0\quad \text{ sur } \Lambda\times
+  \cparent{-\thickness} \text{ et } \Lambda\times \cparent{\thickness}
+\end{equation}
+pour $i = 1,2$, c'est-à-dire que
+\begin{equation}
+\stresstensor(U) = 0\quad \text{ sur } \Lambda\times
+\cparent{-\thickness, \thickness}.
+\end{equation}
+
 On prolonge toutes les fonctions dans la variable $x_3$ sur tout
 $\mathbb R$ en des fonctions périodiques de période $2\thickness$. On
 note encore par $U_1$, $U_2$, $U_3$, $P$, $F_1$, $F_2$, $F_3$ ces
@@ -150,16 +146,12 @@ variable $x_3$ des fonctions $U_i$, $F_i$, $i = 1,2,3$ et $P$ s'écrit
   &F_3(x_1, x_2, x_3) = \sum_{k > 0}f_3^k(x_1,x_2)%
                         \sin\parent{\beta^kx_3}.\label{eq:fourier-coeff-def-5}
 \end{align}
-En identifiant les différents modes, on obtient pour $k = 0$:
+On note $u^0 = (u^0_1, u^0_2)$, $f^0 = (f^0_1, f^0_2)$, $u^k =
+(u^k_1,u^k_2,u^k_3)$ et $f^k = (f^k_1, f^k_2, f^k_3)$, $k \geq
+1$. En identifiant les différents modes, on obtient pour $k = 0$:
 \begin{align}
-  &-\mu \Delta u_1^0 + \frac{\partial p_0}{\partial x_1} %
-  = f_1^0,\label{eq:fourier-fund-1}\\
-  %
-  &-\mu \Delta u_2^0 + \frac{\partial p_0}{\partial x_2} %
-  = f_2^0,\label{eq:fourier-fund-2}\\
-  %
-  &\frac{\partial u_1^0}{\partial x_1} +   \frac{\partial u_2^0}{\partial x_2} %
-  = 0,\label{eq:fourier-fund-3}
+  -\div\parent{\stresstensor(u^0)} + \nabla p^0 = f^0,\\
+  &\div (u^0)= 0,\label{eq:fourier-fund-3}
 \end{align}
 et pour $k = 1, 2, 3,\dots$ :
 \begin{align}
