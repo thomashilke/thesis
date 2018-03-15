@@ -7,28 +7,29 @@ géométrique de la cuve d'électrolyse
   \Omega = \Lambda \times (0,\thickness).
 \end{equation}
 On suppose que le domaine $\Omega$ est occupé par l'électrolyte, un
-fluide newtonien incompressible de viscosité $\mu$. Le tenseur de
-viscosité est symétrique \cite{Landau1987}, et le tenseur des
-contraintes visqueuses est donné par
+fluide newtonien incompressible de viscosité $\mu$. Si $u$ est la
+vitesse de l'écoulement le tenseur des contraintes visqueuses
+\cite{Landau1987} est donné par
 \begin{equation}
-  \mathcal T_{i,j} = 2\electrolyteviscosity_{i,j} \straintensor_{i,j}
+  \mathcal T_{i,j}(u) = 2\electrolyteviscosity_{i,j}
+  \straintensor_{i,j}(u),\quad i,j = 1,2,3.
 \end{equation}
-où le tenseur des contraintes $\straintensor$ s'écrit en fonction de
-la vitesse d'écoulement u:
+Ici on a noté $\straintensor$ le tenseur des contraintes qui s'écrit
+en fonction de la vitesse d'écoulement $u$:
 \begin{equation}
-  \straintensor_{i,j} = \frac{1}{2}\parent{\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}}.
+  \straintensor_{i,j}(u) = \frac{1}{2}\parent{\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}},\quad i,j = 1,2,3.
 \end{equation}
 Étant donné un champ de forces $f:\Omega\to \mathbb R^3$, on suppose
 que la vitesse d'écoulement $u:\Omega \to \mathbb R^3$ et la pression
 $p:\Omega \to \mathbb R$ du fluide satisfont le système de Stokes
 \begin{align}
-  &- \div(\mathcal T) + \nabla p = f,\label{eq:stokes-u}\\
-  &\div u = 0.\label{eq:stokes-p}
+  &- \div(\mathcal T(u)) + \nabla p = f,\label{eq:stokes-u}\\
+  &\div \parent{u} = 0\label{eq:stokes-p}
 \end{align}
-Dans la suite nous notons $u = (u_1, u_2, u_3)$ et $f = (f_1, f_2,
-f_3)$. L'écoulement $u$ satisfait les conditions aux limites suivantes.
-Sur les faces latérales, la vitesse satisfait la condition
-d'adhérence
+dans $\Omega$. Dans la suite nous notons $u = (u_1, u_2, u_3)$ et $f =
+(f_1, f_2, f_3)$. De plus, on demande que l'écoulement $u$ satisfasse
+les conditions aux limites suivantes. Sur les faces latérales, la
+vitesse satisfait la condition d'adhérence
 \begin{equation}
   u(x_1, x_2, x_3) = 0\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
   \text{ et } x_3\in(0, \thickness).\label{eq:stokes-bc-1}
@@ -37,20 +38,29 @@ Sur les faces horizontales supérieures et inférieures, la vitesse
 d'écoulement satisfait une condition de glissement total
 \begin{align}
   &u_3(x_1, x_2, x_3) = 0&\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
-  \quad\text{ et }\quad x_3 = 0 \text{ ou } x_3 = \thickness,\\
-  &\left[ \mathcal T\cdot \nu \right]\cdot\tau = 0&\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
-  \quad\text{ et }\quad x_3 = 0 \text{ ou } x_3 = \thickness,
+  \quad\text{ et }\quad x_3 = 0 \text{ ou } x_3 = \thickness,\label{eq:stokes-bc-2}\\
+  &\left[ \mathcal T(u)\cdot \nu \right]\cdot\tau = 0&\quad \text{ si }\quad (x_1, x_2) \in \partial \Lambda%
+  \quad\text{ et }\quad x_3 = 0 \text{ ou } x_3 = \thickness,\label{eq:stokes-bc-3}
 \end{align}
 et pour tout vecteur $\tau$ tangent au bord de $\Omega$. Cette
 condition correspond à demander à ce que le fluide ne sorte pas par les
 faces horizontales de $\Omega$ et que la contrainte visqueuse tangentielle du
-fluide s'annule sur ces faces.
+fluide s'annule sur ces faces. En d'autres termes, il n'y a pas de
+transfert de quantité de mouvement entre le fluide et ces faces en question.
+
+La condition (\ref{eq:stokes-bc-3}) s'écrit en choisissant $\tau =
+(1,0,0)^t$, $\tau = (0,1,0)^t$ et en fonction de $u$ comme
+\begin{equation}
+  \frac{\partial u_1}{\partial x_3} + \frac{\partial u_3}{\partial u_1}
+  = 0\quad \text{ et }\quad \frac{\partial u_2}{\partial x_3} + \frac{\partial u_3}{\partial u_2}
+  = 0.
+\end{equation}
 
 \paragraph{Décomposition en séries de Fourier}
-Pour résoudre le système d'équation (\ref{eq:stokes-u}),
+Pour résoudre le système d'équations (\ref{eq:stokes-u}),
 (\ref{eq:stokes-p}) avec les conditions (\ref{eq:stokes-bc-1}) à
 (\ref{eq:stokes-bc-3}), on exprime les inconnues sous forme de séries
-de Fourier dans la direction $x_3$.Soit le domaine $\Omega^+ = \Lambda
+de Fourier dans la direction $x_3$. Soit le domaine $\Omega^+ = \Lambda
 \times (-\thickness, \thickness)$, on définit les fonctions suivantes
 $\forall (x_1, x_2, x_3)\in \Omega^+$:
 \begin{align}
@@ -90,6 +100,17 @@ $\forall (x_1, x_2, x_3)\in \Omega^+$:
   \right.
 \end{align}
 
+Les dérivées secondes en $x_3$ des fonction $U_1$, $U_2$, $U_3$ ne
+présenteront pas de masse de Dirac en $x_3 = 0$.
+
+Avec les définitions ci-dessus on peut ainsi vérifier que $U$ et $P$
+satisfont les équations
+\begin{align}
+  &-\div\parent{\mathcal T(U)} + \Delta P = F& \quad \text{sur }\Omega^+,\\
+  &\div\parent{U} = 0,& \quad \text{sur }\Omega^+.
+\end{align}
+
+
 Ainsi on a $U_3(x_1, x_2, 0) = 0\ \forall(x_1, x_2)\in\Lambda$ et les
 conditions de glissement impliquent en $x_3 = 0$ que
 \begin{equation}
@@ -97,21 +118,11 @@ conditions de glissement impliquent en $x_3 = 0$ que
 U_1}{\partial x_3}(x_1,x_2, 0) = \frac{\partial U_2}{\partial
   x_3}(x_1, x_2, 0) = 0\quad \forall (x_1, x_2) \in \Lambda
 \end{equation}
-et en $x_3 = \thickness$ que
+et en $x_3 = \pm\thickness$ que
 \begin{align}
   &\frac{\partial U_1}{\partial x_3}(x_1, x_2, \thickness) = \frac{\partial U_1}{\partial x_3}(x_1, x_2, -\thickness) = 0,\\
   &\frac{\partial U_2}{\partial x_3}(x_1, x_2, \thickness) = \frac{\partial U_2}{\partial x_3}(x_1, x_2, -\thickness) = 0.
 \end{align}
-Les dérivées secondes en $x_3$ des fonction $U_1$, $U_2$, $U_3$ ne
-présenteront pas de masse de Dirac en $x_3 = 0$.
-
-Avec les définitions ci-dessus on peut ainsi vérifier que $U$ et $P$
-satisfont les équations
-\begin{align}
-  &-\mu\Delta U + \Delta P = F& \quad \text{sur }\Omega^+,\\
-  &\div U = 0,& \quad \text{sur }\Omega^+.
-\end{align}
-
 On prolonge toutes les fonctions dans la variable $x_3$ sur tout
 $\mathbb R$ en des fonctions périodiques de période $2\thickness$. On
 note encore par $U_1$, $U_2$, $U_3$, $P$, $F_1$, $F_2$, $F_3$ ces
@@ -121,94 +132,100 @@ $2\thickness$-périodiques selon $x_3$. Les fonctions $U_1$, $U_2$,
 $U_3$ sont $\mathcal C^2$ par morceaux, $P$ est $\mathcal C^1$ par
 morceaux et $F_1$, $F_2$, $F_3$ sont $C^0$ par morceaux.
 
-Leurs décomposition en série de Fourier selon la variable $x_3$ s'écrivent:
+On pose pour alléger l'écriture $\beta_k = \frac{\pi
+k}{\thickness}$. La décomposition en série de Fourier selon la
+variable $x_3$ des fonctions $U_i$, $F_i$, $i = 1,2,3$ et $P$ s'écrit
 \begin{align}
-  &U_i(x_1, x_2, x_3) = u_{i,0}(x_1, x_2) %
-                       + \sum_{k > 0} u_{i,k}(x_1, x_2)%
-                       \cos\parent{\frac{\pi k}{\thickness}x_3}, &\quad i = 1, 2,\label{eq:fourier-coeff-def-1}\\
-  &U_3(x_1, x_2, x_3) = \sum_{k > 0} u_{3,k}(x_1, x_2)%
-                        \sin\parent{\frac{\pi k}{\thickness}x_3},\label{eq:fourier-coeff-def-2}\\
-  &P(x_1, x_2, x_3) = p_0(x_1, x_2) %
-                      + \sum_{k>0}p_k(x_1, x_2)%
-                      \cos\parent{\frac{\pi k}{\thickness}x_3},\label{eq:fourier-coeff-def-3}\\
-  &F_i(x_1, x_2, x_3) = f_{i, 0}(x_1, x_2) %
-                        + \sum_{k > 0}f_{i,k}(x_1, x_2)%
-                        \cos\parent{\frac{\pi k}{\thickness}x_3}, &\quad i = 1,2,\label{eq:fourier-coeff-def-4}\\
-  &F_3(x_1, x_2, x_3) = \sum_{k > 0}f_{3,k}(x_1,x_2)%
-                        \sin\parent{\frac{\pi k}{\thickness}x_3}.\label{eq:fourier-coeff-def-5}
+  &U_i(x_1, x_2, x_3) = u_i^0(x_1, x_2) %
+                       + \sum_{k > 0} u_i^k(x_1, x_2)%
+                       \cos\parent{\beta^kx_3}, &\quad i = 1, 2,\label{eq:fourier-coeff-def-1}\\
+  &U_3(x_1, x_2, x_3) = \sum_{k > 0} u_3^k(x_1, x_2)%
+                        \sin\parent{\beta^kx_3},\label{eq:fourier-coeff-def-2}\\
+  &P(x_1, x_2, x_3) = p^0(x_1, x_2) %
+                      + \sum_{k>0}p^k(x_1, x_2)%
+                      \cos\parent{\beta^kx_3},\label{eq:fourier-coeff-def-3}\\
+  &F_i(x_1, x_2, x_3) = f_i^0(x_1, x_2) %
+                        + \sum_{k > 0}f_i^k(x_1, x_2)%
+                        \cos\parent{\beta^kx_3}, &\quad i = 1,2,\label{eq:fourier-coeff-def-4}\\
+  &F_3(x_1, x_2, x_3) = \sum_{k > 0}f_3^k(x_1,x_2)%
+                        \sin\parent{\beta^kx_3}.\label{eq:fourier-coeff-def-5}
 \end{align}
 En identifiant les différents modes, on obtient pour $k = 0$:
 \begin{align}
-  &-\mu \Delta_{x_1, x_2}u_{1, 0} + \frac{\partial p_0}{\partial x_1} %
-  = f_{1,0},\label{eq:fourier-fund-1}\\
+  &-\mu \Delta u_1^0 + \frac{\partial p_0}{\partial x_1} %
+  = f_1^0,\label{eq:fourier-fund-1}\\
   %
-  &-\mu \Delta_{x_1, x_2}u_{2, 0} + \frac{\partial p_0}{\partial x_2} %
-  = f_{2,0},\label{eq:fourier-fund-2}\\
+  &-\mu \Delta u_2^0 + \frac{\partial p_0}{\partial x_2} %
+  = f_2^0,\label{eq:fourier-fund-2}\\
   %
-  &\frac{\partial u_{1, 0}}{\partial x_1} +   \frac{\partial u_{2, 0}}{\partial x_2} %
+  &\frac{\partial u_1^0}{\partial x_1} +   \frac{\partial u_2^0}{\partial x_2} %
   = 0,\label{eq:fourier-fund-3}
 \end{align}
 et pour $k = 1, 2, 3,\dots$ :
 \begin{align}
-  &- \mu\Delta_{x_1, x_2}u_{1, k}%
-  + \mu\parent{\frac{\pi k}{\thickness}}^2 u_{1,k}%
-  + \frac{\partial p_k}{\partial x_1} %
-  = f_{1,k}, \label{eq:fourier-harm-1}\\
+  &- \mu\frac{\partial^2 u_1^k}{\partial x_1^2} - \mu\frac{\partial^2 u_1^k}{\partial x_2^2}%
+  + \mu\parent{\beta^k}^2 u_1^k%
+  + \frac{\partial p^k}{\partial x_1} %
+  = f_1^k, \label{eq:fourier-harm-1}\\
   %
-  &- \mu\Delta_{x_1, x_2}u_{2, k} %
-  + \mu\parent{\frac{\pi k}{\thickness}}^2 u_{2,k} %
+  &- \mu\frac{\partial^2 u_2^k}{\partial x_1^2} - \mu\frac{\partial^2 u_2^k}{\partial x_2^2} %
+  + \mu\parent{\beta^k}^2 u_2^k %
   + \frac{\partial p_k}{\partial x_2} %
-  = f_{2,k}, \label{eq:fourier-harm-2} \\
+  = f_2^k, \label{eq:fourier-harm-2} \\
   %
-  &- \mu\Delta_{x_1, x_2}u_{3, k} %
-  + \mu\parent{\frac{\pi k}{\thickness}}^2 u_{3,k} %
-  - \frac{\pi k}{\thickness}p_k %
-  = f_{3,k}, \label{eq:fourier-harm-3}\\
+  &- \mu\frac{\partial^2 u_3^k}{\partial x_1^2} - \mu\frac{\partial^2 u_3^k}{\partial x_2^2} %
+  + \mu\parent{\beta^k}^2 u_3^k %
+  - \beta^kp^k %
+  = f_3^k, \label{eq:fourier-harm-3}\\
   %
-  &  \frac{\partial u_{1,k}}{\partial x_1} %
-  + \frac{\partial u_{2,k}}{\partial x_2} %
-  + \frac{\pi k}{\thickness} u_{3, k} %
+  &  \frac{\partial u_1^k}{\partial x_1} %
+  + \frac{\partial u_2^k}{\partial x_2} %
+  + \beta^k u_3^k %
   = 0. \label{eq:fourier-incompressibility}
 \end{align}
 Les problèmes ci-dessus sont à résoudre dans $\Lambda \subset
-\mathbb R^2$. Naturellement ils nécessitent des
-conditions limites d'adhérence sur $\partial \Lambda$:
+\mathbb R^2$. Naturellement ils nécessitent les conditions limites
+d'adhérence
+\begin{equation*}
+u_1^0 = u_2^0 = 0 \quad\text{ sur }\partial \Lambda
+\end{equation*}
+et
+\begin{equation*}
+ u_1^k = u_2^k = u_3^k = 0 \quad\text{ sur }\partial \Lambda
+\end{equation*}
+pour tout $k \geq 1$, et le calcul au préalable des coefficients
+de Fourier du champ de force:
 \begin{align}
-  & u_{1,0} = u_{2,0} = 0 & \text{ sur } \partial \Lambda,\\
-  & u_{1,k} = u_{2,k} = u_{3,k} = 0 &\text{ sur } \partial \Lambda,\ k
-  = 1, 2, 3,\dots,
-\end{align}
-et le calcul au préalable des coefficients de Fourier du champ de force:
-\begin{align}
-  f_{i,0}(x_1, x_2) %
+  f_i^0(x_1, x_2) %
   &= \frac{1}{2\thickness}\int_0^{2\thickness}f_i(x_1, x_2, x_3)%
   \,\mathrm dx_3,& i = 1,2,\label{eq:force-coefficient-1}\\
   %
-  f_{i,k}(x_1, x_2) %
+  f_i^k(x_1, x_2)
+\end{align}
+et pour $k > 0$,
+\begin{align}
   &= \frac{1}{\thickness}\int_0^{2\thickness}f_i(x_1, x_2, x_3)%
-  \cos\parent{\frac{\pi k}{\thickness}}\,\mathrm dx_3,& i = 1,2,\ k > 0,\label{eq:force-coefficient-2}\\
+  \cos\parent{\beta^kx_3}\,\mathrm dx_3,& i = 1,2,\label{eq:force-coefficient-2}\\
   %
-  f_{3,k}(x_1, x_2)%
+  f_3^k(x_1, x_2)%
   &= \frac{1}{\thickness}\int_0^{2\thickness}f_3(x_1, x_2, x_3)%
-  \sin\parent{\frac{\pi k}{\thickness}}\,\mathrm dx_3,& k > 0.\label{eq:force-coefficient-3}
+  \sin\parent{\beta^kx_3}\,\mathrm dx_3.\label{eq:force-coefficient-3}
 \end{align}
 
 \paragraph{Formulation faible}\label{sec:stokes-fourier-weak}
-La formulation variationnelle associée au problèmes formés par les
-équations (\ref{eq:fourier-fund-1}) à
-(\ref{eq:fourier-incompressibility}) s'énonce de la façon
-suivante. Premièrement, nous cherchons les fonctions $u_{1,0},u_{2,0} \in
-H^1(\Lambda)$ $p_0 \in L^2_0(\Lambda)$, telles
-que
+Les formulations variationnelles associées aux problèmes formés par
+les équations (\ref{eq:fourier-fund-1}) à
+(\ref{eq:fourier-incompressibility}) s'énoncent de la façon
+suivante. Premièrement, nous cherchons les fonctions $u_1^0,u_2^0
+\in H^1(\Lambda)$ $p^0 \in L^2_0(\Lambda)$, telles que
 \begin{align}
 &\int_\Lambda \electrolyteviscosity \nabla u : \nabla v \intd{x_1}\intd{x_2} -
 \int_\Lambda p\div v \intd{x_1}\intd{x_2} = \int_\Lambda f v
 \intd{x_1}\intd{x_2},\label{eq:stokes-weak-1}\\
 &\int_\Lambda q\div u \intd{x_1}\intd{x_2} = 0\label{eq:stokes-weak-2}
 \end{align}
-pour toute fonctions $v \in \parent{H^1(\Lambda)}^2$, $q \in
-L_0^2(\Lambda)$. Notons pour alléger l'écriture $\beta_k = \frac{\pi
-  k}{\thickness}$. Deuxièmement, pour tout $k = 1, 2, \dots$, nous cherchons les
+pour toutes fonctions $v \in \parent{H^1(\Lambda)}^2$, $q \in
+L_0^2(\Lambda)$. Deuxièmement, pour tout $k = 1, 2, \dots$, nous cherchons les
 fonctions $u_{1,k},u_{2,k},u_{3,k} \in H^1(\Lambda)$, $p_k \in
 L_0^2(\Lambda)$ et les nombres réels $C_k\in\mathbb R$ tels que
 \begin{align}
