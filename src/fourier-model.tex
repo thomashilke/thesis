@@ -34,12 +34,12 @@ vitesse satisfait la condition d'adhérence
   u = 0\quad \text{ sur } \quad\partial \Lambda\times(0,\thickness).\label{eq:stokes-bc-1}
 \end{equation}
 Sur les faces horizontales supérieures et inférieures, la vitesse
-d'écoulement satisfait une condition de glissement total
+d'écoulement satisfait une condition de glissement total. On a
 \begin{align}
   &u_3(x_1, x_2, x_3) = 0,\label{eq:stokes-bc-2}\\
   &\stresstensor(u)\cdot \nu = 0\label{eq:stokes-bc-3}
 \end{align}
-sur $\partial \Lambda \times\cparent{0,\thickness}$.
+sur $\Lambda \times\cparent{0,\thickness}$.
 Les conditions (\ref{eq:stokes-bc-2}), (\ref{eq:stokes-bc-3})
 correspondent à demander à ce que le fluide ne pénètre pas les faces
 horizontales de $\partial\Omega$ et à ce que le flux de quantité de
@@ -209,7 +209,7 @@ Les formulations variationnelles associées aux problèmes formés par
 les équations (\ref{eq:fourier-fund-1}) à
 (\ref{eq:fourier-incompressibility}) s'énoncent de la façon
 suivante. Premièrement, nous cherchons les fonctions $u_1^0,u_2^0
-\in H^1(\Lambda)$ $p^0 \in L^2_0(\Lambda)$, telles que
+\in H^1(\Lambda)$, $p^0 \in L^2_0(\Lambda)$, telles que
 \begin{align}
 &\int_\Lambda \electrolyteviscosity \nabla u : \nabla v \intd{x_1}\intd{x_2} -
 \int_\Lambda p\div v \intd{x_1}\intd{x_2} = \int_\Lambda f v
