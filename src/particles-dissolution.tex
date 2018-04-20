@@ -30,7 +30,7 @@ L'oxyde d'aluminium a une forte affinité avec l'eau
 l'électrolyte en fusion, le gaz qui résulte de la désorption des
 molécules d'eau crée une forte agitation qui favorise la dispersion et
 la dissolution des particules. Par exemple, Haverkamp et
-al. \cite{Haverkamp1994} ont montré que le temps de dissolution de
+al. \cite{Haverkamp1994} ont montré que le temps de dissolution des
 particules d'alumine hydratées peut être jusqu'à \num{40}\% plus
 faible par rapport à des particules sèches. La formation d'agrégats
 et de radeaux est également réduite.
@@ -77,12 +77,12 @@ effet est pricipalement d'aider à la dispersion des particules
 
 On suppose que cette particule est une sphère parfaite, non poreuse,
 et qu'elle est complètement mouillée par le bain, \ie, que la totalité
-de sa surface soit en contact avec de l'électrolyte. Dans le travail
+de sa surface est en contact avec le bain électrolytique. Dans le travail
 \cite{Hofer2011}, la vitesse de dissolution d'une particule est une
 fonction $f$ qui décrit la vitesse de variation de son rayon $r$, et
 qui dépend d'une part de $r$ et d'autre part de la concentration
 locale d'alumine dissoute $c$. Dans le présent travail, nous
-considèrerons en plus l'influence de la température locale de
+considérerons en plus l'influence de la température locale de
 l'électrolyte $\temperature$ sur sa vitesse de dissolution,
 c'est-à-dire que
 \begin{equation}\label{eq:radius-edo}
@@ -146,7 +146,39 @@ $\concentration = 0$ et le taux de dissolution limite $K = 1$.
   \end{center}
 \end{figure}
 
-La vitesse de dissolution $f$ décrite ci-dessus forme la base qui
-permet la description de l'évolution d'une population constituée de
-particules de tailles différentes dans un bain électrolytique, et qui
-fait l'objet de la section suivante.
+Supposons maintenant que $\concentration$ et $\temperature$ sont des
+constantes données. Alors
+$\dissolutionrate(\concentration,\temperature)$ est un réel fixé, et
+on omettra d'indiquer ses arguments jusqu'à la fin du paragraphe,
+puisqu'il n'y a pas de risque d'ambiguïté.
+
+%Considérons tout d'abord une particule individuelle de rayon initiale
+%$r_0$.
+En tenant compte de (\ref{eq:dissolution-velocity}), l'équation
+d'évolution du rayon d'une particule (\ref{eq:radius-edo}) de rayon initial $r_0 > 0$
+ devient
+\begin{align}\label{eq:radius-edo-cst-diss-rate}
+  \begin{array}{l}
+    \displaystyle\frac{\mathrm d r}{\mathrm d t}(t) = -\displaystyle\frac{\dissolutionrate}{r(t)} \quad \text{si } t
+    > 0,\\[0.5\normalbaselineskip]
+    r(0) = r_0.
+  \end{array}
+\end{align}
+Ainsi, en notant $\dot r = \frac{\mathrm dr}{\mathrm dt}$ on obtient
+une expression exacte pour le rayon de la particule au cours du temps:
+\begin{align}
+  &r\dot r = -\dissolutionrate,\nonumber\\
+  &\frac{1}{2}\frac{\mathrm d}{\mathrm dt}r^2 = -\dissolutionrate,\nonumber\\
+  &r^2 = -2\dissolutionrate t + r_0^2,\nonumber\\
+  &r(t) = \sqrt{r_0^2-2\kappa t}.\label{eq:particle-exact}
+\end{align}
+Si $\bar t = \frac{r_0^2}{2\dissolutionrate}$ on obtient $r(\bar
+t) = 0$. La particule de rayon $r_0$ sera dissoute après un temps $\bar
+t = \frac{r_0^2}{2\dissolutionrate}$.
+
+La vitesse de dissolution $f$ décrite ci-dessus et l'expression de
+du rayon d'une particule qui se dissout au cours du temps
+(\ref{eq:particle-exact}) forment la base qui permet la description de
+l'évolution d'une population constituée de particules de tailles
+hétérogènes dans un bain électrolytique, et qui fait l'objet de la
+section suivante.

@@ -186,21 +186,6 @@ profondeur maximale lorsque le rayon initial est inférieur à
 \num{80} \si{\micro\meter} est systématiquement inférieure à
 \num{1} \si{\centi\meter}.
 
-Si on suppose maintenant que le fluide est turbulent, la viscosité
-effective de l'écoulement moyen est supérieure à la viscosité
-laminaire du bain. Cette situation correspond aux trois dernières
-colonnes à droite du tableau \ref{tab:fall-results}. Dans ce cas, on
-constate que la profondeur maximale est systématiquement de l'ordre de
-\num{1}\si{\milli\meter}, ou inférieure.
-
-Le bain électrolytique d'une cuve n'est jamais au repos, en
-particulier dans les canaux où le fluide est agité par les bulles de
-gaz qui résultent de l'électrolyse et qui remontent à la surface du
-bain. Dans la suite de ce travail, nous ferons l'hypothèse que
-l'injection des doses de particules d'alumine ne perturbe pas
-l'écoulement du bain. Dans ce cadre, nous négligerons l'effet de la
-force de gravité sur la trajectoire des particules.
-
 Dans cette section on a donné une expression exacte pour la position
 de la particule lorsque celle-ci est complètement dissoute,
 c'est-à-dire lorsque $t = T$. La position de la particule
@@ -209,14 +194,44 @@ différentielle linéaire non-homogène et à coefficients variables
 (\ref{eq:simple-mvt}). Nous ne chercherons pas ici à expliciter la
 solution exacte pour $x(t)$. Cependant, il est facile d'obtenir une
 approximation numérique de $x$ à l'aide des intégrateur offerts par
-MatLAB\textregistered, \texttt{ode45} par exemple. La figure \ref{fig:}
+MatLAB\textregistered, \texttt{ode45} par exemple. La figure
+\ref{fig:particle-trajectories} présente les trajectoires adoptées
+par trois particules de rayon initiaux différents. La figure
+\ref{fig:particle-trajectories-a} montre la trajectoire en entier
+jusqu'à dissolution complète de chaque particule, tandis que la
+figure \ref{fig:particle-trajectories-b} illustre la phase
+d'accélération initiale de chaque particule qui succède
+immédiatement à la condition initiale.
 
-Nous concluons cette section par trois remarques qui traitent
+\begin{figure}
+ \begin{center}
+    \begin{subfigure}[b]{0.49\textwidth}
+      \input{../media/particles/trajectories/particle_fall.tex}
+      \caption{Trajectoire des particules.}
+      \label{fig:particle-trajectories-a}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+      \input{../media/particles/trajectories/particle_fall_zoom.tex}
+      \caption{Zoom sur la phase d'accélération initiale.}
+      \label{fig:particle-trajectories-b}
+    \end{subfigure}
+
+    \caption{Trajectoires de trois particules de rayons initiaux $r_0 =
+      $ 40, 60 et 80 \si{\micro\meter} et une vitesse initiale $v_0 =
+      0$. Les trajectoires sont intégrées pour $t < T =
+      \frac{r_0^2}{2\kappa}$. Notez les échelles différentes sur
+      chaque graphique.}
+    \label{fig:particle-trajectories}
+  \end{center}
+\end{figure}
+
+Nous concluons cette section par quatre remarques qui traitent
 premièrement de la validité de la loi de Stokes pour la force de traînée,
 deuxièmement de l'importance de la vitesse initiale de la particule
-sur la profondeur terminale de la particule, et troisièmement du temps
+sur la profondeur terminale de la particule, troisièmement du temps
 caractéristique pour qu'une particule soit emportée par un fluide en
-mouvement laminaire.
+mouvement laminaire et quatrièmement de la validité de l'hypothèse de
+supposer un fluide au repos dans le bain d'une cuve d'électrolyse.
 
 %%\begin{remarque}
 %%  (Sur le fait qu'on peut negliger le terme de reaction dans
@@ -256,10 +271,8 @@ mouvement laminaire.
   \begin{equation*}
     \reynolds = \frac{2 \electrolytedensity v r}{\electrolyteviscosity}
   \end{equation*}
-  où $v$ est sa vitesse relative au fluide.
-
-  En supposant $r$ fixé, l'équation du mouvement d'une particule
-  dans le fluide s'écrit
+  où $v$ est sa vitesse relative au fluide.  En supposant $r$ fixé,
+  l'équation du mouvement d'une particule dans le fluide s'écrit
   \begin{equation}\label{eq:mvt-fixed-r}
     \aluminadensity \frac{4}{3}\pi r^3 \ddot x(t) = \frac{4}{3}\pi
     r^3\parent{\aluminadensity - \electrolytedensity}g -
@@ -337,3 +350,28 @@ mouvement laminaire.
     \label{fig:particle-trajectories}
  \end{center}
 \end{figure}
+
+
+\begin{remarque}
+
+  Le bain électrolytique d'une cuve n'est jamais au repos, en
+  particulier dans les canaux où le fluide est agité par les bulles de
+  gaz qui résultent de l'électrolyse et qui remontent à la surface du
+  bain. Les turbulences se manifestent par une viscosité apparente de
+  l'écoulement moyen supérieure à la viscosité laminaire du bain. Dans
+  le bain d'une cuve d'électrolyse industrielle, cette viscosité
+  turbulente est typiquement de l'ordre de \num{1}
+  \si{\kilo\gram\per\meter\per\second}. Cette situation correspond aux
+  trois dernières colonnes à droite du tableau
+  \ref{tab:fall-results}. Dans ce cas, on constate que la profondeur
+  maximale est systématiquement de l'ordre de
+  \num{1}\si{\milli\meter}, ou inférieure.
+
+  On conclut que la gravité a un effet négligeable sur le transport de
+  particules individuelles dans une cuve d'électrolyse. Dans la suite
+  de ce travail, nous ferons l'hypothèse que l'injection des doses de
+  particules d'alumine ne perturbe pas l'écoulement du bain. Dans ce
+  cadre, nous négligerons l'effet de la force de gravité sur la
+  trajectoire des particules dans les chapitres \ref{chap:populations}
+  et \ref{chap:fourier} qui suivent.
+\end{remarque}

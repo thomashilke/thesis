@@ -8,6 +8,7 @@ all:
 	@cd dissolution; $(MAKE) all
 	@cd fall; $(MAKE) all
 	@cd trajectories; $(MAKE) all
+	@cd characteristics; $(MAKE) all
 
 clean:
 	@cd solidfraction; $(MAKE) clean
@@ -19,3 +20,4 @@ clean:
 	@cd dissolution; $(MAKE) clean
 	@cd fall; $(MAKE) clean
 	@cd trajectories; $(MAKE) clean
+	@cd characteristics; $(MAKE) clean
