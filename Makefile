@@ -40,7 +40,11 @@ TEX_SOURCES = src/thesis.tex \
   src/populations-conclusion.tex \
   src/fourier-chapter.tex \
   src/fourier-discretisation.tex \
+  src/fourier-validation.tex \
+  src/fourier-application.tex \
+  src/fourier-alumina-mdl.tex \
   src/fourier-introduction.tex \
+  src/fourier-conclusion.tex \
   src/fourier-model.tex \
   src/abstract.tex \
   src/resume.tex \

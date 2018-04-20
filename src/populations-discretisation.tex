@@ -127,16 +127,16 @@ utilisant $q_{2,n+1}$:
 p_{2,n+1} = -[\cee{Al2O3}]\aluminadissolutionenthalpy q_{2,n+1}.
 \end{equation}
 
-L'équation (\ref{eq:splitting-dissolution}) est discrétisé selon $r$
-à l'aide du schéma de caractéristiques présenté dans la section
+L'équation (\ref{eq:splitting-dissolution}) est discrétisé selon $r$ à
+l'aide du schéma de caractéristiques présenté dans la section
 \ref{sec:particle-population-dissolution}. Les équations
 (\ref{eq:splitting-np1-u}), (\ref{eq:splitting-np2-u}),
 (\ref{eq:splitting-np2-w}), (\ref{eq:splitting-c}) et
 (\ref{eq:splitting-t}) sont des équations d'advection ou
-d'advection-diffusion et sont discrétisées en espace selon la
-méthode adoptée dans \cite{Hofer2011}. La discrétisation est basée
-sur des éléments finis stabilisée par la méthode SUPG
-\cite{Quarteroni2008}.
+d'advection-diffusion et sont discrétisées en espace selon la méthode
+adoptée dans \cite{Hofer2011}. La discrétisation est basée sur une
+méthode d'éléments finis continus linéaires par morceaux et stabilisée
+par la méthode SUPG \cite{Quarteroni2008}.
 
 \paragraph{Propriétés de conservation du schéma de discrétisation}
 Nous établissons maintenant le bilan de masse d'alumine dans les

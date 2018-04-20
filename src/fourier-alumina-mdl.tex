@@ -1,0 +1,66 @@
+L'objectif ultime étant d'obtenir une approximation de la
+concentration d'alumine dans la cuve, on propose un modèle de
+transport et diffusion stationnaire d'alumine dissoute dans le domaine $\Omega$.
+On suppose donné un champ de convection stationnaire $u:\Omega\to\mathbb R^3$,
+qui correspond à l'écoulement des fluides dans le domaine
+$\Omega$. Le champ $u$ est typiquement calculé à l'aide d'un
+schéma numérique évoqué dans le chapitre
+\ref{chap:populations}.
+Soit $S$ le terme source de la concentration d'alumine dissoute
+correspondant à l'injection de particules, $\dot
+q$ le terme source correspondant à la consommation d'alumine
+dissoute par la réaction d'électrolyse, et la diffusivité de la
+concentration d'alumine dans le bain $D_C > 0$.
+On cherche le champ de concentration d'alumine stationnaire
+$c:\Omega\to\mathbb R$ solution de l'équation d'advection-diffusion
+\begin{equation}\label{eq:stat-concentration}
+  u\cdot \nabla c - D_c \Delta c = S + \dot q\quad \text{dans } \Omega,
+\end{equation}
+avec des conditions de Neumann homogènes sur le bord $\partial
+\Omega$:
+\begin{equation}
+  \frac{\partial c}{\partial n} = 0,\quad\text{sur } \partial \Omega.
+\end{equation}
+La solution $c$ de l'équation (\ref{eq:stat-concentration}) étant
+définie à une constante près, on considère la contrainte
+supplémentaire:
+\begin{equation}\label{eq:stat-alumina-avg-c}
+  \frac{1}{\abs{\Omega}}\int_\Omega c\,\mathrm dx = \bar c,
+\end{equation}
+où $\bar c$ est la concentration moyenne dans le domaine $\Omega$,
+supposée donnée.
+Le terme source $S$ est construit à partir des conditions initiales
+$S_k$ des populations de particules d'alumines introduite dans la
+section \ref{sec:math-np}. On définit $S$ comme la moyenne
+temporelle du débit de masse de particules d'alumine définit par
+les fonctions $S_k$:
+\begin{equation}
+  S(x_1,x_2,x_3) = \lim_{T\to\infty}\frac{1}{T}\int_0^T \sum_{k>0}
+  S_k(x_1, x_2, x_3) \delta(t - \tau_k)\,\mathrm dt, \quad (x_1, x_2, x_3)\in\Omega.
+\end{equation}
+
+Le terme source $\dot q$ correspond à la consommation d'alumine
+dissoute par la réaction d'électrolyse. Le débit total d'alumine
+consommée dans la cuve étant donné par la relation
+(\ref{eq:mass-consumption}), on pose:
+\begin{equation}
+  \dot q(x_1, x_2, x_3) = -\frac{I[\ce{Al2O3}]}{6\faraday\abs{\Omega}},
+\end{equation}
+où $I$ est le courant électrique total qui traverse la cuve, et
+$\faraday$ la constante de Faraday.
+
+\begin{remarque}
+  Par construction des fonctions $\cparent{S_k}_{k>0}$, la moyenne de $S$ sur
+  $\Omega$ est exactement égale à la moyenne de $\dot q$ sur
+  $\Omega$, i. e.:
+  \begin{equation}
+    \int_\Omega S + q\,\mathrm dx = 0,
+  \end{equation}
+  condition nécessaire pour que le problème
+  (\ref{eq:stat-concentration}) admette une solution.
+\end{remarque}
+
+On utilisera pour approcher la solution du problème
+(\ref{eq:stat-concentration}) une méthode d'éléments finis continus
+linéaires par morceaux, statbilisée par une méthode SUPG, sur un
+maillage tetraédrique de $\Omega$.

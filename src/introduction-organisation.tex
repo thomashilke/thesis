@@ -1,16 +1,49 @@
-Ce travail se divise en deux parties. Dans la partie
-\ref{part:alumina}, on considère plusieurs effets physiques liés à la
-gravité et aux interactions thermiques entre les particules d'alumine
-et le bain environnant, que l'on exprime sous forme de modèles
-mathématiques. On propose ensuite une extension du modèle de transport
-et dissolution d'alumine, introduit dans le travail de thèse de
-T. Hofer \cite{Hofer2011}, pour tenir compte de l'effet de la gravité
-sur la trajectoire des particules d'alumine et de l'effet de la
-température du bain sur leur dissolution.  Dans la partie
-\ref{part:fluid} on s'intéresse à diminuer le coût de calcul de
-l'écoulement dans le bain électrolytique et le métal liquide. On
-propose une méthode numérique basée sur une décomposition en
-harmoniques de Fourier du problème de Stokes dans la dimension
-verticale. On propose de plus une méthode pour approximer la
-distribution de concentration d'alumine dans le bain électrolytique,
-sans recourir au calcul d'une solution transitoire.
+La partie \ref{part:alumina} de ce travail concerne plusieurs
+phénomènes physiques liés à la dissolution de particules d'alumine et
+de populations de particules d'alumine dans un bain électrolytique. Le
+chapitre \ref{chap:particles} traite de l'interaction entre le bain
+électrolytique dans une cuve et une unique particule ou d'un ensemble
+de particules indépendantes. Nous commençons dans la section
+\ref{sec:particle-freeze} par étudier la solidification et
+liquéfaction du bain électrolytique autour d'une particule d'alumine
+de température \num{150}\si{\celsius} injectée dans un bain à
+\num{950}\si{\celsius}. Puis nous considérons la modélisation de la
+dissolution, c'est-à-dire de l'évolution de la taille au cours du
+temps d'une particule d'alumine placée dans un bain électrolytique
+dans la section \ref{sec:particle-dissolution}. Dans la section
+\ref{sec:particle-population-dissolution} nous utilisons le modèle de
+dissolution d'une unique particule pour décrire l'évolution d'une
+population de particules qui se dissout dans le bain. Enfin, dans la
+section \ref{sec:particle-fall} nous discutons du mouvement d'une
+particule dans le bain soumise à l'action de la gravité, et dans
+quelle mesure cet effet peut être négligé. Dans le chapitre
+\ref{chap:populations}, nous utilisons les résultats établis dans le
+chapitre \ref{chap:particles} pour proposer un modèle de transport et
+dissolution de poudre d'alumine dans le bain d'une cuve d'électrolyse
+de Hall-Héroult en fonction de la température dudit bain. Dans la
+section \ref{sec:populations-model} nous décrivons en détail les
+équations et les données qui interviennent dans le modèle de transport
+et dissolution d'alumine, que nous discrétisons dans la section
+\ref{sec:populations-discretisation}. Dans la section
+\ref{sec:populations-industriel} nous appliquons le modèle proposé
+dans les section \ref{sec:populations-model} et
+\ref{sec:populations-discretisation} au cas de la cuve d'électrolyse
+industrielle AP32, et nous discutons des résultats dans la section
+\ref{sec:populations-conclusion}.
+
+La partie \ref{part:fluid} de ce travail concerne la problématique du
+calcul de l'écoulement des fluides dans une cuve d'électrolyse. Dans
+la section \ref{sec:fourier-model} nous proposons de calculer un
+écoulement de Stokes dans les fluides d'une cuve d'électrolyse en
+décomposant les données et les inconnues du problème en séries de
+Fourier selon la direction verticale. Les équations qui résultent de
+cette décomposition sont discrétisées dans la section
+\ref{sec:fourier-discretisation}. Dans la section
+\ref{sec:fourier-validation} nous étudions les propriétés du schéma
+obtenu à la section \ref{sec:fourier-discretisation} et soulignons ses
+avantages par rapport à une discrétisation basée sur une méthode
+d'éléments finis en trois dimensions classique. Finalement, le schéma
+obtenu à la section \ref{sec:fourier-discretisation} est appliqué au
+problème du calcul de l'écoulement des fluides dans la cuve
+d'électrolyse AP32, et nous discutons des résultats dans la section
+\ref{sec:fourier-conclusion}.

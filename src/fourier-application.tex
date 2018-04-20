@@ -1,0 +1,532 @@
+L'un des objectifs premiers du développement du schéma numérique
+SF, est d'une part de fournir une approximation de l'écoulement des
+fluides dans une cuve d'électrolyse d'aluminium, et d'autre part
+de fournir une approximation de la distribution d'alumine dans le bain
+électrolytique, le tout à moindre coût par rapport au modèle
+3D standard déjà implémenté dans le logiciel Alucell, tels que décrit
+dans le chapitre \ref{chap:populations}
+
+Dans cette partie, on compare les champs de vitesse et de
+concentration issus de la méthode Stokes Fourier décrite ci-dessus
+et ceux obtenus avec la méthode 3D standard du chapitre
+\ref{chap:populations}. La méthode 3D standard fournit une
+concentration $c$ dépendante du temps. Dans la suite, la concentration
+est celle calculée à $t = \num{1e4}\si{\second}$.
+
+Le parallélépipède rectangle $\Omega$ défini par (\ref{eq:domain}) est
+contenu dans la partie fluide de la cuve, dans notre cas $\Omega = (0,
+\num{13.8})\times(0,\num{3.26})\times(0,\num{0.18})$. Le plan $x_3 =
+0$ coïncide avec la face supérieure de la cathode qui est en contacte
+avec l'aluminium liquide. On considère finalement la restriction à
+$\Omega$ du champ de force $f = j\times B$ correspondant aux forces de
+Lorentz calculées à l'aide du modèle 3D standard.
+
+La figure \ref{fig:harmonic-force-h} représente l'intensité et la
+direction du champ de force $f$ dans le plan $x_3 = \thickness / 2$,
+à mi-hauteur entre les anodes et la cathode. Nous utiliserons ce champ
+de force pour calculer $u_{h,K}^\mathrm{SF}$ définie par
+(\ref{eq:u-h-12}), (\ref{eq:u-h-3}).
+
+On choisit une triangulation de $\Lambda$ de sorte à ce que la taille
+des mailles des deux calculs (Stokes-Fourier et méthode 3D standard)
+soient comparables, soit $h = \num{0.69}$. La moyenne $\bar{c}$ dans
+(\ref{eq:stat-alumina-avg-c}) est fixée à 3\% masse, identique à la
+concentration d'alumine dissoute initiale dans le modèle de transport
+et dissolution décrit dans le chapitre 2. Dans
+(\ref{eq:stat-alumina-consommation}), le courant électrique total $I =
+\num{320000}\si{\ampere}$. Les différentes grandeurs physiques qui
+interviennent dans ce modèle ont déjà été introduites dans le tableau
+\ref{tab:dissolution-physical-parameters}. La figure
+\ref{fig:harmonic-concentration} représente les champs
+$u^{\mathrm{SF}}$, $c^\mathrm{SF}$, $u^\mathrm{F3D}$ et $c^{F3D}$ dans
+le plan $x_3 = \thickness / 2$.
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+          colorbar,
+          hide axis,
+          scale only axis,
+          height=0.41\rasterimagewidth,
+          width=\rasterimagewidth,
+          colorbar horizontal,
+          point meta min=0.11,
+          point meta max=198.96,
+          colorbar style={
+            title=Force $f$ [\si{\newton\per\cubic\meter}],
+            width=7.4cm,
+            height=0.3cm,
+            xtick={0.11, 50, 100, 150, 198.96},
+            at={(0.5\rasterimagewidth,0.4cm)},
+            anchor=north
+          }
+        ]
+        \addplot [] coordinates {(0,0)};
+        \node (myfirstpic) at (0,0) {\includegraphics[width=\rasterimagewidth]{../media/fourier/application/print/force-h.png}};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{Champ de force $f$ dans le fluide issus du modèle 3D standard.}
+    \label{fig:harmonic-force-h}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\rasterimagewidth]{{../media/populations/ap32-fluid-flow/print/acd-all-anodes-velocity-0.00-0.05}.png}\\
+    \begin{tikzpicture}
+      \begin{axis}[
+          colorbar,
+          hide axis,
+          scale only axis,
+          height=0.41\rasterimagewidth,
+          width=\rasterimagewidth,
+          colorbar horizontal,
+          point meta min=0.0,
+          point meta max=6.0,
+          colorbar style={
+            title=Vitesse $u_{h,K}^\mathrm{SF}$ [\si{\centi\meter\per\second}],
+            width=7.4cm,
+            height=0.3cm,
+            xtick={0.0, 3.0, 6.0},
+            at={(0.5\rasterimagewidth,0.4cm)},
+            anchor=north
+          }
+        ]
+        \addplot [] coordinates {(0,0)};
+        \node (myfirstpic) at (0,0) {\includegraphics[width=\rasterimagewidth]{../media/fourier/application/print/all-velocity-harm.png}};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{Champ de vitesse stationnaire $u_h^{F3D}$ (haut) et
+      $u_{h,K}^\mathrm{SF}$ reconstruit selon les équations
+      (\ref{eq:u-h-12}), (\ref{eq:u-h-3}) (bas).}
+    \label{fig:harmonic-velocity}
+  \end{center}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\rasterimagewidth]{{../media/fourier/application/print/all-concentration-acd}.png}\\
+    \begin{tikzpicture}
+      \begin{axis}[
+          colorbar,
+          hide axis,
+          scale only axis,
+          height=0.41\rasterimagewidth,
+          width=\rasterimagewidth,
+          colorbar horizontal,
+          point meta min=1.73,
+          point meta max=6.84,
+          colorbar style={
+            title=Concentration $c$ [w\%],
+            width=7.4cm,
+            height=0.3cm,
+            xtick={1.73, 3.0, 5.0, 6.84},
+            at={(0.5\rasterimagewidth,0.4cm)},
+            anchor=north
+          }
+        ]
+        \addplot [] coordinates {(0,0)};
+        \node (myfirstpic) at (0,0) {\includegraphics[width=\rasterimagewidth]{../media/fourier/application/print/all-concentration-harm.png}};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{Champ de concentration stationnaire $c_h^\mathrm{F3D}$
+      (haut) et $c_{h}^\mathrm{SF}$
+      solution de l'équation (\ref{eq:stat-concentration}) (bas).}
+    \label{fig:harmonic-concentration}
+  \end{center}
+\end{figure}
+
+
+\subsection{Désactivation d'anodes}
+On s'intéresse maintenant au cas du calcul de l'écoulement des
+fluides et de la concentration d'alumine dissoute dans le bain
+électrolytique lorsqu'on désactive une anode, c'est-à-dire que
+l'une des anodes du plan anodique n'est pas conductrice
+électriquement. Cette situation a lieu en pratique lorsqu'une anode
+en fin de vie est remplacée par une anode neuve, mais froide. Sa
+conductivité électrique quasi-nulle initialement, augmente au fur
+et à mesure que l'anode atteint sa température d'opération. Dans
+cette partie, on dénotera conjointement le modèle d'écoulement stationnaire
+évoqué dans le chapitre \ref{chap:populations} et le
+modèle de transport et dissolution d'alumine décrit dans le
+chapitre \ref{chap:dissolution} par l'abréviation F3D. Dans cette
+partie, on considérera uniquement une dissolution des particules
+d'alumine indépendante de la température, c'est-à-dire que le champ
+$c^\mathrm{F3D}$ est calculé avec le modèle 3D standard en
+désactivant la dépendance de la vitesse de dissolution par rapport
+à la température du bain.
+
+Dans le modèle F3D, on peut simuler la désactivation d'une anode en
+annulant la conductivité électrique $\conductivity$ dans le volume
+occupé par ladite anode. On a donc la densité de courant $j =
+\conductivity\parent{\nabla \phi + u^\mathrm{F3D}}$, $\div j = 0$,
+où $\phi$ est le potentiel électrique, $u^\mathrm{F3D}$
+l'écoulement des fluides solution des équations de Navier-Stokes,
+$B$ le champ d'induction magnétique solution des équations de
+Maxwell et la force $f = j\times B$. Dans le modèle SF, on pose $f =
+0$ sous les anodes, voir figure \ref{fig:anode-deactivation}.
+
+\begin{figure}
+  \begin{center}
+    %\input{../media/fourier/anode-deactivation/anode-deactivation.tex}
+    \caption{Désactivation d'une anode dans le modèle standard 3D et
+      le modèle SF.}
+    \label{fig:anode-deactivation}
+  \end{center}
+\end{figure}
+La figure \ref{fig:f3d-deactivated} présente
+le champ de vitesse stationnaire du bain électrolytique dans l'ACD de
+la cuve AP32, pour quatre configurations différentes du plan
+anodique, soit les anodes $(1,1)$, $(1,2)$, $(2,1)$ et $(2,2)$
+successivement désactivées. On se réfère à la figure
+\ref{fig:anode-numerotations} pour le placement de chacune de ces anodes. On
+trouve sur la même figure les champs de concentration d'alumine
+associées.
+
+\begin{figure}
+  \begin{center}
+    \input{../media/fourier/anode-numerotations/anode-numerotation.pdf_tex}
+    \caption{Numérotation des anodes de la cuve AP32.}
+    \label{fig:anode-numerotations}
+  \end{center}
+\end{figure}
+
+% comparaison side-by-side entre la vitesse d'ecoulement stationnaire
+% et la concentration stationnaire avec le modele Full3D.
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \includegraphics[width=0.9\textwidth]{../media/fourier/application/print/ab-0-1-velocity-acd.png}     \includegraphics[width=0.9\textwidth]{../media/fourier/application/print/ab-0-2-velocity-acd.png}
+        \includegraphics[width=0.9\textwidth]{../media/fourier/application/print/ab-1-1-velocity-acd.png}
+        \includegraphics[width=0.9\textwidth]{../media/fourier/application/print/ab-1-2-velocity-acd.png}
+        \begin{tikzpicture}
+          \begin{axis}[
+              colorbar,
+              hide axis,
+              scale only axis,
+              height=0.41\textwidth,
+              width=0.5\textwidth,
+              colorbar horizontal,
+              point meta min=0.0,
+              point meta max=6.0,
+              colorbar style={
+                title=Vitesse $u_h$ [\si{\centi\meter\per\second}],
+                width=4cm,
+                height=0.3cm,
+                xtick={0.0, 3.0, 6.0},
+                at={(0.5\textwidth,0.4cm)},
+                anchor=north
+              }
+            ]
+            \addplot [] coordinates {(0,0)};
+            \node (myfirstpic) at (0,0) {};
+          \end{axis}
+        \end{tikzpicture}
+        \caption{Champ de vitesse stationnaire $u$ dans l'ACD de la cuve
+          AP32.}
+      \end{center}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+            \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-1-concentration-acd.png}     \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-2-concentration-acd.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-1-concentration-acd.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-2-concentration-acd.png}
+        \begin{tikzpicture}
+          \begin{axis}[
+              colorbar,
+              hide axis,
+              scale only axis,
+              height=0.41\textwidth,
+              width=0.5\textwidth,
+              colorbar horizontal,
+              point meta min=2.26,
+              point meta max=5.43,
+              colorbar style={
+                title=Concentration $c$ [w\%],
+                width=4cm,
+                height=0.3cm,
+                xtick={2.26, 4, 5.43},
+                at={(0.5\textwidth,0.4cm)},
+                anchor=north
+              }
+            ]
+            \addplot [] coordinates {(0,0)};
+            \node (myfirstpic) at (0,0) {};
+          \end{axis}
+        \end{tikzpicture}
+        \caption{Champ de concentration $c$ dans l'ACD de la cuve AP32.}
+      \end{center}
+    \end{subfigure}
+    \caption{Champs de vitesse stationnaire $u$ dans l'ACD de la cuve
+      AP32 pour différentes configuration du plan anodique. Les
+      anodes désactivées sont respectivement, de haut en bas les
+      anodes $(1,1)$, $(1,2)$, $(2,1)$ et $(2,2)$. Sur la droite, on a
+    les champs de concentration d'alumine dissoute dans l'ACD de la
+    cuve AP32, correspondant aux différents champs de vitesse.}
+    \label{fig:f3d-deactivated}
+  \end{center}
+\end{figure}
+
+Pour évaluer l'effet des approximations introduites par le modèle
+SF par rapport au modèle F3D, on compare les champs de vitesse $u_h$
+obtenu avec le modèle SF en utilisant le champ de force $f$ calculé
+avec le modèle F3D. Sur la figure \ref{fig:harmonic-velocity-comp}
+on peut comparer les champs de vitesse $u$ et $u_h$ obtenu avec l'un
+ou l'autre des modèles dans l'ACD ou dans le domaine $\Omega$.
+
+% Comparaison entre les schemas numerique pour la vitesse d'ecoulement stationnaire
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \includegraphics[width=0.9\textwidth]{../media/fourier/application/print/ab-0-1-velocity-acd.png}
+        \includegraphics[width=0.9\textwidth]{../media/fourier/application/print/ab-0-2-velocity-acd.png}
+        \includegraphics[width=0.9\textwidth]{../media/fourier/application/print/ab-1-1-velocity-acd.png}
+        \includegraphics[width=0.9\textwidth]{../media/fourier/application/print/ab-1-2-velocity-acd.png}
+        \begin{tikzpicture}
+          \begin{axis}[
+              colorbar,
+              hide axis,
+              scale only axis,
+              height=0.41\textwidth,
+              width=0.5\textwidth,
+              colorbar horizontal,
+              point meta min=0.0,
+              point meta max=6.0,
+              colorbar style={
+                title=Vitesse $u_h$ [\si{\centi\meter\per\second}],
+                width=4cm,
+                height=0.3cm,
+                xtick={0.0, 3.0, 6.0},
+                at={(0.5\textwidth,0.4cm)},
+                anchor=north
+              }
+            ]
+            \addplot [] coordinates {(0,0)};
+            \node (myfirstpic) at (0,0) {};
+          \end{axis}
+        \end{tikzpicture}
+        \caption{Champ de vitesse stationnaire $u_h$ dans l'ACD de la cuve
+          AP32.}
+      \end{center}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-1-velocity-harm.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-2-velocity-harm.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-1-velocity-harm.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-2-velocity-harm.png}
+        \begin{tikzpicture}
+          \begin{axis}[
+              colorbar,
+              hide axis,
+              scale only axis,
+              height=0.41\textwidth,
+              width=0.5\textwidth,
+              colorbar horizontal,
+              point meta min=0.0,
+              point meta max=6.0,
+              colorbar style={
+                title=Vitesse $u_h$ [\si{\centi\meter\per\second}],
+                width=4cm,
+                height=0.3cm,
+                xtick={0.0, 3.0, 6.0},
+                at={(0.5\textwidth,0.4cm)},
+                anchor=north
+              }
+            ]
+            \addplot [] coordinates {(0,0)};
+            \node (myfirstpic) at (0,0) {};
+          \end{axis}
+        \end{tikzpicture}
+        \caption{Vitesse d'écoulement $u_h$ obtenue avec le schéma
+        numérique SF sur une surface à mi-hauteur dans le domaine $\Omega$.}
+      \end{center}
+    \end{subfigure}
+    \caption{}
+    \label{fig:harmonic-velocity-comp}
+  \end{center}
+\end{figure}
+
+L'objectif final est de calculer le champs de concentration d'alumine
+dans le bain électrolytique. Sur la figure
+\ref{fig:harmonic-concentration-comp}, on compare les champs de
+concentration $c$ obtenus avec le modèle F3D et le champ de
+concentration stationnaire dans le domaine $\Omega$ avec le modèle
+SF.
+
+% Comparaison entre les schema numerique de concentration
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-1-concentration-acd.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-2-concentration-acd.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-1-concentration-acd.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-2-concentration-acd.png}
+        \begin{tikzpicture}
+          \begin{axis}[
+              colorbar,
+              hide axis,
+              scale only axis,
+              height=0.41\textwidth,
+              width=0.5\textwidth,
+              colorbar horizontal,
+              point meta min=2.26,
+              point meta max=5.43,
+              colorbar style={
+                title=Concentration $c$ [w\%],
+                width=4cm,
+                height=0.3cm,
+                xtick={2.26, 4, 5.43},
+                at={(0.5\textwidth,0.4cm)},
+                anchor=north
+              }
+            ]
+            \addplot [] coordinates {(0,0)};
+            \node (myfirstpic) at (0,0) {};
+          \end{axis}
+        \end{tikzpicture}
+        \caption{Champ de concentration $c$ dans l'ACD de la cuve AP32.}
+      \end{center}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-1-concentration-harm.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-2-concentration-harm.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-1-concentration-harm.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-2-concentration-harm.png}
+        \begin{tikzpicture}
+          \begin{axis}[
+              colorbar,
+              hide axis,
+              scale only axis,
+              height=0.41\textwidth,
+              width=0.5\textwidth,
+              colorbar horizontal,
+              point meta min=1.73,
+              point meta max=6.84,
+              colorbar style={
+                title=Concentration $c$ [w\%],
+                width=4cm,
+                height=0.3cm,
+                xtick={1.73, 3.0, 5.0, 6.84},
+                at={(0.5\textwidth,0.4cm)},
+                anchor=north
+              }
+            ]
+            \addplot [] coordinates {(0,0)};
+            \node (myfirstpic) at (0,0) {};
+          \end{axis}
+        \end{tikzpicture}
+        \caption{Champ de concentration $c$ obtenu avec le schéma
+          numérique SF sur une surface à mi-hauteur du domaine $\Omega$.}
+      \end{center}
+    \end{subfigure}
+    \caption{Champ de concentration obtenu avec le modèle F3D
+      (\textbf{gauche}) dans les différentes configurations
+      anodiques, et la concentration d'alumine stationnaire obtenue
+      avec le modèle SF (\textbf{droite}).}
+    \label{fig:harmonic-concentration-comp}
+  \end{center}
+\end{figure}
+
+L'objectif du modèle étant d'obtenir une approximation du champ de
+vitesse et du champ de concentration à moindre coût, on veut
+éviter à tout prix de devoir utiliser le modèle F3D pour obtenir
+le champ de force en fonction de la configuration du plan anodique. A
+la place, on effectue un calcul de la force que l'on note $f^0$ avec
+le modèle F3D dans la configuration où toutes les anodes sont
+actives. La force $f^0$ est représentée sur la figure \ref{fig:harmonic-force-h}.
+
+Lorsqu'une anodes est désactivée, elle ne conduit plus le courant
+électrique, et par conséquent la densité de courant électrique
+responsable de la force de Lorentz dans le fluide est fortement
+réduite sous l'anode concernée.
+
+On propose d'approximer le champ de force $f$ à partir de $f^0$ en
+annulant celle-ci dans la région située sous l'anode
+désactivée. Sur la figure
+\ref{fig:harmonic-concentration-comp-fc}, on peut comparer les champs
+de concentration dans les différentes configurations anodique entre
+le modèle F3D et le modèle SF.
+
+
+% Comparaison entre les schema numerique de concentration, FC
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-1-concentration-acd.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-2-concentration-acd.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-1-concentration-acd.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-2-concentration-acd.png}
+        \begin{tikzpicture}
+          \begin{axis}[
+              colorbar,
+              hide axis,
+              scale only axis,
+              height=0.41\textwidth,
+              width=0.5\textwidth,
+              colorbar horizontal,
+              point meta min=2.26,
+              point meta max=5.43,
+              colorbar style={
+                title=Concentration $c$ [w\%],
+                width=4cm,
+                height=0.3cm,
+                xtick={2.26, 4, 5.43},
+                at={(0.5\textwidth,0.4cm)},
+                anchor=north
+              }
+            ]
+            \addplot [] coordinates {(0,0)};
+            \node (myfirstpic) at (0,0) {};
+          \end{axis}
+        \end{tikzpicture}
+        \caption{Champ de concentration $c_h^\mathrm{F3D}$ dans l'ACD de la cuve AP32.}
+      \end{center}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-1-concentration-harm-fc.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-2-concentration-harm-fc.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-1-concentration-harm-fc.png}
+        \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-2-concentration-harm-fc.png}
+        \begin{tikzpicture}
+          \begin{axis}[
+              colorbar,
+              hide axis,
+              scale only axis,
+              height=0.41\textwidth,
+              width=0.5\textwidth,
+              colorbar horizontal,
+              point meta min=1.73,
+              point meta max=6.84,
+              colorbar style={
+                title=Concentration $c$ [w\%],
+                width=4cm,
+                height=0.3cm,
+                xtick={1.73, 3.0, 5.0, 6.84},
+                at={(0.5\textwidth,0.4cm)},
+                anchor=north
+              }
+            ]
+            \addplot [] coordinates {(0,0)};
+            \node (myfirstpic) at (0,0) {};
+          \end{axis}
+        \end{tikzpicture}
+        \caption{Champ de concentration $c_h^\mathrm{SF}$ sur le plan
+          $x_3 = \thickness / 2$.}
+      \end{center}
+    \end{subfigure}
+    \caption{Champ de concentration $c_h^\mathrm{F3D}$ dans l'ACD de
+      la cuve AP32 (\textbf{gauche}), et $c_h^\mathrm{SF}$ sur le plan
+      $x_3 = \thickness / 2$ (\textbf{droite}). La force $f$ utilisée
+      pour le calcul de $u$ dans la colonne de droite est construite à
+      partir de $f^0$, qui est annulée sous l'anode désactivée.}
+    \label{fig:harmonic-concentration-comp-fc}
+  \end{center}
+\end{figure}

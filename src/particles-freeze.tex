@@ -243,7 +243,8 @@ $\temperature$ de la manière suivante:
   \right.
 \end{equation}
 La fonction $\beta$ est représentée sur la figure \ref{fig:beta}. Pour
-les besoins de la représentation, on a choisi ici $\tliq = 1218\si{\kelvin}$.
+les besoins de la représentation, on a choisi ici $\tliq =
+\num{1218}\si{\kelvin}$ et $\fusionenthalpy = \num{5.508e5}$.
 \begin{figure}
   \begin{center}
     \input{../media/particles/beta/beta.tex}
@@ -265,7 +266,7 @@ telles que:
   & \forall (t, x) \in [0,\infty)\times
     \Omega,\label{eq:heat-one-phase}\\
   & \temperature = \beta(\enthalpydensity),
-    &\forall (t, x) \in [0,\infty)\times,\label{eq:heat-temperature-enthalpy}\\
+    &\forall (t, x) \in [0,\infty)\times \Omega,\label{eq:heat-temperature-enthalpy}\\
   & \temperature = \temperature_\mathrm{D}, %
   & \forall (t, x) \in [0,\infty)\times \Gamma_\mathrm{D},\label{eq:heat-one-phase-dirichlet}\\
   & \frac{\partial \temperature}{\partial \nu} = \temperature_\mathrm{N}, %
@@ -308,10 +309,9 @@ et soit $\Gamma_{tx}$ dans l'espace-temps:
 \end{equation}
 Soit $\nu_{tx}$ la normale unité à $\Gamma_{tx}$ dirigée vers
 $\Lambda_2$, on note $\nu_t$, $\nu_x$ les composantes temporelles et
-spatiales de $\nu_{tx}$, \ie, $\nu_{tx} = (\nu_t, \nu_x)^t$. Soit
-$\enthalpydensity$, $\temperature$ solutions faibles du problème de
-Stefan
-(\ref{eq:heat-one-phase})-(\ref{eq:heat-temperature-enthalpy}). On
+spatiales de $\nu_{tx}$, \ie, $\nu_{tx} = (\nu_t, \nu_x)^t$. Soient
+$\enthalpydensity$, $\temperature$ qui satisfont au sens faible les équations
+(\ref{eq:heat-one-phase}) à (\ref{eq:heat-temperature-enthalpy}). On
 note le $v = (\enthalpydensity, -\electrolytetdiff\nabla
 \temperature)^t$. L'équation (\ref{eq:heat-one-phase}) s'écrit donc:
 \begin{equation}\label{eq:space-time-divergence}
@@ -328,58 +328,11 @@ on doit avoir:
 ce qui est équivalent à (\ref{eq:stefan-condition}) avec $\nu =
 \frac{\nu_x}{\abs{\nu_x}}$ et $v_\Gamma = \frac{\nu_t}{\nu_x}$.
 
-
-%%Au sens faible,
-%%l'équation (\ref{eq:space-time-divergence}) s'écrit:
-%%\begin{equation}\label{eq:one-phase-weak-space-time}
-%%  \int_\Lambda v\cdot \nabla g\,\intd{x}\intd{t} = 0, \quad \forall g\in C^\infty_0(\Lambda),
-%%\end{equation}
-%%où $C^\infty_0(\Lambda)$ et l'ensemble des fonctions infiniment
-%%dérivables à support compact et nulles sur le bord $\partial\Lambda$.
-%%En supposant que $\enthalpydensity$ et $\temperature$ sont suffisamment
-%%régulière sur $\Lambda_1$ et $\Lambda_2$ et en utilisant le
-%%théorème de la divergence dans l'espace-temps, l'intégrale
-%%(\ref{eq:one-phase-weak-space-time}) se réécrit:
-%%\begin{equation}\label{eq:one-phase-space-time}
-%%  -\int_{\Lambda_1} \div v g\,\intd{x}\intd{t} + \int_{\partial \Lambda_1}gv\cdot \nu_1\intd{\sigma}
-%%  - \int_{\Lambda_2}\div v g\,\intd{x}\intd{t} + \int_{\partial \Lambda_2}gv\cdot \nu_2\intd{\sigma}
-%%  = 0, \quad \forall g\in C^\infty_0(\Lambda).
-%%\end{equation}
-%%
-%%En choisissant la fonction test $g$ telle que $\supp(g) \subset
-%%\Lambda_1$ ou $\supp(g)\subset \Lambda_2$, on déduit que les restrictions de
-%%$\temperature$ aux domaines $\Lambda_1$ et $\Lambda_2$ satisfont les
-%%équations (\ref{eq:heat-solid-phase}), (\ref{eq:heat-liquid-phase}) au
-%%sens fort.
-%%
-%%On choisit maintenant $g$ telle que $\supp(g)\subset \Lambda$, $\supp
-%%g\cap\Gamma_{xy} \neq\emptyset$. Puisque seule l'intégrale sur
-%%l'interface $\Gamma_{tx}$ subsiste, et que $\nu_1 = -\nu_2$ sur $\Gamma_{tx}$, l'expression
-%%(\ref{eq:one-phase-space-time}) se réduit à:
-%%\begin{equation}
-%%\int_{\Gamma_{tx}} g\jump{v}\cdot \nu_1\intd{\sigma} = 0.
-%%\end{equation}
-%%On a donc $\jump{v}\cdot \nu_1 = 0$ sur tout $\Gamma_{tx}$, c'est-à-dire
-%%que:
-%%\begin{align}
-%%  &\jump{\enthalpydensity}\nu_t = - \jump{\nabla \beta(\enthalpydensity)}\nu_x,\\
-%%  \Rightarrow &\jump{\enthalpydensity}\frac{\nu_t}{\abs{\nu_x}} = - \jump{\nabla \beta(\enthalpydensity)}\frac{\nu_x}{\abs{\nu_x}}.\\
-%%\end{align}
-%%Puisque $\frac{\nu_t}{\abs{\nu_x}} = v_\Gamma$,
-%%$\frac{\nu_x}{\abs{\nu_x}}$ est la normale unité à l'interface
-%%$\Gamma(t)$ et $\jump{\enthalpydensity} = \fusionenthalpy$, on retrouve
-%%bien la condition de Stefan (\ref{eq:stefan-condition}).
-
 Le lecteur intéressé par les aspects fonctionnels liés à cette
 équivalence peut consulter le travail de thèse de
 P.-A. Gremaud \cite{Gremaud1991}, ou l'ouvrage de J. Hill
 \cite{HillStefanProblems}.
-%\footnote{Ou plutôt le livre rouge, sur
-%l'étagère en bas au fond à droite de la bibliothèque de
-%mathématique...}
 
-% discrétisation: symétrie sphérique ou plane, discrétisation en temps,
-%  discrétisation en espace.
 \paragraph{Schéma de discrétisation en temps}
 Pour obtenir un schéma de discrétisation en temps du problème de
 Stefan, on part de la formulation enthalpique
@@ -421,14 +374,33 @@ avec la correction pour la densité d'enthalpie à chaque pas de temps:
 
 Ce schéma numérique basé sur la formule de Chernoff
 (\ref{eq:chernoff-update}) a été proposé par M. Paolini
-\cite{Paolini1988}. On décrit maintenant la discrétisation en
-espace des équations (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}).
+\cite{Paolini1988}.
 
+\begin{remarque}
+  Le schéma formé par les équations (\ref{eq:chernoff-heat}) à
+  (\ref{eq:chernoff-update}) peut être interprété comme un
+  schéma d'Euler implicite en temps associée à un développement
+  limité au premier ordre de (\ref{eq:heat-temperature-enthalpy}). En
+  effet, (\ref{eq:chernoff-heat}) se réecrit
+  \begin{equation}
+    \mu \frac{\temperature^{n+1} - \beta(\enthalpydensity^n)}{\tau} -
+    \div\parent{\electrolytetdiff \nabla \temperature^{n+1}} = 0,
+  \end{equation}
+  ce qui correspond à
+  \begin{equation}
+    \frac{\enthalpydensity^{n+1} - \enthalpydensity^n}{\tau} -
+    \div\parent{\electrolytetdiff \nabla \temperature^{n+1}} = 0
+  \end{equation}
+  en utilisant (\ref{eq:chernoff-update}).
+\end{remarque}
+
+On décrit maintenant la discrétisation en
+espace des équations (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}).
 
 \paragraph{Formulations faibles en coordonnées sphériques}
 La formulation faible du système d'équations
-(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) consiste, $\forall
-n\leq N$, à chercher une fonction $\temperature^{n+1}:\Omega\to\mathbb R$
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) consiste $\forall
+n\leq N$ à chercher une fonction $\temperature^{n+1}:\Omega\to\mathbb R$
 à symétrie sphérique telle que la relation:
 \begin{equation}\label{eq:weak-form-cart-coord}
   \int_\Omega \temperature^{n+1} v\,\intd{x} + \frac{\tau}{\mu} %
@@ -443,29 +415,12 @@ On tire parti de la symétrie sphérique du système formé par la
 particule et le bain environnant en reformulant maintenant le
 problème (\ref{eq:weak-form-cart-coord}) en coordonnées sphériques.
 
-%%Soit $\Phi:[0,\infty)\times[0,2\pi)\times[0,\pi)\to\mathbb R^3$ le
-%%changement de variable de coordonnées sphériques en coordonnées
-%%cartésiennes défini par:
-%%\begin{equation}
-%%  \Phi(r, \psi, \phi) = \begin{pmatrix}
-%%    r\cos\psi\sin\phi\\
-%%    r\sin\psi\sin\phi\\
-%%    r\cos\phi
-%%  \end{pmatrix},
-%%\end{equation}
-%%dont le jacobien de $\Phi$ est donné par:
-%%\begin{equation}\label{eq:spherical-jacobian}
-%%  \det J_\Phi(r, \psi,\phi) = -r^2\sin\phi.
-%%\end{equation}
-%%On note $\hat e_r$, $\hat e_\psi$ et $\hat e_\phi$ les vecteurs de la
-%%base standard orthonormée associée au système de coordonnée sphérique.
-
 On note d'un tilde la composante radiale d'une fonction à symétrie
 sphérique, c'est-à-dire que si une fonction $f:\mathbb
 R^3\to\mathbb R$ est à symétrie sphérique, alors on note $\tilde
 f:\mathbb \rplus\to\mathbb R$ la fonction telle que
 \begin{equation}\label{eq:spherical-symmetry}
-  \tilde f\parent{\sqrt{x_1^2 + x_2^2 + x_3^2}} = f(x_1, x_2,
+  \tilde f(r) \equiv\tilde f\parent{\sqrt{x_1^2 + x_2^2 + x_3^2}} = f(x_1, x_2,
   x_3)\quad \forall(x_1, x_2,x_3)\in\mathbb R^3.
 \end{equation}
 Le gradient de la fonctions $f$ en coordonnées sphérique s'écrit selon
@@ -483,7 +438,7 @@ que la condition initiale $\tinit$ pour la température, sont à
 symétrie sphérique, \ie, elle ne dépendent que de $r$ et
 éventuellement $t$.
 
-Sous ces hypothèses, on cherche une solution au problème de Stefan
+Sous ces hypothèses, on cherche une solution du problème de Stefan
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}) en
 utilisant le schéma de Chernoff
 (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}) qui soit également
@@ -529,47 +484,21 @@ formes faibles proviennent de l'élément de volume en
 coordonnées sphériques $4\pi r^2\intd{r}$.
 
 \paragraph{Discrétisation en espace}
-On considère une subdivision uniforme de l'intervalle $[0, \rmax]$, et
-on note $\delta$ taille des éléments de la subdivision. Pour
-discrétiser les problèmes faibles
+Soit un entier $M$. On considère une subdivision uniforme de
+l'intervalle $[0, \rmax]$, et on note $\delta = \rmax/M$ la taille des
+éléments de la subdivision. On pose $r_0 = 0$ et $r_{i+1} = r_i +
+\delta$, $i = 0,2,\dots, M-1$ . Pour discrétiser les problèmes faibles
 (\ref{eq:weak-form-spher-coord-dirichlet}),
 (\ref{eq:weak-form-spher-coord-neumann}) on utilise une méthode
-éléments finis Lagrange, continue et linéaire par morceau. Les
-intégrales qui interviennent dans les expressions
-(\ref{eq:weak-form-spher-coord-dirichlet}),
+d'éléments finis Lagrange, continue et linéaire par morceaux sur
+chaque intervalle $[r_i, r_{i+1}]$. Les intégrales qui interviennent
+dans les expressions (\ref{eq:weak-form-spher-coord-dirichlet}),
 (\ref{eq:weak-form-spher-coord-neumann}) sont approchées numériquement
 par une formule de quadrature de Gauss à 3 points.
-
-
-%%On donne maintenant la discrétisation du problème faible
-%%(\ref{eq:weak-form-spher-coord}) par une méthode de Galerkin. Soit un
-%%réel $\delta$ tel que $0 < \delta < \rmax$, et une subdivision
-%%$\mathcal T_\delta$ de l'intervalle $[0, \rmax]$, telle que pour tout
-%%élément $K\in\mathcal T_\delta$ son diamètre $\diam(K)$ soit borné par
-%%$\delta$.
-%%
-%%On définit l'espace éléments finis
-%%\begin{equation}
-%%V_\delta = \cparent{v \in C^0(0, \rmax)\mid v\vert_K \in \mathbb
-%%  P_1(K)\ \forall K\in\mathcal T_h},
-%%\end{equation}
-%%où $\mathbb P_1(K)$ est l'espace des polynômes de degré 1 sur
-%%l'intervalle $K$.
-%%
-%%Pour tout $n \leq N$, on note $\tilde \temperature_\delta^{n+1} \in
-%%V_\delta$ une approximation de la fonction $\tilde \temperature_\delta^{n+1}$.
-%%L'approximation de Galerkin du problème faible (\ref{eq:weak-form-spher-coord})
-%%consiste à chercher une fonction $\tilde \temperature_\delta^{n+1} \in
-%%V_\delta$ telle que la relation
-%%\begin{multline}\label{eq:galerkin-weak-form-spher-coord}
-%%  4\pi\int_0^{\rmax} \tilde \temperature_\delta^{n+1}\tilde v_\delta r^2\,\intd{r}
-%%  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \frac{\partial %
-%%    \tilde \temperature_\delta^{n+1}}{\partial r} \frac{\partial \tilde v_\delta}{\partial %
-%%    r}r^2\,\intd{r} \\
-%%  - \frac{\abs{\Gamma_N}}{\rmax^2}\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v_\delta(\rmax) %
-%%  = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity_\delta^n)\tilde v_\delta r^2\,\intd{r},
-%%\end{multline}
-%%soit vérifiée pour tout $v_\delta \in V_\delta$.
+A chaque pas de temps $n$, la fonction $\enthalpydensity^{n+1}$ est
+approximée par l'interpolant de Lagrange du membre de droite de
+(\ref{eq:chernoff-update}) aux noeuds du maillage $r_i$, $i =
+0,1,\dots, N$.
 
 \paragraph{Un test exact du problème de Stefan à symétrie plane}
 On propose de valider l'implémentation du schéma numérique de
@@ -581,29 +510,55 @@ discrétisation en temps
 convergence de l'erreur entre une solution exacte du problème de
 Stefan classique et de son approximation numérique.
 
-Un certain nombre de solutions exactes du problème de Stefan
-classique sont connues. On décrit à présent l'une d'elles, découverte en
-premier par J. Neumann. Cette solution a l'avantage de correspondre à
-une situation physique que l'on peut facilement interpréter.
+Un certain nombre de solutions exactes du problème de Stefan classique
+sont connues. On décrit à présent l'une d'elles, découverte par
+F. Neumann\footnote{Franz Neumann est un mathématicien allemand. Sa
+  solution au problème de Stefan figure dans des notes de cours donnés
+  au début des années 1860 \cite{HillStefanProblems}.}. Cette solution
+a l'avantage de correspondre à une situation physique suivante que
+l'on peut facilement interpréter.  Un matériau, qui présente une
+transition entre les phases solide et liquide à $\tliq = 0$, occupe le
+demi espace $\cparent{(x_1, x_2, x_3)\in \mathbb R^3 \mid x_1 >
+  0}$. Ce matériau est initialement dans l'état liquide à la
+température $\temperature = \tliq$. Au temps initial, on le met en
+contact sur le bord $\cparent{(x_1, x_2, x_3)\in\mathbb R^3 \mid x_1 =
+  0}$ avec un réservoir thermique à température constante
+$\temperature = -1$. Au cours de l'évolution temporelle, un front de
+transition de phase, de liquide à solide, se propage dans le
+matériau. Pour des raisons de symétrie, le front de transition reste
+en tout temps parallèle au bord $\cparent{(x_1, x_2, x_3)\in\mathbb
+  R^3 \mid x_1 = 0}$.
 
-On considère le problème de Stefan classique formé par les équations
+Nous utiliserons cette solution exacte au paragraphe suivant pour valider le
+schéma de discrétisation des équations
+(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann})
+
+Si, au lieu de définir une symétrie sphérique nous prenons unes
+symétrie planaire, \ie, $\tilde f$ de (\ref{eq:spherical-symmetry})
+est remplacée par $\tilde f(x_1, x_2, x_3) = \tilde{\tilde f}(x_1)$,
+alors il suffit de changer $\intd{r}$ en $\intd{x}$ et de supprimer
+$r^2$ dans les intégrales figurant dans
+(\ref{eq:weak-form-spher-coord-dirichlet}),
+(\ref{eq:weak-form-spher-coord-neumann}). Ainsi, on considère le
+problème de Stefan classique formé par les équations
 (\ref{eq:heat-solid-phase})-(\ref{eq:heat-liquid-phase}), et on fixe
-les données de la manière suivante. On fixe
-$\electrolytehc(\temperature) = 1$ et
+les données de la manière suivante.
+
+
+On fixe $\electrolytehc(\temperature) = 1$ et
 $\electrolytetdiff(\temperature)=1$ $\forall\temperature \in \mathbb
 R$, $\electrolytedensity = 1$, $\fusionenthalpy = 1$ et $\tliq =
 0$. On s'intéresse à la température dans un matériau qui occupe la
-demi-droite positive, c'est-à-dire que $\Omega = \rplus$.
-
-On choisit la condition initiale suivante pour la température
-$\temperature$:
+demi-droite positive, c'est-à-dire que $\Omega = \rplus$. On choisit
+la condition initiale suivante pour la température $\temperature$:
 \begin{equation}
   \temperature(0, x) = 0, \quad \forall x\in\rplus,
 \end{equation}
 et la condition aux limites de Dirichlet sur le bord $\Gamma_\mathrm{D} =
-\cparent{0}$:
+\cparent{0}\cup \cparent{+\infty}$:
 \begin{equation}
-  \temperature(t, 0) = -1, \quad \forall t > 0.
+  \temperature(t, 0) = -1 \quad\text{et}\quad
+  \lim_{x\to\infty}\temperature(t, x) = 0, \quad \forall t > 0.
 \end{equation}
 
 On note $X(t) > 0$ la position du front de solidification à l'instant
@@ -626,10 +581,9 @@ l'équation transcendante:
 \end{equation}
 
 On trouvera les détails de la dérivation de cette solution, entre
-autres, dans l'ouvrage de J. Hill \cite{HillStefanProblems}.
-
-On calcul une approximation numérique de $\gamma$ à l'aide d'une
-itération de Newton, implémentée avec le logiciel MatLAB\textregistered. On obtient
+autres, dans l'ouvrage de J. Hill \cite{HillStefanProblems}. On calcul
+une approximation numérique de $\gamma$ à l'aide d'une itération de
+Newton, implémentée avec le logiciel MatLAB\textregistered. On obtient
 \begin{equation}\label{eq:gamma}
  %\gamma =\num{0.768955338463582}.
   \gamma =\num{0.768955}.
@@ -637,13 +591,13 @@ itération de Newton, implémentée avec le logiciel MatLAB\textregistered. On o
 
 La solution
 (\ref{eq:neumann-sol-solid-phase})-(\ref{eq:neumann-sol-liquid-phase})
-pour la température $\temperature$ s'écrit de manière explicite
-en vue de son évaluation numérique sous la forme suivante:
+pour la température $\temperature$ s'écrit de manière explicite en vue
+de son évaluation numérique sous la forme suivante:
 \begin{equation}\label{eq:neumann-sol}
   \temperature(t, x) = \left\{
   \begin{array}{ll}
-    -\exp\parent{\frac{\gamma}{2}}\sqrt{\frac{\pi\gamma}{2}} %
-    \parent{\erf{\frac{\gamma}{2}} - \erf{\frac{x}{2\sqrt{t}}}}, %
+    -\exp\parent{\displaystyle\frac{\gamma}{2}}\sqrt{\displaystyle\frac{\pi\gamma}{2}} %
+    \parent{\erf{\displaystyle\frac{\gamma}{2}} - \erf{\displaystyle\frac{x}{2\sqrt{t}}}}, %
     & \text{si } x \leq \sqrt{2\gamma t},\\
     0 %
     & \text{sinon,}
@@ -655,7 +609,6 @@ standard définie par:
 \begin{equation}
   \erf(x) = \frac{1}{\sqrt \pi}\int_0^x \exp\parent{-s^2}\,\intd{s}.
 \end{equation}
-
 La solution exacte (\ref{eq:neumann-sol}) est représentée sur la
 figure \ref{fig:neumann-sol} à l'instant $t = 0.5$, avec $\gamma$
 donné par la relation (\ref{eq:gamma}).
@@ -663,40 +616,28 @@ donné par la relation (\ref{eq:gamma}).
 \begin{figure}
   \begin{center}
     \input{../media/particles/remelt/neumann-exact.tex}
-    \caption{Solution exacte de Neumann du problème de Stefan classique
+    \caption{Solution exacte obtenue par F. Neumann du problème de Stefan classique
       (\ref{eq:heat-solid-phase})-(\ref{eq:stefan-condition}), évaluée
       à $t = 0.5$ sur l'intervalle $[0,1]\subset \rplus$.}
     \label{fig:neumann-sol}
   \end{center}
 \end{figure}
 
-D'un point de vue physique, la solution exacte de Neumann correspond à
-la situation suivante. Un matériau, qui présente une transition entre
-les phases solide et liquide à $\tliq = 0$, occupe le demi espace
-$\cparent{(x_1, x_2, x_3)\in \mathbb R^3 \mid x_1 > 0}$. Ce matériau
-est initialement dans l'état liquide à la température $\temperature =
-\tliq$. Au temps initial, on le met en contact sur le bord
-$\cparent{(x_1, x_2, x_3)\in\mathbb R^3 \mid x_1 = 0}$ avec un
-réservoir thermique à température constante $\temperature = -1$. Au
-cours de l'évolution temporelle, un front de transition de phase, de
-liquide à solide, se propage dans le matériau. Pour des raisons de
-symétrie, le front de transition reste en tout temps parallèle au
-bord $\cparent{(x_1, x_2, x_3)\in\mathbb R^3 \mid x_1 = 0}$.
-
-On utilisera cette solution exacte dans la suite pour valider le schéma de
-discrétisation des équations
-(\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}), que l'on
-décrit maintenant.
+Dans le paragraphe suivant, nous utilisons la solution de F. Neumann
+pour valider l'implémentation du schéma numérique correspondant aux
+équations (\ref{eq:chernoff-heat}) à (\ref{eq:chernoff-update}).
 
 \paragraph{Validation numérique}
 Pour valider l'implémentation du schéma numérique
 (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}), on évalue la
 convergence de l'erreur entre la solution exacte définie par la
-relation (\ref{eq:neumann-sol}) et $\temperature^N_\delta$,
-l'approximation de la température à l'instant $T$. Remarquons que
-puisque la solution de Neumann correspond à un problème spatial avec
-une symétrie plane, on omet les facteurs $r^2$ dans la forme faible
-(\ref{eq:weak-form-spher-coord-dirichlet}). On fixe $\mu = L_\beta =
+relation (\ref{eq:neumann-sol}) et $\beta(\enthalpydensity^N_\delta)$,
+l'approximation de la température à l'instant $T$ avec $\delta =
+\rmax/M$ la taille de maille:
+\begin{equation}
+\norm{\beta(\enthalpydensity^N_\delta) - \temperature(T, \cdot)}_{L^2(\mathbb R^+)}
+\end{equation}
+On fixe $\mu = L_\beta =
 1$. On choisit $\Omega = [0, 1] \subset \rplus$ et $T = 0.5$. On
 impose des conditions aux limites de Dirichlet sur le bord de
 $\Omega$, \ie, $\Gamma_\mathrm{D} = \cparent{0, 1}$. On se donne
@@ -708,7 +649,7 @@ $[\num{3.9e-5}, \num{5e-3}]$, et $\delta = O(\tau)$.
   \begin{center}
     \input{../media/particles/remelt/neumann-convergence-h.tex}
     \caption{Erreur $L^2$ entre la solution exacte de Neumann et
-      l'approximation numérique $\temperature^N_\delta$. Pour ce
+      l'approximation numérique $\beta(\enthalpydensity^N_\delta)$. Pour ce
       calcul on a fixé $\mu = 1$.}
     \label{fig:neumann-convergence}
   \end{center}
@@ -716,9 +657,7 @@ $[\num{3.9e-5}, \num{5e-3}]$, et $\delta = O(\tau)$.
 
 On constate sur la figure \ref{fig:neumann-convergence} que l'erreur
 $L^2$ entre la solution exacte et l'approximation numérique converge
-vers 0, avec un ordre approximatif $O(h^{3/4})$.
-
-
+vers 0, avec un ordre approximatif sous-estimé  $O(h^{3/4})$.
 
 
 % application: formation et refonte de bain gele autour d'une
@@ -805,7 +744,7 @@ On définit alors le temps de latence $\tlat(R_p) > 0$, le temps
 nécessaire à ce que l'épaisseur de bain solidifié atteigne à nouveau
 zéro:
 \begin{equation}
-  R_g(\tlat).
+  R_g(\tlat) = 0.
 \end{equation}
 
 \begin{figure}

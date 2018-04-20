@@ -1,0 +1,27 @@
+Dans ce dernier chapitre, nous avons proposé une méthode numérique
+pour calculer l'écoulement de fluides dans un domaine
+$\Omega = \Lambda\times(0,\thickness)$ de $\mathbb R^3$, basée sur une
+décomposition en harmoniques de Fourier des inconnues et des
+méthodes d'éléments finis pour chaque coefficients des séries de
+Fourier. Cette formulation nécessite d'imposer des conditions
+d'adhérence sur les bords verticaux du domaine et des conditions de
+glissement total sur les bords horizontaux.
+
+Une caractésistique essentielle de cette méthode est de calculer une
+approximation de l'écoulement tridimensionnel en résolvant une
+série de problèmes bidimensionnels découplés les uns des autres. Cette
+approche devient de plus en plus intéressante lorsque l'épaisseur du
+domaine $\thickness$ s'approche de 0. En effet, on observe d'une part
+que le temps CPU est essentiellement indépendent de $\thickness$, mais
+en plus l'erreur d'approximation diminue lorsque $\thickness$
+diminue. C'est un clair avantage par rapport à une méthode
+d'éléments finis classiques basée sur un maillage tetraédrique. En
+raison de la péjoration du conditionnement des matrice éléments
+finis lorsque $\thickness$ tend vers 0, \ie, lorsque le rapport
+d'aspect du maillage devient de plus en plus grand, la convergence des
+méthodes iteratives devient de plus en plus lente. De plus, l'erreur
+d'approximation tend accroître lorsque $\thickness$ diminue.
+
+Cette méthode est donc bien adaptée au calcule d'écoulement de
+fluides en couches minces, pour autant que les conditions aux limites
+soient adaptées.
