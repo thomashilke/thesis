@@ -1,7 +1,9 @@
 On répète ici, par soucis de clarté, le système d'équations aux
 dérivées partielles qui correspondent au modèle de transport et
-dissolution d'alumine en fonction de la température (\ref{eq:}). On a $\forall k =
-1, 2, \dots, K$
+dissolution d'alumine en fonction de la température, soit les
+équations (\ref{eq:population-pre-injection} à
+(\ref{eq:population-dissolution}), (\ref{eq:concentration}) et
+(\ref{eq:temperature}). On a $\forall k = 1, 2, \dots, K$
 \begin{align}
   & n_p^k(t, x, r) = 0,
   & 0\leq t < \tau^k,\label{eq:mdl-eq-1}\\
@@ -20,9 +22,31 @@ et
   & \frac{\partial \temperature}{\partial t} + u(x)\cdot\nabla\temperature - \div\parent{\electrolytetdiff(x)\nabla \temperature} = \frac{1}{\electrolytedensity\electrolytehc}\sum_{i = 1}^{3}p_i,
   & \forall t\in(0, T)\label{eq:mdl-eq-5}
 \end{align}
-dans $\Omega$.
+dans $\Omega$. Les termes source de la concentration $\concentration$ sont
+\begin{equation}
+  q_1(x) = -\frac{I}{6\faraday} %
+  \frac{\abs{j(x)}}{\displaystyle\int_\Omega\abs{j(x)}\intd{x}}
+\end{equation}
+et
+\begin{equation}
+  q_2(t, x) = -\sum_{k = 1}^{\bar
+    k(t)}\frac{4\pi\aluminadensity}{[\ce{Al2O3}]}\int_{\rplus}n_p^k(t,
+  x, r)f(r, \concentration(t, x), \temperature(t, x))r^2\,\intd{r}.
+\end{equation}
+Les termes source de la température $\temperature$ sont
+\begin{equation}
+  p_1(t, x) = -\parent{\tinit-\tinj}\sum_{k = 1}^{K}\dirac(t -
+  \tau_k)\int_{\rplus}\aluminadensity\aluminahc\frac{4}{3}\pi r^3 S^k(x, r)\,\intd{r},
+\end{equation}
+\begin{equation}
+  p_2(t, x) = - \aluminadissolutionenthalpy q_2(t, x),
+\end{equation}
+et
+\begin{equation}
+  p_3(x) = \frac{j\cdot j}{\conductivity}.
+\end{equation}
 
-Ces équations forment un système couplé pour les inconnues $n_p^k$,
+Ces équations munies de conditions limites et initiales forment un système couplé pour les inconnues $n_p^k$,
 $\concentration$ et $\temperature$. En effet, la densité de
 particules $n_p$ dépend de la concentration $\concentration$ et de
 la température $\temperature$ par l'intermédiaire de la vitesse de
@@ -32,28 +56,28 @@ sources respectifs $q_2$, $p_1$ et $p_2$.
 
 En suivant l'approche adoptée dans \cite{Hofer2011}, on propose de
 discrétiser les équations (\ref{eq:mdl-eq-1}) à (\ref{eq:mdl-eq-5})
-par une méthode de splitting en temps de la façon suivante. Soit
-l'entier $N$, le nombre de pas de temps et $\dt = T/N$ un pas de temps
+par une méthode de splitting en temps de la façon suivante. Soit un
+nombre de pas de temps $N$ et soit $\dt = T/N$ un pas de temps
 uniforme. Soient $t_n = n\dt$, $n = 0, 1, \dots, N$, une subdivision
 de l'intervalle de temps $[0, T]$. On note $n_{p,n}^k$ une
 approximation de $n_p^k(t_n, ., .)$, $n_{p,n}$ une approximation de
 $n_p(t_n, ., .)$, $\concentration_n$ une approximation de
 $\concentration(t_n, .)$ et $\temperature_n$ une approximation de
-$\temperature(t_n, .)$. Si $k$ et l'indice de l'injection d'une
-population de particules, on définit $p^k$ et $q^k$ les plus grands
-entiers tels que
+$\temperature(t_n, .)$. Puisque $k$ est l'indice de l'injection d'une
+population de particules, on définit $p^k$ et $q^k$ tels que
 \begin{equation}
-  t_{p^k} < \tau^k \quad\text{et}\quad t_{q^k} < \tau^k + \tlat.
+  p^k = \max\cparent{j\in \mathbb N\ \middle|\ j\dt < \tau^k}, \quad
+  q^k = \max\cparent{j \in \mathbb N\ \middle|\ j\dt < \tau^k + \tlat}.
 \end{equation}
-En d'autres termes, $p_k$ est le dernier pas de temps qui précède
-l'injection de la population $k$, et $q_k$ est le dernier pas de temps
+En d'autres termes, $p_k$ est l'indice du dernier pas de temps qui précède
+l'injection de la population $k$, et $q_k$ est l'indice du dernier pas de temps
 qui précède le début de la dissolution de la population $k$. Bien
 entendu, si $\tlat = 0$ alors $p_k = q_k$.
 
 Étant donnés $n_{p,n}^k$ $\forall k=1, 2, \dots, K$,
 $\concentration_n$ et $\temperature_n$, on pose
 \begin{align}
-  & n_{p,n+1}^k = 0, &&\text{si } 1\leq n + 1 < p^k + 1,\label{eq:splitting-np1-init}\\
+  & n_{p,n+1}^k = 0, &&\text{si }  n + 1 < p^k + 1,\label{eq:splitting-np1-init}\\
   & n_{p,n+1}^k = S^k, &&\text{si } n + 1 = p^k + 1,\\
   & \frac{n_{p,n+1}^k - n_{p,n}^k}{\dt} + u\cdot\nabla n_{p,n+1}^k = 0, && \text{si } p^k + 1 < n+1 \leq q^k.\label{eq:splitting-np1-u}
 \end{align}
@@ -63,7 +87,7 @@ dans $\Omega$ et pour tout $r > 0$. Puis, si $n$ est tel que $q^k < n
   &\displaystyle\frac{\bar n_{p,n+1}^k - n_{p,n}^k}{\dt} +
   u\cdot\nabla \bar n_{p,n+1}^k = 0,\label{eq:splitting-np2-u}\\
   &\displaystyle\frac{\bar{\bar n}_{p,n+1}^k - \bar n_{p,n+1}^k}{\dt} +
-  w\cdot\nabla \bar{\bar n}_{p,n+1}^k = 0,\label{eq:splitting-np2-w}\\
+  w(r)\cdot\nabla \bar{\bar n}_{p,n+1}^k = 0,\label{eq:splitting-np2-w}\\
     &\displaystyle\frac{n_{p,n+1}^k - \bar{\bar n}_{p,n+1}^k}{\dt} +
     \displaystyle\frac{\partial}{\partial r}\parent{f(r,
       \concentration_n, \temperature_n)n_{p,n+1}^k} =
@@ -82,7 +106,7 @@ dans $\Omega$ et pour tout $r > 0$. Et finalement
 dans $\Omega$. On précise maintenant la forme des termes sources
 discrétisés $q_{2,n+1}$, $p_{i,n+1}$, $i = 1,2$.
 
-\paragraph{Discrétisation de la source d'alumine $q_{2}$}
+\paragraph{Discrétisation de la source d'alumine $q_{2}$.}
 Le terme source $q_{2}$ qui apparaît dans l'équation
 (\ref{eq:mdl-eq-4}) correspond à la masse d'alumine qui est transférée
 entre les particules qui se dissolvent et l'alumine dissoute par unité
@@ -103,8 +127,8 @@ dissolvent à l'instant $t_n$, c'est-à-dire les populations $k$
 telles que $t_{q^k} < t_n$.
 
 
-\paragraph{Discrétisation des source de puissance thermique $p_1$ et
-$p_2$} Le terme source de puissance thermique $p_1$ est discrétisé
+\paragraph{Discrétisation des sources de puissance thermique $p_1$ et
+$p_2$.} Le terme source de puissance thermique $p_1$ (voir (\ref{eq:power-heating})) est discrétisé
 en régularisant la masse de Dirac sur les intervalles $[t_{p^k},
   t_{p^k} + \dt]$, $k = 1, 2, \dots, K$. On pose
 \begin{equation}\label{eq:p1-discret}
@@ -121,14 +145,14 @@ où $\kronecker_{i,j}$ est le symbol de Kronecker définit par
   \end{array}\right.
 \end{equation}
 Le terme source $p_2$ qui correspond à la puissance thermique
-nécessaire à la dissolution des particules est discrétisé en
-utilisant $q_{2,n+1}$:
+nécessaire à la dissolution des particules (voir (\ref{eq:p2})) est
+discrétisé en utilisant $q_{2,n+1}$:
 \begin{equation}\label{eq:p2-discret}
 p_{2,n+1} = -[\cee{Al2O3}]\aluminadissolutionenthalpy q_{2,n+1}.
 \end{equation}
 
-L'équation (\ref{eq:splitting-dissolution}) est discrétisé selon $r$ à
-l'aide du schéma de caractéristiques présenté dans la section
+L'équation (\ref{eq:splitting-dissolution}) est discrétisée selon $r$ à
+l'aide du schéma des caractéristiques présenté dans la section
 \ref{sec:particle-population-dissolution}. Les équations
 (\ref{eq:splitting-np1-u}), (\ref{eq:splitting-np2-u}),
 (\ref{eq:splitting-np2-w}), (\ref{eq:splitting-c}) et
@@ -136,63 +160,71 @@ l'aide du schéma de caractéristiques présenté dans la section
 d'advection-diffusion et sont discrétisées en espace selon la méthode
 adoptée dans \cite{Hofer2011}. La discrétisation est basée sur une
 méthode d'éléments finis continus linéaires par morceaux et stabilisée
-par la méthode SUPG \cite{Quarteroni2008}.
+par une méthode de type SUPG \cite{Quarteroni2008}.
 
 \paragraph{Propriétés de conservation du schéma de discrétisation}
 Nous établissons maintenant le bilan de masse d'alumine dans les
 champs $n_{p,n+1}^k$, $k = 1,\dots, K$ et $c_{n+1}$ à l'instant
-$t_{n+1}$ dans le cas particulier ou la vitesse de sédimentation des
+$t_{n+1}$ dans le cas particulier où la vitesse de sédimentation des
 particules est nulles, \ie, lorsque $w(r)$ = 0. On note la masse
-de particules d'alumine dans la population $k$ à l'instant $t_{n+1}$
+de particules d'alumine dans la population $k$ à l'instant $t_{n+1}$ par
 \begin{equation}\label{eq:np-masse-def}
   N_{p,n+1}^k = \int_\Omega\int_0^\infty \aluminadensity
-  n_{p,n+1}^k\frac{4}{3}\pi r^3\intd{r}\intd{x},
+  n_{p,n+1}^k\frac{4}{3}\pi r^3\intd{r}\intd{x}.
 \end{equation}
-la masse totale de particules d'alumine à l'instant $t_{n+1}$, $N_{p,n+1} =
-\sum_{k = 1}^K N_{p,n+1}^k$, la masse d'alumine dissoute à l'instant $t_{n+1}$
+On notera encore la masse totale de particules d'alumine à l'instant
+$t_{n+1}$ par $N_{p,n+1} =
+\sum_{k = 1}^K N_{p,n+1}^k$ et la masse d'alumine dissoute à l'instant
+$t_{n+1}$ par
 \begin{equation}\label{eq:c-masse-def}
-  C_{n+1} = [\cee{Al2O3}]\int_\Omega c_n\intd{x}
+  C_{n+1} = [\cee{Al2O3}]\int_\Omega c_n\intd{x}.
 \end{equation}
-et la masse totale d'alumine dans le bain $M_{n+1} = N_{p,n+1} +
-C_n$. En vertu des équations (\ref{eq:splitting-np1-init}) à
+
+En vertu des équations (\ref{eq:splitting-np1-init}) à
 (\ref{eq:splitting-dissolution}), l'accoissement de la masse d'alumine
 de la population $k$ entre les instants $t_{n}$ et $t_{n + 1}$ s'écrit
 \begin{equation}\label{eq:np-accr}
   N_{p,n+1}^k - N_{p,n}^k = \left\{
   \begin{array}{ll}
     0, & \text{si }n+1 \leq p^k, \\
-    \displaystyle\int_\Omega\displaystyle\int_0^\infty \aluminadensity S^k\frac{4}{3}\pi
-    r^3\intd{r}\intd{x}, & \text{si }n+1 = p^k + 1, \\
+    \displaystyle\int_\Omega\intd{x}\displaystyle\int_0^\infty\intd{r} \aluminadensity S^k\frac{4}{3}\pi
+    r^3, & \text{si }n+1 = p^k + 1, \\
     0, & \text{si }p^k+1 < n+1 \leq q^k, \\
-    \displaystyle\int_\Omega\displaystyle\int_0^\infty \aluminadensity \frac{4}{3}\pi
-    r^3\parent{n_{p,n+1}^k - \bar{\bar n}_{p,n+1}}\intd{r}\intd{x}, &\text{si } q^k < n+1 \leq N.
+    \displaystyle\int_\Omega\intd{x}\displaystyle\int_0^\infty\intd{r} \aluminadensity \frac{4}{3}\pi
+    r^3\parent{n_{p,n+1}^k - \bar{\bar n}_{p,n+1}}, &\text{si } q^k < n+1 \leq N.
   \end{array}
   \right.
 \end{equation}
 On obtient l'accoissement de la masse totale de particules entre les
 instants $t_n$ et $t_{n+1}$ en sommant sur $k = 1$ à $K$:
+\begin{eqnarray*}
+  N_{p,n+1} - N_{p,n}
+  &=& \sum_{\mathclap{\substack{k\\ n+1 \leq p^k}}} \parent{N_{p,n+1}^k - N_{p,n}^k} %
+  + \sum_{\mathclap{\substack{k\\ n+1 = p^k + 1}}} \parent{N_{p,n+1}^k - N_{p,n}^k}\\
+  && + \sum_{\mathclap{\substack{k\\ p^k + 1 < n+1 \leq q^k}}} \parent{N_{p,n+1}^k - N_{p,n}^k} %
+  + \sum_{\mathclap{\substack{k\\ q^k < n+1}}} \parent{N_{p,n+1}^k -
+    N_{p,n}^k}.
+\end{eqnarray*}
+Puisque
+\begin{equation*}
+\sum_{\mathclap{\substack{k\\ n+1 \leq p^k}}} \parent{N_{p,n+1}^k - N_{p,n}^k} = 0 \quad \text{et}\quad \sum_{\mathclap{\substack{k\\ p^k + 1 < n+1 \leq q^k}}} \parent{N_{p,n+1}^k - N_{p,n}^k} = 0
+\end{equation*}
+en vertu de (\ref{eq:np-accr}), on obtient
 \begin{eqnarray}
   N_{p,n+1} - N_{p,n}
-  &=& \sum_{\mathclap{\substack{k\\ n+1 \leq p^k}}} N_{p,n+1}^k - N_{p,n}^k %
-  + \sum_{\mathclap{\substack{k\\ n+1 = p^k + 1}}} N_{p,n+1}^k - N_{p,n}^k \nonumber\\
-  && + \sum_{\mathclap{\substack{k\\ p^k + 1 < n+1 \leq q^k}}} N_{p,n+1}^k - N_{p,n}^k %
-  + \sum_{\mathclap{\substack{k\\ q^k < n+1}}} N_{p,n+1}^k - N_{p,n}^k,\nonumber\\
-  &=&\sum_{\mathclap{\substack{k\\ n+1 = p^k+1}}} \displaystyle\int_\Omega\displaystyle\int_0^\infty \aluminadensity S^k\frac{4}{3}\pi
-  r^3\intd{r}\intd{x} \nonumber\\
-  && + \sum_{\mathclap{\substack{k \\ q^k < n+1}}} \displaystyle\int_\Omega\displaystyle\int_0^\infty \aluminadensity \frac{4}{3}\pi
-    r^3\parent{n_{p,n+1}^k - \bar{\bar n}_{p,n+1}^k}\intd{r}\intd{x}, \label{eq:np-masse-1}
+  &=&\sum_{\mathclap{\substack{k\\ n+1 = p^k+1}}} \displaystyle\int_\Omega\intd{x}\displaystyle\int_0^\infty\intd{r} \aluminadensity S^k\frac{4}{3}\pi
+  r^3 \nonumber\\
+  && + \sum_{\mathclap{\substack{k \\ q^k < n+1}}} \displaystyle\int_\Omega\intd{x}\displaystyle\int_0^\infty \intd{r}\aluminadensity \frac{4}{3}\pi
+    r^3\parent{n_{p,n+1}^k - \bar{\bar n}_{p,n+1}^k}, \label{eq:np-masse-1}
 \end{eqnarray}
-puisque
-\begin{equation*}
-\sum_{\mathclap{\substack{k\\ n+1 \leq p^k}}} N_{p,n+1}^k - N_{p,n}^k = 0 \quad \text{et}\quad \sum_{\mathclap{\substack{k\\ p^k + 1 < n+1 \leq q^k}}} N_{p,n+1}^k - N_{p,n}^k = 0
-\end{equation*}
-en vertu de (\ref{eq:np-accr}). En intégrant les expression (\ref{eq:splitting-np2-u}),
+
+En intégrant les expression (\ref{eq:splitting-np2-u}),
 (\ref{eq:splitting-np2-w}) sur $\Omega$, en utilisant le théorème
 de la divergence et en se rappelant que $\div u = 0$ dans $\Omega$,
 que $u\cdot\nu = 0$ sur $\partial \Omega$ et que $\frac{\partial
   n_{p,n+1}}{\partial \nu} = 0$ sur $\partial \Omega$, on obtient que
 \begin{equation}\label{eq:np-masse-2}
-  \int_\Omega \bar{\bar n}_{p,n+1}^k\intd{x} = \int_\Omega n_{p,n}\intd{x}.
+  \int_\Omega \bar{\bar n}_{p,n+1}^k\intd{x} = \int_\Omega n_{p,n}^k\intd{x}.
 \end{equation}
 En remplaçant (\ref{eq:np-masse-2}) dans (\ref{eq:np-masse-1}),
 l'accroissement de masse totale de particules s'écrit
@@ -207,13 +239,13 @@ On dérive maintenant une expression pour l'accroissement de la masse
 d'alumine dissoute. En intégrant l'équation (\ref{eq:splitting-c}) où
 le terme source $q_{2,n+1}$ est donné par l'expression (\ref{eq:q2}),
 en utilisant le théorème de la divergence et en utilisant à nouveau le
-fait que $\div u = 0$ dans $\Omega$, et que $u\cdot \nu = 0$ et
-$\frac{\partial c_n}{\partial \nu} = 0$ sur $\partial \Omega$, on
-obtient
+fait que $\div u = 0$ dans $\Omega$, que $u\cdot \nu = 0$ et
+$\frac{\partial c_n}{\partial \nu} = 0$ sur $\partial \Omega$, et que
+$w = 0$ par hypothèse on obtient
 \begin{eqnarray*}
 [\cee{Al2O3}]\int_\Omega c_{n+1}\intd{x} - [\cee{Al2O3}] \int_\Omega
-c_n\intd{x} &=& -\frac{\dt I [\cee{Al2O3}]}{6\faraday} - \\
-&&\sum_{\mathclap{\substack{k \\ q^k < n+1}}}
+c_n\intd{x} &=& -\frac{\dt I [\cee{Al2O3}]}{6\faraday}\\
+&& - \sum_{\mathclap{\substack{k \\ q^k < n+1}}}
 \int_\Omega\int_0^\infty\aluminadensity \frac{4}{3}\pi
 r^3 \parent{n_{p,n+1} - n_{p,n}}\intd{r}\intd{x},\nonumber\\
 \end{eqnarray*}
@@ -224,19 +256,20 @@ et ainsi par (\ref{eq:c-masse-def}),
 \int_\Omega\int_0^\infty\aluminadensity \frac{4}{3}\pi
 r^3 \parent{n_{p,n+1} - n_{p,n}}\intd{r}\intd{x}\label{eq:c-masse-1}
 \end{eqnarray}
-On obtient l'accroissement total de masse d'alumine dans le bain entre
-$t_n$ et $t_{n+1}$ en sommant (\ref{eq:np-masse-3}) et
-(\ref{eq:c-masse-1}). On obtient
+On définit la masse totale d'alumine dans le bain par $M_{n+1} =
+N_{p,n+1} + C_n$, et on obtient l'accroissement total de masse
+d'alumine dans le bain entre $t_n$ et $t_{n+1}$ en sommant
+(\ref{eq:np-masse-3}) et (\ref{eq:c-masse-1}). On obtient
 \begin{equation}
   M_{n+1} - M_{n} = - \dt \frac{I[\cee{Al2O3}]}{6\faraday} +
-  \sum_{\mathclap{\substack{k\\ n+1 = p^k + 1}}} \int_\Omega
-  \aluminadensity S^k\frac{4}{3}\pi r^3 \intd{r}\intd{x}.
+  \sum_{\mathclap{\substack{k\\ n+1 = p^k + 1}}} \int_\Omega\intd{x}\int_0^{\infty}\intd{r}
+  \aluminadensity S^k\frac{4}{3}\pi r^3.
 \end{equation}
 Par récurrence sur $n$ on obtient
 \begin{equation}\label{eq:alumina-mass-balance}
   M_{n+1} - M_{0} = - t_{n+1} \frac{I[\cee{Al2O3}]}{6\faraday} +
-  \sum_{\mathclap{\substack{k\\  p^k + 1 \leq n+1}}} \int_\Omega
-  \aluminadensity S^k\frac{4}{3}\pi r^3 \intd{r}\intd{x},
+  \sum_{\mathclap{\substack{k\\  p^k + 1 \leq n+1}}} \int_\Omega\intd{x}\int_0^{\infty}\intd{r}
+  \aluminadensity S^k\frac{4}{3}\pi r^3,
 \end{equation}
 c'est-à-dire que la masse totale d'alumine dans le bain dépend
 uniquement du taux de consommation de l'alumine dissoute par
@@ -255,7 +288,7 @@ on a
 +\dt\electrolytedensity\electrolytehc\parent{\int_\Omega
   u\cdot\nabla\temperature_{n+1}\intd{x} - \int_\Omega
   \div\parent{\electrolytetdiff\nabla\temperature_{n+1}}} \\
-= \dt\sum_{i=1}^2\int_\Omega p_{x,n+1}\intd{x} + \dt\int_\Omega p_3\intd{x}.
+= \dt\sum_{i=1}^2\int_\Omega p_{i,n+1}\intd{x} + \dt\int_\Omega p_3\intd{x}.
 \end{multline}
 En utilisant le théorème de la divergence, et en utilisant le fait que
 $\div u = 0$ dans $\Omega$, que $\frac{\partial
@@ -287,12 +320,18 @@ antérieurement à l'instant $t_n$ et de la masse de particule d'alumine
 dissoute durant l'intervalle de temps $[0, t_n]$.
 
 \begin{remarque}
-  Les bilans de masse (\ref{eq:alumina-mass-balance}) et
-  (\ref{eq:energy-mass-balance}) ne sont valable que si la vitesse de
-  sédimentation des particules $w$ est strictement nulle, \ie, $w(r) =
-  0$ $\forall r > 0$. Dans le cas contraire, il peut exister un flux
-  de particules non nulle à travers le bord $\partial \Omega$ que l'on
-  ne peut pas contrôler.
+  En général, les bilans de masse (\ref{eq:alumina-mass-balance}) et
+  (\ref{eq:energy-mass-balance}) sont valables pour autant que la
+  totalité des particules se dissolvent à l'intérieur du bain. Cette
+  condition est satisfaite si la vitesse de sédimentation $ w = 0$
+  comme on l'a supposé dans ce dernier paragraphe. Cette condition est
+  aussi satisfaite si $n_p^k = 0$ sur $\partial \Omega$, puisque le
+  terme
+  \begin{equation}
+    \int_{\partial \Omega} n_p^k w\cdot \nu\intd{s} = 0
+  \end{equation}
+  également, \ie, le flux de particule à travers la frontière de
+  $\Omega$ est nul.
 \end{remarque}
 
 \begin{remarque}
@@ -304,8 +343,8 @@ dissoute durant l'intervalle de temps $[0, t_n]$.
   (\ref{eq:splitting-np2-u}), (\ref{eq:splitting-np2-w}),
   (\ref{eq:splitting-c}) (\ref{eq:splitting-t}) conservent exactement
   les intégrales de $n_{p,n}$, $\concentration_n$ et
-  $\temperature_n$. Cette condition est garantie par le schéma de
-  discrétisation proposé dans \cite{Hofer2011} que l'on utilise ici.
+  $\temperature_n$ sur $\Omega$. Cette condition est garantie par le schéma de
+  discrétisation proposé dans \cite{Flotron2013b} que l'on utilise ici.
 \end{remarque}
 
 La section suivant traite de l'application de ce modèle numérique à
