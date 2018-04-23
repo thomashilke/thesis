@@ -2,24 +2,25 @@ Comme annoncé dans le chapitre \ref{chap:introduction}, une cuve
 d'électrolyse typique dans une halle de production n'est jamais dans
 un état stationnaire \cite{Steiner2009,Flotron2013}. La cause
 majeure pour laquelle ces cuves se trouvent dans un état de
-déséquilibre constant est due aux changements d'anodes en fin de vie,
+déséquilibre constant est liée aux changements d'anodes en fin de vie,
 qui interviennent toutes les 24 heures environ.
 
 Cet état de déséquilibre entraîne d'importantes variation des
 écoulements des fluides dans la cuve, et ces variations ont un impact
 non négligeable sur la répartition de l'alumine dissoute dans le bain
-électrolytique. Pour palier à ces variations de répartition d'alumine,
-les opérateurs peuvent modifier les cadences d'injection de chaque
-injecteur. Malheureusement, il ne disposent pour l'heure d'aucun outil
-qui leur permette de déterminer comment adapter ces cadences en
-fonction de l'état de la cuve.
+électrolytique. Pour palier à ces variations de répartition de
+concentration d'alumine, les opérateurs peuvent modifier les cadences
+d'injection de chaque injecteur. Malheureusement, il ne disposent pour
+l'heure d'aucun outil qui leur permette de déterminer comment adapter
+ces cadences en fonction de l'état de la cuve.
 
 Le modèle de dissolution et transport d'alumine proposé dans
 \cite{Hofer2011} et dont nous avons étudié certaines extensions dans
-la première partie de ce travail, offre un début de réponse: la
+la première partie de ce travail, peut apporter un début de réponse: la
 conductivité des différentes anodes dépend de leur âge, ce qui modifie
 le champs de vitesse dans le bain électrolytique et dans l'aluminium
-liquide, ainsi que la distribution d'alumine
+liquide par l'intermédiaire de la densité de courant
+électrique et des forces de Lorentz, ainsi que la distribution d'alumine
 dissoute. Malheureusement, ce calcul ne peut pas être fait en temps
 réel, et donc la cadence des injecteurs qui optimise la répartition de
 l'alumine dissoute dans le bain ne peut pas non plus être obtenu en
@@ -31,13 +32,12 @@ modèles de \cite{Steiner2009} et \cite{Hofer2011}, au prix de
 certaines hypothèses supplémentaires que l'on discutera.
 
 La géométrie d'une cuve d'aluminium est particulier: l'essentiel de
-l'écoulement des fluides prend place dans un domaine
+l'écoulement des fluides prend place dans un domaine approximativement
 parallélépipédique qui présente une forte anisotropie. Les dimensions
 horizontales ($\approx \num{14}\times\num{4}$ \si{\meter}) sont bien plus
 grandes que la dimension verticales ($\approx \num{0.2}$ \si{\meter}). Par
 conséquent, l'écoulement est essentiellement contraint dans le plan
-horizontal, si l'on néglige ce qui se passe dans les canaux bien
-entendu.
+horizontal, si l'on néglige ce qui se passe dans les canaux.
 
 Le modèle de référence dans Alucell \cite{Steiner2009},
 \cite{Flotron2013}, \cite{Hofer2011}, \cite{Rochat2016} calcule une
@@ -49,22 +49,19 @@ Or, la géométrie anisotrope du domaine fluide d'une cuve d'électrolyse
 pose de sérieuses difficultés au niveau numérique. En effet,
 l'utilisation de mailles isotropes n'est pas possible puisque la
 taille de maille dans la direction verticale est de l'ordre de
-\num{0.01} \si{\meter}.
-
-La seule alternative est de considérer des mailles anisotropes ed
-l'ordre de \num{0.01} \si{\meter} dans la direction verticale et
-\num{0.1} \si{\meter} dans les directions horizontales.
-
-Cependant, l'utilisation de mailles anisotropes augmente le
-conditionnement des matrices et donc le nombre d'itérations
-nécessaires à la résolution du système linéaire et dégrade la
-précision du calcul.
+\num{0.01} \si{\meter}.  La seule alternative est de considérer des
+mailles anisotropes ed l'ordre de \num{0.01} \si{\meter} dans la
+direction verticale et \num{0.1} \si{\meter} dans les directions
+horizontales. Cependant, l'utilisation de mailles anisotropes
+augmente le conditionnement des matrices et donc le nombre
+d'itérations nécessaires à la résolution du système linéaire et
+dégrade la précision du calcul.
 
 Le but de ce chapitre est de proposer une méthode pour calculer des
 écoulements de Stokes ou de Navier-Stokes dans des domaines
 parallélépipédiques présentant une forte anisotropie. Dans la section
 \ref{sec:fourier-model} nous proposons une décomposition de Fourier de la
-vitesse selon la direction verticale, puis nous proposerons dans la
+vitesse selon la direction verticale, puis nous proposons dans la
 section \ref{sec:fourier-discretisation} une méthode numérique de type éléments
 finis pour approcher chaque harmonique de la décomposition de
 Fourier. Dans la section \ref{sec:fourier-validation} nous validons

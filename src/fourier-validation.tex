@@ -10,8 +10,11 @@ solution exacte et l'approximation $u_{h,K}$ telle que définie par
 
 \subsection{Une solution exacte polynomiale non triviale}
 On pose $\Lambda = (-1, 1)^2$, on rappelle que $\Omega =
-\Lambda\times(0,\thickness)$. On vérifie que les fonctions $u_1, u_2,
-u_3:\Omega\to\mathbb R$ et $p:\Omega\to\mathbb R$ définies par:
+\Lambda\times(0,\thickness)$. On choisit dans cette partie
+\ref{sec:fourier-validation} une viscosité scalaire unité,
+c'est-à-dire que $\mu_{i,j} = 1\ \forall i,j$. On vérifie alors que les
+fonctions $u_1, u_2, u_3:\Omega\to\mathbb R$ et $p:\Omega\to\mathbb R$
+définies par:
 \begin{align}
   &u_1(x_1, x_2, x_3) = u_2(x_1, x_2, x_3) = \parent{x_1^2 - 1} %
   \parent{x_2^2 - 1}
@@ -29,7 +32,6 @@ u_3:\Omega\to\mathbb R$ et $p:\Omega\to\mathbb R$ définies par:
 satisfont (\ref{eq:stokes-u}), (\ref{eq:stokes-p}) avec les
 conditions aux limites (\ref{eq:stokes-bc-1})-(\ref{eq:stokes-bc-3}),
 pour autant que $f$ dans (\ref{eq:stokes-u}) soit définie par
-
 \begin{multline}
   f_1(x_1, x_2, x_3) =
   -\left(
@@ -50,8 +52,6 @@ pour autant que $f$ dans (\ref{eq:stokes-u}) soit définie par
       \parent{\frac{1}{4}\thickness ^3 - \frac{3}{2} \thickness x_3^2 + x_3^3}\right)\\
     + 3x_1^2 x_2^3x_3^5,
 \end{multline}
-
-
 \begin{multline}
   f_2(x_1, x_2, x_3) =
   -\left(8x_1^2 \parent{x_2^2 - 1}^2
@@ -138,17 +138,16 @@ choix $\thickness = 2$, i. e. dans le domaine $\Omega =
     \includegraphics[width=\rasterimagewidth]{../media/fourier/fig-exact/print/streamlines.png}
     \caption{Lignes de courant de la vitesse $u$ définie par
       (\ref{eq:stokes-exact-sol-1})-(\ref{eq:stokes-exact-sol-2}) dans
-      le domaine $\Omega$, avec $h = 2$.}
+      le domaine cubique $\Omega$, c'est-à-dire que $\thickness = 2$.}
     \label{fig:stokes-exact-sol-streamlines}
   \end{center}
 \end{figure}
 
 
 \subsection{Convergence de l'erreur}
-On choisit dans cette partie une viscosité scalaire unité,
-c'est-à-dire que $\mu_{i,j} = 1\ \forall i,j$. On s'intéresse d'une
-part à la convergence de l'erreur d'approximation de $u_{h,K}$ donnée
-par (\ref{eq:u-h-12}),(\ref{eq:u-h-3}) vers la solution exacte
+On s'intéresse d'une part à la convergence de l'erreur d'approximation
+de $u_{h,K}$ donnée par (\ref{eq:u-h-12}),(\ref{eq:u-h-3}) vers la
+solution exacte
 (\ref{eq:stokes-exact-sol-1})-(\ref{eq:stokes-exact-sol-2}), définie
 par:
 \begin{equation}
@@ -205,7 +204,7 @@ On s'intéresse à la convergence de l'erreur $e_{h,K}^\mathrm{SF}$ en
 fonction de la taille de maille $h$ de la subdivision $\mathcal M_h$ du domaine
 $\Lambda$. Le tableau \ref{tab:n-h-convergence} donne les valeurs de
 l'erreur pour différentes tailles de maille $h$ et différentes
-épaisseurs $h$ du domaine $\Omega$.
+épaisseurs $\thickness$ du domaine $\Omega$.
 
 \begin{table}[t]
   \caption{Erreur $e_{h,K}^\mathrm{SF}$ en fonction de $h$ et de
@@ -284,9 +283,9 @@ système linéaire dans le cas du schéma S3D.
     fonction de l'épaisseur $\thickness$. Les calculs
     sont effectués sur un machine équipée d'un processeur Intel$^{\tiny{\textregistered}}$ Xeon$^{\tiny{\textregistered}}$
     E5-2620 v2 @ 2.1\si{\giga\hertz} et 32Go de RAM.}
-  \label{tab:e-sf-e-s3d-convergence}
+  \label{tab:e-sf-e-s3d-cpu-cost}
   \begin{center}
-    \begin{tabularx}{\textwidth}{@{}Xrrrrr@{}}
+    \begin{tabular}{@{}lrrrrr@{}}
       \toprule
       & $\thickness = 0.020$
       %& $\thickness = 0.033$
@@ -305,6 +304,6 @@ système linéaire dans le cas du schéma S3D.
       SF \\
       \hphantom{a} $T_\text{CPU}$ [\si{\second}] & 43 & 45   & 43   & 44  & 45  \\
       \bottomrule
-    \end{tabularx}
+    \end{tabular}
   \end{center}
 \end{table}
