@@ -256,7 +256,32 @@ formé par les équations (\ref{eq:fourier-fund-1}) et
 (\ref{eq:fourier-fund-2}) qui correspondent au mode fondamental de
 l'écoulement $u$, et des problèmes formés par les équations
 (\ref{eq:fourier-harm-1}) à (\ref{eq:fourier-harm-3}) qui
-correspondent à chacune des harmoniques de l'écoulement $u$.
+correspondent à chacune des harmoniques de l'écoulement $u$. Pour ce
+faire, nous aurons besoins des espaces fonctionnels suivants. L'espace
+$L^2(\Lambda)$ est l'ensemble
+\begin{align}
+  L^2(\Lambda) = \cparent{f:\Lambda\to\mathbb R \mathrel{\Big|} \int_\Lambda
+    \abs{f}^2\mathrm dx < \infty}.
+\end{align}
+Il est muni du produit scalaire
+\begin{align}
+  (f, g)_{L^2(\Lambda)} = \int_\Lambda f(x)g(x)\mathrm dx
+\end{align}
+pour tout $f, g\in L^2(\Lambda)$, et de la norme
+\begin{align}
+  \norm{f}_{L^2(\Lambda)} = \sqrt{(f, f)}\quad\forall f\in L^2(\Lambda).
+\end{align}
+On définit encore
+\begin{align}
+  L^2_0(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|} f(x) = 0 \forall
+    x\in \partial\Lambda},\\
+  H^1(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|} \int_\Lambda
+    \abs{\nabla f}^2 \mathrm dx < \infty}
+\end{align}
+et
+\begin{align}
+  H^1_0(\Lambda) = H^1(\Lambda) \cap L^2_0.
+\end{align}
 
 Commençons tout d'abord par traiter le mode fondamental. Pour
 simplifier l'écriture, on note $\overline{\mu}$ et
@@ -309,8 +334,8 @@ les équations (\ref{eq:fourier-harm-1}) à (\ref{eq:fourier-harm-3})
 par des fonctions test $v_1$, $v_2$, $v_3$ et $q$ et en intégrant par
 parties les termes qui comportent des dérivées secondes. Le problème
 faible pour chaque harmonique $k$ consiste à chercher les fonctions
-$u_1^k$, $u_2^k$, $u_3^k$ $\in H^1(\Lambda)$ et $p^k\in
-L^2_0(\Lambda)$ telles que
+$u^k = (u_1^k,u_2^k,u_3^k)\in \parent{H^1_0(\Lambda)}^3$ et $p^k\in
+L^2(\Lambda)$ telles que
 \begin{align}
   &\int_\Lambda 2\mu\otimes\tilde\straintensor^k(u^k):\tilde\straintensor^k(v)
   - \int_\Lambda p^k\parent{\frac{\partial v_1}{\partial x_1} +
@@ -318,7 +343,7 @@ L^2_0(\Lambda)$ telles que
   = \int_\Lambda f^k\cdot v,\label{eq:fourier-weak-harm-1}\\
   &\int_\Lambda \parent{\frac{\partial u_1^k}{\partial x_1} + \frac{\partial u_2^k}{\partial x_2} + \beta^k u_3^k}q = 0\label{eq:fourier-weak-harm-2}
 \end{align}
-pour toutes fonctions $v = (v_1,v_2,v_3)\in \parent{H^1(\Lambda)}^3$ et $q\in
+pour toutes fonctions $v = (v_1,v_2,v_3)\in \parent{H^1_0(\Lambda)}^3$ et $q\in
 L^2(\Lambda)$. Afin de rendre plus explicite la structure sous-jacente
 de cette formulation, on peut l'exprimer en des termes plus
 abstraits. Soit $a^k:H^1_0(\Lambda)^3\times H^1_0(\Lambda)^3 \to \mathbb
