@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="anode-configuration.svg">
+   sodipodi:docname="anode-numerotation.svg">
   <defs
      id="defs4">
     <marker
@@ -148,12 +148,19 @@
      inkscape:snap-grids="false"
      inkscape:snap-to-guides="false"
      inkscape:snap-global="false"
-     inkscape:window-width="1200"
-     inkscape:window-height="856"
+     inkscape:window-width="1440"
+     inkscape:window-height="851"
      inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:lockguides="false" />
+     inkscape:window-y="1"
+     inkscape:window-maximized="1"
+     inkscape:lockguides="false"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="262.65813,159.06171"
+       orientation="1,0"
+       id="guide4301" />
+  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -564,7 +571,7 @@
          id="tspan4371"
          x="111.88834"
          y="947.82446"
-         style="font-size:7.92500067px">$(1,1)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(1,1)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4436"
@@ -576,7 +583,7 @@
          y="947.82446"
          x="143.97572"
          id="tspan4438"
-         sodipodi:role="line">$(1,2)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(1,2)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -588,7 +595,7 @@
          id="tspan4442"
          x="176.0631"
          y="947.82446"
-         style="font-size:7.92500067px">$(1,3)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(1,3)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4444"
@@ -600,7 +607,7 @@
          y="947.82446"
          x="208.15048"
          id="tspan4446"
-         sodipodi:role="line">$(1,4)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(1,4)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -612,7 +619,7 @@
          id="tspan4450"
          x="240.23785"
          y="947.82446"
-         style="font-size:7.92500067px">$(1,5)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(1,5)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4452"
@@ -624,7 +631,7 @@
          y="947.82446"
          x="272.32523"
          id="tspan4454"
-         sodipodi:role="line">$(1,6)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(1,6)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -636,7 +643,7 @@
          id="tspan4458"
          x="336.5"
          y="947.82446"
-         style="font-size:7.92500067px">$(1,8)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(1,8)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4460"
@@ -648,7 +655,7 @@
          y="947.82446"
          x="304.41263"
          id="tspan4462"
-         sodipodi:role="line">$(1,7)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(1,7)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -660,7 +667,7 @@
          id="tspan4466"
          x="368.58737"
          y="947.82446"
-         style="font-size:7.92500067px">$(1,9)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(1,9)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4468"
@@ -672,7 +679,7 @@
          y="947.82446"
          x="400.67477"
          id="tspan4470"
-         sodipodi:role="line">$(1,10)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(1,10)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4512"
@@ -684,7 +691,7 @@
          y="985.82446"
          x="111.88834"
          id="tspan4514"
-         sodipodi:role="line">$(2,1)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(2,1)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -696,7 +703,7 @@
          id="tspan4518"
          x="143.97572"
          y="985.82446"
-         style="font-size:7.92500067px">$(2,2)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(2,2)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4520"
@@ -708,7 +715,7 @@
          y="985.82446"
          x="176.0631"
          id="tspan4522"
-         sodipodi:role="line">$(2,3)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(2,3)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -720,7 +727,7 @@
          id="tspan4526"
          x="208.15048"
          y="985.82446"
-         style="font-size:7.92500067px">$(2,4)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(2,4)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4528"
@@ -732,7 +739,7 @@
          y="985.82446"
          x="240.23785"
          id="tspan4530"
-         sodipodi:role="line">$(2,5)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(2,5)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -744,7 +751,7 @@
          id="tspan4534"
          x="272.32523"
          y="985.82446"
-         style="font-size:7.92500067px">$(2,6)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(2,6)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4536"
@@ -756,7 +763,7 @@
          y="985.82446"
          x="336.5"
          id="tspan4538"
-         sodipodi:role="line">$(2,8)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(2,8)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -768,7 +775,7 @@
          id="tspan4542"
          x="304.41263"
          y="985.82446"
-         style="font-size:7.92500067px">$(2,7)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(2,7)$}</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4544"
@@ -780,7 +787,7 @@
          y="985.82446"
          x="368.58737"
          id="tspan4546"
-         sodipodi:role="line">$(2,9)$</tspan></text>
+         sodipodi:role="line">\scriptsize{$(2,9)$}</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -792,6 +799,6 @@
          id="tspan4550"
          x="400.67477"
          y="985.82446"
-         style="font-size:7.92500067px">$(2,10)$</tspan></text>
+         style="font-size:7.92500067px">\scriptsize{$(2,10)$}</tspan></text>
   </g>
 </svg>

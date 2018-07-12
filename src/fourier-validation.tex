@@ -124,11 +124,11 @@ choix $\thickness = 2$, i. e. dans le domaine $\Omega =
     \end{subfigure}
     \caption{Représentation de la solution exacte
       (\ref{eq:stokes-exact-sol-1})-(\ref{eq:stokes-exact-sol-3}) du
-      problème de Stokes (\ref{eq:stokes}). La solution est
-      représentée sur 6 plans horizontaux espacés
-      régulièrement entre $x_3 = 0$ et $x_3 = 2$. L'échelle de
-      couleur correspond à l'amplitude de $u$, tandis que les
-      flèches indique la direction de $u$.}
+      problème de Stokes (\ref{eq:stokes-u}), (\ref{eq:stokes-p}). La
+      solution est représentée sur 6 plans horizontaux espacés
+      régulièrement entre $x_3 = 0$ et $x_3 = 2$. L'échelle de couleur
+      correspond à l'amplitude de $u$, tandis que les flèches indique
+      la direction de $u$.}
     \label{fig:stokes-exact-sol}
   \end{center}
 \end{figure}
@@ -275,7 +275,10 @@ forme graphique.
 
 Finalement, on compare les temps CPU pour chaque schéma, ainsi
 que le nombre d'itérations de l'algorithme GMRES pour résoudre le
-système linéaire dans le cas du schéma S3D.
+système linéaire dans le cas du schéma S3D, dont les résultats sont
+synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
+compare les performances entre le temps de calculs du modèle F3D et SF
+en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et \num{1.19}.
 
 \begin{table}[t]
   \caption{Comparaison des performances entre les schémas permettant

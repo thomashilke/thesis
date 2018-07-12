@@ -23,7 +23,7 @@ trois fonctions barycentriques du triangle $K$.
 \paragraph{Mode fondamental}
 La méthode d'éléments finis correspondant à
 (\ref{eq:fourier-weak-fund-1}), (\ref{eq:fourier-weak-fund-2})
-consiste à chercher $(u^0_h, p^0_h)\in \mathcal B_h\times(V_h \cap
+consiste à chercher $(u^0_h, p^0_h)\in B_h\times(V_h \cap
 L^2_0(\Lambda))$ tels que, pour tout $(v_h, q_h)\in \mathcal
 B_h\times(V_h \cap L^2_0(\Lambda))$ on ait
 \begin{align}
@@ -34,7 +34,7 @@ B_h\times(V_h \cap L^2_0(\Lambda))$ on ait
 \end{align}
 Il est connu que le couple d'espaces éléments finis $(B_h, V_h \cap
 L^2_0(\Lambda))$ est stable, ainsi (\ref{eq:fourier-fund-discrete-1}),
-(\ref{eq:fourier-fund-discrete-2}) admet une unique solution.
+(\ref{eq:fourier-fund-discrete-2}) admet une unique solution \cite{Temam1977}.
 
 Le schéma (\ref{eq:fourier-fund-discrete-1}),
 (\ref{eq:fourier-fund-discrete-2}) fait intervenir l'espace
@@ -46,8 +46,8 @@ en ajoutant l'équation
 \int_\Lambda p^0_h = 0
 \end{equation}
 et en ajoutant un multiplicateur de Lagrange. Il est alors équivalent
-de chercher $(u^0_h, p^0_h)\in \mathcal B_h\times V_h$ et
-$\lambda\in\mathbb R$ tels que, pour tout $(v_h, q_h)\in \mathcal
+de chercher $(u^0_h, p^0_h)\in B_h\times V_h$ et
+$\lambda\in\mathbb R$ tels que, pour tout $(v_h, q_h)\in
 B_h\times V_h$ on ait
 \begin{align}
   &\int_\Lambda
@@ -127,3 +127,4 @@ et
   p_{h,K}(x_1, x_2, x_3) = p_h^0(x_1, x_2) + \sum_{k = 1}^K p_h^k(x_1,
   x_2) \cos\parent{\beta^k x_3}.
 \end{align}
+Enfin on notera $u_{k,K} = (u_{1,k,K}, u_{2,k,K}, u_{3,k,K})$.

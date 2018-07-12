@@ -95,8 +95,24 @@ $\forall (x_1, x_2, x_3)\in \Omega^+$:
   \right.\label{eq:decomp-5}
 \end{align}
 En vertu de (\ref{eq:stokes-bc-2}) et (\ref{eq:stokes-bc-3}), les
-dérivées selon $x_3$ des fonctions $U_1$, $U_2$ et $U_3$ ainsi définies ne
-présentent pas de masse de Dirac en $x_3 = 0$.
+dérivées selon $x_3$ des fonctions $U_1$, $U_2$ et $U_3$ ainsi
+définies ne présentent pas de masse de Dirac en $x_3 = 0$. La figure
+\ref{fig:solution-periodique} représente schématiquement le
+comportement et la régularité de ces fonctions de part et d'autre de
+l'origine de l'axe $x_3$.
+
+\begin{figure}
+  \begin{center}
+    \input{../media/fourier/solution-periodique/solution-periodique.pdf_tex}
+    \caption{Représentation schématique de la réplication des fonction
+    $u_i$, $i = 1,2,3$, $p$, et $f_i$, $i = 1,2,3$ sur l'intervalle
+      $(0, -\thickness)$. En $x_3 = 0$, les fonctions $U_i$,
+      $i=1,2,3$ sont $\mathcal C^1$, $P$, $F_1$, $F_2$ sont $\mathcal
+      C^0$, et $F_3$ est discontinue.}
+    \label{fig:solution-periodique}
+  \end{center}
+\end{figure}
+
 
 Avec les définitions ci-dessus on vérifie que $U = (U_1, U_2, U_3)$ et
 $P$ satisfont les équations
@@ -437,7 +453,7 @@ telle que $\frac{\partial u_1}{\partial x_1} + \frac{\partial
     u_1}{\partial x_1} + \frac{\partial u_2}{\partial x_2} +
   \beta^k u_3 = 0$. Ici on a noté
   \begin{equation}
-    \norm{\nabla u}_{L^2(\Lambda)}^2 = \sum_{i,j = 1}^3 \norm{\frac{\partial u_i}{\partial x_j}}^2
+    \norm{\nabla u}_{L^2(\Lambda)}^2 = \sum_{i,j = 1}^3 \norm{\frac{\partial u_i}{\partial x_j}}^2_{L^2(\Lambda)}
   \end{equation}
   et
   \begin{equation}
@@ -471,7 +487,7 @@ x_2)\in \Lambda$, alors le problème (\ref{eq:abstr-weak-harm-1}),
   que la forme $a^k(.,.)$ est coercive sur $V_0$ où $V_0 = \cparent{v
     \in H_0^1(\Lambda)^3\mid b^k(v, q) = 0\ \forall q \in
     L^2(\Lambda)}$, et que la condition classique inf-sup sur la forme
-  bilinéaire $b$ est satisfaite.
+  bilinéaire $b^k$ est satisfaite.
 
   Le lemme \ref{lem:2} avec l'hypothèse (\ref{eq:hypothesis}) montre
   bien que $a^k$ est coercive sur $V_0$. D'autre part en utilisant

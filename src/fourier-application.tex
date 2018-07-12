@@ -1,9 +1,9 @@
 L'un des objectifs premiers du développement du schéma numérique
-SF, est d'une part de fournir une approximation de l'écoulement des
+SF est d'une part de fournir une approximation de l'écoulement des
 fluides dans une cuve d'électrolyse d'aluminium, et d'autre part
 de fournir une approximation de la distribution d'alumine dans le bain
 électrolytique, le tout à moindre coût par rapport au modèle
-3D standard déjà implémenté dans le logiciel Alucell, tels que décrit
+3D standard déjà implémenté dans le logiciel Alucell tel que décrit
 dans le chapitre \ref{chap:populations}
 
 Dans cette partie, on compare les champs de vitesse et de
@@ -12,7 +12,7 @@ section \ref{sec:fourier-model} et \ref{sec:fourier-discretisation} et
 ceux obtenus avec la méthode 3D standard du chapitre
 \ref{chap:populations}. La méthode 3D standard fournit une
 concentration $c$ dépendante du temps. Dans la suite, cette
-concentration est calculée à $t = \num{1e4}\si{\second}$.
+concentration est calculée à $T = \num{1e4}\si{\second}$.
 
 Le parallélépipède rectangle $\Omega$ défini par (\ref{eq:domain}) est
 contenu dans la partie fluide de la cuve, dans notre cas $\Omega = (0,
@@ -140,22 +140,22 @@ le plan $x_3 = \thickness / 2$.
 
 
 \subsection{Désactivation d'anodes}
-On s'intéresse maintenant au cas du calcul de l'écoulement des
-fluides et de la concentration d'alumine dissoute dans le bain
-électrolytique lorsqu'on désactive une anode, c'est-à-dire que
-l'une des anodes du plan anodique n'est pas conductrice
-électriquement. Cette situation a lieu en pratique lorsqu'une anode
-en fin de vie est remplacée par une anode neuve, mais froide. Sa
-conductivité électrique qui est quasi-nulle initialement, augmente au fur
-et à mesure que l'anode atteint sa température d'opération. Dans
-cette partie, on dénotera conjointement le modèle d'écoulement stationnaire
-évoqué dans le chapitre \ref{chap:populations} et le
-modèle de transport et dissolution d'alumine décrit dans le
-chapitre \ref{chap:fourier} par l'abréviation F3D. Dans cette
-partie, on considérera uniquement une dissolution des particules
-d'alumine indépendante de la température, c'est-à-dire que le champ
-$c^\mathrm{F3D}$ est calculé avec le modèle 3D standard en
-désactivant la dépendance de la vitesse de dissolution en fonction de la température du bain.
+On s'intéresse maintenant au cas du calcul de l'écoulement des fluides
+et de la concentration d'alumine dissoute dans le bain électrolytique
+lorsqu'on désactive une anode, c'est-à-dire que l'une des anodes du
+plan anodique n'est pas conductrice électriquement. Cette situation a
+lieu en pratique lorsqu'une anode en fin de vie est remplacée par une
+anode neuve, mais froide. Sa conductivité électrique qui est
+quasi-nulle initialement, augmente au fur et à mesure que l'anode
+atteint sa température d'opération. Dans cette partie, on dénotera
+conjointement le modèle d'écoulement stationnaire évoqué dans le
+chapitre \ref{chap:populations} et le modèle de transport et
+dissolution d'alumine décrit dans le chapitre \ref{chap:fourier} par
+l'abréviation F3D. Dans cette partie, on considérera uniquement une
+dissolution des particules d'alumine indépendante de la température,
+c'est-à-dire que le champ $c^\mathrm{F3D}$ est calculé avec le modèle
+3D standard en désactivant la dépendance de la vitesse de dissolution
+en fonction de la température du bain.
 
 Dans le modèle F3D, on peut simuler la désactivation d'une anode en
 annulant la conductivité électrique $\conductivity$ dans le volume
@@ -164,14 +164,19 @@ occupé par ladite anode. On a donc la densité de courant $j =
 où $\phi$ est le potentiel électrique, $u^\mathrm{F3D}$
 l'écoulement des fluides solution des équations de Navier-Stokes,
 $B$ le champ d'induction magnétique solution des équations de
-Maxwell et la force $f = j\times B$. Dans le modèle SF, on pose $f =
-0$ sous les anodes, voir figure \ref{fig:anode-deactivation}.
+Maxwell et la force $f = j\times B$. Dans le modèle SF, on impose
+$f = 0$ sous les anodes, voir figure \ref{fig:anode-deactivation}.
 
 \begin{figure}
   \begin{center}
-    %\input{../media/fourier/anode-deactivation/anode-deactivation.pdf_tex}
-    \caption{Désactivation d'une anode dans le modèle standard 3D et
-      le modèle SF.}
+    \input{../media/fourier/anode-deactivation/anode-deactivation.pdf_tex}
+    \caption{Désactivation d'une anode dans le modèle standard F3D et
+      le modèle SF. (a) Dans le modèle F3D, la désactivation d'une
+      anode est modélisée par l'annulation de sa conductivité
+      électrique $\conductivity$. (b.1) Calcul du terme de force avec
+      le modèle F3D et toutes les anodes activées. (b.2) Calcul de
+      l'écoulement dans le domaine $\Omega$ avec le modèle SF et la
+      force obtenue en (b.1), mais annulée sous l'anode désactivée.}
     \label{fig:anode-deactivation}
   \end{center}
 \end{figure}
@@ -565,7 +570,7 @@ actives. La force $f^0$ est représentée sur la figure \ref{fig:harmonic-force-
 Lorsqu'une anodes est désactivée, elle ne conduit plus le courant
 électrique, et par conséquent la densité de courant électrique
 responsable de la force de Lorentz dans le fluide est fortement
-réduite sous l'anode concernée.
+réduite sous l'anode concernée (voir figure \ref{fig:anode-deactivation}).
 
 On propose d'approximer le champ de force $f$ à partir de $f^0$ en
 annulant celle-ci dans la région située sous l'anode désactivée (voir

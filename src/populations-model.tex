@@ -48,9 +48,9 @@ par la vitesse d'écoulement $u$, et diffusés.
 Dans une cuve industrielle, de l'alumine en poudre doit être injectée
 à intervalles réguliers dans le bain. Nous modélisons ces injections
 sous la forme d'une série d'évènements instantanés, successifs dans le
-temps. Soi $K$ le nombre total d'injections, et soit un ensemble de
+temps. Soit $K$ le nombre total d'injections, et soit un ensemble de
 nombres réels $\tau^k$ tels que $0\leq \tau^k < T$ $\forall k$, où
-les $\tau_k$ représentent les
+les $\tau^k$ représentent les
 instants auxquels surviennent chaque injection. Soit pour toute
 injection $k = 1,2, \dots, K$ la distribution initiale de particule
 $S^k:\Omega\times\rplus\to\mathbb R$ issue de l'injection $k$,
@@ -93,7 +93,7 @@ définie par
 \end{equation}
 Ici, $\nu$ est le vecteur normal unitaire extérieur à la surface
 $\partial \Omega$. La condition aux limites sur le bord entrant s'écrit
-alors pour tout $k = 1, 2, \dots, K$ et $t > \tau_k$
+alors pour tout $k = 1, 2, \dots, K$ et $t > \tau^k$
 \begin{equation}
 \frac{\partial n_p^k}{\partial \nu}(t, x) = 0, \quad x\in\Gamma^-.
 \end{equation}
@@ -105,7 +105,7 @@ $x\in\Omega$ et fonction de $r$ est donnée par
 \end{equation}
 Les conditions initiales de l'équation
 (\ref{eq:population-dissolution}) sont celles obtenues de
-(\ref{eq:population-transport}) en $t = \tau_k + \tlat$.
+(\ref{eq:population-transport}) en $t = \tau^k + \tlat$.
 
 \begin{remarque}
 Les quantités $n_p^k$ introduites ici sont similaires au champ $n_p$
@@ -123,7 +123,7 @@ la cathode.} par la réaction
 d'électrolyse. Si $I$ est le courant électrique total imposé
 traversant la cuve, le débit total d'alumine dissoute consommée en
 \si{\mol\per\second} est proportionnel à $I$ et s'écrit
-\begin{equation}
+\begin{equation}\label{eq:mass-consumption}
   \frac{I}{6\faraday}
 \end{equation}
 où $F = \num{96485.33}$ \si{\coulomb\per\mol} est la constante de
@@ -134,7 +134,7 @@ produire deux molécules d'aluminium métallique \ce{Al}.
 On suppose que la consommation d'alumine dissoute qui a lieu dans le
 bain électrolytique est proportionnelle à la densité de courant
 électrique locale $j:\Omega\to\mathbb R^3$. On définit alors le terme
-de disparition de la concentration d'alumine $\dot q_1$ associé à la
+de disparition de la concentration d'alumine $q_1$ associé à la
 consommation par la réaction d'électrolyse
 \begin{equation}
   q_1(x) = -\frac{I}{6\faraday} %
@@ -151,7 +151,7 @@ $\population$ vient contribuer à la concentration d'alumine
 dissoute. On définit $q_2$ le terme source de la concentration
 qui représente l'apport dû à la dissolution des particules de la
 manière suivante. Si $t \in [0, T]$, on note $\bar k(t)$ l'entier tel
-que $\bar k(t) = \max_{1\leq k\leq K}\cparent{k \mid \tau_k + \tlat < t}$ . Alors on définit
+que $\bar k(t) = \max_{1\leq k\leq K}\cparent{k \mid \tau^k + \tlat < t}$ . Alors on définit
 \begin{equation}
   q_2(t, x) = -\sum_{k = 1}^{\bar
     k(t)}\frac{4\pi\aluminadensity}{[\ce{Al2O3}]}\int_{\rplus}n_p^k(t,
@@ -198,7 +198,7 @@ x)$ la densité de puissance thermique extraite du bain pour réchauffer
 les particules, que l'on définit par
 \begin{equation}\label{eq:power-heating}
   p_1(t, x) = -\parent{\tinit-\tinj}\sum_{k = 1}^{K}\dirac(t -
-  \tau_k)\int_{\rplus}\aluminadensity\aluminahc\frac{4}{3}\pi r^3 S^k(x, r)\,\intd{r}
+  \tau^k)\int_{\rplus}\aluminadensity\aluminahc\frac{4}{3}\pi r^3 S^k(x, r)\,\intd{r}
 \end{equation}
 où $\dirac$ est une masse de Dirac et $\tinit$ la température
 initiale du bain. Dans (\ref{eq:power-heating}) et pour rappel, $\tinit$ est la
@@ -237,7 +237,7 @@ s'écrit
 \begin{equation}\label{eq:p3}
 p_3(x) = \frac{j\cdot j}{\conductivity}.
 \end{equation}
-où le nombre réel $\sigma > 0$ est la conductivité du bain que l'on
+où le nombre réel $\sigma > 0$ est la conductivité électrique du bain que l'on
 suppose constante dans tout $\Omega$.
 
 \paragraph{Température du bain}

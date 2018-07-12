@@ -340,7 +340,7 @@ Stefan, on part de la formulation enthalpique
 suit le travail de M. Paolini et al. \cite{Paolini1988}.
 
 Soit un temps final $T > 0$, $N\in \mathbb \nstar$ le nombre de pas de
-temps. Soit $\tau = T / N$ le pas de temps et $t^n = \tau n$. On note
+temps. Soit $\timestep = T / N$ le pas de temps et $t^n = \timestep n$. On note
 $L_\beta$ la constante de Lipschitz de la fonction $\beta$:
 \begin{equation}
   L_\beta = \sup_{\enthalpy}\abs{\beta'(\enthalpy)}.
@@ -355,7 +355,7 @@ on pose $\temperature^0 = \tinit$, $\enthalpydensity^0 = \enthalpy(\tinit)$,
 avec $\enthalpy$ donnée par (\ref{eq:enthalpy}). Pour $0 < n \leq N$, on résout
 successivement les équations:
 \begin{align}
-  &\temperature^{n+1} - \frac{\tau}{\mu} \div\parent{
+  &\temperature^{n+1} - \frac{\timestep}{\mu} \div\parent{
     \electrolytetdiff \nabla\temperature^{n+1}} = %
   \beta\parent{\enthalpydensity^n}, & \text{dans } \Omega,\label{eq:chernoff-heat}\\
   &\temperature^{n+1}(x) = \temperature_{\mathrm D}(t^{n+1}, x), &
@@ -383,12 +383,12 @@ Ce schéma numérique basé sur la formule de Chernoff
   limité au premier ordre de (\ref{eq:heat-temperature-enthalpy}). En
   effet, (\ref{eq:chernoff-heat}) se réecrit
   \begin{equation}
-    \mu \frac{\temperature^{n+1} - \beta(\enthalpydensity^n)}{\tau} -
+    \mu \frac{\temperature^{n+1} - \beta(\enthalpydensity^n)}{\timestep} -
     \div\parent{\electrolytetdiff \nabla \temperature^{n+1}} = 0,
   \end{equation}
   ce qui correspond à
   \begin{equation}
-    \frac{\enthalpydensity^{n+1} - \enthalpydensity^n}{\tau} -
+    \frac{\enthalpydensity^{n+1} - \enthalpydensity^n}{\timestep} -
     \div\parent{\electrolytetdiff \nabla \temperature^{n+1}} = 0
   \end{equation}
   en utilisant (\ref{eq:chernoff-update}).
@@ -403,7 +403,7 @@ La formulation faible du système d'équations
 n\leq N$ à chercher une fonction $\temperature^{n+1}:\Omega\to\mathbb R$
 à symétrie sphérique telle que la relation:
 \begin{equation}\label{eq:weak-form-cart-coord}
-  \int_\Omega \temperature^{n+1} v\,\intd{x} + \frac{\tau}{\mu} %
+  \int_\Omega \temperature^{n+1} v\,\intd{x} + \frac{\timestep}{\mu} %
   \int_\Omega \electrolytetdiff\nabla \temperature^{n+1} \nabla v\,\intd{x} - %
   \int_{\Gamma_\mathrm{N}} \temperature^{n+1}_\mathrm{N} v\,\intd{\sigma} %
   = \int_\Omega \beta(\enthalpydensity^n)v\,\intd{x}
@@ -458,7 +458,7 @@ R$, $\tilde\temperature^{n+1}(\rmax) =
 \tilde\temperature_{\mathrm{D}}^{n+1}$ telle que:
 \begin{multline}\label{eq:weak-form-spher-coord-dirichlet}
   4\pi\int_0^{\rmax} \tilde \temperature^{n+1}\tilde v r^2\,\intd{r}
-  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \electrolytetdiff\frac{\mathrm d %
+  + \frac{4\pi\timestep}{\mu}\int_0^{\rmax} \electrolytetdiff\frac{\mathrm d %
     \tilde \temperature^{n+1}}{\mathrm d r} \frac{\mathrm d \tilde v}{\mathrm d %
     r}r^2\,\intd{r}  %
   = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity^n)\tilde v r^2\,\intd{r}
@@ -472,7 +472,7 @@ chercher une fonction $\tilde \temperature^{n+1}:[0,\rmax] \to \mathbb
 R$, telle que:
 \begin{multline}\label{eq:weak-form-spher-coord-neumann}
   4\pi\int_0^{\rmax} \tilde \temperature^{n+1}\tilde v r^2\,\intd{r}
-  + \frac{4\pi\tau}{\mu}\int_0^{\rmax} \electrolytetdiff\frac{\mathrm d %
+  + \frac{4\pi\timestep}{\mu}\int_0^{\rmax} \electrolytetdiff\frac{\mathrm d %
     \tilde \temperature^{n+1}}{\mathrm d r} \frac{\mathrm d \tilde v}{\mathrm d %
     r}r^2\,\intd{r} \\
   - 4\pi\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v(\max)\rmax^2%
@@ -642,8 +642,8 @@ On fixe $\mu = L_\beta =
 impose des conditions aux limites de Dirichlet sur le bord de
 $\Omega$, \ie, $\Gamma_\mathrm{D} = \cparent{0, 1}$. On se donne
 $\temperature_\mathrm{D}(0) = -1$ et $\temperature_\mathrm{D}(1) =
-0$. On choisit le pas de temps $\tau$ dans l'intervalle
-$[\num{3.9e-5}, \num{5e-3}]$, et $\delta = O(\tau)$.
+0$. On choisit le pas de temps $\timestep$ dans l'intervalle
+$[\num{3.9e-5}, \num{5e-3}]$, et $\delta = O(\timestep)$.
 
 \begin{figure}[h]
   \begin{center}

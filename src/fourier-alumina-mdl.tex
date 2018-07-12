@@ -7,13 +7,13 @@ dans le domaine $\Omega$. Le champ $u$ sera typiquement calculé à
 l'aide du schéma numérique introduit dans la section
 \ref{sec:fourier-discretisation}.  Soit $S$ le terme source de la
 concentration d'alumine dissoute correspondant à l'injection de
-particules, $\dot q$ le terme source correspondant à la consommation
+particules, $q$ le terme source correspondant à la consommation
 d'alumine dissoute par la réaction d'électrolyse, et la diffusivité
 moléculaire de la concentration d'alumine dans le bain $D_C^M > 0$.
 On cherche le champ de concentration d'alumine stationnaire
 $c:\Omega\to\mathbb R$ solution de l'équation d'advection-diffusion
 \begin{equation}\label{eq:stat-concentration}
-  u\cdot \nabla c - D_c^M \Delta c = S + \dot q\quad \text{dans } \Omega,
+  u\cdot \nabla c - D_c^M \Delta c = S + q\quad \text{dans } \Omega,
 \end{equation}
 avec des conditions de Neumann homogènes sur le bord $\partial
 \Omega$:
@@ -35,22 +35,22 @@ temporelle du débit de masse de particules d'alumine définit par
 les fonctions $S_k$:
 \begin{equation}
   S(x_1,x_2,x_3) = \lim_{T\to\infty}\frac{1}{T}\int_0^T \sum_{k>0}
-  S_k(x_1, x_2, x_3) \delta(t - \tau_k)\,\mathrm dt, \quad (x_1, x_2, x_3)\in\Omega.
+  S_k(x_1, x_2, x_3) \delta(t - \tau^k)\,\mathrm dt, \quad (x_1, x_2, x_3)\in\Omega.
 \end{equation}
 
-Le terme source $\dot q$ correspond à la consommation d'alumine
+Le terme source $q$ correspond à la consommation d'alumine
 dissoute par la réaction d'électrolyse. Le débit total d'alumine
 consommée dans la cuve étant donné par la relation
 (\ref{eq:mass-consumption}), on pose:
 \begin{equation}\label{eq:stat-alumina-consommation}
-  \dot q(x_1, x_2, x_3) = -\frac{I}{6\faraday\abs{\Omega}},
+  q(x_1, x_2, x_3) = -\frac{I}{6\faraday\abs{\Omega}},
 \end{equation}
 où $I$ est le courant électrique total qui traverse la cuve, et
 $\faraday$ la constante de Faraday.
 
 \begin{remarque}
   Par construction des fonctions $\cparent{S_k}_{k>0}$, la moyenne de $S$ sur
-  $\Omega$ est exactement égale à la moyenne de $\dot q$ sur
+  $\Omega$ est exactement égale à la moyenne de $q$ sur
   $\Omega$, i. e.:
   \begin{equation}
     \int_\Omega \parent{S + q}\,\mathrm dx = 0.
