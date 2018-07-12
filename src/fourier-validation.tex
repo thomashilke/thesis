@@ -122,6 +122,28 @@ choix $\thickness = 2$, i. e. dans le domaine $\Omega =
       \includegraphics[width=\textwidth]{../media/fourier/fig-exact/print/slice-1.png}
       \caption{$x_3 = 0$}
     \end{subfigure}
+        \begin{tikzpicture}
+      \begin{axis}[
+          colorbar,
+          hide axis,
+          scale only axis,
+          height=0.0\rasterimagewidth,
+          width=\rasterimagewidth,
+          colorbar horizontal,
+          point meta min=0.0,
+          point meta max=2.83,
+          colorbar style={
+            title=Vitesse $u$,
+            width=7.4cm,
+            height=0.3cm,
+            xtick={0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 2.83},
+            at={(0.5\rasterimagewidth,0.4cm)},
+            anchor=north
+          }
+        ]
+        \addplot [] coordinates {(0,0)};
+      \end{axis}
+    \end{tikzpicture}
     \caption{Représentation de la solution exacte
       (\ref{eq:stokes-exact-sol-1})-(\ref{eq:stokes-exact-sol-3}) du
       problème de Stokes (\ref{eq:stokes-u}), (\ref{eq:stokes-p}). La
@@ -166,6 +188,11 @@ $u_h^\mathrm{S3D}$ dans la suite). On note aussi l'erreur
 \begin{equation}
   e_h^{\mathrm{S3D}} = \frac{\norm{u - u_h^{\mathrm{S3D}}}_{L^2(\Omega)}}{\norm{u}_{L^2(\Omega)}}.
 \end{equation}
+
+\renewcommand{\floatpagefraction}{.9}%
+\renewcommand{\topfraction}{.9}
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{4}
 
 \subsubsection{Convergence de la somme partielle de Fourier}
 On s'intéresse à la convergence de l'erreur $e_h^\mathrm{SF}$ en
@@ -227,7 +254,6 @@ l'erreur pour différentes tailles de maille $h$ et différentes
   \end{center}
 \end{table}
 
-
 \subsubsection{Comparaison des erreur $e_h^{\mathrm{SF}}$ et
   $e_h^{\mathrm{S3D}}$} On s'intéresse maintenant à comparer la
 précision des calculs $u_{h,K}^\mathrm{SF}$ et
@@ -237,7 +263,16 @@ différents épaisseurs $\thickness$ du domaine $\Omega$. La figure
 \ref{fig:e-sf-e-s3d-convergence} représente les même données sous
 forme graphique.
 
-\begin{table}[t]
+\begin{figure}[t!]
+  \begin{center}
+    \input{../media/fourier/convergence/sf-convergence.tex}
+    \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en fonction
+    de l'épaisseur $\thickness$ lorsque $K = 20$ et $h = 2/64$.}
+    \label{fig:e-sf-e-s3d-convergence}
+  \end{center}
+\end{figure}
+
+\begin{table}[t!]
   \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en fonction
     de l'épaisseur $\thickness$ lorsque $K = 20$ et $h = 2/64$.}
   \label{tab:e-sf-e-s3d-convergence}
@@ -264,23 +299,7 @@ forme graphique.
   \end{center}
 \end{table}
 
-\begin{figure}
-  \begin{center}
-    \input{../media/fourier/convergence/sf-convergence.tex}
-    \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en fonction
-    de l'épaisseur $\thickness$ lorsque $K = 20$ et $h = 2/64$.}
-    \label{fig:e-sf-e-s3d-convergence}
-  \end{center}
-\end{figure}
-
-Finalement, on compare les temps CPU pour chaque schéma, ainsi
-que le nombre d'itérations de l'algorithme GMRES pour résoudre le
-système linéaire dans le cas du schéma S3D, dont les résultats sont
-synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
-compare les performances entre le temps de calculs du modèle F3D et SF
-en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et \num{1.19}.
-
-\begin{table}[t]
+\begin{table}[t!]
   \caption{Comparaison des performances entre les schémas permettant
     de calculer $u_{h,K}^{\mathrm{SF}}$ et $u_h^\mathrm{S3D}$ en
     fonction de l'épaisseur $\thickness$. Les calculs
@@ -310,3 +329,12 @@ en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et \num{1.19}.
     \end{tabular}
   \end{center}
 \end{table}
+
+Finalement, on compare les temps CPU pour chaque schéma, ainsi
+que le nombre d'itérations de l'algorithme GMRES pour résoudre le
+système linéaire dans le cas du schéma S3D, dont les résultats sont
+synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
+compare les performances entre le temps de calculs du modèle F3D et SF
+en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et \num{1.19}.
+\renewcommand{\floatpagefraction}{.6}%
+\renewcommand{\topfraction}{0.7}

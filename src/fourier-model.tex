@@ -216,55 +216,6 @@ x_3)\cos\parent{\beta^k x_3}\,\mathrm dx_3,\quad i = 1,2,\label{eq:f-2}\\
 F_3(x_1, x_2,x_3) \sin\parent{\beta^k x_3}\,\mathrm dx_3.\label{eq:f-3}
 \end{align}
 
-%%\begin{align}
-%%  &- \mu\frac{\partial^2 u_1^k}{\partial x_1^2} - \mu\frac{\partial^2 u_1^k}{\partial x_2^2}%
-%%  + \mu\parent{\beta^k}^2 u_1^k%
-%%  + \frac{\partial p^k}{\partial x_1} %
-%%  = f_1^k, \label{eq:fourier-harm-1}\\
-%%  %
-%%  &- \mu\frac{\partial^2 u_2^k}{\partial x_1^2} - \mu\frac{\partial^2 u_2^k}{\partial x_2^2} %
-%%  + \mu\parent{\beta^k}^2 u_2^k %
-%%  + \frac{\partial p_k}{\partial x_2} %
-%%  = f_2^k, \label{eq:fourier-harm-2} \\
-%%  %
-%%  &- \mu\frac{\partial^2 u_3^k}{\partial x_1^2} - \mu\frac{\partial^2 u_3^k}{\partial x_2^2} %
-%%  + \mu\parent{\beta^k}^2 u_3^k %
-%%  - \beta^kp^k %
-%%  = f_3^k, \label{eq:fourier-harm-3}\\
-%%  %
-%%  &  \frac{\partial u_1^k}{\partial x_1} %
-%%  + \frac{\partial u_2^k}{\partial x_2} %
-%%  + \beta^k u_3^k %
-%%  = 0. \label{eq:fourier-incompressibility}
-%%\end{align}
-%%Les problèmes ci-dessus sont à résoudre dans $\Lambda \subset
-%%\mathbb R^2$. Naturellement ils nécessitent les conditions limites
-%%d'adhérence
-%%\begin{equation*}
-%%u_1^0 = u_2^0 = 0 \quad\text{ sur }\partial \Lambda
-%%\end{equation*}
-%%et
-%%\begin{equation*}
-%% u_1^k = u_2^k = u_3^k = 0 \quad\text{ sur }\partial \Lambda
-%%\end{equation*}
-%%pour tout $k \geq 1$, et le calcul au préalable des coefficients
-%%de Fourier du champ de force:
-%%\begin{align}
-%%  f_i^0(x_1, x_2) %
-%%  &= \frac{1}{2\thickness}\int_0^{2\thickness}f_i(x_1, x_2, x_3)%
-%%  \,\mathrm dx_3,& i = 1,2,\label{eq:force-coefficient-1}\\
-%%  %
-%%  f_i^k(x_1, x_2)
-%%\end{align}
-%%et pour $k > 0$,
-%%\begin{align}
-%%  &= \frac{1}{\thickness}\int_0^{2\thickness}f_i(x_1, x_2, x_3)%
-%%  \cos\parent{\beta^kx_3}\,\mathrm dx_3,& i = 1,2,\label{eq:force-coefficient-2}\\
-%%  %
-%%  f_3^k(x_1, x_2)%
-%%  &= \frac{1}{\thickness}\int_0^{2\thickness}f_3(x_1, x_2, x_3)%
-%%  \sin\parent{\beta^kx_3}\,\mathrm dx_3.\label{eq:force-coefficient-3}
-%%\end{align}
 
 \paragraph{Formulation faible}\label{sec:stokes-fourier-weak}
 Nous énonçons maintenant les formulations variationnelles du problème
@@ -273,7 +224,7 @@ formé par les équations (\ref{eq:fourier-fund-1}) et
 l'écoulement $u$, et des problèmes formés par les équations
 (\ref{eq:fourier-harm-1}) à (\ref{eq:fourier-harm-3}) qui
 correspondent à chacune des harmoniques de l'écoulement $u$. Pour ce
-faire, nous aurons besoins des espaces fonctionnels suivants. L'espace
+faire, nous aurons besoin des espaces fonctionnels suivants. L'espace
 $L^2(\Lambda)$ est l'ensemble
 \begin{align}
   L^2(\Lambda) = \cparent{f:\Lambda\to\mathbb R \mathrel{\Big|} \int_\Lambda
@@ -287,16 +238,23 @@ pour tout $f, g\in L^2(\Lambda)$, et de la norme
 \begin{align}
   \norm{f}_{L^2(\Lambda)} = \sqrt{(f, f)}\quad\forall f\in L^2(\Lambda).
 \end{align}
-On définit encore
+On notera encore $H^1(\Lambda)$ l'espace de Sobolev
+$W^{1,2}(\Lambda)$, c'est-à-dire que
 \begin{align}
-  L^2_0(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|} f(x) = 0 \forall
-    x\in \partial\Lambda},\\
   H^1(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|} \int_\Lambda
     \abs{\nabla f}^2 \mathrm dx < \infty}
 \end{align}
 et
 \begin{align}
-  H^1_0(\Lambda) = H^1(\Lambda) \cap L^2_0.
+  H^1_0(\Lambda) = \cparent{f \in H^1(\Lambda) \mathrel{\bigg|}
+    f|_{\partial \Lambda} = 0}.
+\end{align}
+Nous aurons finalement besoin des espaces de fonctions à moyenne nulle
+\begin{align}
+  &L^2_0(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|} f(x) = 0 \forall
+    x\in \partial\Lambda},\\
+  \text{et }\quad &H^1_{0,0}(\Lambda) = \cparent{f\in H^1_0(\Lambda)\mathrel{\bigg|}
+    \int_\Lambda f \,\mathrm dx = 0}.
 \end{align}
 
 Commençons tout d'abord par traiter le mode fondamental. Pour
@@ -312,15 +270,15 @@ déformation réduits aux composantes 1 et 2:
 \end{equation}
 Le problème faible correspondant aux équations
 (\ref{eq:fourier-fund-1}) et (\ref{eq:fourier-fund-2}) consiste à
-chercher les fonctions $u_1^0,u_2^0 \in H^1(\Lambda)$, $p^0 \in
+chercher les fonctions $u_1^0,u_2^0 \in H^1_0(\Lambda)$, $p^0 \in
 L^2_0(\Lambda)$, telles que
 \begin{align}
   &\int_\Lambda \electrolyteviscosity\otimes \reducedstraintensor(u^0) : \reducedstraintensor(v) \intd{x_1}\intd{x_2} -
   \int_\Lambda p^0\div v \intd{x_1}\intd{x_2} = \int_\Lambda f^0\cdot v
   \intd{x_1}\intd{x_2},\label{eq:fourier-weak-fund-1}\\
-  &\int_\Lambda q\div u \intd{x_1}\intd{x_2} = 0\label{eq:fourier-weak-fund-2}
+  &\int_\Lambda q\div u^0 \intd{x_1}\intd{x_2} = 0\label{eq:fourier-weak-fund-2}
 \end{align}
-pour toutes fonctions $v \in \parent{H^1(\Lambda)}^2$, $q \in
+pour toutes fonctions $v \in \parent{H^1_0(\Lambda)}^2$, $q \in
 L_0^2(\Lambda)$. En admettant une régularité adéquate pour le bord
 $\partial \Lambda$ et en supposant que $f^0\in \mathrm L^2(\Lambda)$,
 il est connu que la formulation faible
@@ -328,7 +286,7 @@ il est connu que la formulation faible
 solution \cite{Temam1977}.
 
 Traitons à présent les problèmes pour les coefficients $u^k$ et
-$p^k$. Soit $k > 0$ et soit $\tilde \straintensor$ le tenseur $3\times
+$p^k$. Soit $k > 0$ et soit $\tilde \straintensor^k$ le tenseur $3\times
 3$ définit par
 \begin{equation}
   \tilde\straintensor^k(u) = \begin{bmatrix}
@@ -336,7 +294,7 @@ $p^k$. Soit $k > 0$ et soit $\tilde \straintensor$ le tenseur $3\times
     & \frac{\partial u_1}{\partial x_2} + \frac{\partial u_2}{\partial x_1}
     & \frac{\partial u_3}{\partial x_1} - \beta_k u_1 \\
     %
-       \frac{\partial u_2}{\partial x_1} + \frac{\partial u_1^k}{\partial x_2}
+       \frac{\partial u_2}{\partial x_1} + \frac{\partial u_1}{\partial x_2}
     & 2\frac{\partial u_2}{\partial x_2}
     &  \frac{\partial u_3}{\partial x_2} - \beta_k u_2 \\
     %
@@ -360,28 +318,69 @@ L^2(\Lambda)$ telles que
   &\int_\Lambda \parent{\frac{\partial u_1^k}{\partial x_1} + \frac{\partial u_2^k}{\partial x_2} + \beta^k u_3^k}q = 0\label{eq:fourier-weak-harm-2}
 \end{align}
 pour toutes fonctions $v = (v_1,v_2,v_3)\in \parent{H^1_0(\Lambda)}^3$ et $q\in
-L^2(\Lambda)$. Afin de rendre plus explicite la structure sous-jacente
-de cette formulation, on peut l'exprimer en des termes plus
-abstraits. Soit $a^k:H^1_0(\Lambda)^3\times H^1_0(\Lambda)^3 \to \mathbb
-R$ les formes bilinéaires continues définies pour tout $k > 0$ par
+L^2(\Lambda)$. Nous reformulons maintenant ce problème sous une forme
+plus adéquate pour l'analyse qui suit.
+On montre en utilisant le théorème de la divergence et en posant
+$\tilde p^k = p^k - C^k$ avec $C^k \in \mathbb R$ que le
+problème
+(\ref{eq:fourier-weak-harm-1}),(\ref{eq:fourier-weak-harm-2}) est
+équivalent au problème suivant: trouver $u^k\in
+H^1_0(\Lambda)^3$, $\tilde p^k \in
+L^2_0(\Lambda)$ et $C^k\in\mathbb R$ tels que pour tout $v\in
+H^1_0(\Lambda)^3$ et $\tilde p^k \in L^2_0(\Lambda)$:
+\begin{align}
+  &\int_\Lambda 2\mu\otimes\tilde\straintensor^k(u^k):\tilde\straintensor^k(v)
+  - \int_\Lambda \tilde p^k\parent{\frac{\partial v_1}{\partial x_1} +
+    \frac{\partial v_2}{\partial x_2}} - \int_\Lambda(\tilde p^k +
+  C^k)\beta^k v_3
+  = \int_\Lambda f^k\cdot v,\label{eq:fourier-weak-harm-v2-1}\\
+  &\int_\Lambda \parent{\frac{\partial u_1^k}{\partial x_1} +
+    \frac{\partial u_2^k}{\partial x_2} + \beta^k u_3^k}q =
+  0,\label{eq:fourier-weak-harm-v2-2}\\
+  &\int_\Lambda u_3^k = 0.\label{eq:fourier-weak-harm-v2-3}
+\end{align}
+Soit maintenant $\psi \in H^1_0(\Lambda)$ tel que $\int_\Lambda
+\psi\,\mathrm dx \neq 0$. Alors on peut écrire $H^1_0(\Lambda) =
+H^1_{0,0}(\Lambda) \oplus W$, où $W =\mathrm{span}(\psi)$. En
+cherchant $u_3^k \in H^1_{0,0}(\Lambda)$, on obtient
+le problème bien posé suivant: trouver $u^k \in
+H_0^1(\Lambda)^2 \times H_{0,0}^1(\Lambda)$, $\tilde p^k \in
+L^2_0(\Lambda)$ tels que pour tout $v \in H_0^1(\Lambda)^2 \times
+H_{0,0}^1(\Lambda)$, $q \in L^2_0(\Lambda)$ on ait
+\begin{align}
+  &\int_\Lambda 2\mu\otimes\tilde\straintensor^k(u^k):\tilde\straintensor^k(v)
+  - \int_\Lambda \tilde p^k\parent{\frac{\partial v_1}{\partial x_1} +
+    \frac{\partial v_2}{\partial x_2} + \beta^k v_3}
+  = \int_\Lambda f^k\cdot v,\label{eq:fourier-weak-harm-v3-1}\\
+  &\int_\Lambda \parent{\frac{\partial u_1^k}{\partial x_1} + \frac{\partial u_2^k}{\partial x_2} + \beta^k u_3^k}q = 0\label{eq:fourier-weak-harm-v3-2}
+\end{align}
+La constante $C^k$ est unique et peut être calculée a posteriori en
+connaissant les fonctions $u^k$ et $\tilde p^k$. Nous reportons la
+discussion de ce point à la fin de cette section.
+
+Afin de rendre plus explicite la structure sous-jacente de cette
+formulation, on peut l'exprimer en des termes plus abstraits. Notons
+$V = H^1_0(\Lambda)^2\times H^1_{0,0}(\Lambda)$. Soit $a^k:V\times V
+\to \mathbb R$ les formes bilinéaires continues définies pour tout $k
+> 0$ par
 \begin{equation}
   a^k(u,v) = \int_\Lambda
   2\mu\otimes\tilde\straintensor^k(u):\tilde\straintensor^k(v)
 \end{equation}
-et les formes bilinéaires continues $b^k:H^1_0(\Lambda)^3\times L^2(\Lambda)\to\mathbb
+et les formes bilinéaires continues $b^k:V\times L^2_0(\Lambda)\to\mathbb
 R$ définies pour tout $k > 0$ par
 \begin{equation}
   b^k(u, q) = \int_\Lambda \parent{\frac{\partial u_1}{\partial x_1} +
     \frac{\partial u_2}{\partial x_2} + \beta^k u_3}q.
 \end{equation}
-Ainsi pour $k$ fixé, le problème (\ref{eq:fourier-weak-harm-1}),
-(\ref{eq:fourier-weak-harm-2}) est équivalent au problème de
-chercher $(u^k,p^k)\in H^1_0(\Lambda)^3 \times L^2(\Lambda)$ tel que
+Ainsi pour $k$ fixé, le problème (\ref{eq:fourier-weak-harm-v3-1}),
+(\ref{eq:fourier-weak-harm-v3-2}) est équivalent au problème de
+chercher $(u^k,\tilde p^k)\in V \times L^2_0(\Lambda)$ tel que
 \begin{align}
   &a^k(u^k,v) - b^k(v,p^k) = \int_\Lambda f^k\cdot v,\label{eq:abstr-weak-harm-1}\\
   & b^k(u^k, q) = 0\label{eq:abstr-weak-harm-2}
 \end{align}
-pour tout $(v, q)\in H^1_0(\Lambda)^3 \times L^2(\Lambda)$.
+pour tout $(v, q)\in V \times L^2_0(\Lambda)$.
 
 \paragraph{Existence d'une solution faible pour les harmoniques}
 On donne maintenant une preuve de l'existence et de l'unicité du
@@ -438,7 +437,7 @@ telle que $\frac{\partial u_1}{\partial x_1} + \frac{\partial
   \frac{\partial u_2}{\partial x_2} + \beta^k u_3 = 0$ et les
   conditions aux limites de Dirichlet homogènes $u = 0$ sur
   $\partial \Lambda$ on conclut que l'expression
-  (\ref{eq:lemme-nul-term}) est identiquement nul et on obtient le
+  (\ref{eq:lemme-nul-term}) est identiquement nulle et on obtient le
   résultat annoncé.
 \end{proof}
 
@@ -485,28 +484,55 @@ x_2)\in \Lambda$, alors le problème (\ref{eq:abstr-weak-harm-1}),
 \begin{proof}
   Pour montrer la proposition \ref{prop:2}, il suffit de vérifier
   que la forme $a^k(.,.)$ est coercive sur $V_0$ où $V_0 = \cparent{v
-    \in H_0^1(\Lambda)^3\mid b^k(v, q) = 0\ \forall q \in
-    L^2(\Lambda)}$, et que la condition classique inf-sup sur la forme
+    \in V\mid b^k(v, q) = 0\ \forall q \in
+    L^2_0(\Lambda)}$, et que la condition classique inf-sup sur la forme
   bilinéaire $b^k$ est satisfaite.
 
   Le lemme \ref{lem:2} avec l'hypothèse (\ref{eq:hypothesis}) montre
   bien que $a^k$ est coercive sur $V_0$. D'autre part en utilisant
   l'inégalité concernant la condition inf-sup dans $\mathbb R^2$ et si
-  $q\in L^2(\Lambda)$, on a que
+  $q\in L^2_0(\Lambda)$, on a que
   \begin{align*}
-    \sup_{\norm{v}_{H^1_0} = 1} b^k(v,q)
-    = \sup_{\norm{v}_{H^1_0} = 1} \int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} + \frac{\partial v_2}{\partial x_2} + \beta^k v_3}
-    \geq & \sup_{\norm{v}_{H^1_0} = 1}\int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} + \frac{\partial v_2}{\partial x_2}}\\
-    &\geq \gamma \norm{q}_{L^2},
+    \sup_{\norm{v}_{H^1_0}(\Lambda)^3 = 1} b^k(v,q) = &\sup_{\norm{v}_{H^1_0(\Lambda)^3} = 1} \int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} + \frac{\partial v_2}{\partial x_2} + \beta^k v_3}q\\
+    \geq & \sup_{\norm{(v_1, v_2, 0)}_{H^1_0(\Lambda)^3} =
+      1}\int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} +
+      \frac{\partial v_2}{\partial x_2}}q\\
+    = & \sup_{\norm{(v_1, v_2)}_{H^1_0(\Lambda)^2} = 1}\int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} + \frac{\partial v_2}{\partial x_2}}q\\
+    \geq& \gamma \norm{q}_{L^2_0(\Lambda)},
   \end{align*}
-  où $\gamma > 0$, et où on a noté $\norm{v}_{H_0^1}^2 = \sum_{i =
-    1}^3 \norm{v_i}_{H_0^2}^2$. Ainsi on a bien
-  \begin{equation}
-    \inf_{q\in L^2}\sup_{v\in (H_0^1)^3} \frac{b(v,
-      q)}{\norm{q}_{L^2}\norm{v}_{H^1_0}} \geq \gamma > 0,
-  \end{equation}
+  où $\gamma > 0$. Ainsi on a bien
+  \begin{equation*}
+    \inf_{q\in L^2_0}\sup_{v\in V} \frac{b(v,
+      q)}{\norm{q}_{L^2_0}\norm{v}_{V}} \geq \gamma > 0,
+  \end{equation*}
   et la proposition est prouvée.
 \end{proof}
+
+Afin d'obtenir le coefficient de Fourier de la pression $p^k$, il
+reste à calculer la constante $C^k$ et à montrer son unicité. En
+prenant la fonction test $v = (0,0,\psi)$ dans
+(\ref{eq:fourier-weak-harm-v2-1}) on obtient
+\begin{align}
+\int_\Lambda 2\mu\otimes
+\tilde\straintensor^k(u^k):\tilde\straintensor^k(v) -
+\beta^k\int_\Lambda (\tilde p^k + C^k) = \int_\Lambda f_3 \psi, \label{eq:fourier-pressure-constant}
+\end{align}
+ce qui permet de calculer $C^k$.
+
+On montre enfin que le calcul de la constante $C^k$ ne dépend pas du
+choix de la fonction de base $\psi$ de $W$. En effet, en considérant
+une autre fonction $\phi \in H^1_0(\Lambda)$ telle que $\int_\Lambda
+\phi \neq 0$ alors $\phi = \bar\phi + \tilde \phi$ où $\tilde \phi \in
+H^1_{0,0}(\Lambda)$ et $\bar \phi \in W$ puisque $H^1_0(\Lambda) =
+H^1_{0,0} \oplus W$. Cette décomposition implique qu'il existe une
+unique constante $\gamma \in \mathbb R$ telle que $\bar \phi = \gamma
+\psi$. Si, au lieu de $v = (0,0,\psi)$ on prend $v = (0,0,\phi) =
+(0,0,\tilde \phi) + (0,0,\gamma \psi)$ dans
+(\ref{eq:fourier-weak-harm-v2-1}), alors $(0,0,\tilde \phi) \in
+H^1_0(\Lambda)^2\times H^1_{0,0}(\Lambda)$. Cette fonction test est
+comprise dans (\ref{eq:fourier-weak-harm-v3-1}). D'autre part
+$(0,0,\gamma \psi)$ donne la même constante $C^k$ que la relation
+(\ref{eq:fourier-pressure-constant}).
 
 %%Deuxièmement, pour tout $k = 1, 2, \dots$, nous cherchons les
 %%fonctions $u_{1,k},u_{2,k},u_{3,k} \in H^1(\Lambda)$, $p_k \in

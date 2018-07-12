@@ -1,3 +1,6 @@
+\renewcommand{\floatpagefraction}{.9}%
+\renewcommand{\topfraction}{0.9}
+
 L'un des objectifs premiers du développement du schéma numérique
 SF est d'une part de fournir une approximation de l'écoulement des
 fluides dans une cuve d'électrolyse d'aluminium, et d'autre part
@@ -12,7 +15,7 @@ section \ref{sec:fourier-model} et \ref{sec:fourier-discretisation} et
 ceux obtenus avec la méthode 3D standard du chapitre
 \ref{chap:populations}. La méthode 3D standard fournit une
 concentration $c$ dépendante du temps. Dans la suite, cette
-concentration est calculée à $T = \num{1e4}\si{\second}$.
+concentration est calculée à $T = \num{1e4}$ \si{\second}.
 
 Le parallélépipède rectangle $\Omega$ défini par (\ref{eq:domain}) est
 contenu dans la partie fluide de la cuve, dans notre cas $\Omega = (0,
@@ -37,12 +40,12 @@ et dissolution décrit dans le chapitre 2. Dans
 (\ref{eq:stat-alumina-consommation}), le courant électrique total $I =
 \num{320000} \si{\ampere}$. Les différentes grandeurs physiques qui
 interviennent dans ce modèle ont déjà été introduites dans le tableau
-\ref{tab:dissolution-physical-parameters}. La figure
-\ref{fig:harmonic-concentration} représente les champs
-$u^{\mathrm{SF}}$, $c^\mathrm{SF}$, $u^\mathrm{F3D}$ et $c^{F3D}$ dans
-le plan $x_3 = \thickness / 2$.
+\ref{tab:dissolution-physical-parameters}. Les figures
+\ref{fig:harmonic-velocity} et \ref{fig:harmonic-concentration}
+représente les champs $u^{\mathrm{SF}}$, $c^\mathrm{SF}$,
+$u^\mathrm{F3D}$ et $c^{F3D}$ dans le plan $x_3 = \thickness / 2$.
 
-\begin{figure}
+\begin{figure}[t!]
   \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
@@ -72,7 +75,7 @@ le plan $x_3 = \thickness / 2$.
   \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t!]
   \begin{center}
     \includegraphics[width=\rasterimagewidth]{{../media/populations/ap32-fluid-flow/print/acd-all-anodes-velocity-0.00-0.05}.png}\\
     \begin{tikzpicture}
@@ -105,7 +108,7 @@ le plan $x_3 = \thickness / 2$.
   \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t!]
   \begin{center}
     \includegraphics[width=\rasterimagewidth]{{../media/fourier/application/print/all-concentration-acd}.png}\\
     \begin{tikzpicture}
@@ -138,7 +141,10 @@ le plan $x_3 = \thickness / 2$.
   \end{center}
 \end{figure}
 
+\renewcommand{\floatpagefraction}{.6}%
+\renewcommand{\topfraction}{0.7}
 
+\clearpage
 \subsection{Désactivation d'anodes}
 On s'intéresse maintenant au cas du calcul de l'écoulement des fluides
 et de la concentration d'alumine dissoute dans le bain électrolytique
@@ -167,7 +173,7 @@ $B$ le champ d'induction magnétique solution des équations de
 Maxwell et la force $f = j\times B$. Dans le modèle SF, on impose
 $f = 0$ sous les anodes, voir figure \ref{fig:anode-deactivation}.
 
-\begin{figure}
+\begin{figure}[t]
   \begin{center}
     \input{../media/fourier/anode-deactivation/anode-deactivation.pdf_tex}
     \caption{Désactivation d'une anode dans le modèle standard F3D et
@@ -189,7 +195,7 @@ successivement désactivées. On se réfère à la figure
 trouve sur la même figure les champs de concentration d'alumine
 associées.
 
-\begin{figure}
+\begin{figure}[t]
   \begin{center}
     \input{../media/fourier/anode-numerotations/anode-numerotation.pdf_tex}
     \caption{Numérotation des anodes de la cuve AP32.}
@@ -197,7 +203,7 @@ associées.
   \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -270,7 +276,7 @@ associées.
   \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -350,7 +356,7 @@ avec le modèle F3D. Sur la figure \ref{fig:harmonic-velocity-comp}
 on peut comparer les champs de vitesse $u$ et $u_h$ obtenu avec l'un
 ou l'autre des modèles dans l'ACD ou dans le domaine $\Omega$.
 
-\begin{figure}
+\begin{figure}[h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -401,7 +407,7 @@ ou l'autre des modèles dans l'ACD ou dans le domaine $\Omega$.
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -458,7 +464,7 @@ concentration $c$ obtenus avec le modèle F3D et le champ de
 concentration stationnaire dans le domaine $\Omega$ avec le modèle
 SF.
 
-\begin{figure}
+\begin{figure}[h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -508,7 +514,7 @@ SF.
   \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -580,7 +586,7 @@ de concentration dans les différentes configurations anodique entre le
 modèle F3D et le modèle SF.
 
 
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
 \begin{subfigure}[t]{\textwidth}
   \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-1-concentration-acd.png}
@@ -629,7 +635,7 @@ modèle F3D et le modèle SF.
 \end{center}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
 \begin{subfigure}[t]{\textwidth}
   \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-1-concentration-acd.png}
