@@ -21,7 +21,41 @@ finis lorsque $\thickness$ tend vers 0, \ie, lorsque le rapport
 d'aspect du maillage devient de plus en plus grand, la convergence des
 méthodes iteratives devient de plus en plus lente. De plus, l'erreur
 d'approximation tend a croître lorsque $\thickness$ diminue.
-
 Cette méthode est donc bien adaptée au calcule d'écoulement de
 fluides en couches minces, pour autant que les conditions aux limites
 soient adaptées.
+
+La formulation du modèle de Stokes-Fourier impose des contraintes
+particulières au niveau de la géométrie du domaine, des conditions
+aux limites sur certaines parties du bord du domaine. Dans le cas
+d'une cuve d'électrolyse d'aluminium, on est contraint de négliger la
+présence des l'ensemble des canaux et de l'inclinaison des parois
+latérales de la cuve. Au niveau des conditions aux limites, on est
+forcés d'imposer des conditions de glissement parfait sur les partie
+du bord en contact avec les anodes ou la cathode, et des conditions
+d'adhérence parfaite sur les parois verticales. Dans une cuve
+d'électrolyse, alors que le choix des conditions aux limites sur les
+parois est cohérent avec le modèle S3D, les conditions aux limites sur
+la cathodes ne correspondent pas. Le choix des conditions aux limites
+sur les anodes est sujet à discussion en raison de la présence de
+film gazeux à leur surface et à la présence de bulles de \ce{CO2}
+qui provoquent une forte agitation.
+
+La structure des champs de vitesse $u_h^\mathrm{SF}$ est
+similaire au modèle de référence $u_h^\mathrm{S3D}$ lorsque
+toutes les anodes sont activées. Cependant, lorsque des anodes sont
+désactivées l'écoulement de rérérence $u_h^\mathrm{S3D}$ développe des
+petites structures et des tourbillons additionnels à proximité de
+l'anodes désactivée que la solution $u_h^\mathrm{S3D}$ peine à
+reproduire.
+
+Le calcul de distribution stationnaire $c_h^\mathrm{SF}$ dépend
+directement de la vitesse d'écoulement $u_h^\mathrm{SF}$. La
+distribution $c_h^\mathrm{SF}$ certaines caractéristique
+significatives de la distribution de référence $c_h^\mathrm{S3D}$,
+tels que les excès de concentration à proximité des points
+d'injection. Cependant, la distribution d'alumine dans la cuve
+dépend de manière sensible à la position des tourbillons principaux
+de l'écoulement $u_h^\mathrm{SF}$. Il suffit que ces tourbillons
+soient légérement décalés par rapport à l'emplacement des injecteurs
+pour que la distribution d'alumine dissoute change drastiquement.

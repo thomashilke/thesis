@@ -195,13 +195,20 @@ $u_h^\mathrm{S3D}$ dans la suite). On note aussi l'erreur
 \setcounter{totalnumber}{4}
 
 \subsubsection{Convergence de la somme partielle de Fourier}
-On s'intéresse à la convergence de l'erreur $e_h^\mathrm{SF}$ en
+On s'intéresse à la convergence de l'erreur $e_{h,K}^\mathrm{SF}$ en
 fonction du nombre d'harmoniques $K$ dans la somme partielle de
 $u_{h,K}$. On prend pour le maillage $\mathcal M_h$ du domaine $\Lambda$
 une triangulation structurée de taille de maille $h = 2/64$. La
 table \ref{tab:h-k-convergence} donne les valeurs de l'erreur
 $e_{h,K}^\mathrm{SF}$ pour différents nombres d'harmoniques $K$ et
-différentes épaisseurs $\thickness$ du domaine $\Omega$.
+différentes épaisseurs $\thickness$ du domaine $\Omega$. On remarque
+que le nombre de terme dans de la somme partielle de la série de
+Fourier nécessaire pour saturer l'erreur augmente lorsque le rapport
+d'aspect du domaine $\Omega$ augmente, c'est-à-dire lorsque
+$\thickness$ tend vers zéro. En effet, lorsque $\thickness = 2$,
+l'erreur $e_h^\mathrm{SF}$ cesse de décroîter lorsque $K \geq 5$,
+tandis que lorsque $\thickness = 0.02$ il faut que $K \geq 7$ pour que
+l'erreur $e_h^\mathrm{SF}$ cesse de décroître.
 
 \begin{table}[t]
   \caption{Erreur $e_{h,K}^\mathrm{SF}$ entre la solution exacte et la
@@ -261,7 +268,13 @@ $u_h^{\mathrm{S3D}}$. Ici on a choisi $K = 20$ et $h = 2/64$. La table
 \ref{tab:e-sf-e-s3d-convergence} donne la valeur des erreurs pour
 différents épaisseurs $\thickness$ du domaine $\Omega$. La figure
 \ref{fig:e-sf-e-s3d-convergence} représente les même données sous
-forme graphique.
+forme graphique. On remarque que l'erreur $e_{h,K}^\mathrm{SF}$
+dépend fortement du rapport d'aspect du domaine $\Omega$, et
+décroît lorsque celui-ci augmente. A l'inverse, $e_h^\mathrm{S3D}$ est
+relativement indépendent de $\thickness$, et tend même à croître
+lorsque $\thickness$ tend vers zéro. Ce résultat indique qu'il est
+avantageux de considérer le modèle SF lorsque le domaine de calcul
+$\Omega$ présente une forte anisotropie.
 
 \begin{figure}[t!]
   \begin{center}
@@ -320,7 +333,7 @@ forme graphique.
       & $\thickness = 1.198$ \\
       %& $\thickness = 2$ \\
       \cmidrule{2-6}
-      F3D  \\
+      S3D  \\
       \hphantom{a} $T_\text{CPU}$ [\si{\second}] & 4587 & 2694 & 1343 & 753 & 753 \\
       \hphantom{a} itérations GMRES           & 901 & 609  & 327  & 184 & 133 \\
       SF \\
@@ -334,7 +347,19 @@ Finalement, on compare les temps CPU pour chaque schéma, ainsi
 que le nombre d'itérations de l'algorithme GMRES pour résoudre le
 système linéaire dans le cas du schéma S3D, dont les résultats sont
 synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
-compare les performances entre le temps de calculs du modèle F3D et SF
-en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et \num{1.19}.
+compare les performances entre le temps de calculs du modèle S3D et SF
+en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et
+\num{1.19}. On note que le coût en temps de calcul de la solution
+$u_h^\mathrm{S3D}$ augmente catastrophiquement lorsque $\thickness$
+diminue. Ceci est principalement dû au conditionnement de la matrice
+qui se péjore et au nombre d'itération de
+l'algorithm GMRES nécessaires pour atteindre la tolérance souhaitée.
+En comparaison, le coût en temps de calcul de la solution
+$u_{h,K}^{\mathrm{SF}}$ est indépendent de l'épaisseur $\thickness$,
+et environ 17 fois meilleur que le coût de calcul de
+$u_h^\mathrm{S3D}$ dans le pire des cas. A nouveau, ce résultat
+indique un clair avantage du modèle SF par rapport au modèle S3D.
+
+
 \renewcommand{\floatpagefraction}{.6}%
 \renewcommand{\topfraction}{0.7}
