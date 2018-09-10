@@ -1,4 +1,4 @@
-Soit $\Lambda$ un ouvert borné de $\mathbb R^2$ de bord
+Soit $\Lambda$ un ouvert borné de $\mathbb R^2$ de bord Lipschitzien
 $\partial\Lambda$. Soit $\thickness > 0$ un nombre réel donné
 correspondant à la dimension verticale d'une cuve. On définit le
 domaine de $\mathbb R^3$ correspondant à une simplification
@@ -7,7 +7,16 @@ géométrique de la cuve d'électrolyse
   \Omega = \Lambda \times (0,\thickness).
 \end{equation}
 On suppose que le domaine $\Omega$ est occupé par l'électrolyte, un
-fluide newtonien incompressible de viscosité $\mu$. Si $u$ est la
+fluide newtonien incompressible de viscosité tensorielle $\mu$. On suppose de plus
+que le tenseur de viscosité est tel que:
+\begin{itemize}
+  \item $\mu$ est symétrique, \ie, $\mu_{ij} = \mu_{ji}$, $1\leq
+    i,j\leq 3$,
+  \item $\exists \chi_0 > 0$ tel que $\mu_{ij} > \chi_0$, $1\leq
+    i,j\leq 3$,
+    \item $\mu$ est indépendent de $x_3$.
+\end{itemize}
+Si $u$ est la
 vitesse de l'écoulement, le tenseur des contraintes visqueuses dans le
 fluide \cite{Landau1987} est donné par
 \begin{equation}
@@ -21,7 +30,7 @@ fluide qui s'écrit en fonction de la vitesse d'écoulement $u$:
 \end{equation}
 Étant donné un champ de forces $f:\Omega\to \mathbb R^3$, on suppose
 que la vitesse d'écoulement $u:\Omega \to \mathbb R^3$ et la pression
-$p:\Omega \to \mathbb R$ du fluide satisfont le système de Stokes
+$p:\Omega \to \mathbb R$ du fluide satisfont le système de Stokes stationnaire
 \begin{align}
   &- \div(\stresstensor(u)) + \nabla p = f,\label{eq:stokes-u}\\
   &\div \parent{u} = 0\label{eq:stokes-p}
@@ -37,13 +46,14 @@ Sur les faces horizontales supérieures et inférieures, la vitesse
 d'écoulement satisfait une condition de glissement total. On a
 \begin{align}
   &u_3(x_1, x_2, x_3) = 0,\label{eq:stokes-bc-2}\\
-  &\stresstensor(u)\cdot \nu = 0\label{eq:stokes-bc-3}
+  &\parent{\stresstensor(u)\cdot \nu}\cdot t_i = 0,\quad i = 1,2\label{eq:stokes-bc-3}
 \end{align}
-sur $\Lambda \times\cparent{0,\thickness}$.
+sur $\Lambda \times\cparent{0,\thickness}$, avec $t_1$, $t_2$ les deux
+vecteurs tangents unités.
 Les conditions (\ref{eq:stokes-bc-2}), (\ref{eq:stokes-bc-3})
 correspondent à demander à ce que le fluide ne pénètre pas les faces
-horizontales de $\partial\Omega$ et à ce que le flux de quantité de
-mouvement à travers ces faces soit nul. En utilisant
+horizontales de $\partial\Omega$ et à ce que les contraintes
+tangentielles sur ces faces soient nulles. En utilisant
 (\ref{eq:stokes-bc-2}), la condition (\ref{eq:stokes-bc-3}) se réécrit
 \begin{equation}
 \frac{\partial u_1}{\partial x_3}
@@ -131,18 +141,19 @@ et
 \end{equation}
 pour $i = 1,2$, c'est-à-dire que
 \begin{equation}
-\stresstensor(U)\cdot \nu = 0\quad \text{ sur } \Lambda\times
+\parent{\stresstensor(U)\cdot \nu}\cdot t_i = 0\quad i = 1,2, \text{ sur } \Lambda\times
 \cparent{-\thickness, \thickness}.
 \end{equation}
 
 On prolonge toutes les fonctions dans la variable $x_3$ sur tout
-$\mathbb R$ en des fonctions périodiques de période $2\thickness$. On
-note encore par $U_1$, $U_2$, $U_3$, $P$, $F_1$, $F_2$, $F_3$ ces
-prolongements, c'est-à-dire que ces fonctions sont considérées comme
-fonctions de $(x_1, x_2, x_3)\in \Lambda\times \mathbb R$ et
-$2\thickness$-périodiques selon $x_3$. Les fonctions $U_1$, $U_2$,
-$U_3$ sont $\mathcal C^2$ par morceaux, $P$ est $\mathcal C^1$ par
-morceaux et $F_1$, $F_2$, $F_3$ sont $C^0$ par morceaux.
+$\mathbb R$ en des fonctions périodiques de période $2\thickness$ en
+$x_3$. On note encore par $U_1$, $U_2$, $U_3$, $P$, $F_1$, $F_2$,
+$F_3$ ces prolongements, c'est-à-dire que ces fonctions sont
+considérées comme fonctions de $(x_1, x_2, x_3)\in \Lambda\times
+\mathbb R$ et $2\thickness$-périodiques selon $x_3$. Les fonctions
+$U_1$, $U_2$, $U_3$ sont $\mathcal C^2$ par morceaux, $P$ est
+$\mathcal C^1$ par morceaux et $F_1$, $F_2$, $F_3$ sont $C^0$ par
+morceaux.
 
 On pose pour alléger l'écriture $\beta^k = \frac{\pi
 k}{\thickness}$. Les décompositions en séries de Fourier selon la
@@ -180,7 +191,9 @@ chaque mode indépendamment des autres. On obtient pour $k = 0$:
     p^0}{\partial x_i} = f_i^0, \quad i = 1,2,\label{eq:fourier-fund-1}\\
   &\sum_{j = 1}^2 \frac{\partial u_j^0}{\partial x_j} = 0\label{eq:fourier-fund-2}
 \end{align}
-sur $\Lambda$ et $u^0 = 0$ sur $\partial \Lambda$. On obtient pour $k
+sur $\Lambda$ et $u^0 = 0$ sur $\partial \Lambda$.
+
+On obtient pour $k
 \geq 1$:
 \begin{align}
   &-\sum_{j = 1}^2\frac{\partial}{\partial
@@ -236,7 +249,7 @@ Il est muni du produit scalaire
 \end{align}
 pour tout $f, g\in L^2(\Lambda)$, et de la norme
 \begin{align}
-  \norm{f}_{L^2(\Lambda)} = \sqrt{(f, f)}\quad\forall f\in L^2(\Lambda).
+  \norm{f}_{L^2(\Lambda)} = \sqrt{(f, f)_{L^2(\Lambda)}}\quad\forall f\in L^2(\Lambda).
 \end{align}
 On notera encore $H^1(\Lambda)$ l'espace de Sobolev
 $W^{1,2}(\Lambda)$, c'est-à-dire que
@@ -251,11 +264,15 @@ et
 \end{align}
 Nous aurons finalement besoin des espaces de fonctions à moyenne nulle
 \begin{align}
-  &L^2_0(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|} f(x) = 0 \forall
+  &L^2_0(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|} f(x) = 0\ \forall
     x\in \partial\Lambda},\\
   \text{et }\quad &H^1_{0,0}(\Lambda) = \cparent{f\in H^1_0(\Lambda)\mathrel{\bigg|}
     \int_\Lambda f \,\mathrm dx = 0}.
 \end{align}
+Remarquons que $L^2_0(\Lambda)$ est un sous-espace ferme de
+$L^2(\Lambda)$ et $H^1_{0,0}(\Lambda)$ est un sous-espace fermé de
+$H^1_0(\Lambda)$ ce qui sera important pour répondre aux questions
+d'existence et d'unicité par la suite.
 
 Commençons tout d'abord par traiter le mode fondamental. Pour
 simplifier l'écriture, on note $\overline{\mu}$ et
@@ -276,18 +293,21 @@ L^2_0(\Lambda)$, telles que
   &\int_\Lambda \electrolyteviscosity\otimes \reducedstraintensor(u^0) : \reducedstraintensor(v) \intd{x_1}\intd{x_2} -
   \int_\Lambda p^0\div v \intd{x_1}\intd{x_2} = \int_\Lambda f^0\cdot v
   \intd{x_1}\intd{x_2},\label{eq:fourier-weak-fund-1}\\
-  &\int_\Lambda q\div u^0 \intd{x_1}\intd{x_2} = 0\label{eq:fourier-weak-fund-2}
+  &\int_\Lambda q\div u^0 \intd{x_1}\intd{x_2} = 0,\label{eq:fourier-weak-fund-2}
 \end{align}
 pour toutes fonctions $v \in \parent{H^1_0(\Lambda)}^2$, $q \in
-L_0^2(\Lambda)$. En admettant une régularité adéquate pour le bord
-$\partial \Lambda$ et en supposant que $f^0\in \mathrm L^2(\Lambda)$,
-il est connu que la formulation faible
-(\ref{eq:fourier-weak-fund-1}),(\ref{eq:fourier-weak-fund-2}) admet une unique
-solution \cite{Temam1977}.
+L_0^2(\Lambda)$. Ici $\otimes$ est le produit tensoriel, \ie,
+$\parent{\mu\otimes\reducedstraintensor}_{i,j} =
+\mu_{ij}\reducedstraintensor_{ij}$ et $\mu\otimes\reducedstraintensor(u):\reducedstraintensor(v) =
+\sum_{i,j = 1}^2\mu_{ij}\reducedstraintensor_{ij}(u)\reducedstraintensor_{ij}(v)$.
+En admettant que $\partial \Lambda$ est Lipschitzien et en supposant
+que $f^0\in \mathrm L^2(\Lambda)$, il est connu que la formulation
+faible (\ref{eq:fourier-weak-fund-1}),(\ref{eq:fourier-weak-fund-2})
+admet une unique solution \cite{Temam1977}.
 
 Traitons à présent les problèmes pour les coefficients $u^k$ et
 $p^k$. Soit $k > 0$ et soit $\tilde \straintensor^k$ le tenseur $3\times
-3$ définit par
+3$ défini par
 \begin{equation}
   \tilde\straintensor^k(u) = \begin{bmatrix}
      2\frac{\partial u_1}{\partial x_1}
@@ -317,17 +337,19 @@ L^2(\Lambda)$ telles que
   = \int_\Lambda f^k\cdot v,\label{eq:fourier-weak-harm-1}\\
   &\int_\Lambda \parent{\frac{\partial u_1^k}{\partial x_1} + \frac{\partial u_2^k}{\partial x_2} + \beta^k u_3^k}q = 0\label{eq:fourier-weak-harm-2}
 \end{align}
-pour toutes fonctions $v = (v_1,v_2,v_3)\in \parent{H^1_0(\Lambda)}^3$ et $q\in
-L^2(\Lambda)$. Nous reformulons maintenant ce problème sous une forme
-plus adéquate pour l'analyse qui suit.
-On montre en utilisant le théorème de la divergence et en posant
-$\tilde p^k = p^k - C^k$ avec $C^k \in \mathbb R$ que le
-problème
+pour toutes fonctions $v = (v_1,v_2,v_3)\in \parent{H^1_0(\Lambda)}^3$
+et $q\in L^2(\Lambda)$. Ici on adopte les mêmes notations que
+précédemment pour le produit tensorielle avec $i,j =
+1,2,3$. Remarquons que l'on omet $\intd{x_1}\intd{x_2}$ dans les
+intégrales pour simplifier l'écriture. Nous reformulons maintenant ce
+problème sous une forme plus adéquate pour l'analyse qui suit.  On
+montre en utilisant le théorème de la divergence et en posant $\tilde
+p^k = p^k - C^k$ avec $C^k = \abs{\Lambda}^{-1} \int_\Lambda
+p^k\intd{x_1}\intd{x_2}$ que le problème
 (\ref{eq:fourier-weak-harm-1}),(\ref{eq:fourier-weak-harm-2}) est
-équivalent au problème suivant: trouver $u^k\in
-H^1_0(\Lambda)^3$, $\tilde p^k \in
-L^2_0(\Lambda)$ et $C^k\in\mathbb R$ tels que pour tout $v\in
-H^1_0(\Lambda)^3$ et $\tilde p^k \in L^2_0(\Lambda)$:
+équivalent au problème suivant: trouver $u^k\in H^1_0(\Lambda)^3$,
+$\tilde p^k \in L^2_0(\Lambda)$ et $C^k\in\mathbb R$ tels que pour
+tout $v\in H^1_0(\Lambda)^3$ et $q \in L^2_0(\Lambda)$:
 \begin{align}
   &\int_\Lambda 2\mu\otimes\tilde\straintensor^k(u^k):\tilde\straintensor^k(v)
   - \int_\Lambda \tilde p^k\parent{\frac{\partial v_1}{\partial x_1} +
@@ -342,8 +364,8 @@ H^1_0(\Lambda)^3$ et $\tilde p^k \in L^2_0(\Lambda)$:
 Soit maintenant $\psi \in H^1_0(\Lambda)$ tel que $\int_\Lambda
 \psi\,\mathrm dx \neq 0$. Alors on peut écrire $H^1_0(\Lambda) =
 H^1_{0,0}(\Lambda) \oplus W$, où $W =\mathrm{span}(\psi)$. En
-cherchant $u_3^k \in H^1_{0,0}(\Lambda)$, on obtient
-le problème bien posé suivant: trouver $u^k \in
+cherchant $u_3^k \in H^1_{0,0}(\Lambda)$ (voir éq. (\ref{eq:fourier-weak-harm-v2-3})), on obtient
+le problème que l'on montrera bien posé suivant: trouver $u^k \in
 H_0^1(\Lambda)^2 \times H_{0,0}^1(\Lambda)$, $\tilde p^k \in
 L^2_0(\Lambda)$ tels que pour tout $v \in H_0^1(\Lambda)^2 \times
 H_{0,0}^1(\Lambda)$, $q \in L^2_0(\Lambda)$ on ait
@@ -420,24 +442,20 @@ telle que $\frac{\partial u_1}{\partial x_1} + \frac{\partial
   \end{align}
   Pour obtenir le résultat souhaité, il reste à voir que le
   dernier terme de (\ref{eq:lemme-inter-result}) est nul.
-  En utilisant le théorème de la divergence on obtient
+  En utilisant le théorème de la divergence et les conditions limites
+  de $u_3$ sur $\partial \Lambda$ ($u_3 = 0$ sur $\partial \Lambda$) on obtient
   \begin{align}
     \int_\Lambda \beta^k\parent{
       - u_1 \frac{\partial u_3}{\partial x_1}
       - u_2 \frac{\partial u_3}{\partial x_2}
       + \beta^k\parent{u_3}^2} =
-    &\int_\Lambda\beta^k\parent{
+    \int_\Lambda\beta^k\parent{
         \frac{\partial u_1}{\partial x_1}u_3
       + \frac{\partial u_2}{\partial x_2}u_3 +
-      \beta^k{u_3}^2}\\
-    &+ \int_{\partial \Lambda} u_3\parent{u_1,
-      u_2}^t\cdot\mathrm dl\label{eq:lemme-nul-term}
+      \beta^k{u_3}^2}\label{eq:lemme-nul-term}
   \end{align}
   En utilisant l'hypothèse que $\frac{\partial u_1}{\partial x_1} +
-  \frac{\partial u_2}{\partial x_2} + \beta^k u_3 = 0$ et les
-  conditions aux limites de Dirichlet homogènes $u = 0$ sur
-  $\partial \Lambda$ on conclut que l'expression
-  (\ref{eq:lemme-nul-term}) est identiquement nulle et on obtient le
+  \frac{\partial u_2}{\partial x_2} + \beta^k u_3 = 0$ on obtient le
   résultat annoncé.
 \end{proof}
 
@@ -473,10 +491,10 @@ Le lemme \ref{lem:1} permet de conclure.
 \begin{proposition}\label{prop:2}
   Si le tenseur de viscosité $\mu$ satisfait
 \begin{equation}
-  \mu_{i,j}(x_1,x_2) \geq \mu_0\quad \forall (x_1, x_2)\in \Lambda,\ 1
+  \mu_{i,j}(x_1,x_2) \geq \chi_0\quad \forall (x_1, x_2)\in \Lambda,\ 1
   \leq i,j \leq 3,\label{eq:hypothesis}
 \end{equation}
-où $\mu_0 > 0$ est une constante positive indépendante de $(x_1,
+où $\chi_0 > 0$ est une constante positive indépendante de $(x_1,
 x_2)\in \Lambda$, alors le problème (\ref{eq:abstr-weak-harm-1}),
 (\ref{eq:abstr-weak-harm-2}) admet une unique solution.
 \end{proposition}
@@ -488,7 +506,7 @@ x_2)\in \Lambda$, alors le problème (\ref{eq:abstr-weak-harm-1}),
     L^2_0(\Lambda)}$, et que la condition classique inf-sup sur la forme
   bilinéaire $b^k$ est satisfaite.
 
-  Le lemme \ref{lem:2} avec l'hypothèse (\ref{eq:hypothesis}) montre
+  Les lemmes \ref{lem:1} et \ref{lem:2} avec l'hypothèse (\ref{eq:hypothesis}) montre
   bien que $a^k$ est coercive sur $V_0$. D'autre part en utilisant
   l'inégalité concernant la condition inf-sup dans $\mathbb R^2$ et si
   $q\in L^2_0(\Lambda)$, on a que

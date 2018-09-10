@@ -1,5 +1,5 @@
 L'objectif ultime étant d'obtenir une approximation de la
-concentration d'alumine dans la cuve, on propose un modèle de
+concentration d'alumine dans une cuve d'électrolyse d'aluminium, on propose un modèle de
 transport et diffusion stationnaire d'alumine dissoute dans le domaine
 $\Omega$.  On suppose donné un champ de convection stationnaire
 $u:\Omega\to\mathbb R^3$, qui correspond à l'écoulement des fluides
@@ -12,6 +12,7 @@ d'alumine dissoute par la réaction d'électrolyse, et la diffusivité
 moléculaire de la concentration d'alumine dans le bain $D_C^M > 0$.
 On cherche le champ de concentration d'alumine stationnaire
 $c:\Omega\to\mathbb R$ solution de l'équation d'advection-diffusion
+stationnaire:
 \begin{equation}\label{eq:stat-concentration}
   u\cdot \nabla c - D_c^M \Delta c = S + q\quad \text{dans } \Omega,
 \end{equation}
@@ -31,7 +32,7 @@ supposée donnée.
 Le terme source $S$ est construit à partir des conditions initiales
 $S_k$ des populations de particules d'alumines introduite dans la
 section \ref{sec:populations-model}. On définit $S$ comme la moyenne
-temporelle du débit de masse de particules d'alumine définit par
+temporelle du débit de masse de particules d'alumine défini par
 les fonctions $S_k$:
 \begin{equation}
   S(x_1,x_2,x_3) = \lim_{T\to\infty}\frac{1}{T}\int_0^T \sum_{k>0}
@@ -48,18 +49,16 @@ consommée dans la cuve étant donné par la relation
 où $I$ est le courant électrique total qui traverse la cuve, et
 $\faraday$ la constante de Faraday.
 
-\begin{remarque}
-  Par construction des fonctions $\cparent{S_k}_{k>0}$, la moyenne de $S$ sur
-  $\Omega$ est exactement égale à la moyenne de $q$ sur
-  $\Omega$, i. e.:
-  \begin{equation}
-    \int_\Omega \parent{S + q}\,\mathrm dx = 0.
-  \end{equation}
-  C'est une condition nécessaire pour que le problème
-  (\ref{eq:stat-concentration}) admette une solution.
-\end{remarque}
+Remarquons que par construction des fonctions $\cparent{S_k}_{k>0}$, la moyenne de $S$ sur
+$\Omega$ est exactement égale à la moyenne de $q$ sur
+$\Omega$, i. e.:
+\begin{equation}
+  \int_\Omega \parent{S + q}\,\mathrm dx = 0.
+\end{equation}
+C'est une condition nécessaire pour que le problème
+(\ref{eq:stat-concentration}) admette une solution.
 
-On utilisera pour approcher la solution du problème
+  On utilisera pour approcher la solution du problème
 (\ref{eq:stat-concentration}) une méthode d'éléments finis continus
 linéaires par morceaux, stabilisée par une méthode de type SUPG, sur un
 maillage tetraédrique de $\Omega$.

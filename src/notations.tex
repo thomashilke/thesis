@@ -23,6 +23,10 @@
 
 
 %%%
+\newcommand{\alucell}{\texttt{Alucell}}
+\newcommand{\citealucell}{\alucell \cite{Steiner2009}}
+
+%%%
 \newcommand{\thetime}{t}
 \newcommand{\timestep}{\Delta t}
 
@@ -108,7 +112,7 @@
 \chapter*{Notations}
 \addcontentsline{toc}{chapter}{Notations}
 
-\begin{tabularx}{\textwidth}{@{}ll@{}}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
   \toprule
   Symbol & Description \\
   \midrule
@@ -125,8 +129,8 @@
   $\partial\Omega$ & Bord d'un domaine ouvert $\Omega$\\
   $\mathcal B(x, r)$ & Boule de rayon $r$ et de centre $x$\\
   $\Gamma$ & Surface dans $\mathbb R^3$\\
-  $\Gamma_\mathrm{N}$ & Partie du bord d'un ouvert sur laquelle sont imposées des conditions aux limite de Neumann\\
-  $\Gamma_\mathrm{D}$ & Partie du bord d'un ouvert sur laquelle sont imposées des conditions aux limite de Dirichlet\\
+  $\Gamma_\mathrm{N}$ & Partie du bord d'un ouvert sur laquelle sont imposées des conditions aux limites de Neumann\\
+  $\Gamma_\mathrm{D}$ & Partie du bord d'un ouvert sur laquelle sont imposées des conditions aux limites de Dirichlet\\
   $\nu$ & Vecteur normal au bord d'un ouvert\\
   $\temperature$ & Température des fluides dans une cuve\\
   $H$ & Enthalpie dans l'alumine ou l'électrolyte environnant \\
@@ -148,7 +152,7 @@
 \end{tabularx}
 
 
-\begin{tabularx}{\textwidth}{@{}ll@{}}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
   \toprule
   Symbol & Description \\
   \midrule
@@ -198,7 +202,7 @@
   \bottomrule
 \end{tabularx}
 
-\begin{tabularx}{\textwidth}{@{}ll@{}}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
   \toprule
   Symbol & Description \\
   \midrule
@@ -219,8 +223,10 @@
   $H^1(\Omega)$ & L'ensemble $W^{1, 2}(\Omega)$\\
   $L^2(\Omega)$ & L'ensemble $W^{0, 2}(\Omega)$\\
   $L^2_0(\Omega)$ & L'ensemble $\cparent{f \in L^2(\Omega) \mid \displaystyle\int_\Omega f\,\mathrm dx = 0}$\\
-  $H^1_0(\Omega)$ & L'ensemble $\cparent{f \in H^1(\Omega) \mid \displaystyle\int_\Omega f\,\mathrm dx = 0}$\\
-  $V_h$ & Approximation de l'espace $H^1(\Omega)$ par des fonctions linéaires par morceaux\\
-  $B_h$ & Espace $V_h$ enrichi par une fonction bulle\\
+  $H^1_0(\Omega)$ & L'ensemble $\cparent{f \in H^1(\Omega) \mid f = 0 \text{ sur } \Gamma_D}$\\
+  $H^1_{0,0}(\Omega)$ & L'ensemble $\cparent{f \in H^1_0(\Omega) \mid \displaystyle\int_\Omega f\,\mathrm dx = 0}$\\
+  $V_h$ & Approximation de l'espace $H^1(\Omega)$ par des fonctions
+  linéaires par morceaux sur $\mathcal M_h$\\
+  $B_h$ & Espace $V_h$ enrichi par une fonction bulle sur chaque simplex\\
   \bottomrule
 \end{tabularx}

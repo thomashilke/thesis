@@ -12,7 +12,7 @@ actuellement dans les halles de productions à travers le monde
 
 Nous commençons par présenter le design et le mode d'opération de la
 cuve AP32. Nous détaillerons ensuite le choix des différentes données
-qui interviennent dans modèle numérique proposé dans la section
+qui interviennent dans le modèle numérique proposé dans la section
 \ref{sec:populations-discretisation} et dans le cadre de la cuve
 AP32. Finalement, nous présenterons une sélection de résultats
 numériques obtenus.
@@ -95,8 +95,8 @@ avec le carbone des anodes \footnote{L'oxydation du carbone qui
   constitue les anodes par l'oxygène qui résulte de la réaction
   d'électrolyse forme du \ce{CO2} sous forme gazeux.} provoque
 l'érosion de celles-ci à une vitesse d'environ \num{1100}
-\si{\kilo\gram} par jour. Étant donné le nombre total d'anodes et leur
-taille respectives, chaque anode d'une cuve AP32 a une durée de vie
+\si{\kilo\gram} par jour. Étant donné le nombre total d'anodes et leurs
+tailles respectives, chaque anode d'une cuve AP32 a une durée de vie
 d'environ 30 jours, après quoi elle doit être remplacée par une anode
 neuve.
 
@@ -113,12 +113,12 @@ avoir lieu continûment.
 
 Pour maintenir un rendement énergétique maximum, éviter l'émission de
 gaz fluorés et éviter l'occurence des effets d'anodes, il est crucial
-que la concentration d'oxyde d'aluminium dissout dans le bain soit
+que la concentration d'oxyde d'aluminium dissoute dans le bain soit
 maintenue dans un intervalle très précis. Malheureusement, pour de
 nombreuses raisons il est impossible de maintenir un bilan précis de
 la quantité d'alumine dans le bain en fonction de ce qui est injecté
 et de ce qui est consommé. En effet, l'environnement rend difficile la
-pesée précise des quantités déposées, une partie des particules
+mesure précise des quantités déposées, une partie des particules
 volatiles ne parviennent jamais dans le bain, des agrégats se forment,
 dont une partie s'accumule au fond de la cuve sur la cathode, et des
 réactions chimiques parasites viennent, entre autres, grever ce bilan.
@@ -199,7 +199,7 @@ stationnaire proposé par S. Steiner \cite{Steiner2009}, J. Rochat
 \cite{Rochat2016} déjà introduit dans la section
 \ref{sec:populations-introduction}. La figure \ref{fig:ap32-flow-acd}
 représente la vitesse d'écoulement ainsi calculée par le logiciel
-Alucell dans le bain électrolytique de la cuve AP32, dans
+\citealucell dans le bain électrolytique de la cuve AP32, dans
 l'ACD. Lorsque la densité de courant électrique est répartie
 uniformément sur toutes les anodes, l'écoulement dans les fluides
 forme deux tourbillons principaux qui tournent en sens opposés. Deux
@@ -251,7 +251,7 @@ Il faut donc choisir la masse des doses d'alumine injectées $S^k$, $k
 = 1, 2,\dots$ et les temps d'injection $\tau^k$, $k = 1,2,\dots$ de
 sorte à ce que le débit de masse de poudre d'alumine moyen au cours du
 temps soit égal à $\frac{I[\cee{Al2O3}]}{6F}$, c'est-à-dire
-\num{56.382e-3}\si{\kilo\gram\per\second}.
+\num{56.382e-3} \si{\kilo\gram\per\second}.
 
 \begin{figure}
   \begin{center}
@@ -279,10 +279,10 @@ définissent chaque injecteur sont regroupés dans la table
       \toprule
       Injecteur & Position & Première injection & Intervalle d'injection & Masse de dose\\
       \midrule
-      \#1         & \num{-4.4}\si\meter & \num{16}\si\second & \num{16}\si\second  & \num{0.225}\si{\kilo\gram} \\
-      \#2         & \num{-1.6}\si\meter & \num{32}\si\second & \num{32}\si\second  & \num{0.451}\si{\kilo\gram} \\
-      \#3         & \num{ 1.6}\si\meter & \num{48}\si\second & \num{48}\si\second  & \num{0.676}\si{\kilo\gram} \\
-      \#4         & \num{ 4.4}\si\meter & \num{64}\si\second & \num{24}\si\second  & \num{0.338}\si{\kilo\gram} \\
+      \#1         & \num{-4.4}\si\meter & \num{16}\si\second & \num{16}\si\second  & \num{0.225} \si{\kilo\gram} \\
+      \#2         & \num{-1.6}\si\meter & \num{32}\si\second & \num{32}\si\second  & \num{0.451} \si{\kilo\gram} \\
+      \#3         & \num{ 1.6}\si\meter & \num{48}\si\second & \num{48}\si\second  & \num{0.676} \si{\kilo\gram} \\
+      \#4         & \num{ 4.4}\si\meter & \num{64}\si\second & \num{24}\si\second  & \num{0.338} \si{\kilo\gram} \\
       \bottomrule
     \end{tabularx}
   \end{center}
@@ -329,13 +329,13 @@ ce qui correspond à la condition, en considérant (\ref{eq:energy-mass-balance}
   1 \leq n + 1}}}\int_\Omega\intd{x}\int_0^\infty\intd{r}\aluminadensity
   \frac{4}{3}\pi r^3 S^k\nonumber \\
   &&-
-       {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\intd{x}\int_0^\infty\intd{r} \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}\nonumber\\
+       {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\intd{x}\int_0^\infty\intd{r} \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}.\nonumber\\
        \label{eq:energy-condition}
 \end{eqnarray}
-Le premier terme du
-membre de droite de (\ref{eq:energy-condition}) est égal à
+Le premier terme du membre de droite de (\ref{eq:energy-condition})
+est égal à
 \begin{equation*}
-\aluminahc\parent{\tinit-\tinj}  \frac{I[\cee{Al2O3}]}{6F}
+  \aluminahc\parent{\tinit-\tinj}  \frac{I[\cee{Al2O3}]}{6F}
 \end{equation*}
 en vertu de (\ref{eq:injection-mass-condition}). Pour que le deuxième
 terme du membre de droite de (\ref{eq:energy-condition}) converge, il
@@ -349,7 +349,7 @@ Le cas échéant on peut télescoper la somme sur $k$ et en remarquant que
   \int_\Omega n_{p,q^k}^k\intd{x} = \int_\Omega S^k\intd{x}
 \end{equation*}
 pour tout $k \leq 1$ et pour tout $r > 0$ lorsque la vitesse de chute
-$w = 0$, le deuxième terme du membre de droite de
+est nulle, le deuxième terme du membre de droite de
 (\ref{eq:energy-condition}) se réduit à
 \begin{equation*}
   {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ p^k +
@@ -374,12 +374,12 @@ stationnaire du bain $u$ obtenue par la méthode introduite dans
 écoulement turbulent. Les structures turbulentes du fluide sont
 décrites par un modèle de longueur de mélange de Smagorinsky
 \cite{Rochat2016}. Dans le modèle de Smagorinsky, les structures
-turbulentes de l'écoulement se traduise par une viscosité de
+turbulentes de l'écoulement se traduisent par une viscosité de
 l'écoulement moyen $u$ proportionnelle au tenseur des déformation de
 $u$. Dans le présent travail, nous caractérisons la diffusivité
 $\electrolytecdiff$ de la concentration $\concentration$ et la
 diffusivité $\electrolytetdiff$ de la température $\temperature$ par
-quatre réels $\electrolytemoldiff_\temperature$, $\electrolyteturbdiff_\temperature$,
+quatre réels positifs $\electrolytemoldiff_\temperature$, $\electrolyteturbdiff_\temperature$,
 $\electrolytemoldiff_c$ et $\electrolyteturbdiff_c$ pour tout
 $x\in\Omega$ de la manière suivante:
 \begin{align}
@@ -394,9 +394,9 @@ de l'écoulement défini par
   \straintensor_{ij} = \frac{1}{2}\parent{\frac{\partial u_i}{\partial
       x_j} + \frac{\partial u_j}{\partial x_i}}.
 \end{equation}
-Les valeurs du paramètre $\electrolytemoldiff$, associé à la diffusion
-moléculaire et de $\electrolyteturbdiff$, associé à la diffusion
-induite par les turbulences de l'écoulement, sont rapporté dans le
+Les valeurs du paramètre $\electrolytemoldiff$ associé à la diffusion
+moléculaire et de $\electrolyteturbdiff$ associé à la diffusion
+induite par les turbulences de l'écoulement, sont rapportées dans le
 tableau \ref{tab:dissolution-physical-parameters}.
 
 
@@ -408,59 +408,57 @@ tableau \ref{tab:dissolution-physical-parameters}.
     \label{tab:dissolution-physical-parameters}
     \begin{tabularx}{\textwidth}{@{}lllX@{}}
       \toprule
-      Quantité                         & Valeur           & Unités                                      & Description \\
+      Quantité                              & Valeur              & Unités                               & Description \\
       \midrule
-      $\electrolytedensity$            & \num{2130}       & \si{\kg\per\cubic\meter}                    & Masse volumique du bain électrolytique                          \\
-      $\aluminadensity$                & \num{3960}       & \si{\kg\per\cubic\meter}                    & Masse volumique de l'oxyde d'aluminium                          \\
-      $\electrolytehc$                 & \num{2945}       & \si{\joule\per\kilo\gram\per\kelvin}        & Chaleur spécifique du bain électrolytique liquide               \\
-      $\aluminahc$                     & \num{1200}       & \si{\joule\per\kilo\gram\per\kelvin}        & Chaleur spécifique de l'oxyde d'aluminium                       \\
-      $g$                              & \num{9.81}       & \si{\meter\per\square\second}               & Accélération de la gravité terrestre                            \\
-      $I$                              & \num{320000}     & \si{\ampere}                                & Courant électrique total                                        \\
-      $\faraday$                       & \num{96485.33}   & \si{\coulomb\per\mol}                       & Constante de Faraday                                            \\
-      $\faradayyield$                  & \num{0.945}       & []                                          & Rendement de Faraday de l'électrolyse                           \\\relax
-      [\ce{Al2O3}]                     & \num{0.102}      & \si{\kilo\gram\per\mol}                     & Masse molaire de l'oxyde d'aluminium                            \\
-      $\tinit$                         & \num{1223}       & \si{\kelvin}                                & Température initiale du bain électrolytique                     \\
-      $\tinj$                          & \num{423}        & \si{\kelvin}                                & Température d'injection des particules d'alumine                \\
-      $\tliq$                          & \num{1218}       & \si{\kelvin}                                & Température du liquidus du bain électrolytique                  \\
-      $\tcrit$                         & \num{1218.86}    & \si{\kelvin}                                & Température critique de dissolution dans le bain électrolytique \\
-      $K$                              & \num{0.5e-09}    & \si{\square\meter\per\second}               & Taux de dissolution des particules d'alumine                    \\
-      $\aluminadissolutionenthalpy$    & \num{5.3e5}      & \si{\joule\per\kilo\gram}                   & Enthalpie de dissolution de l'oxyde d'aluminium                 \\
-      $\conductivity$                  & $\approx$ \num{900} & \si{\siemens\per\meter}                     & Conductivité électrique du bain électrolytique                  \\
-%     $\electrolytelaminarviscosity$   & \num{2e-3}       & \si{\kilo\gram\per\meter\per\second}        & Viscosité laminaire du bain électrolytique                      \\
-%     $\electrolyteturbulentviscosity$ & \num{2e-3}       & \si{\kilo\gram\per\meter\per\second}        & Viscosité turbulente du bain électrolytique                     \\
-      $\electrolytemoldiff_\temperature$            & \num{5e-4}       & \si{\watt\per\kelvin\per\meter}              & Diffusivité thermique dans le bain                            \\
-      $\electrolyteturbdiff_\temperature$           & \num{5e-4}       & \si{\joule\per\kelvin\per\meter}              & Diffusivité thermique turbulente dans le bain                             \\
-      $\electrolytemoldiff_\concentration$            & \num{5e-4}       & \si{\square\meter\per\second}              & Diffusivité moléculaire dans le bain                            \\
-      $\electrolyteturbdiff_\concentration$           & \num{5e-4}       & \si{\square\meter}              & Diffusivité turbulente dans le bain                             \\
-      $\electrolyteviscosity$          & \num{2e-3}       & \si{\kilo\gram\per\meter\per\second}        & Viscosité laminaire du bain électrolytique                      \\
-      $\csat$                          & \num{1689.7}     & \si{\mol\per\cubic\meter}                   & Concentration de saturation de l'alumine dissoute               \\
-      $\csatwp$                        & \num{7.8}        & w\%                                         & Concentration de saturation de l'alumine dissoute               \\
-      $\cinit$                         & \num{635.3}      & \si{\mol\per\cubic\meter}                   & Concentration initiale de l'alumine dissoute                    \\
-      $\cinitwp$                       & \num{3.0}        & w\%                                         & Concentration initiale de l'alumine dissoute                    \\
+      $\electrolytedensity$                 & \num{2130}          & \si{\kg\per\cubic\meter}             & Masse volumique du bain électrolytique                          \\
+      $\aluminadensity$                     & \num{3960}          & \si{\kg\per\cubic\meter}             & Masse volumique de l'oxyde d'aluminium                          \\
+      $\electrolytehc$                      & \num{2945}          & \si{\joule\per\kilo\gram\per\kelvin} & Chaleur spécifique du bain électrolytique liquide               \\
+      $\aluminahc$                          & \num{1200}          & \si{\joule\per\kilo\gram\per\kelvin} & Chaleur spécifique de l'oxyde d'aluminium                       \\
+      $g$                                   & \num{9.81}          & \si{\meter\per\square\second}        & Accélération de la gravité terrestre                            \\
+      $I$                                   & \num{320000}        & \si{\ampere}                         & Courant électrique total                                        \\
+      $\faraday$                            & \num{96485.33}      & \si{\coulomb\per\mol}                & Constante de Faraday                                            \\
+      $\faradayyield$                       & \num{0.945}         & []                                   & Rendement de Faraday de l'électrolyse                           \\\relax
+      [\ce{Al2O3}]                          & \num{0.102}         & \si{\kilo\gram\per\mol}              & Masse molaire de l'oxyde d'aluminium                            \\
+      $\tinit$                              & \num{1223}          & \si{\kelvin}                         & Température initiale du bain électrolytique                     \\
+      $\tinj$                               & \num{423}           & \si{\kelvin}                         & Température d'injection des particules d'alumine                \\
+      $\tliq$                               & \num{1218}          & \si{\kelvin}                         & Température du liquidus du bain électrolytique                  \\
+      $\tcrit$                              & \num{1218.86}       & \si{\kelvin}                         & Température critique de dissolution dans le bain électrolytique \\
+      $K$                                   & \num{0.5e-09}       & \si{\square\meter\per\second}        & Taux de dissolution des particules d'alumine                    \\
+      $\aluminadissolutionenthalpy$         & \num{5.3e5}         & \si{\joule\per\kilo\gram}            & Enthalpie de dissolution de l'oxyde d'aluminium                 \\
+      $\conductivity$                       & $\approx$ \num{900} & \si{\siemens\per\meter}              & Conductivité électrique du bain électrolytique                  \\
+%     $\electrolytelaminarviscosity$        & \num{2e-3}          & \si{\kilo\gram\per\meter\per\second} & Viscosité laminaire du bain électrolytique                      \\
+%     $\electrolyteturbulentviscosity$      & \num{2e-3}          & \si{\kilo\gram\per\meter\per\second} & Viscosité turbulente du bain électrolytique                     \\
+      $\electrolytemoldiff_\temperature$    & \num{5e-4}          & \si{\watt\per\kelvin\per\meter}      & Diffusivité thermique dans le bain                              \\
+      $\electrolyteturbdiff_\temperature$   & \num{5e-4}          & \si{\joule\per\kelvin\per\meter}     & Diffusivité thermique turbulente dans le bain                   \\
+      $\electrolytemoldiff_\concentration$  & \num{5e-4}          & \si{\square\meter\per\second}        & Diffusivité moléculaire dans le bain                            \\
+      $\electrolyteturbdiff_\concentration$ & \num{5e-4}          & \si{\square\meter}                   & Diffusivité turbulente dans le bain                             \\
+      $\electrolyteviscosity$               & \num{2e-3}          & \si{\kilo\gram\per\meter\per\second} & Viscosité laminaire du bain électrolytique                      \\
+      $\csat$                               & \num{1689.7}        & \si{\mol\per\cubic\meter}            & Concentration de saturation de l'alumine dissoute               \\
+      $\csatwp$                             & \num{7.8}           & w\%                                  & Concentration de saturation de l'alumine dissoute               \\
+      $\cinit$                              & \num{635.3}         & \si{\mol\per\cubic\meter}            & Concentration initiale de l'alumine dissoute                    \\
+      $\cinitwp$                            & \num{3.0}           & w\%                                  & Concentration initiale de l'alumine dissoute                    \\
       \bottomrule
     \end{tabularx}
   \end{center}
 \end{table}
 
 \paragraph{Conditions initiales de la concentration et de la
-  température}
-Les conditions initiales des population de particules $n_p^k$ sont
-données implicitement dans la description du modèle par la
-relation (\ref{eq:splitting-np1-init}). Plus précisément, aucune
-particule n'est présente dans le bain électrolytique à $t = 0$, et
-donc $n_p(0, x,r) = 0$ pour $r>0$ et $x\in\Omega$.
+  température} Les conditions initiales des populations de particules
+$n_p^k$ sont données par la relation (\ref{eq:splitting-np1-init}). En
+d'autres termes, aucune particule n'est présente dans le bain
+électrolytique à $t = 0$.
 
 On observe expérimentalement sur des cuves d'électrolyse industrielles
-que celle-ci atteignent un état stationnaire périodique lié à la période
-du cycle d'injection après un temps caractéristique de transition. On
-observe typiquement l'établissement de cet état périodique par
-d'intermédiaire de mesures indirectes de la résistivité électrique de
-la cuve. Par analogie, dans le cadre du modèle de transport et
+que celles-ci atteignent un état stationnaire périodique lié à la
+période du cycle d'injection après un temps caractéristique de
+transition. On observe typiquement l'établissement de cet état
+périodique indirectement par des mesures de la résistivité électrique
+de la cuve. Par analogie, dans le cadre du modèle de transport et
 dissolution d'alumine nous nous attendons à ce que la densité de
 particules $n_p$, la concentration $\concentration$ et la température
-$\temperature$ atteignent asymptotiquement lorsque $t\to\infty$, un état
-périodique de période $P$ identique à la période du
-cycle d'injection global, soit \num{192}\si{\second} dans notre cas.
+$\temperature$ atteignent asymptotiquement lorsque $t\to\infty$, un
+état périodique de période $P$ identique à la période du cycle
+d'injection global, soit \num{192} \si{\second} dans notre cas.
 
 Il est clair que plus les conditions initiales pour $c$ et
 $\temperature$ sont éloignées de l'état périodique
@@ -506,8 +504,8 @@ champs $u$ et $j$ par la méthode déjà évoquée plus haut proposée par
 \ref{fig:bath-mesh} un aperçu du maillage de $\Omega$ qui correspond à
 l'une des extrémités de la cuve. Le maillage est fortement anisotrope,
 avec des rapports d'aspect d'environ \num{25} dans l'ACD. Le diamètre
-des mailles est compris entre \num{38}\si{\centi\meter} (aux
-extrémités de la cuve) et \num{9}\si{\centi\meter} (dans l'ACD et les
+des mailles est compris entre \num{38} \si{\centi\meter} (aux
+extrémités de la cuve) et \num{9} \si{\centi\meter} (dans l'ACD et les
 canaux). Le maillage comporte \num{282240} éléments tetraédriques. On
 choisit le nombre de discrétisation des rayons des particules $M = 5$
 et $\dr = \num{40}$ \si{\micro\meter}. Enfin on fixe $\dt = 1$
@@ -582,7 +580,7 @@ solution satisfait ce critère pour $T = \num{10000}$ \si{\second}.
 La figure \ref{fig:alumin-control-var} représente l'évolution de
 la variance de la concentration au cours du temps. On remarque une
 phase initiale lorsque $t\in[0,500]$, au cours de laquelle la variance
-croît rapidement. Cette croissance ralenti quand la concentration
+croît rapidement. Cette croissance ralentit quand la concentration
 approche de l'état périodique, et à partir de $t \approx
 \num{4500}$ \si{\second} nous pouvons considérer que la
 concentration est dans un état périodique. Les
@@ -627,7 +625,7 @@ transitoire initiale de \num{64} \si{\second}.
             title=Concentration $c$ [\%w],
             width=7.4cm,
             height=0.3cm,
-            xtick={2.38, 2.50, 3.00, 3.50, 4.00, 4.21},
+            xtick={2.38, 3.00, 3.50, 4.00, 4.21},
             xticklabel style={
               /pgf/number format/fixed,
               /pgf/number format/fixed zerofill,
@@ -661,7 +659,7 @@ l'ACD. La figure \ref{fig:ap32-alumina-wo-t} présente la distribution de la
 concentration d'alumine dans le bain électrolytique.
 
 On remarque sur la figure \ref{fig:ap32-alumina-wo-t} que la
-concentration atteint des maximums locaux aux voisinages des points
+concentration atteint des maxima locaux aux voisinages des points
 d'injection, ce qui montre que l'essentiel de la poudre d'alumine se
 dissout dans ces régions. Cette alumine dissoute est ensuite
 transportée par l'écoulement. Les deux injecteurs de gauche alimentent
@@ -743,7 +741,7 @@ quantité d'énergie thermique constante en moyenne dans le temps. En
 l'absence de transition de phase dans l'électrolyte, cela signifie que
 la température moyenne au cours du temps de celui-ci est maintenue
 constante. Par conséquent, une température initiale du bain $\tinit$
-plus élevée résulte en une température $\temperature$ dans l'état
+plus élevée conduit à une température $\temperature$ dans l'état
 périodique plus élevée en moyenne au cours d'une période
 du cycle d'injection global.
 
@@ -772,7 +770,7 @@ qui correspond à $\tsur = $ \num{10} \si{\kelvin}, la similarité avec la
 solution de référence illustrée sur la figure
 \ref{fig:ap32-alumina-wo-t} pour laquelle la température ne joue pas
 de rôle dans la dissolution des particules. Les valeurs maximales
-atteinte par la concentration d'alumine dissoute sont cependant plus faibles.
+atteintes par la concentration d'alumine dissoute sont cependant plus faibles.
 
 Le premier champ de concentration de la figure
 \ref{fig:dissolution-alumin-influence-sur} correspond à une
@@ -821,7 +819,7 @@ dissolution (\ref{eq:dissolution-rate}) s'écrit:
 \end{equation}
 En d'autres termes, la dissolution des particules est contrôlée
 uniquement par la concentration locale $\concentration$ si
-$\temperature \geq \tliq$, et ne se dissolvent pas sinon.
+$\temperature \geq \tliq$, et les particules ne se dissolvent pas sinon.
 
 Nous présentons maintenant la distribution de concentration d'alumine
 dissoute dans le bain de la cuve AP32 dans l'état périodique résultant
@@ -867,7 +865,7 @@ paramètres sont reportés dans la table
 \ref{tab:dissolution-physical-parameters} et nous annulons
 l'accélération de la gravité $g = 0$, ce qui donne lieu à une vitesse
 de chute strictement nulle, soit $w(r) = 0$ pour tout $r>0$. De plus,
-l'injection des dose d'alumine a lieu dans le canal central comme
+l'injection des doses d'alumine a lieu dans le canal central comme
 indiqué sur la figure \ref{fig:injections}, au niveau de l'ACD.
 
 Pour le deuxième calcul la valeur de $g$ est restaurée, telle que

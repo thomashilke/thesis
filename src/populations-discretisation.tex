@@ -1,7 +1,7 @@
 On répète ici, par soucis de clarté, le système d'équations aux
 dérivées partielles qui correspondent au modèle de transport et
 dissolution d'alumine en fonction de la température, soit les
-équations (\ref{eq:population-pre-injection} à
+équations (\ref{eq:population-pre-injection}) à
 (\ref{eq:population-dissolution}), (\ref{eq:concentration}) et
 (\ref{eq:temperature}). On a $\forall k = 1, 2, \dots, K$
 \begin{align}
@@ -46,13 +46,14 @@ et
   p_3(x) = \frac{j\cdot j}{\conductivity}.
 \end{equation}
 
-Ces équations munies de conditions limites et initiales forment un système couplé pour les inconnues $n_p^k$,
-$\concentration$ et $\temperature$. En effet, la densité de
-particules $n_p$ dépend de la concentration $\concentration$ et de
-la température $\temperature$ par l'intermédiaire de la vitesse de
-dissolution $f$, tandis que la concentration et la température
-dépendent de la densité de particule $n_p$ à travers leurs termes
-sources respectifs $q_2$, $p_1$ et $p_2$.
+Ces équations munies de conditions limites et initiales forment un
+système couplé pour les inconnues $n_p^k$, $\concentration$ et
+$\temperature$. En effet, la densité de particules $n_p$ (voir
+(\ref{eq:populations-sum})) dépend de la concentration
+$\concentration$ et de la température $\temperature$ par
+l'intermédiaire de la vitesse de dissolution $f$, tandis que la
+concentration et la température dépendent de la densité de particule
+$n_p$ à travers leurs termes sources respectifs $q_2$, $p_1$ et $p_2$.
 
 En suivant l'approche adoptée dans \cite{Hofer2011}, on propose de
 discrétiser les équations (\ref{eq:mdl-eq-1}) à (\ref{eq:mdl-eq-5})
@@ -69,8 +70,8 @@ population de particules, on définit $p^k$ et $q^k$ tels que
   p^k = \max\cparent{j\in \mathbb N\ \middle|\ j\dt < \tau^k}, \quad
   q^k = \max\cparent{j \in \mathbb N\ \middle|\ j\dt < \tau^k + \tlat}.
 \end{equation}
-En d'autres termes, $p_k$ est l'indice du dernier pas de temps qui précède
-l'injection de la population $k$, et $q_k$ est l'indice du dernier pas de temps
+En d'autres termes, $p^k$ est l'indice du dernier pas de temps qui précède
+l'injection de la population $k$, et $q^k$ est l'indice du dernier pas de temps
 qui précède le début de la dissolution de la population $k$. Bien
 entendu, si $\tlat = 0$ alors $p_k = q_k$.
 
@@ -79,7 +80,8 @@ $\concentration_n$ et $\temperature_n$, on pose
 \begin{align}
   & n_{p,n+1}^k = 0, &&\text{si }  n + 1 < p^k + 1,\label{eq:splitting-np1-init}\\
   & n_{p,n+1}^k = S^k, &&\text{si } n + 1 = p^k + 1,\\
-  & \frac{n_{p,n+1}^k - n_{p,n}^k}{\dt} + u\cdot\nabla n_{p,n+1}^k = 0, && \text{si } p^k + 1 < n+1 \leq q^k.\label{eq:splitting-np1-u}
+  & \frac{\bar n_{p,n+1}^k - n_{p,n}^k}{\dt} + u\cdot\nabla \bar n_{p,n+1}^k = 0,\\
+  & \frac{n_{p,n+1}^k - \bar n_{p,n}^k}{\dt} + u\cdot\nabla n_{p,n+1}^k = 0, && \text{si } p^k + 1 < n+1 \leq q^k,\label{eq:splitting-np1-u}
 \end{align}
 dans $\Omega$ et pour tout $r > 0$. Puis, si $n$ est tel que $q^k < n
 + 1 \leq N$, on pose
@@ -105,6 +107,11 @@ dans $\Omega$ et pour tout $r > 0$. Et finalement
 \end{align}
 dans $\Omega$. On précise maintenant la forme des termes sources
 discrétisés $q_{2,n+1}$, $p_{i,n+1}$, $i = 1,2$.
+
+\begin{remarque}
+Les équations (\ref{eq:splitting-np2-u})-(\ref{eq:splitting-dissolution}) forment un ``splitting'' en
+temps de (\ref{eq:mdl-eq-3}).
+\end{remarque}
 
 \paragraph{Discrétisation de la source d'alumine $q_{2}$.}
 Le terme source $q_{2}$ qui apparaît dans l'équation
@@ -144,8 +151,8 @@ où $\kronecker_{i,j}$ est le symbol de Kronecker définit par
     0&\quad\text{si } i\neq j.
   \end{array}\right.
 \end{equation}
-Le terme source $p_2$ qui correspond à la puissance thermique
-nécessaire à la dissolution des particules (voir (\ref{eq:p2})) est
+Le terme source $p_2$, qui correspond à la puissance thermique
+nécessaire à la dissolution des particules (voir (\ref{eq:p2})), est
 discrétisé en utilisant $q_{2,n+1}$:
 \begin{equation}\label{eq:p2-discret}
 p_{2,n+1} = -[\cee{Al2O3}]\aluminadissolutionenthalpy q_{2,n+1}.
@@ -169,8 +176,8 @@ $t_{n+1}$ dans le cas particulier où la vitesse de sédimentation des
 particules est nulles, \ie, lorsque $w(r)$ = 0. On note la masse
 de particules d'alumine dans la population $k$ à l'instant $t_{n+1}$ par
 \begin{equation}\label{eq:np-masse-def}
-  N_{p,n+1}^k = \int_\Omega\int_0^\infty \aluminadensity
-  n_{p,n+1}^k\frac{4}{3}\pi r^3\intd{r}\intd{x}.
+  N_{p,n+1}^k = \int_\Omega \intd{x}\int_0^\infty \aluminadensity
+  n_{p,n+1}^k\frac{4}{3}\pi r^3\intd{r}.
 \end{equation}
 On notera encore la masse totale de particules d'alumine à l'instant
 $t_{n+1}$ par $N_{p,n+1} =
@@ -179,9 +186,10 @@ $t_{n+1}$ par
 \begin{equation}\label{eq:c-masse-def}
   C_{n+1} = [\cee{Al2O3}]\int_\Omega c_n\intd{x}.
 \end{equation}
+Pour rappel, on a noté ici $[\ce{Al2O3}]$ la masse molaire de l'alumine.
 
 En vertu des équations (\ref{eq:splitting-np1-init}) à
-(\ref{eq:splitting-dissolution}), l'accoissement de la masse d'alumine
+(\ref{eq:splitting-dissolution}), l'accroissement de la masse d'alumine
 de la population $k$ entre les instants $t_{n}$ et $t_{n + 1}$ s'écrit
 \begin{equation}\label{eq:np-accr}
   N_{p,n+1}^k - N_{p,n}^k = \left\{
@@ -229,10 +237,10 @@ que $u\cdot\nu = 0$ sur $\partial \Omega$ et que $\frac{\partial
 En remplaçant (\ref{eq:np-masse-2}) dans (\ref{eq:np-masse-1}),
 l'accroissement de masse totale de particules s'écrit
 \begin{eqnarray}\label{eq:np-masse-3}
-  N_{p,n+1} - N_{p,n} &=&\sum_{\mathclap{\substack{k\\ n+1 = p^k+1}}} \displaystyle\int_\Omega\displaystyle\int_0^\infty \aluminadensity S^k\frac{4}{3}\pi
-  r^3\intd{r}\intd{x} \nonumber\\
-  && + \sum_{\mathclap{\substack{k \\ q^k < n+1}}} \displaystyle\int_\Omega\displaystyle\int_0^\infty \aluminadensity \frac{4}{3}\pi
-    r^3\parent{n_{p,n+1}^k - n_{p,n}^k}\intd{r}\intd{x}.
+  N_{p,n+1} - N_{p,n} &=&\sum_{\mathclap{\substack{k\\ n+1 = p^k+1}}} \displaystyle\int_\Omega\intd{x}\displaystyle\int_0^\infty \aluminadensity S^k\frac{4}{3}\pi
+  r^3\intd{r} \nonumber\\
+  && + \sum_{\mathclap{\substack{k \\ q^k < n+1}}} \displaystyle\int_\Omega\intd{x}\displaystyle\int_0^\infty \aluminadensity \frac{4}{3}\pi
+    r^3\parent{n_{p,n+1}^k - n_{p,n}^k}\intd{r}.
 \end{eqnarray}
 
 On dérive maintenant une expression pour l'accroissement de la masse
@@ -300,24 +308,31 @@ $\partial \Omega$ il reste
 En remplaçant les expressions (\ref{eq:p1-discret}), (\ref{eq:p2-discret}) et (\ref{eq:p3}) pour le termes sources $p_{1,n+1}$, $p_{2,n+1}$ et $p_3$ on obtient
 \begin{eqnarray*}
   \electrolytedensity\electrolytehc\int_\Omega\parent{\temperature_{n+1} - \temperature_n}\intd{x} &=& \frac{\dt}{ \conductivity}\int_\Omega j\cdot j\intd{x}\\
-  && - \aluminahc\parent{\tinit - \tinj}\sum_{\mathclap{\substack{k\\ p^k + 1 = n+1}}}\int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3 S^k\intd{r}\intd{x}\\
-  && + {\aluminadissolutionenthalpy}\sum_{\mathclap{\substack{k\\ q^k < n+1}}} \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,n+1}^k-n_{p,n}^k}\intd{r}\intd{x}.
+  && - \aluminahc\parent{\tinit - \tinj}\sum_{\mathclap{\substack{k\\ p^k + 1 = n+1}}}\int_\Omega\intd{x}\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3 S^k\intd{r}\\
+  && + {\aluminadissolutionenthalpy}\sum_{\mathclap{\substack{k\\ q^k < n+1}}} \int_\Omega\intd{x}\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,n+1}^k-n_{p,n}^k}\intd{r}.
 \end{eqnarray*}
 A nouveau par récurrence sur $n$ on obtient
 \begin{eqnarray}
   \electrolytedensity\electrolytehc\int_\Omega\parent{\temperature_{n+1} - \temperature_0}\intd{x} &=& \frac{t_{n+1}}{\conductivity}\int_\Omega j\cdot j\intd{x}\nonumber\\
-  && - \aluminahc\parent{\tinit - \tinj}\sum_{\mathclap{\substack{k\\ p^k + 1 \leq n+1}}}\int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3 S^k\intd{r}\intd{x}\nonumber\\
+  && - \aluminahc\parent{\tinit - \tinj}\sum_{\mathclap{\substack{k\\ p^k + 1 \leq n+1}}}\int_\Omega\intd{x}\int_0^\infty \aluminadensity \frac{4}{3}\pi r^3 S^k\intd{r}\nonumber\\
   && + {\aluminadissolutionenthalpy}\sum_{m =
     0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}}
-  \int_\Omega\int_0^\infty \aluminadensity \frac{4}{3}\pi
-  r^3\parent{n_{p,m+1}^k-n_{p,m}^k}\intd{r}\intd{x},\nonumber\\ \label{eq:energy-mass-balance}
+  \int_\Omega\intd{x}\int_0^\infty \aluminadensity \frac{4}{3}\pi
+  r^3\parent{n_{p,m+1}^k-n_{p,m}^k}\intd{r},\nonumber\\ \label{eq:energy-mass-balance}
 \end{eqnarray}
 c'est-à-dire que l'énergie thermique du bain
 $\electrolytedensity\electrolytehc\int_\Omega\temperature_{n}\intd{x}$
 dépend uniquement de l'énergie thermique initiale, de l'intensité de
 l'effet Joule, de la masse des doses d'alumine injectées
-antérieurement à l'instant $t_n$ et de la masse de particule d'alumine
-dissoute durant l'intervalle de temps $[0, t_n]$.
+antérieurement à l'instant $t_n$ et de la masse de particules
+d'alumine dissoutes durant l'intervalle de temps $[0, t_n]$. Nous
+utiliserons la relation de bilan d'énergie thermique
+(\ref{eq:energy-mass-balance}) pour fixer la conductivité électrique
+$\sigma$ dans la section \ref{sec:populations-industriel}. La
+conductivité sera choisie de sorte à ce que l'énergie thermique
+$\electrolytedensity \electrolytehc \int_\Omega
+\parent(\temperature_{n+1} - \temperature_0)\intd{x}$ soit bornée dans
+la limite où $n\to\infty$.
 
 \begin{remarque}
   En général, les bilans de masse (\ref{eq:alumina-mass-balance}) et
@@ -330,7 +345,7 @@ dissoute durant l'intervalle de temps $[0, t_n]$.
   \begin{equation}
     \int_{\partial \Omega} n_p^k w\cdot \nu\intd{s} = 0
   \end{equation}
-  également, \ie, le flux de particule à travers la frontière de
+  également, \ie, le flux de particules à travers la frontière de
   $\Omega$ est nul.
 \end{remarque}
 
@@ -343,8 +358,15 @@ dissoute durant l'intervalle de temps $[0, t_n]$.
   (\ref{eq:splitting-np2-u}), (\ref{eq:splitting-np2-w}),
   (\ref{eq:splitting-c}) (\ref{eq:splitting-t}) conservent exactement
   les intégrales de $n_{p,n}$, $\concentration_n$ et
-  $\temperature_n$ sur $\Omega$. Cette condition est garantie par le schéma de
-  discrétisation proposé dans \cite{Flotron2013b} que l'on utilise ici.
+  $\temperature_n$ sur $\Omega$. Dans les approximations numériques
+  des équations de convection-diffusion d'une grandeur physique,
+  où le transport par une vitesse $u_h$ donnée ne satisfait pas
+  exactement  $\div u_h = 0$ et $u_h\cdot \nu = 0$ sur $\partial
+  \Omega$, on obtient un défaut de conservation numérique de
+  la grandeur physique. Pour y remédier, on utilise une
+  technique donnée dans l'article \cite{flotron2013b}  qui a pour but
+  de conserver numériquement l'intégrale de la grandeur physique
+  répondant à l'équations de convection-diffusiton discrétisée.
 \end{remarque}
 
 La section suivant traite de l'application de ce modèle numérique à

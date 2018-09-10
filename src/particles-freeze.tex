@@ -1,5 +1,3 @@
-% introduction: dans cette section, on introduit le problème de Stefan
-%  pour une particule isolée dans un bain électrolytique infini
 Dans cette section, nous détaillons et étudions numériquement les
 phénomènes thermiques qui sont responsables du temps de latence
 préalable au début de la dissolution des grains d'alumine dans le bain
@@ -12,8 +10,8 @@ symétrique sphérique de la solution.
 
 Commençons par remarquer que la chaleur spécifique $\aluminahc$ de
 l'alumine solide et sa densité $\aluminadensity$ conduisent à une
-capacité thermique massique $\aluminadensity\aluminahc$ presque égale
-à celle du bain électrolytique
+capacité thermique massique $\aluminadensity\aluminahc$ du même ordre
+de grandeur que celle du bain électrolytique
 $\electrolytedensity\electrolytehc$. L'écart entre ces deux capacités
 thermiques étant de \num{32}\% seulement, nous remplacerons les
 caractéristiques thermiques de l'alumine solide par celles du bain
@@ -107,12 +105,12 @@ de la chaleur dans chaque phase:
   = 0, & \forall x \in \Omega_2(t),\ \forall t\in [0,\infty).\label{eq:heat-liquid-phase}
 \end{align}
 Soit $\nu$ la normale unité à l'interface $\Gamma$ dirigée vers
-$\Omega_2$. Pour toute fonction $g:\Omega_1\cap\Omega_2\to\mathbb R$,
+$\Omega_2$. Pour toute fonction $g:\Omega_1\cup\Omega_2\to\mathbb R$,
 on note $\jump{g}:\Gamma\to\mathbb R$ le saut de la fonction $g$ sur
 l'interface $\Gamma$ défini par:
 \begin{equation}
   \jump{g}(x) = \lim_{\epsilon\to 0}g(x + \epsilon\nu) - g(x -
-  \epsilon\nu) \quad \text{ sur } \Gamma.
+  \epsilon\nu) \quad x\in \Gamma.
 \end{equation}
 
 A l'interface $\Gamma(t)$ entre les phases liquide est solide, on
@@ -138,7 +136,7 @@ la somme des flux d'énergie thermique au niveau du front de
 solidification.
 
 % subdivision du bord, conditions aux limites
-On suppose donnée une subdivision $\Gamma_\mathrm{N}$,
+On suppose données une subdivision $\Gamma_\mathrm{N}$,
 $\Gamma_\mathrm{D}\subset \partial \Omega$ telle que
 $\Gamma_\mathrm{N}\cap \Gamma_\mathrm{D} = \emptyset$ et
 $\Gamma_\mathrm{N}\cup \Gamma_\mathrm{D} = \partial \Omega$, et les
@@ -154,7 +152,7 @@ limites:
   &\temperature(t, x) = \temperature_\mathrm{D}(x), %
   &\forall x \in \Gamma_\mathrm{D}(t),\ \forall t \in [0,\infty),\label{eq:heat-dirichlet}\\
     %
-  &\frac{\partial \temperature}{\partial \nu}(t, x) = \temperature_\mathrm{N}(x), %
+  &\electrolytetdiff\frac{\partial \temperature}{\partial \nu}(t, x) = \temperature_\mathrm{N}(x), %
   &\forall x \in \Gamma_\mathrm{N}(t),\ \forall t \in [0,\infty),\label{eq:heat-neumann}
 \end{align}
 ainsi que par une condition initiale $\tinit$ appropriée à $t = 0$ pour
@@ -233,25 +231,25 @@ $\temperature$ de la manière suivante:
 \begin{equation}\label{eq:beta}
   \beta(\enthalpy) = \left\{
   \begin{array}{ll}
-    \frac{\enthalpy}{\electrolytehc\electrolytedensity} %
+    \displaystyle\frac{\enthalpy}{\electrolytehc\electrolytedensity} %
       & \enthalpy < \tliq \electrolytehc\electrolytedensity,\\
     \tliq %
       & \tliq \electrolytehc\electrolytedensity < \enthalpy < \tliq \electrolytehc\electrolytedensity + \fusionenthalpy,\\
-    \frac{\enthalpy - \fusionenthalpy}{\electrolytehc\electrolytedensity} %
+    \displaystyle\frac{\enthalpy - \fusionenthalpy}{\electrolytehc\electrolytedensity} %
       & \tliq\electrolytehc\electrolytedensity + \fusionenthalpy < \enthalpy.\\
   \end{array}
   \right.
 \end{equation}
 La fonction $\beta$ est représentée sur la figure \ref{fig:beta}. Pour
 les besoins de la représentation, on a choisi ici $\tliq =
-\num{1218}\si{\kelvin}$ et $\fusionenthalpy = \num{5.508e5}$.
+\num{1218}$ \si{\kelvin} et $\fusionenthalpy = \num{5.508e5}$ \si{\joule\per\kilo\gram}.
 \begin{figure}
   \begin{center}
     \input{../media/particles/beta/beta.tex}
     \caption{Fonction $\beta(\enthalpy)$. On a noté $H_1 =
       \tliq\electrolyteshc\electrolytedensity$ et $H_2 =
       \tliq\electrolyteshc\electrolytedensity + \fusionenthalpy$, et
-      $\tliq = 1218\si{\kelvin}$.}
+      $\tliq = 1218$ \si{\kelvin}.}
     \label{fig:beta}
   \end{center}
 \end{figure}
@@ -269,7 +267,7 @@ telles que:
     &\forall (t, x) \in [0,\infty)\times \Omega,\label{eq:heat-temperature-enthalpy}\\
   & \temperature = \temperature_\mathrm{D}, %
   & \forall (t, x) \in [0,\infty)\times \Gamma_\mathrm{D},\label{eq:heat-one-phase-dirichlet}\\
-  & \frac{\partial \temperature}{\partial \nu} = \temperature_\mathrm{N}, %
+  & \electrolytetdiff\frac{\partial \temperature}{\partial \nu} = \temperature_\mathrm{N}, %
   & \forall (t, x) \in [0,\infty)\times \Gamma_\mathrm{N},\label{eq:heat-one-phase-neumann}\\
   & \temperature(0, x) = \tinit(x),
   & \forall x\in\Gamma,\label{eq:heat-initial-condition}
@@ -319,14 +317,14 @@ note le $v = (\enthalpydensity, -\electrolytetdiff\nabla
 \end{equation}
 où $\Div = (\frac{\partial}{\partial t}, \nabla)$. Alors si
 $\temperature$ est suffisamment régulière dans
-$\Lambda_1\cap\Lambda_2$ et $\jump{\temperature} = 0$ sur $\Gamma$, $\temperature$ est solution forte de
+$\Lambda_1\cup\Lambda_2$ et $\jump{\temperature} = 0$ sur $\Gamma$, $\temperature$ est solution forte de
 (\ref{eq:heat-solid-phase}), (\ref{eq:heat-liquid-phase}). De plus,
 on doit avoir:
 \begin{equation}
   \jump{v\cdot \nu_{tx}} = 0 \quad \text{sur } \Gamma_{tx},
 \end{equation}
 ce qui est équivalent à (\ref{eq:stefan-condition}) avec $\nu =
-\frac{\nu_x}{\abs{\nu_x}}$ et $v_\Gamma = \frac{\nu_t}{\nu_x}$.
+\frac{\nu_x}{\abs{\nu_x}}$ et $v_\Gamma = -\frac{\nu_t}{\nu_x}$.
 
 Le lecteur intéressé par les aspects fonctionnels liés à cette
 équivalence peut consulter le travail de thèse de
@@ -352,46 +350,80 @@ On note $\temperature^n(x)$ et $\enthalpydensity^n(x)$ les approximation
 de $\temperature(t^n, x)$ et $\enthalpydensity(t^n, x)\ \forall x\in
 \Omega$.  On suppose donnée la densité d'enthalpie initiale $h^0$, et
 on pose $\temperature^0 = \tinit$, $\enthalpydensity^0 = \enthalpy(\tinit)$,
-avec $\enthalpy$ donnée par (\ref{eq:enthalpy}). Pour $0 < n \leq N$, on résout
-successivement les équations:
+avec $\enthalpy$ donnée par (\ref{eq:enthalpy}). Pour $0 \leq n \leq N$,
+on cherche la pseudo-température
+$\hat\temperature^n:\Omega\to\mathrm R$ qui satisfait les équations:
 \begin{align}
-  &\temperature^{n+1} - \frac{\timestep}{\mu} \div\parent{
-    \electrolytetdiff \nabla\temperature^{n+1}} = %
+  &\hat\temperature^{n+1} - \frac{\timestep}{\mu} \div\parent{
+    \electrolytetdiff \nabla\hat\temperature^{n+1}} = %
   \beta\parent{\enthalpydensity^n}, & \text{dans } \Omega,\label{eq:chernoff-heat}\\
-  &\temperature^{n+1}(x) = \temperature_{\mathrm D}(t^{n+1}, x), &
+  &\hat\temperature^{n+1}(x) = \temperature_{\mathrm D}(t^{n+1}, x), &
   \forall x\in%
   \Gamma_\mathrm{D},\label{eq:chernoff-dirichlet}\\
-  &\frac{\partial\temperature^{n+1}}{\partial \nu}(x) = %
+  &\electrolytetdiff\frac{\partial\hat\temperature^{n+1}}{\partial \nu}(x) = %
   \temperature_\mathrm{N}(t^{n+1}, x), %
-  & \forall x \in \Gamma_\mathrm{N},\label{eq:chernoff-neumann}
+  & \forall x \in \Gamma_\mathrm{N}.\label{eq:chernoff-neumann}
 \end{align}
-avec la correction pour la densité d'enthalpie à chaque pas de temps:
-\begin{equation}\label{eq:chernoff-update}
-\enthalpydensity^{n+1} = \enthalpydensity^{n} +
-\mu\parent{\temperature^{n+1} - \beta(\enthalpydensity^{n})}, \quad
-\text{dans } \Omega.
-\end{equation}
+On obtient ensuite la densité d'enthalpie et la température à chaque
+pas de temps en calculant:
+\begin{align}
+  &\enthalpydensity^{n+1} = \enthalpydensity^{n} +
+  \mu\parent{\hat\temperature^{n+1} - \beta(\enthalpydensity^{n})}, \quad
+  \text{dans } \Omega,\label{eq:chernoff-update-1}\\
+  %
+  &\temperature^{n+1} = \beta(\enthalpydensity^{n+1}), \quad\text{dans }\Omega.\label{eq:chernoff-update-2}
+\end{align}
 
 Ce schéma numérique basé sur la formule de Chernoff
-(\ref{eq:chernoff-update}) a été proposé par M. Paolini
+(\ref{eq:chernoff-update-1}) a été proposé par M. Paolini
 \cite{Paolini1988}.
 
 \begin{remarque}
   Le schéma formé par les équations (\ref{eq:chernoff-heat}) à
-  (\ref{eq:chernoff-update}) peut être interprété comme un
+  (\ref{eq:chernoff-update-2}) peut être interprété comme un
   schéma d'Euler implicite en temps associée à un développement
   limité au premier ordre de (\ref{eq:heat-temperature-enthalpy}). En
   effet, (\ref{eq:chernoff-heat}) se réecrit
   \begin{equation}
-    \mu \frac{\temperature^{n+1} - \beta(\enthalpydensity^n)}{\timestep} -
-    \div\parent{\electrolytetdiff \nabla \temperature^{n+1}} = 0,
+    \mu \frac{\hat\temperature^{n+1} - \beta(\enthalpydensity^n)}{\timestep} -
+    \div\parent{\electrolytetdiff \nabla \hat\temperature^{n+1}} = 0,
   \end{equation}
   ce qui correspond à
   \begin{equation}
     \frac{\enthalpydensity^{n+1} - \enthalpydensity^n}{\timestep} -
-    \div\parent{\electrolytetdiff \nabla \temperature^{n+1}} = 0
+    \div\parent{\electrolytetdiff \nabla \hat\temperature^{n+1}} = 0
   \end{equation}
-  en utilisant (\ref{eq:chernoff-update}).
+  en utilisant (\ref{eq:chernoff-update-1}).
+\end{remarque}
+
+\begin{remarque}
+Si on considère le milieu solide par exemple, on a
+$\beta(\enthalpydensity) =
+\frac{\enthalpydensity}{\electrolytedensity\electrolytehc}$. Ainsi
+(\ref{eq:chernoff-update-2}) implique
+$\electrolytedensity\electrolytehc\temperature^{n+1} =
+\enthalpydensity^{n+1}$ et en éliminant la pseudo-température
+$\hat\temperature^{n+1}$ dans (\ref{eq:chernoff-heat}) on obtient en
+utilisant (\ref{eq:chernoff-update-1}):
+\begin{equation}
+  \hat\temperature^{n+1} = \frac{\enthalpydensity^{n+1} -
+    \enthalpydensity^n}{\mu} + \beta{\enthalpydensity^n} =
+  \frac{\electrolytedensity
+    \electrolytehc}{\mu}\parent{\temperature^{n+1} - \temperature^{n}}
+  + \temperature^{n},
+\end{equation}
+puis dans (\ref{eq:chernoff-heat}):
+\begin{equation}
+\electrolytedensity \electrolytehc \frac{\temperature^{n+1} -
+  \temperature^{n}}{\timestep} - \div\parent{\electrolytetdiff
+  \nabla\parent{\gamma \temperature^{n+1} - \parent{1 -
+      \gamma}\temperature^n}} = 0 \label{eq:chernoff-gamma-scheme}
+\end{equation}
+avec $\gamma = \frac{\electrolytedensity \electrolytehc}{\mu}$, et si
+$\mu < \frac{1}{L_\beta}$ alors $\gamma < 1$.
+L'équation (\ref{eq:chernoff-gamma-scheme}) est le schéma implicite
+si $\gamma = 1$, explicite si $\gamma = 0$ et de Crank-Nicholson si
+$\gamma = \frac{1}{2}$.
 \end{remarque}
 
 On décrit maintenant la discrétisation en
@@ -403,8 +435,8 @@ La formulation faible du système d'équations
 n\leq N$ à chercher une fonction $\temperature^{n+1}:\Omega\to\mathbb R$
 à symétrie sphérique telle que la relation:
 \begin{equation}\label{eq:weak-form-cart-coord}
-  \int_\Omega \temperature^{n+1} v\,\intd{x} + \frac{\timestep}{\mu} %
-  \int_\Omega \electrolytetdiff\nabla \temperature^{n+1} \nabla v\,\intd{x} - %
+  \int_\Omega \hat\temperature^{n+1} v\,\intd{x} + \frac{\timestep}{\mu} %
+  \int_\Omega \electrolytetdiff\nabla \hat\temperature^{n+1} \nabla v\,\intd{x} - %
   \int_{\Gamma_\mathrm{N}} \temperature^{n+1}_\mathrm{N} v\,\intd{\sigma} %
   = \int_\Omega \beta(\enthalpydensity^n)v\,\intd{x}
 \end{equation}
@@ -426,8 +458,10 @@ f:\mathbb \rplus\to\mathbb R$ la fonction telle que
 Le gradient de la fonctions $f$ en coordonnées sphérique s'écrit selon
 $\tilde f$:
 \begin{equation}\label{eq:spherical-gradient}
-  \tilde\nabla\tilde f = \frac{\mathrm d\tilde f}{\mathrm dr}\hat e_r.
+  \tilde\nabla\tilde f = \frac{\mathrm d\tilde f}{\mathrm dr}\hat e_r,
 \end{equation}
+où $\hat e_r$ est le vecteur unitaire radial du système de
+coordonnées sphérique.
 
 On se donne un réel $\rmax > 0$ et le domaine $\Omega = \mathcal B(0,
 \rmax) \subset \mathbb R^3$ la boule ouverte de centre $0$ de rayon
@@ -441,7 +475,7 @@ symétrie sphérique, \ie, elle ne dépendent que de $r$ et
 Sous ces hypothèses, on cherche une solution du problème de Stefan
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann}) en
 utilisant le schéma de Chernoff
-(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}) qui soit également
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update-2}) qui soit également
 à symétrie sphérique.
 
 La subdivision du bord $\Gamma_\mathrm{D}$, $\Gamma_\mathrm{N}$ doit
@@ -497,7 +531,7 @@ dans les expressions (\ref{eq:weak-form-spher-coord-dirichlet}),
 par une formule de quadrature de Gauss à 3 points.
 A chaque pas de temps $n$, la fonction $\enthalpydensity^{n+1}$ est
 approximée par l'interpolant de Lagrange du membre de droite de
-(\ref{eq:chernoff-update}) aux noeuds du maillage $r_i$, $i =
+(\ref{eq:chernoff-update-1}) aux noeuds du maillage $r_i$, $i =
 0,1,\dots, N$.
 
 \paragraph{Un test exact du problème de Stefan à symétrie plane}
@@ -506,7 +540,7 @@ discrétisation des formes faibles
 (\ref{eq:weak-form-spher-coord-dirichlet}),
 (\ref{eq:weak-form-spher-coord-neumann}) et du schéma de
 discrétisation en temps
-(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}) en étudiant la
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update-2}) en étudiant la
 convergence de l'erreur entre une solution exacte du problème de
 Stefan classique et de son approximation numérique.
 
@@ -525,7 +559,7 @@ contact sur le bord $\cparent{(x_1, x_2, x_3)\in\mathbb R^3 \mid x_1 =
   0}$ avec un réservoir thermique à température constante
 $\temperature = -1$. Au cours de l'évolution temporelle, un front de
 transition de phase, de liquide à solide, se propage dans le
-matériau. Pour des raisons de symétrie, le front de transition reste
+matériau. Pour des raisons de symétrie, le front de transition plan reste
 en tout temps parallèle au bord $\cparent{(x_1, x_2, x_3)\in\mathbb
   R^3 \mid x_1 = 0}$.
 
@@ -533,7 +567,7 @@ Nous utiliserons cette solution exacte au paragraphe suivant pour valider le
 schéma de discrétisation des équations
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann})
 
-Si, au lieu de définir une symétrie sphérique nous prenons unes
+Si, au lieu de définir une symétrie sphérique nous prenons une
 symétrie planaire, \ie, $\tilde f$ de (\ref{eq:spherical-symmetry})
 est remplacée par $\tilde f(x_1, x_2, x_3) = \tilde{\tilde f}(x_1)$,
 alors il suffit de changer $\intd{r}$ en $\intd{x}$ et de supprimer
@@ -566,12 +600,17 @@ $t$. Dans ces conditions, on peut montrer \cite{HillStefanProblems}
 par un calcul algébrique que la solution des équations
 (\ref{eq:heat-solid-phase})-(\ref{eq:stefan-condition}) s'écrit:
 \begin{align}
-  & X(t) = \sqrt{2\gamma t},& \forall t > 0,\label{eq:neumann-sol-frontier}\\
+  & X(t) = \sqrt{2\gamma t},& \forall t >
+  0,\label{eq:neumann-sol-frontier}\\
+  %
   & \temperature(t, x) = -\gamma\int_{x / \sqrt{2\gamma
       t}}^1\exp\parent{\frac{\gamma(1 - \xi^2)}{2}}\, \intd{\xi},%
-  & \forall (t, x) \in [0,\infty)\times[0,X(t)),\label{eq:neumann-sol-solid-phase}\\
-    & \temperature(t, x) = 0,
-    & \forall (t, x) \in [0,\infty)\times[X(t), \infty),\label{eq:neumann-sol-liquid-phase}
+  & \forall x \in [0,X(t)),
+    \forall t \in [0,\infty),\label{eq:neumann-sol-solid-phase}\\
+  %
+  & \temperature(t, x) = 0,
+  & \forall x \in [0,X(t)),
+    \forall t \in [0,\infty),\label{eq:neumann-sol-liquid-phase}
 \end{align}
 où on a noté $\gamma$ la constante réelle définie comme la solution de
 l'équation transcendante:
@@ -625,11 +664,11 @@ donné par la relation (\ref{eq:gamma}).
 
 Dans le paragraphe suivant, nous utilisons la solution de F. Neumann
 pour valider l'implémentation du schéma numérique correspondant aux
-équations (\ref{eq:chernoff-heat}) à (\ref{eq:chernoff-update}).
+équations (\ref{eq:chernoff-heat}) à (\ref{eq:chernoff-update-2}).
 
 \paragraph{Validation numérique}
 Pour valider l'implémentation du schéma numérique
-(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update}), on évalue la
+(\ref{eq:chernoff-heat})-(\ref{eq:chernoff-update-2}), on évalue la
 convergence de l'erreur entre la solution exacte définie par la
 relation (\ref{eq:neumann-sol}) et $\beta(\enthalpydensity^N_\delta)$,
 l'approximation de la température à l'instant $T$ avec $\delta =
@@ -753,16 +792,16 @@ zéro:
   \input{../media/particles/remelt/frozen-layer-sur5.tex}
   \input{../media/particles/remelt/frozen-layer-sur10.tex}
   \caption{Évolution du rayon de la sphère de bain gelé pour des
-    températures de surchauffe de \num{2.5}\si{\kelvin},
-    \num{5}\si{\kelvin} et \num{10}\si{\kelvin} et des particules de
-    rayons initiaux $r_0 = $\num{40}\si{\micro\meter},
-    \num{60}\si{\micro\meter} et \num{80}\si{\micro\meter}.}
+    températures de surchauffe de \num{2.5} \si{\kelvin},
+    \num{5} \si{\kelvin} et \num{10} \si{\kelvin} et des particules de
+    rayons initiaux $r_0 = $\num{40} \si{\micro\meter},
+    \num{60} \si{\micro\meter} et \num{80} \si{\micro\meter}.}
   \label{fig:freeze-radius}
 \end{center}
 \end{figure}
 On considère une particule de bain solidifié de rayon initial $R_0 =$
-\num{40}\si{\micro\meter}, \num{60}\si{\micro\meter} et
-\num{80}\si{\micro\meter}. La surchauffe du bain électrolytique est
+\num{40} \si{\micro\meter}, \num{60} \si{\micro\meter} et
+\num{80} \si{\micro\meter}. La surchauffe du bain électrolytique est
 définie ici comme la différence entre la température initiale du bain
 $\telectrolyte$ et la température de liquidus $\tliq$. La figure
 \ref{fig:freeze-radius} présente l'évolution du rayon de la particule
@@ -773,10 +812,10 @@ diminue avec la surchauffe. De même, le temps de refonte diminue avec
 la taille de la particule.
 
 La température initiale de la particule est $\tinj =
-423.15\si{\kelvin}$. Dans le cas le plus défavorable où $\temperature -
-\tliq = 2.5\si{\kelvin}$ et $r_0 = 80\si{\micro\meter}$, le
+423.15$ \si{\kelvin}. Dans le cas le plus défavorable où $\temperature -
+\tliq = 2.5$ \si{\kelvin} et $r_0 = 80$ \si{\micro\meter}, le
 temps nécessaire pour refondre entièrement la couche de gel est de
-l'ordre de 120\si{\milli\second}.
+l'ordre de 120 \si{\milli\second}.
 
 Dans les calculs présentés ici, on a fait plusieurs hypothèses
 simplificatrices. On a supposé que le fluide environnant est au
@@ -801,13 +840,14 @@ caractéristiques du temps de latence dû à la présence de gel à
 la surface des particules sont largement inférieurs à la seconde. De
 plus, les phénomènes précités d'agitation du fluide et de
 chute verticale des particules, négligés dans ce modèle, tendent à
-diminuer ces temps caractéristiques.
+diminuer ces temps caractéristiques. Finalement, nous ne tenons pas
+compte de l'effet collectif du paquet de particules.
 
 Pour ces raisons, dans la suite de ce travail on négligera la
 formation de gel à la surface des particules d'alumine. Cependant,
 selon les simulations de V. Dassylva-Raymond \cite{Dassylva2015}, nous
 choisirons un temps de latence pour chaque dose de particules
-injectées dans le bain uniforme $\tlat = 1\si{\second}$, indépendante
+injectées dans le bain uniforme $\tlat = 1$ \si{\second}, indépendante
 du rayon. Ce temps de latence se justifie par l'effet collectif de
 toutes les particules d'une dose sur la température du bain
 environnant.

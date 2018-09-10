@@ -29,9 +29,10 @@ en particulier la modélisation de l'interaction entre la température
 du bain électrolytique au cours du temps et la dissolution et
 diffusion de la poudre d'alumine.
 
-Nous proposerons une généralisation du modèle proposé par
-T. Hofer \cite{Hofer2011} pour prendre en compte les nouveaux effets
-évoqués, dans le but d'améliorer son pouvoir de prédiction.
+Nous proposerons une généralisation du modèle de dissolution des
+particules d'alumine proposé par T. Hofer \cite{Hofer2011} pour
+prendre en compte les nouveaux effets évoqués, dans le but d'améliorer
+son pouvoir de prédiction.
 
 % 2ème sujet de cette thèse: calculs rapides
 L'état d'une cuve d'électrolyse n'est pas figé: il évolue sans cesse
@@ -39,16 +40,24 @@ au fil des changements d'anodes, des variations de cadence des
 injecteurs, ou encore des perturbations des cuves voisines de la
 série. Le modèle numérique existant, introduit par G. Steiner dans son
 travail de thèse \cite{Steiner2009} et implémenté dans le logiciel
-Alucell, permet d'obtenir une approximation numérique de l'état des
-écoulements des fluides et de la concentration d'alumine dans une cuve
-d'électrolyse avec un temps de calcul de l'ordre de \num{24} à
-\num{48} heures. Il est donc impossible d'utiliser ce modèle pour
-obtenir des informations sur l'état d'une cuve à chaque instant de sa
-vie, en fonction de paramètres extérieurs. Dans cette thèse nous
-proposerons un modèle d'écoulement de fluide et de concentration
-d'alumine dissoute stationnaire simplifié, qui permet d'obtenir des
-informations sur l'état d'une cuve dans un laps de temps bien plus
-court, de l'ordre de la minute.
+\alucell\footnote{Le logiciel \alucell, copropriété de l'Ecole
+  Polytechnique Fédérale de Lausanne (EPFL) et de RioTinto Alcan, est
+  développé conjointement par le Groupe Picasso à l'EPFL et
+  YcoorSystems SA basée à Sierre en Suisse. Le logiciel \alucell est
+  composé d'une suite de routines bas niveau écrites en
+  \texttt{Fortran} et \texttt{C++} et d'un langage de script
+  propriétaire permettant d'implémenter des algorithmes liés à la
+  modélisation numérique de l'électrolyse de l'aluminium.}, permet
+d'obtenir une approximation numérique de l'état des écoulements des
+fluides et de la concentration d'alumine dans une cuve d'électrolyse
+avec un temps de calcul de l'ordre de \num{24} à \num{48} heures. Il
+est donc impossible d'utiliser ce modèle pour obtenir des informations
+sur l'état d'une cuve à chaque instant de sa vie, en fonction de
+paramètres extérieurs. Dans cette thèse nous proposerons un modèle
+d'écoulement de fluide et de concentration d'alumine dissoute
+stationnaire simplifié, qui permet d'obtenir des informations sur
+l'état d'une cuve dans un laps de temps bien plus court, de l'ordre de
+la minute.
 
 Les opérateurs des cuves industrielles devraient alors pouvoir tirer
 parti des prédictions de ce modèle pour contrôler l'état des cuves

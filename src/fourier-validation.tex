@@ -12,7 +12,7 @@ solution exacte et l'approximation $u_{h,K}$ telle que définie par
 On pose $\Lambda = (-1, 1)^2$, on rappelle que $\Omega =
 \Lambda\times(0,\thickness)$. On choisit dans cette partie
 \ref{sec:fourier-validation} une viscosité scalaire unité,
-c'est-à-dire que $\mu_{i,j} = 1\ \forall i,j$. On vérifie alors que les
+c'est-à-dire que $\mu_{i,j} = 1,\ \forall i,j$. On vérifie alors que les
 fonctions $u_1, u_2, u_3:\Omega\to\mathbb R$ et $p:\Omega\to\mathbb R$
 définies par:
 \begin{align}
@@ -146,7 +146,8 @@ choix $\thickness = 2$, i. e. dans le domaine $\Omega =
     \end{tikzpicture}
     \caption{Représentation de la solution exacte
       (\ref{eq:stokes-exact-sol-1})-(\ref{eq:stokes-exact-sol-3}) du
-      problème de Stokes (\ref{eq:stokes-u}), (\ref{eq:stokes-p}). La
+      problème de Stokes (\ref{eq:stokes-u}), (\ref{eq:stokes-p}),
+      avec $\thickness = 2$. La
       solution est représentée sur 6 plans horizontaux espacés
       régulièrement entre $x_3 = 0$ et $x_3 = 2$. L'échelle de couleur
       correspond à l'amplitude de $u$, tandis que les flèches indique
@@ -166,7 +167,7 @@ choix $\thickness = 2$, i. e. dans le domaine $\Omega =
 \end{figure}
 
 
-\subsection{Convergence de l'erreur}
+\subsection{Convergence de l'erreur en $K$ et en $h$}
 On s'intéresse d'une part à la convergence de l'erreur d'approximation
 de $u_{h,K}$ donnée par (\ref{eq:u-h-12}),(\ref{eq:u-h-3}) vers la
 solution exacte
@@ -206,13 +207,13 @@ que le nombre de terme dans de la somme partielle de la série de
 Fourier nécessaire pour saturer l'erreur augmente lorsque le rapport
 d'aspect du domaine $\Omega$ augmente, c'est-à-dire lorsque
 $\thickness$ tend vers zéro. En effet, lorsque $\thickness = 2$,
-l'erreur $e_h^\mathrm{SF}$ cesse de décroîter lorsque $K \geq 5$,
+l'erreur $e_h^\mathrm{SF}$ cesse de décroître signicativement lorsque $K \geq 5$,
 tandis que lorsque $\thickness = 0.02$ il faut que $K \geq 7$ pour que
-l'erreur $e_h^\mathrm{SF}$ cesse de décroître.
+l'erreur $e_h^\mathrm{SF}$ cesse de décroître signicativement.
 
 \begin{table}[t]
   \caption{Erreur $e_{h,K}^\mathrm{SF}$ entre la solution exacte et la
-    série de Fourier tronquée à l'ordre $K$.}
+    série de Fourier discrète tronquée à l'ordre $K$.}
   \label{tab:h-k-convergence}
   \begin{center}
     \begin{tabular}{@{}rrrrrr@{}}
@@ -266,8 +267,8 @@ l'erreur pour différentes tailles de maille $h$ et différentes
 précision des calculs $u_{h,K}^\mathrm{SF}$ et
 $u_h^{\mathrm{S3D}}$. Ici on a choisi $K = 20$ et $h = 2/64$. La table
 \ref{tab:e-sf-e-s3d-convergence} donne la valeur des erreurs pour
-différents épaisseurs $\thickness$ du domaine $\Omega$. La figure
-\ref{fig:e-sf-e-s3d-convergence} représente les même données sous
+différentes épaisseurs $\thickness$ du domaine $\Omega$. La figure
+\ref{fig:e-sf-e-s3d-convergence} représente les mêmes données sous
 forme graphique. On remarque que l'erreur $e_{h,K}^\mathrm{SF}$
 dépend fortement du rapport d'aspect du domaine $\Omega$, et
 décroît lorsque celui-ci augmente. A l'inverse, $e_h^\mathrm{S3D}$ est
@@ -317,7 +318,7 @@ $\Omega$ présente une forte anisotropie.
     de calculer $u_{h,K}^{\mathrm{SF}}$ et $u_h^\mathrm{S3D}$ en
     fonction de l'épaisseur $\thickness$. Les calculs
     sont effectués sur un machine équipée d'un processeur Intel$^{\tiny{\textregistered}}$ Xeon$^{\tiny{\textregistered}}$
-    E5-2620 v2 @ 2.1\si{\giga\hertz} et 32Go de RAM.}
+    E5-2620 v2 @ 2.1 \si{\giga\hertz} et 32 \si{\giga\octet} de RAM.}
   \label{tab:e-sf-e-s3d-cpu-cost}
   \begin{center}
     \begin{tabular}{@{}lrrrrr@{}}
@@ -347,16 +348,16 @@ Finalement, on compare les temps CPU pour chaque schéma, ainsi
 que le nombre d'itérations de l'algorithme GMRES pour résoudre le
 système linéaire dans le cas du schéma S3D, dont les résultats sont
 synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
-compare les performances entre le temps de calculs du modèle S3D et SF
+comparé les performances entre le temps de calculs du modèle S3D et SF
 en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et
 \num{1.19}. On note que le coût en temps de calcul de la solution
 $u_h^\mathrm{S3D}$ augmente catastrophiquement lorsque $\thickness$
 diminue. Ceci est principalement dû au conditionnement de la matrice
-qui se péjore et au nombre d'itération de
-l'algorithm GMRES nécessaires pour atteindre la tolérance souhaitée.
+qui se péjore et au nombre d'itérations de
+l'algorithme GMRES nécessaire pour atteindre la tolérance souhaitée.
 En comparaison, le coût en temps de calcul de la solution
 $u_{h,K}^{\mathrm{SF}}$ est indépendent de l'épaisseur $\thickness$,
-et environ 17 fois meilleur que le coût de calcul de
+et est environ 17 fois plus faible que le coût de calcul de
 $u_h^\mathrm{S3D}$ dans le pire des cas. A nouveau, ce résultat
 indique un clair avantage du modèle SF par rapport au modèle S3D.
 

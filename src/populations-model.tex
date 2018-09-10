@@ -1,4 +1,4 @@
-Soit $\Omega\subset \mathbb R^3$ un domaine ouvert donné, occupé par
+Soit $\Omega\subset \mathbb R^3$ le domaine ouvert donné, occupé par
 le bain électrolytique. Ce bain est animé par une vitesse d'écoulement
 $u:\Omega\to\mathbb R^3$ stationnaire donnée et telle que $\div u = 0$
 dans $\Omega$ et $u\cdot \nu = 0$ sur le bord $\partial \Omega$ de
@@ -41,7 +41,7 @@ $w$ est tel que $\div w = 0$ dans $\Omega$. Deuxièmement, nous
 supposerons que les particules suivent exactement les lignes de
 courant du champ de transport $u + w$ dans le domaine $\Omega$. Par
 ailleurs, la concentration d'alumine dissoute $\concentration$ et la
-température du bain électrolytique $\temperature$ seront transporté
+température du bain électrolytique $\temperature$ seront transportés
 par la vitesse d'écoulement $u$, et diffusés.
 
 \paragraph{Populations de particules}
@@ -49,15 +49,15 @@ Dans une cuve industrielle, de l'alumine en poudre doit être injectée
 à intervalles réguliers dans le bain. Nous modélisons ces injections
 sous la forme d'une série d'évènements instantanés, successifs dans le
 temps. Soit $K$ le nombre total d'injections, et soit un ensemble de
-nombres réels $\tau^k$ tels que $0\leq \tau^k < T$ $\forall k$, où
-les $\tau^k$ représentent les
-instants auxquels surviennent chaque injection. Soit pour toute
-injection $k = 1,2, \dots, K$ la distribution initiale de particule
-$S^k:\Omega\times\rplus\to\mathbb R$ issue de l'injection $k$,
-supposée donnée.
+nombres réels $\tau^k$, $k = 1, 2, \dots, K$ tels que $0\leq \tau^k <
+T$ $\forall k$, où les $\tau^k$ représentent les instants auxquels
+surviennent chaque injection. Pour toute injection $k = 1,2, \dots,
+K$, la distribution initiale de particule est notée $S^k:(x,
+r)\in\Omega\times\rplus\to S^k(x, r)\in\mathbb R$ et est supposée
+donnée.
 
 On note $n_p^k(t, x, r)$, $k = 1, 2, \dots, K$ la densité en espace et
-en taille de particule issues de l'injection $k$ dans le bain
+en taille de particules issues de l'injection $k$ dans le bain
 électrolytique à l'instant $t \in [0, T]$. Autrement dit, la quantité
 $n_p^k(t, x, r)\intd{x}\intd{r}$ représente le nombre de particules, à
 l'instant $t$, dans le volume infinitésimal $\intd{x}$ autour du point
@@ -95,17 +95,17 @@ Ici, $\nu$ est le vecteur normal unitaire extérieur à la surface
 $\partial \Omega$. La condition aux limites sur le bord entrant s'écrit
 alors pour tout $k = 1, 2, \dots, K$ et $t > \tau^k$
 \begin{equation}
-\frac{\partial n_p^k}{\partial \nu}(t, x) = 0, \quad x\in\Gamma^-.
+n_p^k(t, x) = 0, \quad x\in\Gamma^-.
 \end{equation}
 
 La densité totale de particules au temps $t \in [0, T]$, à l'endroit
 $x\in\Omega$ et fonction de $r$ est donnée par
-\begin{equation}
+\begin{equation}\label{eq:populations-sum}
   n_p(t, x, r) = \sum_{k=1}^K n_p^k(t, x, r).
 \end{equation}
 Les conditions initiales de l'équation
-(\ref{eq:population-dissolution}) sont celles obtenues de
-(\ref{eq:population-transport}) en $t = \tau^k + \tlat$.
+(\ref{eq:population-dissolution}) sont celles obtenues de la solution
+de (\ref{eq:population-transport}) en $t = \tau^k + \tlat$.
 
 \begin{remarque}
 Les quantités $n_p^k$ introduites ici sont similaires au champ $n_p$
@@ -157,9 +157,9 @@ que $\bar k(t) = \max_{1\leq k\leq K}\cparent{k \mid \tau^k + \tlat < t}$ . Alor
     k(t)}\frac{4\pi\aluminadensity}{[\ce{Al2O3}]}\int_{\rplus}n_p^k(t,
   x, r)f(r, \concentration(t, x), \temperature(t, x))r^2\,\intd{r}.
 \end{equation}
-où [\ce{Al2O3}] $ = \num{0.102}$ \si{\kilo\gram\per\mol} la masse
-molaire de l'alumine. L'ensemble des indices $\cparent{k \mid 1\leq k
-  \leq \bar k (t)}$ représente l'ensemble des populations de particules
+où [\ce{Al2O3}] $ = \num{0.102}$ \si{\kilo\gram\per\mol} est la masse
+molaire de l'alumine. L'ensemble des indices $k$ tels que $1\leq k
+\leq \bar k(t)$ représente l'ensemble des populations de particules
 $n_p^k$ qui se dissolvent dans le bain à l'instant $t\in[0, T]$.
 
 \paragraph{Concentration d'alumine dissoute}
@@ -168,7 +168,7 @@ dans le bain par la vitesse d'écoulement $u$, mais est de plus sujette
 à une diffusion liée d'une part à l'agitation moléculaire, et d'autre
 part aux turbulences de l'écoulement. Soit
 $\cdiffusivity:\Omega\to\mathbb R^*_+$ la diffusivité de la
-concentration d'alumine dissoute dans le bain, supposée donnée. Alors
+concentration d'alumine dissoute dans le bain, supposée connue. Alors
 la concentration $\concentration$ doit satisfaire l'équation
 \begin{equation}\label{eq:concentration}
   \frac{\partial \concentration}{\partial t}(t, x) + u(x)\cdot\nabla \concentration(t, x) - \div\parent{\cdiffusivity(x)
@@ -179,7 +179,7 @@ Puisque qu'il ne peut y avoir de flux de masse d'alumine à travers le
 bord du domaine $\Omega$, la concentration doit satisfaire la
 condition aux limites de Neumann homogène
 \begin{equation}\label{eq:c-bc}
-  \frac{\partial \concentration}{\partial \nu}(t, x) = 0 \quad  \quad
+  \electrolytecdiff(x)\frac{\partial \concentration}{\partial \nu}(t, x) = 0 \quad  \quad
   \forall x\in\partial \Omega,\ t\in[0, T].
 \end{equation}
 
@@ -189,8 +189,9 @@ Pour simplifier le modèle, on fait l'hypothèse que le bain
 de flux d'énergie thermique à travers le bord du domaine occupé par le
 bain.
 
-L'énergie thermique du bain provient de trois sources
-distinctes. Premièrement, les particules d'alumine sont injectées avec
+L'énergie thermique du bain provient de trois sources distinctes.
+
+Premièrement, les particules d'alumine sont injectées avec
 une température $\tinj < \temperature$, la température locale du
 bain. De l'énergie thermique est prélevée dans le bain pour rétablir
 l'équilibre thermique entre celui-ci et les particules. On note $p_1(t,
@@ -200,11 +201,11 @@ les particules, que l'on définit par
   p_1(t, x) = -\parent{\tinit-\tinj}\sum_{k = 1}^{K}\dirac(t -
   \tau^k)\int_{\rplus}\aluminadensity\aluminahc\frac{4}{3}\pi r^3 S^k(x, r)\,\intd{r}
 \end{equation}
-où $\dirac$ est une masse de Dirac et $\tinit$ la température
+où $\dirac$ est une masse de Dirac et $\tinit$ est la température
 initiale du bain. Dans (\ref{eq:power-heating}) et pour rappel, $\tinit$ est la
 température initiale du bain électrolytique, $\aluminahc$ et
 $\aluminadensity$ sont la chaleur spécifique et la densité de
-l'alumine, tandis que les $S_k$ sont les distribution en espace et en
+l'alumine, tandis que les $S^k$ sont les distributions en espace et en
 rayon des doses de poudre d'alumine qui interviennent dans le membre
 de droite de (\ref{eq:population-injection}).
 
@@ -243,7 +244,7 @@ suppose constante dans tout $\Omega$.
 \paragraph{Température du bain}
 Tout comme la concentration d'alumine, la température du bain
 électrolytique $\temperature$ est transportée par la vitesse
-d'écoulement $u$, et diffuse dans le bain. Cette diffusion est due à
+d'écoulement $u$, et diffusée dans le bain. Cette diffusion est due à
 la l'agitation moléculaire d'une part, et à aux turbulences de
 l'écoulement d'autre part. Soit $\electrolytetdiff:\Omega\to\mathbb
 R^*_+$ la diffusivité de la température dans le bain, supposée
@@ -268,8 +269,8 @@ $\temperature$ doit satisfaire une condition de Neumann homogène
 \paragraph{Formulation du problème}
 Le problème de transport et dissolution d'alumine en fonction de la
 température consiste à chercher des fonctions $n_p^k:(0,
-T)\times\Omega\times\rplus\to \mathbb R$, $c:(0, T)\times\mathbb R\to
-\mathbb R$ et $\temperature:(0, T)\times\mathbb R\to\mathbb R$ qui
+T)\times\Omega\times\rplus\to \mathbb R$, $c:(0, T)\times\Omega\to
+\mathbb R$ et $\temperature:(0, T)\times\Omega\to\mathbb R$ qui
 satisfont les équations couplées (\ref{eq:population-pre-injection}) à
 (\ref{eq:population-dissolution}), (\ref{eq:concentration}) et
 (\ref{eq:temperature}) ainsi que les conditions aux limites

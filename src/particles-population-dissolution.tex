@@ -1,5 +1,5 @@
 Selon la distribution de tailles des particules d'alumine, une dose de
-\num{1}\si{\kilo\gram} contient typiquement entre $10^9$ et $10^{12}$
+\num{1} \si{\kilo\gram} contient typiquement entre $10^9$ et $10^{12}$
 particules. Il n'est donc pas envisageable de suivre individuellement
 l'évolution de chacune d'elles dans le bain. On adopte une approche
 statistique \cite{Hofer2011} et on décrit l'ensemble des particules
@@ -57,7 +57,8 @@ caractéristique. En dérivant par rapport à $t$ et en utilisant
   &= \frac{\partial n_p}{\partial t}(t, \rcharacteristic(t)) %
   + \frac{\partial}{\partial r}n_p(t,\rcharacteristic(t)) %
     \frac{\mathrm d}{\mathrm dt}\rcharacteristic(t)\\
-  &= \frac{\partial n_p}{\partial t}(r, \rcharacteristic) - \frac{\dissolutionrate}{\rcharacteristic}\frac{\partial}{\partial r} n_p(t, \rcharacteristic(t))\\
+  &= \frac{\partial n_p}{\partial t}(t, \rcharacteristic(t))
+     - \frac{\dissolutionrate}{\rcharacteristic(t)}\frac{\partial}{\partial r} n_p(t, \rcharacteristic(t))\\
   &= -\frac{\dissolutionrate}{R_{(\bar t, \bar r)}^2(t)}N_p(t). %
 \end{align*}
 Ainsi
@@ -80,7 +81,7 @@ $N_p(t) = \parent{\bar r^2 - 2\dissolutionrate\parent{t - \bar t}}^{1/2} \exp(D)
 \begin{equation*}
   N_p(0) = \exp(D)\sqrt{\bar r^2 +
     2\dissolutionrate \bar t} = n_{p,0}(\rcharacteristic(0)) = n_{p,0}(\sqrt{\bar r^2 +
-    2\dissolutionrate \bar t})
+    2\dissolutionrate \bar t}).
 \end{equation*}
 Ainsi
 $\exp(D) = \frac{n_{p,0}\parent{\sqrt{\bar r^2 + 2\dissolutionrate \bar t\,}}}{\sqrt{\bar r^2 + 2\dissolutionrate \bar t\,}}$
@@ -90,9 +91,7 @@ et
       t})}{\sqrt{\bar r^2 + 2\dissolutionrate \bar t\,}}\parent{\bar r^2 -
     2\dissolutionrate \parent{t - \bar t}}^{1/2}.
 \end{equation*}
-Clairement
-$N_p(\bar t) = n_p(\bar t, \bar r)$
-et donc
+Puisque $N_p(\bar t) = n_p(\bar t, \bar r)$, on a
 \begin{equation}\label{eq:population-exact-solution}
   n_p(\bar t, \bar r) = \bar r\frac{n_{p,0}(\sqrt{\bar r^2 +
       2\dissolutionrate \bar t})}{\sqrt{\bar r^2+2\dissolutionrate \bar t}}.
@@ -108,8 +107,8 @@ et donc
   temps $\bar t$ en fonction de $\population$ au temps $\bar t - \dt$
   en fonction de $\population$ au temps $\bar t - \mathrm dt$.
 
-  En effet, supposons connu $n_p(\bar t - \Delta t, r)$ $\forall
-  r$. Nous avons ainsi
+  En effet, supposons connu $n_p(\bar t - \Delta t, r)$, $\forall
+  r\in (0, \infty)$. Nous avons ainsi
   \begin{equation*}
     R_{(\bar t, \bar r)}(\bar t - \Delta t) = \sqrt{\bar r^2 +
       2\dissolutionrate \Delta t\,}.
@@ -205,8 +204,9 @@ on pose pour $j = 1,\dots, M-1$
   \end{center}
   \begin{center}
     \caption{Solution exacte $n_p$ et approximation numérique avec
-      $\Delta r = 1/64$, $\Delta t = \num{1.46e-2}$ à différents
-      temps. La condition initiale est donnée par
+      $\Delta r = 1/64$, $\Delta t = \num{1.46e-2}$ et
+      $\dissolutionrate^n = \num{0.5e-9}$ à différents temps. La
+      condition initiale est donnée par
       (\ref{eq:population-test-ic}.). En vert: solution exacte. En
       violet: approximation numérique.}
     \label{fig:population-timelapse}
@@ -229,7 +229,7 @@ l'implémentation du schéma numérique
 convergence de l'erreur entre une solution exacte et son approximation
 numérique.
 
-On fixe $\rmax = \num{100}\si{\micro\meter}$, $T = 5\si{\second}$ et
+On fixe $\rmax = \num{100}$ \si{\micro\meter}, $T = 5$ \si{\second} et
 le taux de dissolution
 $\dissolutionrate^n = \num{0.5e-9}$ pour tout $n$ tel que $0\leq n\leq
 N-1$. On choisit la distribution de particules initiale

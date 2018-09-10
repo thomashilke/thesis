@@ -6,8 +6,10 @@ SF est d'une part de fournir une approximation de l'écoulement des
 fluides dans une cuve d'électrolyse d'aluminium, et d'autre part
 de fournir une approximation de la distribution d'alumine dans le bain
 électrolytique, le tout à moindre coût par rapport au modèle
-3D standard déjà implémenté dans le logiciel Alucell tel que décrit
-dans le chapitre \ref{chap:populations}.
+3D standard déjà implémenté dans le logiciel \citealucell tel que décrit
+dans le chapitre \ref{chap:populations}. Le but de ce programme est,
+à terme, de permettre de traiter l'opération d'une cuve
+d'électrolyse industrielle comme un problème de contrôle optimal.
 
 Dans cette partie, nous comparons les champs de vitesse et de
 concentration issus de la méthode Stokes Fourier décrite dans les
@@ -35,10 +37,10 @@ On choisit une triangulation de $\Lambda$ de sorte à ce que la taille
 des mailles des deux calculs (Stokes-Fourier et méthode 3D standard)
 soient comparables, soit $h = \num{0.69}$. La moyenne $\bar{c}$ dans
 (\ref{eq:stat-alumina-avg-c}) est fixée à 3\% masse, identique à la
-concentration d'alumine dissoute initiale dans le modèle de transport
-et dissolution décrit dans le chapitre 2. Dans
-(\ref{eq:stat-alumina-consommation}), le courant électrique total $I =
-\num{320000} \si{\ampere}$. Les différentes grandeurs physiques qui
+concentration d'alumine dissoute initialement dans le modèle de transport
+et de dissolution décrit dans le chapitre 2. Dans
+(\ref{eq:stat-alumina-consommation}), le courant électrique total est $I =
+\num{320000}$ \si{\ampere}. Les différentes grandeurs physiques qui
 interviennent dans ce modèle ont déjà été introduites dans le tableau
 \ref{tab:dissolution-physical-parameters}. Les figures
 \ref{fig:harmonic-velocity} et \ref{fig:harmonic-concentration}
@@ -154,14 +156,14 @@ lieu en pratique lorsqu'une anode en fin de vie est remplacée par une
 anode neuve, mais froide. Sa conductivité électrique qui est
 quasi-nulle initialement, augmente au fur et à mesure que l'anode
 atteint sa température d'opération. Dans cette partie, on dénotera
-conjointement le modèle d'écoulement stationnaire évoqué dans le
-chapitre \ref{chap:populations} et le modèle de transport et
-dissolution d'alumine décrit dans le chapitre \ref{chap:fourier} par
-l'abréviation S3D. Dans cette partie, on considérera uniquement une
-dissolution des particules d'alumine indépendante de la température,
-c'est-à-dire que le champ $c^\mathrm{S3D}$ est calculé avec le modèle
-3D standard en désactivant la dépendance de la vitesse de dissolution
-en fonction de la température du bain.
+conjointement la vitesse du fluide stationnaire et la concentration
+d'alumine dissoute obtenue qui résultent du modèle décrit dans le
+chapitre \ref{chap:populations} par l'abréviation S3D. Dans cette
+partie, on considérera uniquement une dissolution des particules
+d'alumine indépendante de la température, c'est-à-dire que le champ
+$c^\mathrm{S3D}$ est calculé avec le modèle standard 3D (S3D) en désactivant
+la dépendance de la vitesse de dissolution en fonction de la
+température du bain.
 
 Dans le modèle S3D, on peut simuler la désactivation d'une anode en
 annulant la conductivité électrique $\conductivity$ dans le volume
@@ -280,7 +282,7 @@ l'anode désactivée, mais ne s'étend pas à l'ensemble de la cuve.
 
     \caption{Champs de vitesse stationnaire $u^{\mathrm{S3D}}$ (haut) et de
       concentration $c^\mathrm{S3D}$ (bas) dans l'ACD de la cuve
-      AP32 pour différentes configuration du plan anodique.}
+      AP32 pour différentes configurations du plan anodique.}
     \label{fig:f3d-deactivated-a}
   \end{center}
 \end{figure}
@@ -353,7 +355,7 @@ l'anode désactivée, mais ne s'étend pas à l'ensemble de la cuve.
 
     \caption{Champs de vitesse stationnaire $u^{\mathrm{S3D}}$ (haut) et de
       concentration $c^\mathrm{S3D}$ (bas) dans l'ACD de la cuve
-      AP32 pour différentes configuration du plan anodique.}
+      AP32 pour différentes configurations du plan anodique.}
     \label{fig:f3d-deactivated-b}
   \end{center}
 \end{figure}
@@ -484,7 +486,7 @@ stationnaire $c^\mathrm{SF}$ dans le domaine $\Omega$ avec le modèle
 SF. On obtient le champ de transport $u_h^\mathrm{SF}$ qui sert au
 calcul de $c_h^\mathrm{SF}$ en utilisant le champ de force $f$ issus
 du calcul de $u^\mathrm{S3D}$ avec l'anode correspondante désactivée
-(voir figure \ref{fig:anode-desactivation}a).
+(voir figure \ref{fig:anode-deactivation}a).
 
 \begin{figure}[h]
   \begin{center}
@@ -594,8 +596,8 @@ tout prix de devoir utiliser le modèle S3D pour obtenir le champ de
 force en fonction de la configuration du plan anodique. A la place, on
 effectue un calcul de la force que l'on note $f^0$ avec le modèle S3D
 dans la configuration où toutes les anodes sont actives (voir figure
-\ref{fig:anode-desactivation}b.1 et
-\ref{fig:anode-desactivation}b.2). La force $f^0$ est représentée sur
+\ref{fig:anode-deactivation}b.1 et
+\ref{fig:anode-deactivation}b.2). La force $f^0$ est représentée sur
 la figure \ref{fig:harmonic-force-h}.
 
 Lorsqu'une anodes est désactivée, elle ne conduit plus le courant

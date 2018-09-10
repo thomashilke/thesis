@@ -1,13 +1,13 @@
-Dans ce chapitre \ref{chap:populations}, nous avons proposé un modèle de transport et
-dissolution des particules d'alumine dans le bain électrolytique d'une
-cuve d'électrolyse d'aluminium. La dissolution des particules dépend
-de leur taille, de la concentration d'alumine dissoute dans leur
-voisinage, et de la température du bain électrolytique. Nous avons
-proposé un schéma numérique pour approcher la densité de particules
-$n_p$, concentration d'alumine dissoute $c$ et la température de
-l'électrolyte $\temperature$ dans le bain électrolytique basé sur un
-splitting en temps des différentes équations, et une méthode d'éléments
-finis. Nous avons ensuite
+Dans ce chapitre \ref{chap:populations}, nous avons proposé un modèle
+de transport et dissolution des particules d'alumine dans le bain
+électrolytique d'une cuve d'électrolyse d'aluminium. La dissolution
+des particules dépend de leur taille, de la concentration d'alumine
+dissoute dans leur voisinage, et de la température du bain
+électrolytique. Nous avons proposé un schéma numérique pour approcher
+la densité de particules $n_p$, concentration d'alumine dissoute $c$
+et la température de l'électrolyte $\temperature$ dans le bain
+électrolytique basé sur un splitting en temps des différentes
+équations, et une méthode d'éléments finis. Nous avons ensuite
 appliqué ce modèle au cas de la cuve industrielle AP32 et calculé la
 distribution du champ de concentration $c$ dans le bain électrolytique
 jusqu'à ce que le système atteigne un état stationnaire
@@ -51,28 +51,28 @@ surchauffe $\tsur$. C'est très certainement le paramètre le plus
 important du modèle de transport et dissolution d'alumine, qu'il faut
 choisir avec soin. Il est clair que si la température du bain
 $\temperature$ est proche de la température de liquidus $\tliq$, une
-petite perturbation est suffisante pour que $\temperature$ soit inférieure
-à $\tliq$. Une telle perturbation intervient lorsque des particules
-d'alumine extraient l'énergie thermique du bain pour se réchauffer et
-se dissoudre. Dans une telle situation, la dissolution est fortement
-ralentie, et les particules sont transportées sur de longues distances,
-typiquement plusieurs mètres avant de se dissoudre complètement. Les
-particules peuvent alors déposer de la masse sous forme d'alumine
-dissoute dans une plus grande région, ce qui contribue à influencer et
-modifier significativement la distribution de l'alumine dissoute dans
-le bain électrolytique. A l'inverse, plus la température de surchauffe
-du bain est élevée, \ie, plus la température du bain s'écarte de la
-température du liquidus, plus la perturbation nécessaire à ce que la
-température du bain passe en-dessous de $\tliq$ est importante. A
-partir d'une certaine limite, l'énergie nécessaire à réchauffer et
-dissoudre une dose d'alumine ne constitue plus une perturbation
-suffisante. Dans ce cas, la température ne joue essentiellement plus
-de rôle dans la dissolution des particules d'alumine. Cette
-constatation rejoint les observation faites sur des cuves
-industrielles. En effet, lorsque la température de surchauffe est
-grande, les doses d'alumine se dissolvent plus facilement que lorsque
-la surchauffe est faible. La difficulté est de trouver un équilibre
-pour que l'alumine se dissolve suffisamment vite pour que la
+petite perturbation est suffisante pour que $\temperature$ soit
+inférieure à $\tliq$. Une telle perturbation intervient lorsque des
+particules d'alumine extraient l'énergie thermique du bain pour se
+réchauffer et se dissoudre. Dans une telle situation, la dissolution
+est fortement ralentie, et les particules sont transportées sur de
+longues distances, typiquement plusieurs mètres avant de se dissoudre
+complètement. Les particules peuvent alors déposer de la masse sous
+forme d'alumine dissoute dans une plus grande région, ce qui contribue
+à influencer et modifier significativement la distribution de
+l'alumine dissoute dans le bain électrolytique. A l'inverse, plus la
+température de surchauffe du bain est élevée, \ie, plus la température
+du bain s'écarte de la température du liquidus, plus la perturbation
+nécessaire à ce que la température du bain passe en-dessous de $\tliq$
+doit être importante. A partir d'une certaine limite, l'énergie
+nécessaire à réchauffer et dissoudre une dose d'alumine ne constitue
+plus une perturbation suffisante. Dans ce cas, la température ne joue
+essentiellement plus de rôle dans la dissolution des particules
+d'alumine. Cette constatation rejoint les observation faites sur des
+cuves industrielles. En effet, lorsque la température de surchauffe
+est grande, les doses d'alumine se dissolvent plus facilement que
+lorsque la surchauffe est faible. La difficulté est de trouver un
+équilibre pour que l'alumine se dissolve suffisamment vite pour que la
 concentration dans le bain soit contrôlable, tout en maintenant une
 surchauffe aussi faible que possible pour minimiser les pertes
 énergétiques.
@@ -95,19 +95,24 @@ l'intervalle $[\tliq, \tliq + 0.86]$, la distribution de concentration
 est insensible à la valeur précise de $\tcrit$. Le rôle essentiel de
 la température dans ce cas-là est de bloquer la dissolution des
 particules lorsque la température $\temperature$ est inférieure à
-$\tliq$.
+$\tliq$. La valeur du paramètre $\tcrit$ devra être déterminée
+par des mesures expérimentales.
 
 Finalement, nous avons étudié l'effet de la chute gravitationnelle des
-particule dans le bain sur la distribution de la concentration
-d'alumine dissoute. La chute des particules apportent des variations
-notables de la concentration uniquement autour des points d'injection,
-qui sont de toute manière soumis à des fluctuations importantes, due
-aux injections qui interviennent à intervalles réguliers au cours du
-cycle global d'injection. De plus, les vitesses de chute des
+particules dans le bain sur la distribution de la concentration
+d'alumine dissoute. La chute des particules apporte des variations
+notables de la concentration uniquement autour des points
+d'injection. Ces régions sont soumisent à de fortes perturbations qui
+sont dues principalement aux injections qui interviennent à
+intervalles réguliers. Par exemple, le transfert de quantité de
+mouvement entre les doses de particules et le bain, lorsque celles-ci
+atteignent sa surface, est négligé. On s'attend donc à ce que le
+modèle de transport des particules d'alumine perde en précision à
+proximité des points d'injection. De plus, les vitesses de chute des
 particules sont très certainement surestimées dans notre
 modèle. L'écoulement dans le canal central, dans lequel ont lieu les
 injections de particules, est turbulent. Cet écoulement turbulent se
-traduit par une viscosité effective ressenties par les particules qui
+traduit par une viscosité effective ressentie par les particules qui
 est certainement supérieure à la viscosité laminaire de
 l'électrolyte. Les profondeurs maximales atteintes par les particules
 dans ce cas sont alors de l'ordre du millimètre ou inférieure. En
@@ -116,29 +121,15 @@ de temps de latence, nous pouvons raisonnablement négliger la chute
 des particules dans le bain électrolytique et son effet sur la
 distribution de la concentration de l'alumine.
 
-Dans ce chapitre \ref{chap:populations}, nous avons supposé que la
-température de liquidus de l'électrolyte $\tliq$ ne dépend pas de la
-chimie du bain, et en particulier de la concentration d'alumine
-dissoute, que la concentration de saturation de l'alumine dissoute ne
-dépend ni de la chimie du bain ni de la température de celui-ci, et
-finalement que l'enthalpie de dissolution
+Remarquons finalement que dans ce chapitre \ref{chap:populations},
+nous avons supposé que la température de liquidus de l'électrolyte
+$\tliq$ ne dépend pas de la chimie du bain, et en particulier de la
+concentration d'alumine dissoute, que la concentration de saturation
+de l'alumine dissoute ne dépend ni de la chimie du bain ni de la
+température de celui-ci, et finalement que l'enthalpie de dissolution
 $\aluminadissolutionenthalpy$ ainsi que la vitesse de dissolution
-$\dissolutionrate$ de dépendent pas de la chimie du bain. Ces
+$\dissolutionrate$ ne dépendent pas de la chimie du bain. Ces
 hypothèses sont valides pour autant que le système s'écarte peu des
 conditions d'exploitations idéales. Ce n'est bien entendu pas le cas
 lorsqu'on considère une cuve d'électrolyse industrielle qui subit de
-nombreuses perturbations et peut traverser des phases
-d'instabilité. Un sujet de recherche futur consiste à prendre en
-comptes ces différentes dépendance dans le modèle de transport et
-dissolution d'alumine dans le bain électrolytique.
-
-
-% future work:
-% - agregats
-% - conditions de bord pour la temperature
-% - csat(T, Chimie), Tliq(al2o3, Chimie), K(Chimie),
-%   deltaHdiss(Chimie), Chimie
-% - Reaction d'electrolyse comme condition de bord,
-% - Densite de courant dependant de sigma(al2o3, chimie)
-% - Reaction d'electrolyse au bord dependant de \sigma(al2o3, chimie)
-%
+nombreuses perturbations et peut traverser des phases d'instabilité.

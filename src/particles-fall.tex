@@ -1,7 +1,7 @@
 La densité de l'alumine $\aluminadensity$ qui constitue les particules
-est de \num{3960}\si{\kilo\gram\per\cubic\meter} soit environ deux
+est de \num{3960} \si{\kilo\gram\per\cubic\meter} soit environ deux
 fois supérieure à celle du bain électrolytique $\electrolytedensity$,
-qui est de \num{2130}\si{\kilo\gram\per\cubic\meter}. Une particule
+qui est de \num{2130} \si{\kilo\gram\per\cubic\meter}. Une particule
 d'alumine placée dans un bain électrolytique animé par un écoulement
 stationnaire subit ainsi l'effet de trois forces
 distinctes. D'une part, cette particule est freinée dans le fluide
@@ -146,8 +146,8 @@ considérons des viscosités dans l'intervalle $[\num{2e-3}, \num{1}]$.
 
 Les doses de particules d'alumine ne sont en général pas délicatement
 déposées à la surface du bain; les particules sont lâchées depuis une
-hauteur qui varie entre \num{20}\si{\centi\meter} et
-\num{40}\si{\centi\meter} par rapport à la surface du bain. On
+hauteur qui varie entre \num{20} \si{\centi\meter} et
+\num{40} \si{\centi\meter} par rapport à la surface du bain. On
 modélise cette condition à l'aide de la vitesse initiale $v_0$. La
 vitesse verticale atteinte par une masse en chute libre dans le champ
 de pesanteur terrestre sur une hauteur $L$ et initialement au repos
@@ -173,35 +173,35 @@ considérerons des vitesses initiales $v_0$ entre \num{0} et
   \end{center}
 \end{table}
 
-Le tableau \ref{tab:fall-results} présente la profondeur
-terminale de la particule d'alumine donnée par la relation
+Le tableau \ref{tab:fall-results} présente la profondeur terminale de
+la particule d'alumine donnée par la relation
 (\ref{eq:particle-terminal-position}) en fonction des conditions
 initiales $r_0$, $v_0$ et la viscosité dynamique du fluide
-$\electrolyteviscosity$. Lorsque $\electrolyteviscosity =
-\num{2e-3}$, c'est-à-dire que la particule est placée dans un fluide
-immobile, une profondeur maximale de \num{4} \si{\centi\meter}
-environ est atteinte lorsque $r_0 = \num{80}$ \si{\micro\meter} et
-avec une vitesse initiale $v_0 = \num{3}$ \si{\meter\per\second}. La
-profondeur maximale lorsque le rayon initial est inférieur à
-\num{80} \si{\micro\meter} est systématiquement inférieure à
-\num{1} \si{\centi\meter}.
+$\electrolyteviscosity$. Lorsque $\electrolyteviscosity = \num{2e-3}$,
+c'est-à-dire que la particule est placée dans un fluide immobile, une
+profondeur maximale de \num{4} \si{\centi\meter} environ est atteinte
+lorsque $r_0 = \num{80}$ \si{\micro\meter} et avec une vitesse
+initiale $v_0 = \num{3}$ \si{\meter\per\second}. La profondeur
+maximale lorsque le rayon initial est inférieur à \num{80}
+\si{\micro\meter} est systématiquement inférieure à \num{1}
+\si{\centi\meter}.
 
 Dans cette section on a donné une expression exacte pour la position
 de la particule lorsque celle-ci est complètement dissoute,
-c'est-à-dire lorsque $t = T$. La position de la particule
-$x(t)$ pour tout $t \in(0, T)$ nécessite l'intégration de l'équation
-différentielle linéaire non-homogène et à coefficients variables
-(\ref{eq:simple-mvt}). Nous ne chercherons pas ici à expliciter la
-solution exacte pour $x(t)$. Cependant, il est facile d'obtenir une
-approximation numérique de $x$ à l'aide des intégrateur offerts par
-MatLAB\textregistered, \texttt{ode45} par exemple. La figure
-\ref{fig:particle-trajectories} présente les trajectoires adoptées
-par trois particules de rayon initiaux différents. La figure
+c'est-à-dire lorsque $t = T$ (voir (\ref{eq:final-time})). La position
+de la particule $x(t)$ pour tout $t \in(0, T)$ nécessite l'intégration
+de l'équation différentielle linéaire non-homogène et à coefficients
+variables (\ref{eq:simple-mvt}). Nous ne chercherons pas ici à
+expliciter la solution exacte pour $x(t)$. Cependant, il est facile
+d'obtenir une approximation numérique de $x$ à l'aide des intégrateur
+offerts par MatLAB\textregistered, \texttt{ode45} par exemple. La
+figure \ref{fig:particle-trajectories} présente les trajectoires
+adoptées par trois particules de rayon initiaux différents. La figure
 \ref{fig:particle-trajectories-a} montre la trajectoire en entier
-jusqu'à dissolution complète de chaque particule, tandis que la
-figure \ref{fig:particle-trajectories-b} illustre la phase
-d'accélération initiale de chaque particule qui succède
-immédiatement à la condition initiale.
+jusqu'à dissolution complète de chaque particule, tandis que la figure
+\ref{fig:particle-trajectories-b} illustre la phase d'accélération
+initiale de chaque particule qui succède immédiatement à la condition
+initiale.
 
 \begin{figure}
  \begin{center}
@@ -230,8 +230,8 @@ premièrement de la validité de la loi de Stokes pour la force de traînée,
 deuxièmement de l'importance de la vitesse initiale de la particule
 sur la profondeur terminale de la particule, troisièmement du temps
 caractéristique pour qu'une particule soit emportée par un fluide en
-mouvement laminaire et quatrièmement de la validité de l'hypothèse de
-supposer un fluide au repos dans le bain d'une cuve d'électrolyse.
+mouvement laminaire et quatrièmement de la validité de l'hypothèse qui
+suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
 
 %%\begin{remarque}
 %%  (Sur le fait qu'on peut negliger le terme de reaction dans
@@ -257,12 +257,12 @@ supposer un fluide au repos dans le bain d'une cuve d'électrolyse.
       \electrolytedensity}{\aluminadensity} r_0^2.
   \end{equation*}
   Pour une particule de rayon initial $r_0 = \num{80}$
-  \si{\micro\meter}, cette vitesse initiales est de $v_0 = \num{14.5}$
+  \si{\micro\meter}, cette vitesse initiale est de $v_0 = \num{14.5}$
   \si{\meter\per\second}, ce qui correspond à une hauteur de chute
-  libre d'environ \num{10} \si{\meter}. On conclut que, dans une cuve
-  d'électrolyse industrielle typique, la vitesse initiales des
-  particules suffisamment dispersées qui pénètrent dans le bain est
-  négligeable sur leur profondeur de pénétration.
+  libre d'environ \num{10} \si{\meter}. On conclut à contrario que,
+  dans une cuve d'électrolyse industrielle typique, la vitesse
+  initiales des particules suffisamment dispersées qui pénètrent dans
+  le bain est négligeable sur leur profondeur de pénétration.
 \end{remarque}
 
 \begin{remarque}
@@ -366,7 +366,7 @@ supposer un fluide au repos dans le bain d'une cuve d'électrolyse.
   trois dernières colonnes à droite du tableau
   \ref{tab:fall-results}. Dans ce cas, on constate que la profondeur
   maximale est systématiquement de l'ordre de
-  \num{1}\si{\milli\meter}, ou inférieure.
+  \num{1} \si{\milli\meter}, ou inférieure.
 
   On conclut que la gravité a un effet négligeable sur le transport de
   particules individuelles dans une cuve d'électrolyse. Dans la suite

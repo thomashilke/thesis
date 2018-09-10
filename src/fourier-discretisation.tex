@@ -4,24 +4,25 @@ l'écoulement $(u^0, p^0)$ et les coefficients des harmoniques $(u^k,
 p^k)$.
 
 Soit un nombre réel $h > 0$ et soit $\mathcal M_h$ une triangulation
-du domaine $\Lambda$ de $\mathbb R^2$ telle que $\diam(K)\leq h$
+du domaine $\Lambda$ de $\mathbb R^2$ telle que $\diam(K)\leq h$,
 $\forall K\in \mathcal M_h$. On introduit maintenant l'espace
 éléments finis $V_h$ défini par
 \begin{equation}
   V_h = \cparent{v\in C^0(\Lambda)\mid v|_K \in \mathbb
-    P_1(K)\ \forall K\in\mathcal M_h}
+    P_1(K)\ \forall K\in\mathcal M_h},
 \end{equation}
-ainsi que l'espace enrichi par une fonction bulle
+avec $\mathbb P_1(K)$ l'espace des polynômes de degré 1 sur le
+triangle $K$. On définit aussi l'espace enrichi par une fonction bulle
 \begin{equation}
-  B_h = \cparent{v \in C^0(\Lambda)^2 \mid v|_K \in P_1^2\oplus
+  B_h = \cparent{v \in C^0(\Lambda)^2 \mid v|_K \in \mathbb P_1^2\oplus
     B_K\ \forall K\in\mathcal M_h} \cap H_0^1(\Lambda)^2
 \end{equation}
 où $B_K$ est engendré par la fonction $27 \lambda_1^K
-\lambda_2^K\lambda_3^K$, les $\lambda_i^K$, $i = 1,2,3$ étant les
+\lambda_2^K\lambda_3^K$, les $\lambda_i^K$, $i = 1,2,3$, étant les
 trois fonctions barycentriques du triangle $K$.
 
 \paragraph{Mode fondamental}
-La méthode d'éléments finis correspondant à
+La méthode d'éléments finis correspondant à la discrétisation des équations
 (\ref{eq:fourier-weak-fund-1}), (\ref{eq:fourier-weak-fund-2})
 consiste à chercher $(u^0_h, p^0_h)\in B_h\times(V_h \cap
 L^2_0(\Lambda))$ tels que, pour tout $(v_h, q_h)\in \mathcal
@@ -45,7 +46,7 @@ en ajoutant l'équation
 \begin{equation}
 \int_\Lambda p^0_h = 0
 \end{equation}
-et en ajoutant un multiplicateur de Lagrange. Il est alors équivalent
+et en ajoutant un multiplicateur de Lagrange pour la fonction test $q_h$. Il est alors équivalent
 de chercher $(u^0_h, p^0_h)\in B_h\times V_h$ et
 $\lambda\in\mathbb R$ tels que, pour tout $(v_h, q_h)\in
 B_h\times V_h$ on ait
@@ -78,7 +79,7 @@ discrétisé consiste à chercher les fonctions $(u^k_h, p^k_h) \in
 \end{align}
 pour tout $(v_{1,h}, v_{3,h}, v_{3,h}, q_h) \in (V_h\cap
 H_0^1(\Lambda))^3\times V_h$. Ici $\delta > 0$ et le terme de
-stabilisation dans (\ref{eq:fourier-harm-discrete-2}) est justifié
+stabilisation dans (\ref{eq:fourier-harm-discrete-2}) qui est justifié
 par le fait que, d'après (\ref{eq:fourier-coeff-def-3}),
 \begin{equation}
   \Delta P = \Delta p^0 + \sum_{k > 0} (\Delta p^k -
@@ -91,22 +92,24 @@ maillage $\mathcal M_h$. Les intégrales qui interviennent dans les
 définitions (\ref{eq:f-1}), (\ref{eq:f-2}) et (\ref{eq:f-3}) sont
 approchées par une formule de Simpson sur une subdivision uniforme de
 l'intervalle $[0, \thickness]$. Le nombre de subdivision sera choisi
-de sorte à ce que cette erreur de quadrature soit négligeable.
+de sorte à ce que cette erreur de quadrature soit négligeable par
+rapport aux erreurs introduites par les discrétisations éléments
+finis et la troncature de la série de Fourier.
 
 \paragraph{Résolution des systèmes linéaires}
 Les systèmes linéaires issus des formulations
 (\ref{eq:fourier-fund-discrete-1-prat})-(\ref{eq:fourier-fund-discrete-3-prat})
 et(\ref{eq:fourier-harm-discrete-1}),(\ref{eq:fourier-harm-discrete-2})
-sont résolu avec la méthode GMRES préconditionnée par ILU(2). Le
+sont résolus avec la méthode GMRES préconditionnée par ILU(2). Le
 critère d'arrêt de l'itération de GMRES est:
 \begin{equation}
-  \frac{\norm{Ax^n - b}_{l^2}}{\norm{Ax^0 - b}_{l^2}} \leq \num{1e-10},
+  \frac{\norm{P^{-1}\parent{Ax^n - b}}_{l^2}}{\norm{P^{-1}\parent{Ax^0 - b}}_{l^2}} \leq \num{1e-10},
 \end{equation}
-où $A$ est la matrice préconditionnée associée à la forme bilinéaire
-d'une formulation
-variationnelle, $b$ le vecteur du membre de droite associé à la
-forme linéaire, et $x^n$ les valeurs de l'approximation de la
-solution $x$ aux itérations successives de l'algorithme GMRES.
+où $A$ est la matrice associée à la forme bilinéaire d'une formulation
+variationnelle, $P$ le préconditionneur ILU(2) associé à la matrice
+$A$, $b$ le vecteur du membre de droite associé à la forme linéaire et
+$x^n$ les valeurs de l'approximation de la solution $x$ aux itérations
+successives de l'algorithme GMRES.
 
 \paragraph{Reconstruction de la solution}
 On se fixe un entier $K > 0$, on suppose avoir calculé $u^k$, $p^k$, $k
