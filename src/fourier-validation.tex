@@ -211,7 +211,7 @@ l'erreur $e_h^\mathrm{SF}$ cesse de décroître signicativement lorsque $K \geq 
 tandis que lorsque $\thickness = 0.02$ il faut que $K \geq 7$ pour que
 l'erreur $e_h^\mathrm{SF}$ cesse de décroître signicativement.
 
-\begin{table}[t]
+\begin{table}
   \caption{Erreur $e_{h,K}^\mathrm{SF}$ entre la solution exacte et la
     série de Fourier discrète tronquée à l'ordre $K$.}
   \label{tab:h-k-convergence}
@@ -236,15 +236,20 @@ l'erreur $e_h^\mathrm{SF}$ cesse de décroître signicativement.
 
 \subsubsection{Convergence en fonction du maillage}
 On s'intéresse à la convergence de l'erreur $e_{h,K}^\mathrm{SF}$ en
-fonction de la taille de maille $h$ de la subdivision $\mathcal M_h$ du domaine
-$\Lambda$. Le tableau \ref{tab:n-h-convergence} donne les valeurs de
-l'erreur pour différentes tailles de maille $h$ et différentes
-épaisseurs $\thickness$ du domaine $\Omega$.
+fonction de la taille de maille $h$ de la subdivision $\mathcal M_h$
+du domaine $\Lambda$. Le tableau \ref{tab:n-h-convergence} donne les
+valeurs de l'erreur pour différentes tailles de maille $h$ et
+différentes épaisseurs $\thickness$ du domaine $\Omega$.  Lorsque le
+domaine est isotrope, raffiner le maillage de $\Lambda$ tend a
+diminuer l'erreur $e_{h, K}^{SF}$. Cependant, plus le domaine est
+anisotrope, plus l'erreur devient insensible au raffinement du
+maillage de $\Lambda$: lorsque $\thickness = \num{0.02}$,
+$e_{h,K}^{SF}$ est de l'ordre de \num{1e-4} quel que soit la valeur de
+$h$.
 
-\begin{table}[t]
-  \caption{Erreur $e_{h,K}^\mathrm{SF}$ en fonction de $h$ et de
-    la taille de maille $h$ et de l'épaisseur $\thickness$ lorsque $K
-    = 20$.}
+\begin{table}
+  \caption{Erreur $e_{h,K}^\mathrm{SF}$ en fonction de la taille de
+    maille $h$ et de l'épaisseur $\thickness$ lorsque $K = 20$.}
   \label{tab:n-h-convergence}
   \begin{center}
     \begin{tabular}{@{}rrrrrr@{}}
@@ -281,14 +286,18 @@ $\Omega$ présente une forte anisotropie.
   \begin{center}
     \input{../media/fourier/convergence/sf-convergence.tex}
     \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en fonction
-    de l'épaisseur $\thickness$ lorsque $K = 20$ et $h = 2/64$.}
+    de l'épaisseur $\thickness$ lorsque $K = 20$ et $h = 2/64$. Dans
+    le cas des calculs de $e_h^\mathrm{S3D}$, la taille de maille
+    verticale est de $\thickness/64$.}
     \label{fig:e-sf-e-s3d-convergence}
   \end{center}
 \end{figure}
 
 \begin{table}[t!]
-  \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en fonction
-    de l'épaisseur $\thickness$ lorsque $K = 20$ et $h = 2/64$.}
+  \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en
+    fonction de l'épaisseur $\thickness$ lorsque $K = 20$ et $h =
+    2/64$.  Dans le cas du calcul de $e_h^\mathrm{S3D}$, la taille de
+    maille verticale est de $\thickness/64$.}
   \label{tab:e-sf-e-s3d-convergence}
   \begin{center}
     \begin{tabular}{@{}rrrrrrrrrrr@{}}

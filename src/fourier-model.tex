@@ -506,10 +506,34 @@ x_2)\in \Lambda$, alors le problème (\ref{eq:abstr-weak-harm-1}),
     L^2_0(\Lambda)}$, et que la condition classique inf-sup sur la forme
   bilinéaire $b^k$ est satisfaite.
 
-  Les lemmes \ref{lem:1} et \ref{lem:2} avec l'hypothèse (\ref{eq:hypothesis}) montre
-  bien que $a^k$ est coercive sur $V_0$. D'autre part en utilisant
-  l'inégalité concernant la condition inf-sup dans $\mathbb R^2$ et si
-  $q\in L^2_0(\Lambda)$, on a que
+  Montrons tout d'abord que $\frac{\partial u_1}{\partial x_1} +
+  \frac{\partial u_2}{\partial x_2} + \parent{\beta^k}^2 u_3 = 0$,
+  c'est-à-dire que
+  \begin{equation}
+    \int_\Omega\parent{\frac{\partial u_1}{\partial x_1} +
+  \frac{\partial u_2}{\partial x_2} + \parent{\beta^k}^2 u_3}q =
+    0,\quad \forall q\in L^2(\Lambda).
+  \end{equation}
+  Remarquons que
+  \begin{equation}
+    \int_\Omega\parent{\frac{\partial u_1}{\partial x_1} +
+      \frac{\partial u_2}{\partial x_2} + \parent{\beta^k}^2 u_3}q =
+    b^k(u, q),
+  \end{equation}
+  et on sait déjà que $b^k(u, q) = 0$ $\forall q \in
+  L_0^2(\Lambda)$. De plus, on a que $b^k(u, q) = 0$ lorsque $q = 1$,
+  puisque
+  \begin{equation}
+    \int_\Lambda u_3  = 0 \quad \text{et}\quad \int_\Lambda
+    \frac{\partial u_1}{\partial x_1} + \frac{\partial u_2}{\partial
+      x_2} = 0.
+  \end{equation}
+
+  Ainsi le lemme \ref{lem:1} s'applique, et les lemmes \ref{lem:1} et
+  \ref{lem:2} avec l'hypothèse (\ref{eq:hypothesis}) montre bien que
+  $a^k$ est coercive sur $V_0$. D'autre part en utilisant l'inégalité
+  concernant la condition inf-sup dans $\mathbb R^2$ et si $q\in
+  L^2_0(\Lambda)$, on a que
   \begin{align*}
     \sup_{\norm{v}_{H^1_0}(\Lambda)^3 = 1} b^k(v,q) = &\sup_{\norm{v}_{H^1_0(\Lambda)^3} = 1} \int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} + \frac{\partial v_2}{\partial x_2} + \beta^k v_3}q\\
     \geq & \sup_{\norm{(v_1, v_2, 0)}_{H^1_0(\Lambda)^3} =
@@ -551,209 +575,3 @@ H^1_0(\Lambda)^2\times H^1_{0,0}(\Lambda)$. Cette fonction test est
 comprise dans (\ref{eq:fourier-weak-harm-v3-1}). D'autre part
 $(0,0,\gamma \psi)$ donne la même constante $C^k$ que la relation
 (\ref{eq:fourier-pressure-constant}).
-
-%%Deuxièmement, pour tout $k = 1, 2, \dots$, nous cherchons les
-%%fonctions $u_{1,k},u_{2,k},u_{3,k} \in H^1(\Lambda)$, $p_k \in
-%%L_0^2(\Lambda)$ et les nombres réels $C_k\in\mathbb R$ tels que
-%%\begin{align}
-%%  &\electrolyteviscosity \int_\Lambda \parent{\nabla u_{1,k}\cdot \nabla v_1 %
-%%                           + \parent{\beta^k}^2 u_{1,k}v_1}\,\mathrm dx_1\mathrm dx_2 %
-%%  - \int_\Lambda p_k\frac{\partial v_1}{\partial x_1}\,\mathrm dx_1\mathrm dx_2 %
-%%  = \int_\Lambda f_{1,k}v_1\mathrm dx_1\mathrm dx_2, \label{eq:stokes-fourier-weak-1}\\
-%%  %
-%%  &\electrolyteviscosity \int_\Lambda \parent{\nabla u_{2,k}\cdot \nabla v_2 %
-%%                           + \parent{\beta^k}^2 u_{2,k}v_2}\,\mathrm dx_1\mathrm dx_2 %
-%%  - \int_\Lambda p_k\frac{\partial v_2}{\partial x_2}\,\mathrm dx_1\mathrm dx_2 %
-%%  = \int_\Lambda f_{2,k}v_1\mathrm dx_1\mathrm dx_2, \label{eq:stokes-fourier-weak-2}\\
-%%  %
-%%  &\electrolyteviscosity \int_\Lambda \parent{\nabla u_{3,k}\cdot \nabla v_3 %
-%%                           + \parent{\beta^k}^2 u_{3,k}v_3}\,\mathrm dx_1\mathrm dx_2 %
-%%  - \int_\Lambda \parent{p_k + C_k}v_3\,\mathrm dx_1\mathrm dx_2 %
-%%  = \int_\Lambda f_{3,k}v_1\mathrm dx_1\mathrm dx_2, \label{eq:stokes-fourier-weak-3}\\
-%%  %
-%%  &\int_\Lambda \parent{\frac{\partial u_{1,k}}{\partial x_1} %
-%%                       + \frac{\partial u_{2,k}}{\partial x_2} + \beta^k u_{3,k}}q\,\mathrm dx_1\mathrm dx_2 %
-%%  %
-%%  = 0,\label{eq:stokes-fourier-weak-4}\\
-%%  %
-%%  &\int_\Lambda u_{3,k}\,\mathrm dx_1\mathrm dx_2 %
-%%  = 0, \label{eq:stokes-fourier-weak-5}
-%%\end{align}
-%%pour toute fonctions $v_1$, $v_2$, $v_3$ $\in H^1(\Lambda)$, $q \in
-%%L_0^2(\Lambda)$. Il est bien connu que la formulation variationnelle
-%%du problème de Stokes
-%%(\ref{eq:stokes-weak-1}),(\ref{eq:stokes-weak-2}) dans $\Lambda$ admet
-%%une solution unique \cite{Temam1977}. La proposition qui suit établi l'existence et
-%%l'unicité de la solution du problème variationnel
-%%(\ref{eq:stokes-fourier-weak-1})-(\ref{eq:stokes-fourier-weak-5}) pour
-%%chacun des coefficients de la série de Fourier.
-
-%%\begin{remarque}
-%%  Si la viscosité du fluide est constante et isotrope,
-%%  c'est-à-dire que le tenseur de viscosité $\mu_{ij}(x_1, x_2) =
-%%  \mu_0$, le problème de Stokes (\ref{eq:stokes-periodic-1}),
-%%  (\ref{eq:stokes-periodic-2}) se réécrit sous la forme
-%%  \begin{align}
-%%    & -\mu_0 \Delta U + \nabla P = F,\\
-%%    & \div(U) = 0.
-%%  \end{align}
-%%\end{remarque}
-
-%%\paragraph{Formulation avec viscosité tensorielle variable}
-%%Considérons maintenant le problème de Stokes avec une viscosité
-%%tensorielle et variable. On suppose que le tenseur de viscosité est
-%%symétrique et est indépendant de la coordonnée verticale $x_3$,
-%%c'est-à-dire que $\mu_{i,j} = \mu_{i,j}(x_1, x_2)$, $i,j = 1,2,3$. On
-%%cherche la vitesse $u$ et la pression $p$ qui vérifient:
-%%\begin{align}
-%%  &-\div\parent{2\mu\otimes \epsilon(u)} + \nabla p = f, %
-%%  \quad \text{dans } \Omega,\\
-%%  %
-%%  &\div(u) = 0, %
-%%  \quad \text{dans } \Omega,
-%%\end{align}
-%%avec les conditions aux limites
-%%\begin{align}
-%%  &u_1 = u_2 = 0, &\quad \text{ sur } \partial \Lambda \times
-%%  (0,\thickness),\\
-%%  &u_3 = 0, &\quad \text{ sur }  \Lambda \times \cparent{0,\thickness},\\
-%%  &\mu_{13}\parent{\frac{\partial u_1}{\partial x_3} + \frac{\partial u_3}{\partial
-%%      x_1}} = 0, &\quad \text{ sur }  \Lambda \times \cparent{0,\thickness},\\
-%%  &\mu_{23}\parent{\frac{\partial u_2}{\partial x_3} + \frac{\partial u_3}{\partial
-%%  x_2}} = 0, &\quad \text{ sur }  \Lambda \times \cparent{0,\thickness}.
-%%\end{align}
-%%Ici on a noté
-%%\begin{equation}
-%%  [\mu \otimes \straintensor(u)]_{i,j} %
-%%  = \frac{1}{2}\mu_{i,j}\parent{\frac{\partial u_i}{\partial x_j} %
-%%                              + \frac{\partial u_j}{\partial x_i}},%
-%%  \quad 1\leq i,j\leq 3.
-%%\end{equation}
-%%En reprenant les notations introduites dans la section
-%%(\ref{sec:fourier}), on obtient pour $\beta > 0$, et en omettant
-%%l'indice du mode de Fourier $k$:
-%%\begin{align}
-%%  - 2\frac{\partial}{\partial x_1}%
-%%  \parent{\mu_{1,1}\frac{\partial u_1}{\partial x_1}} %
-%%  -  \frac{\partial}{\partial x_2}%
-%%  \parent{\mu_{1,2}\parent{\frac{\partial u_1}{\partial x_2} %
-%%                           + \frac{\partial u_2}{\partial x_1}}} %
-%%  - \mu_{1,3}\parent{- \beta^2 u_1 %
-%%                     + \beta\frac{\partial u_3}{\partial x_1}} %
-%%  + \frac{\partial p}{\partial x_1} %
-%%  &= f_{1}, \label{eq:stokes-fourier-visc-1}\\
-%%  %
-%%  - \frac{\partial }{\partial x_1}%
-%%  \parent{\mu_{2,1}\parent{\frac{\partial u_2}{\partial x_1} %
-%%                           + \frac{\partial u_1}{\partial x_2}}}
-%%  - 2\frac{\partial}{\partial x_2}%
-%%  \parent{\mu_{2,2}\frac{\partial u_2}{\partial x_2}}
-%%  - \mu_{2,3}\parent{- \beta^2 u_2 %
-%%                     + \beta\frac{\partial u_3}{\partial x_2}} %
-%%  + \frac{\partial p}{\partial x_2} %
-%%  &= f_{2}, \label{eq:stokes-fourier-visc-2}\\
-%%  %
-%%  - \frac{\partial}{\partial x_1}%
-%%  \parent{\mu_{3,1}\parent{ \frac{\partial u_3}{\partial x_1} %
-%%                           - \beta u_1}} %
-%%  - \frac{\partial }{\partial x_2}%
-%%  \parent{\mu_{3,2}\parent{ \frac{\partial u_3}{\partial x_2} %
-%%                           - \beta u_2}} %
-%%  + 2\mu_{3,3}\beta^2 u_3 %
-%%  - \beta p %
-%%  &= f_{3}. \label{eq:stokes-fourier-visc-3}
-%%\end{align}
-%%
-%%En définissant maintenant le tenseur $3\times 3$ des déformations:
-%%\begin{equation}\label{eq:stokes-fourier-strain-tensor-3d}
-%%  E(u) = \frac{1}{2} \begin{bmatrix}
-%%    2\displaystyle\frac{\partial u_1}{\partial x_1} %
-%%    &  \displaystyle\frac{\partial u_1}{\partial x_1} + \displaystyle\frac{\partial u_2}{\partial x_1} %
-%%    & - \beta u_1 + \displaystyle\frac{\partial u_3}{\partial x_1}\\
-%%    %
-%%    \displaystyle\frac{\partial u_1}{\partial x_2}+ \displaystyle\frac{\partial u_2}{\partial x_1} %
-%%    & 2 \displaystyle\frac{\partial u_2}{\partial x_2} %
-%%    & -\beta u_2 + \displaystyle\frac{\partial u_3}{\partial x_2} \\
-%%    %
-%%    - \beta u_1 + \displaystyle\frac{\partial u_3}{\partial x_1} %
-%%    & - \beta u_2 + \displaystyle\frac{\partial u_3}{\partial x_2} & 2\beta u_3
-%%  \end{bmatrix}
-%%\end{equation}
-%%et celui des viscosités:
-%%\begin{equation}\label{eq:stokes-fourier-visc-tensor-3d}
-%%\mu = \begin{bmatrix}
-%%  \mu_{1,1} & \mu_{1,2} & \mu_{1,3} \\
-%%  \mu_{2,1} & \mu_{2,2} & \mu_{2,3} \\
-%%  \mu_{3,1} & \mu_{3,2} & \mu_{3,3}
-%%\end{bmatrix}
-%%\end{equation}
-%%et en multipliant (\ref{eq:stokes-fourier-visc-1}),
-%%(\ref{eq:stokes-fourier-visc-2}), (\ref{eq:stokes-fourier-visc-3}) par
-%%$v_1$, $v_2$, $v_3$, puis en intégrant par partie, on obtient:
-%%\begin{align}
-%%  \begin{aligned}[b]
-%%    \int_\Lambda 2\mu\otimes E(u):E(v)\,\mathrm dx_1\mathrm dx_2 %
-%%    &- \int_\Lambda p\parent{\frac{\partial v_1}{\partial x_1}
-%%                            + \frac{\partial v_2}{\partial x_2}}\,\mathrm dx_1\mathrm dx_2 \\
-%%    &- \beta \int_\Lambda \parent{p + C}v_3\,\mathrm dx_1\mathrm dx_2
-%%  \end{aligned}
-%%  &= \int_\Lambda f\cdot v\,\mathrm dx_1\mathrm dx_2,\label{eq:stokes-fourier-visc-weak-1}\\
-%%  %
-%%  \int_\Lambda \parent{\frac{\partial u_1}{\partial x_1} %
-%%    + \frac{\partial u_2}{\partial x_2}}q\,\mathrm dx_1\mathrm dx_2 %
-%%  + \beta \int_\Lambda u_3 q \,\mathrm dx_1\mathrm dx_2 %
-%%  &= 0,\label{eq:stokes-fourier-visc-weak-2}\\
-%%  %
-%%  \int_\Lambda u_3 \,\mathrm dx_1\mathrm dx_2 %
-%%  &= 0.\label{eq:stokes-fourier-visc-weak-3}
-%%\end{align}
-%%
-%%\begin{remarque}
-%%Le système d'équations
-%%(\ref{eq:stokes-fourier-visc-weak-1})-(\ref{eq:stokes-fourier-visc-weak-3})
-%%permet de traiter le cas ``historique'':
-%%\begin{equation}
-%%  \mu = \begin{bmatrix}
-%%    10 & 10 & 0.5\\
-%%    10 & 10 & 0.5\\
-%%    0.5 & 0.5 & 1
-%%  \end{bmatrix}.
-%%\end{equation}
-%%\end{remarque}
-%%
-%%\begin{remarque}
-%%  Le mode fondamental $k = 0$ consiste à chercher  $u_0\in\parent{H_0^1(\Lambda)}^2$, $p_0\in L_0^2(\Lambda)$, tels que
-%%pour tout $v\in H_0^1(\Lambda)^2$ et $q\in L_0^2(\Lambda)$:
-%%\begin{align}
-%%  \int_\Lambda 2\tilde\mu\otimes \tilde \straintensor(u_0):\tilde \straintensor(v)\,\mathrm dx_1\mathrm dx_2 %
-%%  - \int_\Lambda p\parent{\frac{\partial v_1}{\partial x_1} %
-%%                          + \frac{\partial v_2}{\partial x_2}}\,\mathrm dx_1\mathrm dx_2 %
-%%  &= \int_\Lambda f\cdot v\,\mathrm dx_1\mathrm dx_2,\\
-%%  %
-%%  \int_\Lambda \parent{\frac{\partial u_1}{\partial x_1} %
-%%    + \frac{\partial u_2}{\partial x_2}}q \,\mathrm dx_1\mathrm dx_2 %
-%%  &= 0,
-%%\end{align}
-%%avec:
-%%\begin{equation}\label{eq:stokes-fourier-strain-tensor-2d}
-%%  \tilde \straintensor(u) = \frac{1}{2}\begin{bmatrix}
-%%    2 \displaystyle\frac{\partial u_1}{\partial x_1} %
-%%    & \displaystyle\frac{\partial u_1}{\partial x_2} + \displaystyle\frac{\partial u_2}{\partial x_1}\\
-%%    %
-%%    \displaystyle\frac{\partial u_1}{\partial x_2} + \displaystyle\frac{\partial u_2}{\partial x_1} %
-%%    & 2 \frac{\partial u_2}{\partial x_2}
-%%  \end{bmatrix}
-%%\end{equation}
-%%et:
-%%\begin{equation}\label{eq:stokes-fourier-visc-tensor-2d}
-%%\tilde \mu = \begin{bmatrix}
-%%  \mu_{1,1} & \mu_{1,2}\\
-%%  \mu_{2,1} & \mu_{2,2}
-%%\end{bmatrix}.
-%%\end{equation}
-%%On trouvera ci-dessous une démonstration plus simple que celle faite
-%%pour démontrer la proposition \ref{prop:existance-unicite-1} de la
-%%section \ref{sec:stokes-fourier-weak}.
-%%\end{remarque}
-
-%\input{fourier-proposition-2.tex}

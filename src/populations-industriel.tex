@@ -199,7 +199,7 @@ stationnaire proposé par S. Steiner \cite{Steiner2009}, J. Rochat
 \cite{Rochat2016} déjà introduit dans la section
 \ref{sec:populations-introduction}. La figure \ref{fig:ap32-flow-acd}
 représente la vitesse d'écoulement ainsi calculée par le logiciel
-\citealucell dans le bain électrolytique de la cuve AP32, dans
+\citealucell{} dans le bain électrolytique de la cuve AP32, dans
 l'ACD. Lorsque la densité de courant électrique est répartie
 uniformément sur toutes les anodes, l'écoulement dans les fluides
 forme deux tourbillons principaux qui tournent en sens opposés. Deux
@@ -488,15 +488,6 @@ unités physique sont rapportées dans la table
 \ref{tab:dissolution-physical-parameters}.
 % paramètres numérique. (deltat, maillage, deltar, N_r)
 
-\begin{figure}[t]
-  \begin{center}
-    \includegraphics[width=\rasterimagewidth]{../media/populations/ap32-mesh-components/print/bath-mesh.png}
-    \caption{Aperçu du maillage du domaine occupé par le bain
-      électrolytique dans la cuve AP32.}
-    \label{fig:bath-mesh}
-  \end{center}
-\end{figure}
-
 \paragraph{Paramètres de discrétisation}
 Le maillage du domaine $\Omega$ est obtenu en même temps que les
 champs $u$ et $j$ par la méthode déjà évoquée plus haut proposée par
@@ -512,6 +503,14 @@ et $\dr = \num{40}$ \si{\micro\meter}. Enfin on fixe $\dt = 1$
 \si{\second} et $T = \num{10000}$ \si{\second}, le temps auquel on
 veut évaluer la concentration.
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\rasterimagewidth]{../media/populations/ap32-mesh-components/print/bath-mesh.png}
+    \caption{Aperçu du maillage du domaine occupé par le bain
+      électrolytique dans la cuve AP32.}
+    \label{fig:bath-mesh}
+  \end{center}
+\end{figure}
 
 \paragraph{Solution de référence} Afin d'évaluer l'effet de la
 température de l'électrolyte sur la dissolution de la poudre
@@ -566,17 +565,6 @@ séparés par la période du cycle d'injection global $P$ est inférieure
 à \num{1}\%. Pour tous les calculs présentés dans cette partie, la
 solution satisfait ce critère pour $T = \num{10000}$ \si{\second}.
 
-\begin{figure}
-  \begin{center}
-    \input{../media/populations/variances/variance-control.tex}
-    \caption{Évolution de $\Var_\concentration$ au cours du temps sur
-      l'intervalle $[0, T]$ dans le bain électrolytique de la cuve
-      AP32 lorsque la température n'est pas prise en compte dans la
-      vitesse de dissolution des particules.}
-    \label{fig:alumin-control-var}
-  \end{center}
-\end{figure}
-
 La figure \ref{fig:alumin-control-var} représente l'évolution de
 la variance de la concentration au cours du temps. On remarque une
 phase initiale lorsque $t\in[0,500]$, au cours de laquelle la variance
@@ -595,6 +583,17 @@ dans l'électrolyte. Cet effet se traduit par un accroissement de la
 variance de la concentration immédiatement après l'injection d'une
 dose, puis par une décroissance de la variance.
 
+\begin{figure}
+  \begin{center}
+    \input{../media/populations/variances/variance-control.tex}
+    \caption{Évolution de $\Var_\concentration$ au cours du temps sur
+      l'intervalle $[0, T]$ dans le bain électrolytique de la cuve
+      AP32 lorsque la température n'est pas prise en compte dans la
+      vitesse de dissolution des particules.}
+    \label{fig:alumin-control-var}
+  \end{center}
+\end{figure}
+
 Cependant, ces variations de la concentration dans l'état
 périodique sont très localisées autour des points d'injection. Dans
 le reste du bain électrolytique, les variations de la concentration
@@ -609,7 +608,7 @@ auquel la solution est évaluée correspond donc à environ \num{51}
 périodes du cycle d'injection global, sans compter la phase
 transitoire initiale de \num{64} \si{\second}.
 
-\begin{figure}[h]
+\begin{figure}
   \begin{center}
     \begin{tikzpicture}
       \begin{axis}[

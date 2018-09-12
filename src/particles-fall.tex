@@ -101,9 +101,15 @@ obtenons
   \electrolytedensity}\frac{r_0^4}{3\dissolutionrate}-\aluminadensity\frac{4}{3}\int_0^T\parent{r_0^2
 - 2\dissolutionrate t}\frac{\mathrm d^2}{\mathrm dt^2}x(t)\,\intd{t}.
 \end{equation}
-En intégrant le dernier terme de l'équation
-(\ref{eq:mvt-integration-1}) par partie, nous obtenons finalement la
-profondeur terminale de la particule au moment de sa dissolution complète
+Le dernier terme de l'équation (\ref{eq:mvt-integration-1}) s'intègre
+par partie,
+\begin{equation}
+\int_0^T\parent{r_0^2 - 2\dissolutionrate t}\frac{\mathrm d^2}{\mathrm
+dx^2}x(t)\intd{t} = \parent{r_0^2 - 2\dissolutionrate T}x'(T) +
+2\dissolutionrate x(T) = 2\dissolutionrate x(T),
+\end{equation}
+et nous obtenons finalement la profondeur terminale de la particule au
+moment de sa dissolution complète
 \begin{equation}\label{eq:particle-terminal-position}
 x(T) = \frac{g\parent{\aluminadensity - \electrolytedensity
     }}{\dissolutionrate
@@ -112,6 +118,11 @@ x(T) = \frac{g\parent{\aluminadensity - \electrolytedensity
   v_0}{9\electrolyteviscosity - 2\aluminadensity \dissolutionrate} r_0^2.
 \end{equation}
 
+Les valeurs des paramètres physiques qui correspondent à une particule
+d'alumine dans un bain et qui interviennent dans l'équation
+(\ref{eq:particle-terminal-position}) sont synthétisées dans le
+tableau \ref{tab:fall-physical-parameters}.
+
 \begin{table}
   \begin{center}
     \caption{Paramètres physiques qui interviennent dans la chute
@@ -119,30 +130,27 @@ x(T) = \frac{g\parent{\aluminadensity - \electrolytedensity
     \label{tab:fall-physical-parameters}
     \begin{tabularx}{\textwidth}{@{}lllX@{}}
       \toprule
-      Quantité                & Valeur       & Unités                                      & Description \\
+      Quantité                & Valeur       & Unités                               & Description \\
       \midrule
-      $\electrolytedensity$   & \num{2130}   & \si{\kg\per\cubic\meter}                    & Masse volumique du bain électrolytique \\
-      $\aluminadensity$       & \num{3960}   & \si{\kg\per\cubic\meter}                    & Masse volumique de l'oxyde d'aluminium \\
-      $g$                     & \num{9.81}   & \si{\meter\per\square\second}               & Accélération de la gravité terrestre\\
-      $\dissolutionrate$      & \num{0.5e-9} & \si{\square\meter\per\second}               & Taux de dissolution de l'alumine \\
-      $\electrolyteviscosity$ & \num{2e-3}   & \si{\kilo\gram\per\meter\per\second}        & Viscosité dynamique du bain électrolytique \\
+      $\electrolytedensity$   & \num{2130}   & \si{\kg\per\cubic\meter}             & Masse volumique du bain électrolytique \\
+      $\aluminadensity$       & \num{3960}   & \si{\kg\per\cubic\meter}             & Masse volumique de l'oxyde d'aluminium \\
+      $g$                     & \num{9.81}   & \si{\meter\per\square\second}        & Accélération de la gravité terrestre\\
+      $\dissolutionrate$      & \num{0.5e-9} & \si{\square\meter\per\second}        & Taux de dissolution de l'alumine \\
+      $\electrolyteviscosity$ & \num{2e-3}   & \si{\kilo\gram\per\meter\per\second} & Viscosité dynamique du bain électrolytique \\
       \bottomrule
     \end{tabularx}
   \end{center}
 \end{table}
 
-Les valeurs des paramètres physiques qui correspondent à une particule
-d'alumine dans un bain et qui interviennent dans l'équation
-(\ref{eq:particle-terminal-position}) sont synthétisées dans le
-tableau \ref{tab:fall-physical-parameters}. Contrairement à
-l'hypothèse admise ici, le bain d'une cuve d'électrolyse est animé par
-une forte agitation. Ces turbulences correspondent à une viscosité
-équivalente $\electrolyteturbviscosity$ qui caractérise l'écoulement
-moyenné au cours du temps. Dans le bain d'une installation
-industrielle, cette viscosité turbulente est typiquement de l'ordre de
-\num{1} \si{\kilo\gram\per\meter\per\second} ou plus, et domine donc
-largement la viscosité physique du fluide. Pour cette raison nous
-considérons des viscosités dans l'intervalle $[\num{2e-3}, \num{1}]$.
+Contrairement à l'hypothèse admise ici, le bain d'une cuve
+d'électrolyse est animé par une forte agitation. Ces turbulences
+correspondent à une viscosité équivalente $\electrolyteturbviscosity$
+qui caractérise l'écoulement moyenné au cours du temps. Dans le bain
+d'une installation industrielle, cette viscosité turbulente est
+typiquement de l'ordre de \num{1} \si{\kilo\gram\per\meter\per\second}
+ou plus, et domine donc largement la viscosité physique du
+fluide. Pour cette raison nous considérons des viscosités dans
+l'intervalle $[\num{2e-3}, \num{1}]$.
 
 Les doses de particules d'alumine ne sont en général pas délicatement
 déposées à la surface du bain; les particules sont lâchées depuis une
@@ -154,6 +162,19 @@ de pesanteur terrestre sur une hauteur $L$ et initialement au repos
 est donnée par l'expression $\sqrt{2gL}$. Par conséquent nous
 considérerons des vitesses initiales $v_0$ entre \num{0} et
 \num{3} \si{\meter\per\second}.
+
+Le tableau \ref{tab:fall-results} présente la profondeur terminale de
+la particule d'alumine donnée par la relation
+(\ref{eq:particle-terminal-position}) en fonction des conditions
+initiales $r_0$, $v_0$ et la viscosité dynamique du fluide
+$\electrolyteviscosity$. Lorsque $\electrolyteviscosity = \num{2e-3}$,
+c'est-à-dire que la particule est placée dans un fluide immobile, une
+profondeur maximale de \num{4} \si{\centi\meter} environ est atteinte
+lorsque $r_0 = \num{80}$ \si{\micro\meter} et avec une vitesse
+initiale $v_0 = \num{3}$ \si{\meter\per\second}. La profondeur
+maximale lorsque le rayon initial est inférieur à \num{80}
+\si{\micro\meter} est systématiquement inférieure à \num{1}
+\si{\centi\meter}.
 
 \begin{table}
   \begin{center}
@@ -173,19 +194,6 @@ considérerons des vitesses initiales $v_0$ entre \num{0} et
   \end{center}
 \end{table}
 
-Le tableau \ref{tab:fall-results} présente la profondeur terminale de
-la particule d'alumine donnée par la relation
-(\ref{eq:particle-terminal-position}) en fonction des conditions
-initiales $r_0$, $v_0$ et la viscosité dynamique du fluide
-$\electrolyteviscosity$. Lorsque $\electrolyteviscosity = \num{2e-3}$,
-c'est-à-dire que la particule est placée dans un fluide immobile, une
-profondeur maximale de \num{4} \si{\centi\meter} environ est atteinte
-lorsque $r_0 = \num{80}$ \si{\micro\meter} et avec une vitesse
-initiale $v_0 = \num{3}$ \si{\meter\per\second}. La profondeur
-maximale lorsque le rayon initial est inférieur à \num{80}
-\si{\micro\meter} est systématiquement inférieure à \num{1}
-\si{\centi\meter}.
-
 Dans cette section on a donné une expression exacte pour la position
 de la particule lorsque celle-ci est complètement dissoute,
 c'est-à-dire lorsque $t = T$ (voir (\ref{eq:final-time})). La position
@@ -202,6 +210,14 @@ jusqu'à dissolution complète de chaque particule, tandis que la figure
 \ref{fig:particle-trajectories-b} illustre la phase d'accélération
 initiale de chaque particule qui succède immédiatement à la condition
 initiale.
+
+Nous concluons cette section par quatre remarques qui traitent
+premièrement de la validité de la loi de Stokes pour la force de traînée,
+deuxièmement de l'importance de la vitesse initiale de la particule
+sur la profondeur terminale de la particule, troisièmement du temps
+caractéristique pour qu'une particule soit emportée par un fluide en
+mouvement laminaire et quatrièmement de la validité de l'hypothèse qui
+suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
 
 \begin{figure}
  \begin{center}
@@ -224,27 +240,6 @@ initiale.
     \label{fig:particle-trajectories}
   \end{center}
 \end{figure}
-
-Nous concluons cette section par quatre remarques qui traitent
-premièrement de la validité de la loi de Stokes pour la force de traînée,
-deuxièmement de l'importance de la vitesse initiale de la particule
-sur la profondeur terminale de la particule, troisièmement du temps
-caractéristique pour qu'une particule soit emportée par un fluide en
-mouvement laminaire et quatrièmement de la validité de l'hypothèse qui
-suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
-
-%%\begin{remarque}
-%%  (Sur le fait qu'on peut negliger le terme de reaction dans
-%%  l'equation du mouvement)
-%%\end{remarque}
-
-%%\begin{remarque}
-%%  Le temps caracteristique du transitoire pour atteindre la vitesse
-%%  du fluide doit etre faible devant les autres temps
-%%  caracteristiques pour que l'approximation de dire que les
-%%  particules sont transportee par les lignes de courant du fluide
-%%  est une bonne approximation.
-%%\end{remarque}
 
 \begin{remarque}
   En considérant la relation (\ref{eq:particle-terminal-position}), on
@@ -327,31 +322,6 @@ suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
   \ref{chap:populations}, où on supposera que les particules suivent
   exactement les lignes de courant de l'écoulement.
 \end{remarque}
-
-\begin{figure}
- \begin{center}
-    \begin{subfigure}[b]{0.49\textwidth}
-      \input{../media/particles/trajectories/particle_fall.tex}
-      \caption{Trajectoire des particules dans le fluide.}
-      \label{fig:particle-trajectories-a}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.49\textwidth}
-      \input{../media/particles/trajectories/particle_fall_zoom.tex}
-      \caption{Zoom sur la phase d'accélération initiale.}
-      \label{fig:particle-trajectories-b}
-    \end{subfigure}
-
-    \caption{Trajectoires de particules de rayon initial
-      $r_0 = $ \numlist{40;60;80} \si{\micro\meter}. Chaque
-    particule est placée à l'origine avec une vitesse nulle
-    au temps $t = 0$. Les trajectoires sont intégrées jusqu'à ce que
-    les particules soient complètement dissoutes, c'est-à dire sur l'intervalle
-    de temps $\left[0, \frac{r_0^2}{2\dissolutionrate}\right]$. Notez
-    les différentes échelles sur les deux graphiques.}
-    \label{fig:particle-trajectories}
- \end{center}
-\end{figure}
-
 
 \begin{remarque}
 

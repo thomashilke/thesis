@@ -213,16 +213,6 @@ on pose pour $j = 1,\dots, M-1$
   \end{center}
 \end{figure}
 
-\begin{figure}[h!]
-  \begin{center}
-    \input{../media/particles/dissolution/dissolution-convergence.tex}
-    \caption{Convergence de l'erreur $L^2(0, \rmax)$ entre $n_p(T, .)$
-      et la reconstruction linéaire par morceau des approximations
-      $n_{p,j}^N$ sur la subdivision $\cparent{r_j}_{j = 0}^M$. Le pas
-      de temps est choisi tel que $\Delta t \propto \Delta r$.}
-    \label{fig:population-convergence}
-  \end{center}
-\end{figure}
 \paragraph{Validation numérique} On propose maintenant de valider
 l'implémentation du schéma numérique
 (\ref{eq:population-characteristic-scheme}) en étudiant la
@@ -255,6 +245,17 @@ choisit $\Delta t = \alpha\Delta r$ avec $\alpha =
 \num{0.934}$. L'erreur est comparée à une droite de pente 1. On
 constate que l'erreur de l'approximation numérique est un $O(\Delta
 r)$.
+
+\begin{figure}[h!]
+  \begin{center}
+    \input{../media/particles/dissolution/dissolution-convergence.tex}
+    \caption{Convergence de l'erreur $L^2(0, \rmax)$ entre $n_p(T, .)$
+      et la reconstruction linéaire par morceau des approximations
+      $n_{p,j}^N$ sur la subdivision $\cparent{r_j}_{j = 0}^M$. Le pas
+      de temps est choisi tel que $\Delta t \propto \Delta r$.}
+    \label{fig:population-convergence}
+  \end{center}
+\end{figure}
 
 La section suivante tient lieu de conclusion de ce chapitre, et discute
 de la sédimentation des particules d'alumine dans le bain sous
