@@ -187,32 +187,6 @@ on pose pour $j = 1,\dots, M-1$
 \end{equation}
 
 
-\begin{figure}[h]
-  \begin{center}
-    %\input{../media/particles/dissolution/timelapse-0.tex}
-    \input{../media/particles/dissolution/timelapse-1.tex}
-    %\input{../media/particles/dissolution/timelapse-2.tex}
-    \input{../media/particles/dissolution/timelapse-3.tex}
-    %\input{../media/particles/dissolution/timelapse-4.tex}
-    \input{../media/particles/dissolution/timelapse-5.tex}
-    %\input{../media/particles/dissolution/timelapse-6.tex}
-    \input{../media/particles/dissolution/timelapse-7.tex}
-    %\input{../media/particles/dissolution/timelapse-8.tex}
-    \input{../media/particles/dissolution/timelapse-9.tex}
-    %\input{../media/particles/dissolution/timelapse-10.tex}
-    \input{../media/particles/dissolution/timelapse-11.tex}
-  \end{center}
-  \begin{center}
-    \caption{Solution exacte $n_p$ et approximation numérique avec
-      $\Delta r = 1/64$, $\Delta t = \num{1.46e-2}$ et
-      $\dissolutionrate^n = \num{0.5e-9}$ à différents temps. La
-      condition initiale est donnée par
-      (\ref{eq:population-test-ic}.). En vert: solution exacte. En
-      violet: approximation numérique.}
-    \label{fig:population-timelapse}
-  \end{center}
-\end{figure}
-
 \paragraph{Validation numérique} On propose maintenant de valider
 l'implémentation du schéma numérique
 (\ref{eq:population-characteristic-scheme}) en étudiant la
@@ -245,6 +219,32 @@ choisit $\Delta t = \alpha\Delta r$ avec $\alpha =
 \num{0.934}$. L'erreur est comparée à une droite de pente 1. On
 constate que l'erreur de l'approximation numérique est un $O(\Delta
 r)$.
+
+\begin{figure}[h!]
+  \begin{center}
+    %\input{../media/particles/dissolution/timelapse-0.tex}
+    \input{../media/particles/dissolution/timelapse-1.tex}
+    %\input{../media/particles/dissolution/timelapse-2.tex}
+    \input{../media/particles/dissolution/timelapse-3.tex}
+    %\input{../media/particles/dissolution/timelapse-4.tex}
+    \input{../media/particles/dissolution/timelapse-5.tex}
+    %\input{../media/particles/dissolution/timelapse-6.tex}
+    \input{../media/particles/dissolution/timelapse-7.tex}
+    %\input{../media/particles/dissolution/timelapse-8.tex}
+    \input{../media/particles/dissolution/timelapse-9.tex}
+    %\input{../media/particles/dissolution/timelapse-10.tex}
+    \input{../media/particles/dissolution/timelapse-11.tex}
+  \end{center}
+  \begin{center}
+    \caption{Solution exacte $n_p$ et approximation numérique avec
+      $\Delta r = 1/64$, $\Delta t = \num{1.46e-2}$ et
+      $\dissolutionrate^n = \num{0.5e-9}$ à différents temps. La
+      condition initiale est donnée par
+      (\ref{eq:population-test-ic}.). En vert: solution exacte. En
+      violet: approximation numérique.}
+    \label{fig:population-timelapse}
+  \end{center}
+\end{figure}
 
 \begin{figure}[h!]
   \begin{center}

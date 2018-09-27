@@ -8,7 +8,7 @@
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\cparent}[1]{\left\{ #1 \right\}}
 \newcommand{\setsuchthat}{\ \mid|\ }
-\newcommand{\rplus}{\mathbb R_+}
+\newcommand{\rplus}{{\mathbb R_+}}
 \newcommand{\nstar}{\mathbb N^*}
 \newcommand{\intd}[1]{\,\mathrm d#1}
 \newcommand{\dt}{\Delta t}
@@ -108,6 +108,7 @@
                                 % taux de deformation (symetrique)
                                 % reduit au premier block 2x2
 \newcommand{\thickness}{\varepsilon}
+\newcommand{\meshcell}{{\mathcal K}}
 
 \chapter*{Notations}
 \addcontentsline{toc}{chapter}{Notations}
@@ -217,6 +218,7 @@
   $f$ & Force exercée sur le fluide \\
   $p$ & Pression hydrostatique \\
   $\mathcal M_h$ & Maillage conforme en simplexes de diamètre maximal $h$ d'un domaine ouvert de $\mathbb R^2$ ou $\mathbb R^3$\\
+  $\meshcell$ & Cellule triangulaire ou tetraédrique d'un maillage\\
   $\delta$ & Coefficient de stabilisation \\
   $h$ & Taille de maille \\
   $\thickness$ & Epaisseur de la couche de fluide \\

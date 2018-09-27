@@ -158,7 +158,7 @@ choix $\thickness = 2$, i. e. dans le domaine $\Omega =
 
 \begin{figure}[t]
   \begin{center}
-    \includegraphics[width=\rasterimagewidth]{../media/fourier/fig-exact/print/streamlines.png}
+    \includegraphics[width=0.9\rasterimagewidth]{../media/fourier/fig-exact/print/streamlines.png}
     \caption{Lignes de courant de la vitesse $u$ définie par
       (\ref{eq:stokes-exact-sol-1})-(\ref{eq:stokes-exact-sol-2}) dans
       le domaine cubique $\Omega$, c'est-à-dire que $\thickness = 2$.}
@@ -169,7 +169,7 @@ choix $\thickness = 2$, i. e. dans le domaine $\Omega =
 
 \subsection{Convergence de l'erreur en $K$ et en $h$}
 On s'intéresse d'une part à la convergence de l'erreur d'approximation
-de $u_{h,K}$ donnée par (\ref{eq:u-h-12}),(\ref{eq:u-h-3}) vers la
+de $u_{h,K}$ donnée par (\ref{eq:u-h-12})-(\ref{eq:u-h-3}) vers la
 solution exacte
 (\ref{eq:stokes-exact-sol-1})-(\ref{eq:stokes-exact-sol-2}), définie
 par:
@@ -181,19 +181,15 @@ où le champ de vecteur $u$ est donné par
 (\ref{eq:stokes-exact-sol-1})-(\ref{eq:stokes-exact-sol-2}).
 
 On cherchera d'autre part à comparer $u_{h,K}$ (notée
-$u_{h,K}^{\mathrm{SF}}$ dans la suite) avec la solution de
-(\ref{eq:stokes-u}), (\ref{eq:stokes-p}) obtenue à l'aide d'une
-méthode d'éléments finis $\mathbb P_1$bulle-$\mathbb P_1$ sur un
-maillage tétraédrique classique (notée
-$u_h^\mathrm{S3D}$ dans la suite). On note aussi l'erreur
+$u_{h,K}^{\mathrm{SF}}$ dans la suite, avec SF l'abbréviation de
+Stokes-Fourier) avec la solution de
+(\ref{eq:stokes-u})-(\ref{eq:stokes-p}) obtenue à l'aide d'une méthode
+d'éléments finis $\mathbb P_1$bulle-$\mathbb P_1$ sur un maillage
+tétraédrique classique (notée $u_h^\mathrm{S3D}$ dans la suite). On
+note aussi l'erreur
 \begin{equation}
   e_h^{\mathrm{S3D}} = \frac{\norm{u - u_h^{\mathrm{S3D}}}_{L^2(\Omega)}}{\norm{u}_{L^2(\Omega)}}.
 \end{equation}
-
-\renewcommand{\floatpagefraction}{.9}%
-\renewcommand{\topfraction}{.9}
-\setcounter{topnumber}{3}
-\setcounter{totalnumber}{4}
 
 \subsubsection{Convergence de la somme partielle de Fourier}
 On s'intéresse à la convergence de l'erreur $e_{h,K}^\mathrm{SF}$ en
@@ -211,7 +207,7 @@ l'erreur $e_h^\mathrm{SF}$ cesse de décroître signicativement lorsque $K \geq 
 tandis que lorsque $\thickness = 0.02$ il faut que $K \geq 7$ pour que
 l'erreur $e_h^\mathrm{SF}$ cesse de décroître signicativement.
 
-\begin{table}
+\begin{table}[h!]
   \caption{Erreur $e_{h,K}^\mathrm{SF}$ entre la solution exacte et la
     série de Fourier discrète tronquée à l'ordre $K$.}
   \label{tab:h-k-convergence}
@@ -237,7 +233,7 @@ l'erreur $e_h^\mathrm{SF}$ cesse de décroître signicativement.
 \subsubsection{Convergence en fonction du maillage}
 On s'intéresse à la convergence de l'erreur $e_{h,K}^\mathrm{SF}$ en
 fonction de la taille de maille $h$ de la subdivision $\mathcal M_h$
-du domaine $\Lambda$. Le tableau \ref{tab:n-h-convergence} donne les
+du domaine $\Lambda$. La table \ref{tab:n-h-convergence} donne les
 valeurs de l'erreur pour différentes tailles de maille $h$ et
 différentes épaisseurs $\thickness$ du domaine $\Omega$.  Lorsque le
 domaine est isotrope, raffiner le maillage de $\Lambda$ tend a
@@ -247,7 +243,7 @@ maillage de $\Lambda$: lorsque $\thickness = \num{0.02}$,
 $e_{h,K}^{SF}$ est de l'ordre de \num{1e-4} quel que soit la valeur de
 $h$.
 
-\begin{table}
+\begin{table}[h!]
   \caption{Erreur $e_{h,K}^\mathrm{SF}$ en fonction de la taille de
     maille $h$ et de l'épaisseur $\thickness$ lorsque $K = 20$.}
   \label{tab:n-h-convergence}
@@ -293,7 +289,24 @@ $\Omega$ présente une forte anisotropie.
   \end{center}
 \end{figure}
 
-\begin{table}[t!]
+Finalement, on compare les temps CPU pour chaque schéma, ainsi
+que le nombre d'itérations de l'algorithme GMRES pour résoudre le
+système linéaire dans le cas du schéma S3D, dont les résultats sont
+synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
+comparé les performances entre le temps de calculs du modèle S3D et SF
+en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et
+\num{1.19}. On note que le coût en temps de calcul de la solution
+$u_h^\mathrm{S3D}$ augmente catastrophiquement lorsque $\thickness$
+diminue. Ceci est principalement dû au conditionnement de la matrice
+qui se péjore et au nombre d'itérations de
+l'algorithme GMRES nécessaire pour atteindre la tolérance souhaitée.
+En comparaison, le coût en temps de calcul de la solution
+$u_{h,K}^{\mathrm{SF}}$ est indépendent de l'épaisseur $\thickness$,
+et est environ 17 fois plus faible que le coût de calcul de
+$u_h^\mathrm{S3D}$ dans le pire des cas. A nouveau, ce résultat
+indique un clair avantage du modèle SF par rapport au modèle S3D.
+
+\begin{table}[h!]
   \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en
     fonction de l'épaisseur $\thickness$ lorsque $K = 20$ et $h =
     2/64$.  Dans le cas du calcul de $e_h^\mathrm{S3D}$, la taille de
@@ -322,7 +335,7 @@ $\Omega$ présente une forte anisotropie.
   \end{center}
 \end{table}
 
-\begin{table}[t!]
+\begin{table}[h!]
   \caption{Comparaison des performances entre les schémas permettant
     de calculer $u_{h,K}^{\mathrm{SF}}$ et $u_h^\mathrm{S3D}$ en
     fonction de l'épaisseur $\thickness$. Les calculs
@@ -332,44 +345,14 @@ $\Omega$ présente une forte anisotropie.
   \begin{center}
     \begin{tabular}{@{}lrrrrr@{}}
       \toprule
-      & $\thickness = 0.020$
-      %& $\thickness = 0.033$
-      & $\thickness = 0.055$
-      %& $\thickness = 0.092$
-      & $\thickness = 0.154$
-      %& $\thickness = 0.258$
-      & $\thickness = 0.430$
-      %& $\thickness = 0.718$
-      & $\thickness = 1.198$ \\
-      %& $\thickness = 2$ \\
+      & $\thickness = 1.198$ & $\thickness = 0.430$ & $\thickness = 0.154$ & $\thickness = 0.055$ & $\thickness = 0.020$   \\
       \cmidrule{2-6}
       S3D  \\
-      \hphantom{a} $T_\text{CPU}$ [\si{\second}] & 4587 & 2694 & 1343 & 753 & 753 \\
-      \hphantom{a} itérations GMRES           & 901 & 609  & 327  & 184 & 133 \\
+      \hphantom{a} $T_\text{CPU}$ [\si{\second}] & 753 & 753 & 1343 & 2694 & 4587  \\
+      \hphantom{a} itérations GMRES           & 133 & 184 & 327 & 609 & 901    \\
       SF \\
-      \hphantom{a} $T_\text{CPU}$ [\si{\second}] & 43 & 45   & 43   & 44  & 45  \\
+      \hphantom{a} $T_\text{CPU}$ [\si{\second}] & 45 & 44 & 43 & 45 & 43    \\
       \bottomrule
     \end{tabular}
   \end{center}
 \end{table}
-
-Finalement, on compare les temps CPU pour chaque schéma, ainsi
-que le nombre d'itérations de l'algorithme GMRES pour résoudre le
-système linéaire dans le cas du schéma S3D, dont les résultats sont
-synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
-comparé les performances entre le temps de calculs du modèle S3D et SF
-en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et
-\num{1.19}. On note que le coût en temps de calcul de la solution
-$u_h^\mathrm{S3D}$ augmente catastrophiquement lorsque $\thickness$
-diminue. Ceci est principalement dû au conditionnement de la matrice
-qui se péjore et au nombre d'itérations de
-l'algorithme GMRES nécessaire pour atteindre la tolérance souhaitée.
-En comparaison, le coût en temps de calcul de la solution
-$u_{h,K}^{\mathrm{SF}}$ est indépendent de l'épaisseur $\thickness$,
-et est environ 17 fois plus faible que le coût de calcul de
-$u_h^\mathrm{S3D}$ dans le pire des cas. A nouveau, ce résultat
-indique un clair avantage du modèle SF par rapport au modèle S3D.
-
-
-\renewcommand{\floatpagefraction}{.6}%
-\renewcommand{\topfraction}{0.7}

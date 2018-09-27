@@ -264,12 +264,12 @@ et
 \end{align}
 Nous aurons finalement besoin des espaces de fonctions à moyenne nulle
 \begin{align}
-  &L^2_0(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|} f(x) = 0\ \forall
-    x\in \partial\Lambda},\\
+  &L^2_0(\Lambda) = \cparent{f\in L^2(\Lambda)\mathrel{\bigg|}
+    \int_\Lambda f \,\mathrm dx = 0},\\
   \text{et }\quad &H^1_{0,0}(\Lambda) = \cparent{f\in H^1_0(\Lambda)\mathrel{\bigg|}
     \int_\Lambda f \,\mathrm dx = 0}.
 \end{align}
-Remarquons que $L^2_0(\Lambda)$ est un sous-espace ferme de
+Remarquons que $L^2_0(\Lambda)$ est un sous-espace fermé de
 $L^2(\Lambda)$ et $H^1_{0,0}(\Lambda)$ est un sous-espace fermé de
 $H^1_0(\Lambda)$ ce qui sera important pour répondre aux questions
 d'existence et d'unicité par la suite.
@@ -535,7 +535,7 @@ x_2)\in \Lambda$, alors le problème (\ref{eq:abstr-weak-harm-1}),
   concernant la condition inf-sup dans $\mathbb R^2$ et si $q\in
   L^2_0(\Lambda)$, on a que
   \begin{align*}
-    \sup_{\norm{v}_{H^1_0}(\Lambda)^3 = 1} b^k(v,q) = &\sup_{\norm{v}_{H^1_0(\Lambda)^3} = 1} \int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} + \frac{\partial v_2}{\partial x_2} + \beta^k v_3}q\\
+    \sup_{\norm{v}_{H^1_0(\Lambda)^3} = 1} b^k(v,q) = &\sup_{\norm{v}_{H^1_0(\Lambda)^3} = 1} \int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} + \frac{\partial v_2}{\partial x_2} + \beta^k v_3}q\\
     \geq & \sup_{\norm{(v_1, v_2, 0)}_{H^1_0(\Lambda)^3} =
       1}\int_{\Lambda}\parent{\frac{\partial v_1}{\partial x_1} +
       \frac{\partial v_2}{\partial x_2}}q\\
@@ -544,8 +544,8 @@ x_2)\in \Lambda$, alors le problème (\ref{eq:abstr-weak-harm-1}),
   \end{align*}
   où $\gamma > 0$. Ainsi on a bien
   \begin{equation*}
-    \inf_{q\in L^2_0}\sup_{v\in V} \frac{b(v,
-      q)}{\norm{q}_{L^2_0}\norm{v}_{V}} \geq \gamma > 0,
+    \inf_{q\in L^2_0(\Lambda)}\sup_{v\in V} \frac{b(v,
+      q)}{\norm{q}_{L^2_0(\Lambda)}\norm{v}_{V}} \geq \gamma > 0,
   \end{equation*}
   et la proposition est prouvée.
 \end{proof}

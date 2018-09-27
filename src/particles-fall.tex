@@ -68,7 +68,7 @@ L'équation du mouvement de la particule s'obtient à l'aide de la
 deuxième loi de Newton qui lie la somme des forces à l'impulsion $p =
 m\dot x$:
 \begin{equation*}
-\frac{\mathrm dp}{\mathrm dt}(t) = \dragforce(r(t), \dot x(t)) + \gravityforce(r(t)) + \buoyancyforce(r(t)),
+\dot p(t) = \dragforce(r(t), \dot x(t)) + \gravityforce(r(t)) + \buoyancyforce(r(t)),
 \end{equation*}
 soit
 \begin{equation}\label{eq:mvt}
@@ -79,18 +79,18 @@ soit
 On suppose que la particule se trouve initialement en $x(0) = 0$ avec
 une vitesse $\dot x(0) = v_0$.
 
-En utilisant la relation (\ref{eq:radius}), nous avons
+En utilisant la relation (\ref{eq:dissolution-velocity}), nous avons
 \begin{equation}\label{eq:volume-variation}
-  \frac{\mathrm d}{\mathrm dt}V(t) = -4\pi \dissolutionrate r(t).
+  \dot V(t) = -4\pi \dissolutionrate r(t).
 \end{equation}
 En remplaçant (\ref{eq:volume-variation}) dans l'égalité
 (\ref{eq:mvt}), en tenant compte du fait que $V(t) = \frac{4}{3}\pi
 r^3(t)$, puis en divisant par $\pi r(t)$ nous obtenons
 \begin{equation}\label{eq:simple-mvt}
-\aluminadensity \frac{4}{3}r^2(t)\frac{\mathrm d^2}{\mathrm dx^2}x(t)
+\aluminadensity \frac{4}{3}r^2(t)\ddot x(t)
 = g\parent{\aluminadensity - \electrolytedensity}\frac{4}{3}r^2(t) -
 \parent{6\electrolyteviscosity - 4\aluminadensity
-  \dissolutionrate}\frac{\mathrm dx}{\mathrm dt}.
+  \dissolutionrate}\dot x(t).
 \end{equation}
 En utilisant (\ref{eq:radius}), (\ref{eq:final-time}) et en
 intégrant l'équation (\ref{eq:simple-mvt}) sur l'intervalle de temps $[0, T]$, nous
@@ -99,14 +99,14 @@ obtenons
 \parent{6\electrolyteviscosity - 4\aluminadensity\dissolutionrate}x(T)
 = g\parent{\aluminadensity -
   \electrolytedensity}\frac{r_0^4}{3\dissolutionrate}-\aluminadensity\frac{4}{3}\int_0^T\parent{r_0^2
-- 2\dissolutionrate t}\frac{\mathrm d^2}{\mathrm dt^2}x(t)\,\intd{t}.
+- 2\dissolutionrate t}\ddot x(t)\,\intd{t}.
 \end{equation}
 Le dernier terme de l'équation (\ref{eq:mvt-integration-1}) s'intègre
 par partie,
 \begin{equation}
-\int_0^T\parent{r_0^2 - 2\dissolutionrate t}\frac{\mathrm d^2}{\mathrm
-dx^2}x(t)\intd{t} = \parent{r_0^2 - 2\dissolutionrate T}x'(T) +
-2\dissolutionrate x(T) = 2\dissolutionrate x(T),
+\int_0^T\parent{r_0^2 - 2\dissolutionrate t}\ddot x(t)\intd{t} =
+\parent{r_0^2 - 2\dissolutionrate T}\dot x(T) + 2\dissolutionrate x(T) =
+2\dissolutionrate x(T),
 \end{equation}
 et nous obtenons finalement la profondeur terminale de la particule au
 moment de sa dissolution complète
@@ -120,10 +120,10 @@ x(T) = \frac{g\parent{\aluminadensity - \electrolytedensity
 
 Les valeurs des paramètres physiques qui correspondent à une particule
 d'alumine dans un bain et qui interviennent dans l'équation
-(\ref{eq:particle-terminal-position}) sont synthétisées dans le
-tableau \ref{tab:fall-physical-parameters}.
+(\ref{eq:particle-terminal-position}) sont synthétisées dans la
+table \ref{tab:fall-physical-parameters}.
 
-\begin{table}
+\begin{table}[h]
   \begin{center}
     \caption{Paramètres physiques qui interviennent dans la chute
       d'une particule d'alumine dans un bain électrolytique.}
@@ -163,7 +163,7 @@ est donnée par l'expression $\sqrt{2gL}$. Par conséquent nous
 considérerons des vitesses initiales $v_0$ entre \num{0} et
 \num{3} \si{\meter\per\second}.
 
-Le tableau \ref{tab:fall-results} présente la profondeur terminale de
+La table \ref{tab:fall-results} présente la profondeur terminale de
 la particule d'alumine donnée par la relation
 (\ref{eq:particle-terminal-position}) en fonction des conditions
 initiales $r_0$, $v_0$ et la viscosité dynamique du fluide
@@ -176,7 +176,7 @@ maximale lorsque le rayon initial est inférieur à \num{80}
 \si{\micro\meter} est systématiquement inférieure à \num{1}
 \si{\centi\meter}.
 
-\begin{table}
+\begin{table}[h!]
   \begin{center}
     \caption{Profondeur terminale de la particule dans le bain
       électrolytique en fonction des conditions initiales $r_0$
@@ -211,15 +211,7 @@ jusqu'à dissolution complète de chaque particule, tandis que la figure
 initiale de chaque particule qui succède immédiatement à la condition
 initiale.
 
-Nous concluons cette section par quatre remarques qui traitent
-premièrement de la validité de la loi de Stokes pour la force de traînée,
-deuxièmement de l'importance de la vitesse initiale de la particule
-sur la profondeur terminale de la particule, troisièmement du temps
-caractéristique pour qu'une particule soit emportée par un fluide en
-mouvement laminaire et quatrièmement de la validité de l'hypothèse qui
-suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
-
-\begin{figure}
+\begin{figure}[h!]
  \begin{center}
     \begin{subfigure}[b]{0.49\textwidth}
       \input{../media/particles/trajectories/particle_fall.tex}
@@ -240,6 +232,15 @@ suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
     \label{fig:particle-trajectories}
   \end{center}
 \end{figure}
+
+Nous concluons cette section par quatre remarques qui traitent
+premièrement de la validité de la loi de Stokes pour la force de traînée,
+deuxièmement de l'importance de la vitesse initiale de la particule
+sur la profondeur terminale de la particule, troisièmement du temps
+caractéristique pour qu'une particule soit emportée par un fluide en
+mouvement laminaire et quatrièmement de la validité de l'hypothèse qui
+suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
+\clearpage
 
 \begin{remarque}
   En considérant la relation (\ref{eq:particle-terminal-position}), on
@@ -285,8 +286,8 @@ suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
     \reynolds =
     \frac{4}{9}\frac{g\electrolytedensity\parent{\aluminadensity - \electrolytedensity}}{\electrolyteviscosity^2}r^3.
   \end{equation*}
-  En reprenant les conditions considérées dans le tableau
-  \ref{tab:fall-results} et les paramètres du tableau
+  En reprenant les conditions considérées dans la table
+  \ref{tab:fall-results} et les paramètres de la table
   \ref{tab:fall-physical-parameters}, on obtient un nombre de Reynolds
   maximal pour $\electrolyteviscosity = \num{2e-3}$
   \si{\kilo\gram\per\meter\per\second} et $r_0 = 80$
@@ -333,7 +334,7 @@ suppose un fluide au repos dans le bain d'une cuve d'électrolyse.
   le bain d'une cuve d'électrolyse industrielle, cette viscosité
   turbulente est typiquement de l'ordre de \num{1}
   \si{\kilo\gram\per\meter\per\second}. Cette situation correspond aux
-  trois dernières colonnes à droite du tableau
+  trois dernières colonnes à droite de la table
   \ref{tab:fall-results}. Dans ce cas, on constate que la profondeur
   maximale est systématiquement de l'ordre de
   \num{1} \si{\milli\meter}, ou inférieure.

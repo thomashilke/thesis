@@ -4,28 +4,28 @@ l'écoulement $(u^0, p^0)$ et les coefficients des harmoniques $(u^k,
 p^k)$.
 
 Soit un nombre réel $h > 0$ et soit $\mathcal M_h$ une triangulation
-du domaine $\Lambda$ de $\mathbb R^2$ telle que $\diam(K)\leq h$,
-$\forall K\in \mathcal M_h$. On introduit maintenant l'espace
+du domaine $\Lambda$ de $\mathbb R^2$ telle que $\diam(\meshcell)\leq h$,
+$\forall \meshcell\in \mathcal M_h$. On introduit maintenant l'espace
 éléments finis $V_h$ défini par
 \begin{equation}
-  V_h = \cparent{v\in C^0(\Lambda)\mid v|_K \in \mathbb
-    P_1(K)\ \forall K\in\mathcal M_h},
+  V_h = \cparent{v\in C^0(\Lambda)\mid v|_\meshcell \in \mathbb
+    P_1(\meshcell)\ \forall \meshcell\in\mathcal M_h},
 \end{equation}
-avec $\mathbb P_1(K)$ l'espace des polynômes de degré 1 sur le
-triangle $K$. On définit aussi l'espace enrichi par une fonction bulle
+avec $\mathbb P_1(\meshcell)$ l'espace des polynômes de degré 1 sur le
+triangle $\meshcell$. On définit aussi l'espace enrichi par une fonction bulle
 \begin{equation}
-  B_h = \cparent{v \in C^0(\Lambda)^2 \mid v|_K \in \mathbb P_1^2\oplus
-    B_K\ \forall K\in\mathcal M_h} \cap H_0^1(\Lambda)^2
+  B_h = \cparent{v \in C^0(\Lambda)^2 \mid v|_\meshcell \in \mathbb P_1^2\oplus
+    B_\meshcell\ \forall \meshcell\in\mathcal M_h} \cap H_0^1(\Lambda)^2
 \end{equation}
-où $B_K$ est engendré par la fonction $27 \lambda_1^K
-\lambda_2^K\lambda_3^K$, les $\lambda_i^K$, $i = 1,2,3$, étant les
-trois fonctions barycentriques du triangle $K$.
+où $B_\meshcell$ est engendré par la fonction $27 \lambda_1^\meshcell
+\lambda_2^\meshcell\lambda_3^\meshcell$, les $\lambda_i^\meshcell$, $i = 1,2,3$, étant les
+trois fonctions barycentriques du triangle $\meshcell$.
 
 \paragraph{Mode fondamental}
 La méthode d'éléments finis correspondant à la discrétisation des équations
 (\ref{eq:fourier-weak-fund-1}), (\ref{eq:fourier-weak-fund-2})
 consiste à chercher $(u^0_h, p^0_h)\in B_h\times(V_h \cap
-L^2_0(\Lambda))$ tels que, pour tout $(v_h, q_h)\in \mathcal
+L^2_0(\Lambda))$ tels que, pour tout $(v_h, q_h)\in
 B_h\times(V_h \cap L^2_0(\Lambda))$ on ait
 \begin{align}
   &\int_\Lambda
@@ -73,8 +73,8 @@ discrétisé consiste à chercher les fonctions $(u^k_h, p^k_h) \in
   \int_\Lambda f\cdot v_h,\label{eq:fourier-harm-discrete-1}\\
   &\int_\Lambda \parent{\frac{\partial u^k_{1,h}}{\partial x_1} +
     \frac{\partial u^k_{2,h}}{\partial x_2} + \beta^k u^k_{3,h}}q_h +
-  \delta \sum_{K\in\mathcal M_h} h_K^2
-  \int_K\parent{\parent{\beta^k}^2 p^k_h q_h + \nabla p_h^k \nabla
+  \delta \sum_{\meshcell\in\mathcal M_h} h_\meshcell^2
+  \int_\meshcell\parent{\parent{\beta^k}^2 p^k_h q_h + \nabla p_h^k \nabla
     q_h} = 0\label{eq:fourier-harm-discrete-2}
 \end{align}
 pour tout $(v_{1,h}, v_{3,h}, v_{3,h}, q_h) \in (V_h\cap
@@ -130,4 +130,4 @@ et
   p_{h,K}(x_1, x_2, x_3) = p_h^0(x_1, x_2) + \sum_{k = 1}^K p_h^k(x_1,
   x_2) \cos\parent{\beta^k x_3}.
 \end{align}
-Enfin on notera $u_{k,K} = (u_{1,k,K}, u_{2,k,K}, u_{3,k,K})$.
+Enfin on notera $u_{h,K} = (u_{1,h,K}, u_{2,h,K}, u_{3,h,K})$.

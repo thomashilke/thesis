@@ -19,11 +19,6 @@ caractéristiques thermiques de l'alumine solide par celles du bain
 liquéfaction dudit bain autour d'une particule d'alumine solide
 injectée dans ce bain.
 
-% Choix des parametre thermiques constants dans chaque phase
-%Ce choix se justifie par le fait que ces valeurs varient peu sur
-%l'intervalle de température qui nous intéresse, et on peut se
-%contenter de considérer une valeur moyenne sur cet intervalle.
-
 % description du système: particule et bain, symétrie sphérique,
 %  caractérisation des matériaux.
 \paragraph{Un modèle thermique avec transition de phase}
@@ -43,9 +38,6 @@ s'équilibrant par diffusion thermique, cette couche de bain va peu à
 peu fondre. On cherche à déterminer l'évolution au cours du temps de
 l'épaisseur de cette couche de bain gelée.
 
-% modèle mathématique: définitions des domaines, front de transition
-%  de phase, problème de la chaleur dans chaque phase, condition de Stefan, formulation
-%  forte, conditions aux limites.
 On introduit maintenant le cadre nécessaire à l'écriture d'un modèle
 mathématique qui décrive l'évolution thermique de la particule et du
 bain.
@@ -129,9 +121,9 @@ bain électrolytique.
 
 La condition (\ref{eq:stefan-condition}) correspond à un bilan
 d'énergie thermique au niveau de l'interface entre les phases. Le
-membre de gauche de la relation (\ref{eq:stefan-condition}) correspond
+membre de droite de la relation (\ref{eq:stefan-condition}) correspond
 à la quantité d'énergie absorbée ou libérée par le déplacement du
-front de solidification, tandis que le membre de droite correspond à
+front de solidification, tandis que le membre de gauche correspond à
 la somme des flux d'énergie thermique au niveau du front de
 solidification.
 
@@ -261,14 +253,14 @@ telles que:
 \begin{align}
   & \frac{\partial \enthalpydensity}{\partial t} %
   - \div\parent{ \electrolytetdiff\nabla \temperature} = 0,%
-  & \forall (t, x) \in [0,\infty)\times
+  & \text{dans } [0,\infty)\times
     \Omega,\label{eq:heat-one-phase}\\
   & \temperature = \beta(\enthalpydensity),
-    &\forall (t, x) \in [0,\infty)\times \Omega,\label{eq:heat-temperature-enthalpy}\\
+    &\text{dans } [0,\infty)\times \Omega,\label{eq:heat-temperature-enthalpy}\\
   & \temperature = \temperature_\mathrm{D}, %
-  & \forall (t, x) \in [0,\infty)\times \Gamma_\mathrm{D},\label{eq:heat-one-phase-dirichlet}\\
+  & \text{dans } [0,\infty)\times \Gamma_\mathrm{D},\label{eq:heat-one-phase-dirichlet}\\
   & \electrolytetdiff\frac{\partial \temperature}{\partial \nu} = \temperature_\mathrm{N}, %
-  & \forall (t, x) \in [0,\infty)\times \Gamma_\mathrm{N},\label{eq:heat-one-phase-neumann}\\
+  & \text{dans } [0,\infty)\times \Gamma_\mathrm{N},\label{eq:heat-one-phase-neumann}\\
   & \temperature(0, x) = \tinit(x),
   & \forall x\in\Gamma,\label{eq:heat-initial-condition}
 \end{align}
@@ -285,13 +277,6 @@ $\Omega_1(t)$ et $\Omega_2(t)$ définis par (\ref{eq:phase-domains})
 avec $\jump{\temperature} = 0$ sur $\Gamma$,
 alors $\temperature$ satisfait (\ref{eq:heat-solid-phase}),
 (\ref{eq:heat-liquid-phase}) et (\ref{eq:stefan-condition}).
-
-%%Si $\temperature$ est suffisamment régulière dans $\Omega$, alors la
-%%condition (\ref{eq:temperature-condition}) ainsi que les équations
-%%(\ref{eq:heat-solid-phase}), (\ref{eq:heat-liquid-phase}) sont
-%%satisfaites par $\temperature$. On montre finalement que la
-%%température $\temperature$ satisfait la condition de Stefan
-%%(\ref{eq:stefan-condition}).
 
 En effet, soit $\Lambda = [0, \infty)\times \Omega$, soit
 \begin{align}
@@ -317,9 +302,9 @@ note le $v = (\enthalpydensity, -\electrolytetdiff\nabla
 \end{equation}
 où $\Div = (\frac{\partial}{\partial t}, \nabla)$. Alors si
 $\temperature$ est suffisamment régulière dans
-$\Lambda_1\cup\Lambda_2$ et $\jump{\temperature} = 0$ sur $\Gamma$, $\temperature$ est solution forte de
-(\ref{eq:heat-solid-phase}), (\ref{eq:heat-liquid-phase}). De plus,
-on doit avoir:
+$\Lambda_1\cup\Lambda_2$ et $\jump{\temperature} = 0$ sur $\Gamma$,
+$\temperature$ est solution forte de (\ref{eq:heat-solid-phase}),
+(\ref{eq:heat-liquid-phase}). De plus, on doit avoir:
 \begin{equation}
   \jump{v\cdot \nu_{tx}} = 0 \quad \text{sur } \Gamma_{tx},
 \end{equation}
@@ -338,29 +323,32 @@ Stefan, on part de la formulation enthalpique
 suit le travail de M. Paolini et al. \cite{Paolini1988}.
 
 Soit un temps final $T > 0$, $N\in \mathbb \nstar$ le nombre de pas de
-temps. Soit $\timestep = T / N$ le pas de temps et $t^n = \timestep n$. On note
-$L_\beta$ la constante de Lipschitz de la fonction $\beta$:
+temps. Soit $\timestep = T / N$ le pas de temps et $t^n = \timestep
+n$. On note $L_\beta$ la constante de Lipschitz de la fonction
+$\beta$:
 \begin{equation}
   L_\beta = \sup_{\enthalpy}\abs{\beta'(\enthalpy)}.
 \end{equation}
 Soit $\mu$ un paramètre de relaxation fixé, tel que $0 < \mu \leq
 1/L_\beta$.
 
-On note $\temperature^n(x)$ et $\enthalpydensity^n(x)$ les approximation
-de $\temperature(t^n, x)$ et $\enthalpydensity(t^n, x)\ \forall x\in
-\Omega$.  On suppose donnée la densité d'enthalpie initiale $h^0$, et
-on pose $\temperature^0 = \tinit$, $\enthalpydensity^0 = \enthalpy(\tinit)$,
-avec $\enthalpy$ donnée par (\ref{eq:enthalpy}). Pour $0 \leq n \leq N$,
-on cherche la pseudo-température
+On note $\temperature^n(x)$ et $\enthalpydensity^n(x)$ les
+approximation de $\temperature(t^n, x)$ et $\enthalpydensity(t^n,
+x)\ \forall x\in \Omega$, et on note $\electrolytetdiff^n(x) =
+\electrolytetdiff(\temperature^n(x))$ pour tout $x\in\Omega$.  On
+suppose donnée la densité d'enthalpie initiale $h^0$, et on pose
+$\temperature^0 = \tinit$, $\enthalpydensity^0 = \enthalpy(\tinit)$,
+avec $\enthalpy$ donnée par (\ref{eq:enthalpy}). Pour $0 \leq n \leq
+N$, on cherche la pseudo-température
 $\hat\temperature^n:\Omega\to\mathrm R$ qui satisfait les équations:
 \begin{align}
   &\hat\temperature^{n+1} - \frac{\timestep}{\mu} \div\parent{
-    \electrolytetdiff \nabla\hat\temperature^{n+1}} = %
+    \electrolytetdiff^n \nabla\hat\temperature^{n+1}} = %
   \beta\parent{\enthalpydensity^n}, & \text{dans } \Omega,\label{eq:chernoff-heat}\\
   &\hat\temperature^{n+1}(x) = \temperature_{\mathrm D}(t^{n+1}, x), &
   \forall x\in%
   \Gamma_\mathrm{D},\label{eq:chernoff-dirichlet}\\
-  &\electrolytetdiff\frac{\partial\hat\temperature^{n+1}}{\partial \nu}(x) = %
+  &\electrolytetdiff^n\frac{\partial\hat\temperature^{n+1}}{\partial \nu}(x) = %
   \temperature_\mathrm{N}(t^{n+1}, x), %
   & \forall x \in \Gamma_\mathrm{N}.\label{eq:chernoff-neumann}
 \end{align}
@@ -386,12 +374,12 @@ Ce schéma numérique basé sur la formule de Chernoff
   effet, (\ref{eq:chernoff-heat}) se réecrit
   \begin{equation}
     \mu \frac{\hat\temperature^{n+1} - \beta(\enthalpydensity^n)}{\timestep} -
-    \div\parent{\electrolytetdiff \nabla \hat\temperature^{n+1}} = 0,
+    \div\parent{\electrolytetdiff^n \nabla \hat\temperature^{n+1}} = 0,
   \end{equation}
   ce qui correspond à
   \begin{equation}
     \frac{\enthalpydensity^{n+1} - \enthalpydensity^n}{\timestep} -
-    \div\parent{\electrolytetdiff \nabla \hat\temperature^{n+1}} = 0
+    \div\parent{\electrolytetdiff^n \nabla \hat\temperature^{n+1}} = 0
   \end{equation}
   en utilisant (\ref{eq:chernoff-update-1}).
 \end{remarque}
@@ -415,7 +403,7 @@ utilisant (\ref{eq:chernoff-update-1}):
 puis dans (\ref{eq:chernoff-heat}):
 \begin{equation}
 \electrolytedensity \electrolytehc \frac{\temperature^{n+1} -
-  \temperature^{n}}{\timestep} - \div\parent{\electrolytetdiff
+  \temperature^{n}}{\timestep} - \div\parent{\electrolytetdiff^n
   \nabla\parent{\gamma \temperature^{n+1} - \parent{1 -
       \gamma}\temperature^n}} = 0 \label{eq:chernoff-gamma-scheme}
 \end{equation}
@@ -436,7 +424,7 @@ n\leq N$ à chercher une fonction $\temperature^{n+1}:\Omega\to\mathbb R$
 à symétrie sphérique telle que la relation:
 \begin{equation}\label{eq:weak-form-cart-coord}
   \int_\Omega \hat\temperature^{n+1} v\,\intd{x} + \frac{\timestep}{\mu} %
-  \int_\Omega \electrolytetdiff\nabla \hat\temperature^{n+1} \nabla v\,\intd{x} - %
+  \int_\Omega \electrolytetdiff^n\nabla \hat\temperature^{n+1} \nabla v\,\intd{x} - %
   \int_{\Gamma_\mathrm{N}} \temperature^{n+1}_\mathrm{N} v\,\intd{\sigma} %
   = \int_\Omega \beta(\enthalpydensity^n)v\,\intd{x}
 \end{equation}
@@ -479,11 +467,10 @@ utilisant le schéma de Chernoff
 à symétrie sphérique.
 
 La subdivision du bord $\Gamma_\mathrm{D}$, $\Gamma_\mathrm{N}$ doit
-également satisfaire la condition de symétrie sphérique. On distingue alors les
-deux seuls cas possibles:
-soit le bord de Dirichlet $\Gamma_\mathrm{D} = \partial\mathcal
-B(0,\rmax)$, soit le bord de Neumann $\Gamma_\mathrm{N} =
-\partial\mathcal B(0,\rmax)$.
+également satisfaire la condition de symétrie sphérique. On distingue
+alors les deux seuls cas possibles: soit le bord de Dirichlet
+$\Gamma_\mathrm{D} = \partial\mathcal B(0,\rmax)$, soit le bord de
+Neumann $\Gamma_\mathrm{N} = \partial\mathcal B(0,\rmax)$.
 
 Dans le premier cas, la formulation faible de l'équation
 (\ref{eq:weak-form-cart-coord}) en coordonnées sphériques consiste à
@@ -492,7 +479,7 @@ R$, $\tilde\temperature^{n+1}(\rmax) =
 \tilde\temperature_{\mathrm{D}}^{n+1}$ telle que:
 \begin{multline}\label{eq:weak-form-spher-coord-dirichlet}
   4\pi\int_0^{\rmax} \tilde \temperature^{n+1}\tilde v r^2\,\intd{r}
-  + \frac{4\pi\timestep}{\mu}\int_0^{\rmax} \electrolytetdiff\frac{\mathrm d %
+  + \frac{4\pi\timestep}{\mu}\int_0^{\rmax} \electrolytetdiff^n\frac{\mathrm d %
     \tilde \temperature^{n+1}}{\mathrm d r} \frac{\mathrm d \tilde v}{\mathrm d %
     r}r^2\,\intd{r}  %
   = 4\pi\int_0^{\rmax} \beta(\tilde \enthalpydensity^n)\tilde v r^2\,\intd{r}
@@ -506,7 +493,7 @@ chercher une fonction $\tilde \temperature^{n+1}:[0,\rmax] \to \mathbb
 R$, telle que:
 \begin{multline}\label{eq:weak-form-spher-coord-neumann}
   4\pi\int_0^{\rmax} \tilde \temperature^{n+1}\tilde v r^2\,\intd{r}
-  + \frac{4\pi\timestep}{\mu}\int_0^{\rmax} \electrolytetdiff\frac{\mathrm d %
+  + \frac{4\pi\timestep}{\mu}\int_0^{\rmax} \electrolytetdiff^n\frac{\mathrm d %
     \tilde \temperature^{n+1}}{\mathrm d r} \frac{\mathrm d \tilde v}{\mathrm d %
     r}r^2\,\intd{r} \\
   - 4\pi\tilde\temperature^{n+1}_\mathrm{N}(\rmax)\tilde v(\max)\rmax^2%
@@ -563,8 +550,8 @@ matériau. Pour des raisons de symétrie, le front de transition plan reste
 en tout temps parallèle au bord $\cparent{(x_1, x_2, x_3)\in\mathbb
   R^3 \mid x_1 = 0}$.
 
-Nous utiliserons cette solution exacte au paragraphe suivant pour valider le
-schéma de discrétisation des équations
+Nous utiliserons cette solution exacte au paragraphe suivant pour
+valider le schéma de discrétisation des équations
 (\ref{eq:heat-one-phase})-(\ref{eq:heat-one-phase-neumann})
 
 Si, au lieu de définir une symétrie sphérique nous prenons une
@@ -688,8 +675,9 @@ $[\num{3.9e-5}, \num{5e-3}]$, et $\delta = O(\timestep)$.
   \begin{center}
     \input{../media/particles/remelt/neumann-convergence-h.tex}
     \caption{Erreur $L^2$ entre la solution exacte de Neumann et
-      l'approximation numérique $\beta(\enthalpydensity^N_\delta)$. Pour ce
-      calcul on a fixé $\mu = 1$.}
+      l'approximation numérique
+      $\beta(\enthalpydensity^N_\delta)$. Pour ce calcul on a fixé
+      $\mu = 1$.}
     \label{fig:neumann-convergence}
   \end{center}
 \end{figure}
@@ -705,11 +693,11 @@ vers 0, avec un ordre approximatif sous-estimé  $O(h^{3/4})$.
 Dans cette partie, on applique la méthode numérique
 (\ref{eq:chernoff-heat})-(\ref{eq:chernoff-neumann}) au calcul de la
 formation de gel autour d'une particule de bain gelé.  On donne dans
-le tableau \ref{tab:freeze-physical-parameters} la valeur des
+la table \ref{tab:freeze-physical-parameters} la valeur des
 différents paramètres physiques liés aux propriétés thermiques du bain
 électrolytique.
 
-\begin{table}
+\begin{table}[h]
   \begin{center}
     \caption{Paramètres physiques qui interviennent dans le
       phénomène de formation de gel autour des particules.}
@@ -729,24 +717,6 @@ différents paramètres physiques liés aux propriétés thermiques du bain
     \end{tabularx}
 \end{center}
 \end{table}
-
-%%Puisqu'on s'intéresse à une particule sphérique, on fait l'hypothèse
-%%que les données du problème présentent une symétrie sphérique. Ainsi,
-%%on décrite l'ensemble des données en fonction de la distance à
-%%l'origine $r$. De plus, on cherche la température $\temperature$ dans
-%%l'électrolyte en fonction de la coordonnée $r$. Par abus de notation
-%%et pour éviter de surcharger les notation, on réutilise les mêmes
-%%symboles, mais explicitant la coordonnée $r$.
-
-\begin{figure}[!h]
-  \begin{center}
-    \input{../media/particles/temperature/temperature.tex}
-    \caption{Température initiale du système formé par la particule de
-      bain gelé placée à l'origine du système de coordonnées, et du
-      bain électrolytique environnant.}
-    \label{fig:particle-initial-temperature}
-  \end{center}
-\end{figure}
 
 Soit $R_p$ le rayon de la particule placée à l'origine du système de
 coordonnées et soit $\tinj\in\mathbb R$ la température à laquelle se
@@ -768,6 +738,16 @@ température initiale au voisinage de la particule. En dehors de la
 particule, la température du bain est suffisante pour que celui-ci
 soit dans la phase liquide. Cependant, on suppose que le bain liquide
 est au repos en tout temps.
+
+\begin{figure}[!h]
+  \begin{center}
+    \input{../media/particles/temperature/temperature.tex}
+    \caption{Température initiale du système formé par la particule de
+      bain gelé placée à l'origine du système de coordonnées, et du
+      bain électrolytique environnant.}
+    \label{fig:particle-initial-temperature}
+  \end{center}
+\end{figure}
 
 On note $R_f$ la distance entre l'origine et la position du front de
 solidification, définie par la relation:
@@ -826,13 +806,6 @@ entre autres, de l'échelle des particules \cite{Rochat2016}. Une
 agitation de l'électrolyte au voisinage d'une particule accélère le
 transport de l'énergie thermique, et tend à accélérer la refonte du
 bain gelé.
-
-%%Pour simplifier le modèle, nous avons étudié la formation de gel
-%%autour d'une particule sphérique de bain solidifiée. Bien entendu,
-%%dans une cuve d'électrolyse industrielle on injecte des particules
-%%particules d'alumine à basse température, plutôt que des particule de
-%%bain gelé. Cependant, les propriétés thermiques des deux systèmes sont
-%%proches, ce qui justifie cette approximation.
 
 Pour des particules d'alumine suffisamment isolées dans le bain
 électrolytique suite à leur injection, on conclut que les temps

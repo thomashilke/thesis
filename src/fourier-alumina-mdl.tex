@@ -1,12 +1,12 @@
 L'objectif ultime étant d'obtenir une approximation de la
-concentration d'alumine dans une cuve d'électrolyse d'aluminium, on propose un modèle de
-transport et diffusion stationnaire d'alumine dissoute dans le domaine
-$\Omega$.  On suppose donné un champ de convection stationnaire
-$u:\Omega\to\mathbb R^3$, qui correspond à l'écoulement des fluides
-dans le domaine $\Omega$. Le champ $u$ sera typiquement calculé à
-l'aide du schéma numérique introduit dans la section
-\ref{sec:fourier-discretisation}.  Soit $S$ le terme source de la
-concentration d'alumine dissoute correspondant à l'injection de
+concentration d'alumine dans une cuve d'électrolyse d'aluminium, on
+propose un modèle de convection et diffusion stationnaire d'alumine
+dissoute dans le domaine $\Omega$.  On suppose donné un champ de
+convection stationnaire $u:\Omega\to\mathbb R^3$, qui correspond à
+l'écoulement des fluides dans le domaine $\Omega$. Le champ $u$ sera
+typiquement calculé à l'aide du schéma numérique introduit dans la
+section \ref{sec:fourier-discretisation}.  Soit $S$ le terme source de
+la concentration d'alumine dissoute correspondant à l'injection de
 particules, $q$ le terme source correspondant à la consommation
 d'alumine dissoute par la réaction d'électrolyse, et la diffusivité
 moléculaire de la concentration d'alumine dans le bain $D_C^M > 0$.
@@ -49,16 +49,16 @@ consommée dans la cuve étant donné par la relation
 où $I$ est le courant électrique total qui traverse la cuve, et
 $\faraday$ la constante de Faraday.
 
-Remarquons que par construction des fonctions $\cparent{S_k}_{k>0}$, la moyenne de $S$ sur
-$\Omega$ est exactement égale à la moyenne de $q$ sur
-$\Omega$, i. e.:
+Remarquons que par construction des fonctions $\cparent{S_k}_{k>0}$,
+la moyenne de $S$ sur $\Omega$ est exactement égale à la moyenne de
+$q$ sur $\Omega$, i. e.:
 \begin{equation}
   \int_\Omega \parent{S + q}\,\mathrm dx = 0.
 \end{equation}
 C'est une condition nécessaire pour que le problème
 (\ref{eq:stat-concentration}) admette une solution.
 
-  On utilisera pour approcher la solution du problème
+On utilisera pour approcher la solution du problème
 (\ref{eq:stat-concentration}) une méthode d'éléments finis continus
-linéaires par morceaux, stabilisée par une méthode de type SUPG, sur un
-maillage tetraédrique de $\Omega$.
+linéaires par morceaux, stabilisée par une méthode de type SUPG, sur
+un maillage tetraédrique de $\Omega$.

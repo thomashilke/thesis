@@ -1,7 +1,7 @@
 set terminal epslatex size 11.25cm,6.95cm color colortext 10 #standalone header '\input{header.tex}'
 set output 'neumann-convergence-h.tex'
 
-set xlabel '$\tau$'
+set xlabel '$\delta$'
 set ylabel '$\norm{\beta(\enthalpydensity_\delta^N) - \temperature(T, \cdot)}_{L^2}$'
 
 set logscale xy

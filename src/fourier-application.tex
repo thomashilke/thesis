@@ -1,6 +1,3 @@
-\renewcommand{\floatpagefraction}{.9}%
-\renewcommand{\topfraction}{0.9}
-
 L'un des objectifs premiers du développement du schéma numérique
 SF est d'une part de fournir une approximation de l'écoulement des
 fluides dans une cuve d'électrolyse d'aluminium, et d'autre part
@@ -33,21 +30,7 @@ direction du champ de force $f$ dans le plan $x_3 = \thickness / 2$,
 de force pour calculer $u_{h,K}^\mathrm{SF}$ définie par
 (\ref{eq:u-h-12}), (\ref{eq:u-h-3}).
 
-On choisit une triangulation de $\Lambda$ de sorte à ce que la taille
-des mailles des deux calculs (Stokes-Fourier et méthode 3D standard)
-soient comparables, soit $h = \num{0.69}$. La moyenne $\bar{c}$ dans
-(\ref{eq:stat-alumina-avg-c}) est fixée à 3\% masse, identique à la
-concentration d'alumine dissoute initialement dans le modèle de transport
-et de dissolution décrit dans le chapitre 2. Dans
-(\ref{eq:stat-alumina-consommation}), le courant électrique total est $I =
-\num{320000}$ \si{\ampere}. Les différentes grandeurs physiques qui
-interviennent dans ce modèle ont déjà été introduites dans le tableau
-\ref{tab:dissolution-physical-parameters}. Les figures
-\ref{fig:harmonic-velocity} et \ref{fig:harmonic-concentration}
-représente les champs $u^{\mathrm{SF}}$, $c^\mathrm{SF}$,
-$u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
-
-\begin{figure}[t!]
+\begin{figure}[h!]
   \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
@@ -77,7 +60,21 @@ $u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
   \end{center}
 \end{figure}
 
-\begin{figure}[t!]
+On choisit une triangulation de $\Lambda$ de sorte à ce que la taille
+des mailles dans le plan $(x,y)$ des deux calculs (Stokes-Fourier et méthode 3D standard)
+soient comparables, soit $h = \num{0.69}$. La moyenne $\bar{c}$ dans
+(\ref{eq:stat-alumina-avg-c}) est fixée à 3\% masse, identique à la
+concentration d'alumine dissoute initialement dans le modèle de transport
+et de dissolution décrit dans le chapitre 2. Dans
+(\ref{eq:stat-alumina-consommation}), le courant électrique total est $I =
+\num{320000}$ \si{\ampere}. Les différentes grandeurs physiques qui
+interviennent dans ce modèle ont déjà été introduites dans la table
+\ref{tab:dissolution-physical-parameters}. Les figures
+\ref{fig:harmonic-velocity} et \ref{fig:harmonic-concentration}
+représente les champs $u^{\mathrm{SF}}$, $c^\mathrm{SF}$,
+$u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
+
+\begin{figure}[h!]
   \begin{center}
     \includegraphics[width=\rasterimagewidth]{{../media/populations/ap32-fluid-flow/print/acd-all-anodes-velocity-0.00-0.05}.png}\\
     \begin{tikzpicture}
@@ -110,7 +107,7 @@ $u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
   \end{center}
 \end{figure}
 
-\begin{figure}[t!]
+\begin{figure}[h!]
   \begin{center}
     \includegraphics[width=\rasterimagewidth]{{../media/fourier/application/print/all-concentration-acd}.png}\\
     \begin{tikzpicture}
@@ -143,10 +140,6 @@ $u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
   \end{center}
 \end{figure}
 
-\renewcommand{\floatpagefraction}{.6}%
-\renewcommand{\topfraction}{0.7}
-
-\clearpage
 \subsection{Désactivation d'anodes}
 On s'intéresse maintenant au cas du calcul de l'écoulement des fluides
 et de la concentration d'alumine dissoute dans le bain électrolytique
@@ -168,21 +161,20 @@ température du bain.
 Dans le modèle S3D, on peut simuler la désactivation d'une anode en
 annulant la conductivité électrique $\conductivity$ dans le volume
 occupé par ladite anode. On a donc la densité de courant $j =
-\conductivity\parent{\nabla \phi + u^\mathrm{S3D}}$, $\div j = 0$,
-où $\phi$ est le potentiel électrique, $u^\mathrm{S3D}$
-l'écoulement des fluides solution des équations de Navier-Stokes,
-$B$ le champ d'induction magnétique solution des équations de
-Maxwell et la force $f = j\times B$. Dans le modèle SF, on utilise le
-champ de force $f$ issus d'un calcul S3D avec toutes les anodes
-activées, restreint à $\Omega$. On simule la désactivation d'une
-anode en supposant que la densité de courant électrique est quasiment nulle
-sous celle-ci, ce qui revient à imposer
-$f = 0$ sous  l'anode désactivée (voir figure
-\ref{fig:anode-deactivation}). L'emplacement des anodes vues depuis dessus et leur
-numérotation dans la cuve AP32 est schématisé sur la figure
-\ref{fig:anode-numerotations}.
+\conductivity\parent{\nabla \phi + u^\mathrm{S3D}}$, $\div j = 0$, où
+$\phi$ est le potentiel électrique, $u^\mathrm{S3D}$ l'écoulement des
+fluides solution des équations de Navier-Stokes, $B$ le champ
+d'induction magnétique solution des équations de Maxwell et la force
+$f = j\times B$. Dans le modèle SF, on utilise le champ de force $f$
+issus d'un calcul S3D avec toutes les anodes activées, restreint à
+$\Omega$. On simule la désactivation d'une anode en supposant que la
+densité de courant électrique est quasiment nulle sous celle-ci, ce
+qui revient à imposer $f = 0$ sous l'anode désactivée (voir figure
+\ref{fig:anode-deactivation}). L'emplacement des anodes vues depuis
+dessus et leur numérotation dans la cuve AP32 est schématisé sur la
+figure \ref{fig:anode-numerotations}.
 
-\begin{figure}[t]
+\begin{figure}[h!]
   \begin{center}
     \input{../media/fourier/anode-deactivation/anode-deactivation.pdf_tex}
     \caption{Désactivation d'une anode dans le modèle standard S3D et
@@ -195,18 +187,20 @@ numérotation dans la cuve AP32 est schématisé sur la figure
     \label{fig:anode-deactivation}
   \end{center}
 \end{figure}
-Les figures \ref{fig:f3d-deactivated-a}, \ref{fig:f3d-deactivated-b}, présente
-le champ de vitesse stationnaire $u^{S3D}$ du bain électrolytique dans l'ACD de
-la cuve AP32 et la distribution de concentration $c^{S3D}$, pour quatre configurations différentes du plan
-anodique, soit les anodes $(1,1)$, $(1,2)$, $(2,1)$ et $(2,2)$
+
+Les figures \ref{fig:f3d-deactivated-a}, \ref{fig:f3d-deactivated-b},
+présente le champ de vitesse stationnaire $u^{S3D}$ du bain
+électrolytique dans l'ACD de la cuve AP32 et la distribution de
+concentration $c^{S3D}$, pour quatre configurations différentes du
+plan anodique, soit les anodes $(1,1)$, $(1,2)$, $(2,1)$ et $(2,2)$
 successivement désactivées. On se réfère à la figure
 \ref{fig:anode-numerotations} pour le placement de chacune de ces
-anodes. Les anodes désactivées se trouvent au niveau de
-l'extrémité gauche de la cuve. On note que l'influence sur le champ de
-vitesse et la distribution de concentration s'étend à proximité de
-l'anode désactivée, mais ne s'étend pas à l'ensemble de la cuve.
+anodes. Les anodes désactivées se trouvent au niveau de l'extrémité
+gauche de la cuve. On note que l'influence sur le champ de vitesse et
+la distribution de concentration s'étend à proximité de l'anode
+désactivée, mais ne s'étend pas à l'ensemble de la cuve.
 
-\begin{figure}[t]
+\begin{figure}[h!]
   \begin{center}
     \input{../media/fourier/anode-numerotations/anode-numerotation.pdf_tex}
     \caption{Numérotation des anodes de la cuve AP32.}
@@ -214,7 +208,7 @@ l'anode désactivée, mais ne s'étend pas à l'ensemble de la cuve.
   \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -287,7 +281,7 @@ l'anode désactivée, mais ne s'étend pas à l'ensemble de la cuve.
   \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -371,7 +365,7 @@ $u_h^\mathrm{SF}$ sur une surface horizontale placée respectivement
 dans l'ACD de la cuve AP32 ou dans le domaine $\Omega$ à une hauteur
 correspondante.
 
-\begin{figure}[h]
+\begin{figure}[!h]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -424,7 +418,7 @@ correspondante.
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -488,7 +482,7 @@ calcul de $c_h^\mathrm{SF}$ en utilisant le champ de force $f$ issus
 du calcul de $u^\mathrm{S3D}$ avec l'anode correspondante désactivée
 (voir figure \ref{fig:anode-deactivation}a).
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -539,7 +533,7 @@ du calcul de $u^\mathrm{S3D}$ avec l'anode correspondante désactivée
   \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \begin{center}
@@ -613,7 +607,7 @@ de concentration dans les différentes configurations anodique entre le
 modèle S3D et le modèle SF.
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-0-1-concentration-acd.png}
@@ -661,7 +655,7 @@ modèle S3D et le modèle SF.
   \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
       \includegraphics[width=0.99\textwidth]{../media/fourier/application/print/ab-1-1-concentration-acd.png}

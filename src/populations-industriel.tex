@@ -245,7 +245,7 @@ c'est-à-dire que
 \begin{equation}\label{eq:injection-mass-condition}
   \frac{I[\cee{Al2O3}]}{6F}
   =\lim_{n\to \infty}\frac{1}{t_{n+1}}\ \sum_{\mathclap{\substack{k\\ p^k + 1\leq n +
-        1}}}\ \int_\Omega\intd{x}\int_0^\infty\intd{r}\aluminadensity S^k \frac{4}{3}\pi r^3.
+        1}}}\ \int_\Omega\intd{x}\int_\rplus\intd{r}\aluminadensity S^k \frac{4}{3}\pi r^3.
 \end{equation}
 Il faut donc choisir la masse des doses d'alumine injectées $S^k$, $k
 = 1, 2,\dots$ et les temps d'injection $\tau^k$, $k = 1,2,\dots$ de
@@ -287,7 +287,7 @@ définissent chaque injecteur sont regroupés dans la table
     \end{tabularx}
   \end{center}
 \end{table}
-La masse des doses dans le tableau \ref{tab:injectors} est choisie de
+La masse des doses dans la table \ref{tab:injectors} est choisie de
 telle sorte à ce que l'ensemble des 4 injecteurs injecte 25\% de la
 masse d'alumine en moyenne. La région de répartition des densités des particules
 initiales $S^k$ est décrite dans \cite{Hofer2011}. Plus précisément,
@@ -297,7 +297,7 @@ correspondant. La distribution initiale en rayon est approximée
 par une loi log-normale basée sur des mesures expérimentales. Puisque
 les rapport des périodes d'injection des 4 injecteurs sont des nombres
 rationnels, on peut définir une période globale $P$ liée à l'ensemble des
-4 injecteurs. Étant données les périodes d'injections reportées dans le tableau
+4 injecteurs. Étant données les périodes d'injections reportées dans la table
 \ref{tab:injectors}, le cycle d'injection global est périodique après une
 transition initiale de \num{64}\si\second, avec une période
 de $P = \num{192}$ \si\second. La figure \ref{fig:injections} représente les
@@ -326,10 +326,10 @@ ce qui correspond à la condition, en considérant (\ref{eq:energy-mass-balance}
 \begin{eqnarray}
   \frac{1}{\conductivity} \int_\Omega j\cdot j\intd{x} &=&
   \aluminahc\parent{\tinit - \tinj}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ p^k +
-  1 \leq n + 1}}}\int_\Omega\intd{x}\int_0^\infty\intd{r}\aluminadensity
+  1 \leq n + 1}}}\int_\Omega\intd{x}\int_\rplus\intd{r}\aluminadensity
   \frac{4}{3}\pi r^3 S^k\nonumber \\
   &&-
-       {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\intd{x}\int_0^\infty\intd{r} \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}.\nonumber\\
+       {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\intd{x}\int_\rplus\intd{r} \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}.\nonumber\\
        \label{eq:energy-condition}
 \end{eqnarray}
 Le premier terme du membre de droite de (\ref{eq:energy-condition})
@@ -353,7 +353,7 @@ est nulle, le deuxième terme du membre de droite de
 (\ref{eq:energy-condition}) se réduit à
 \begin{equation*}
   {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ p^k +
-  1 \leq n + 1}}}\int_\Omega\intd{x}\int_0^\infty\intd{r}\aluminadensity
+  1 \leq n + 1}}}\int_\Omega\intd{x}\int_\rplus\intd{r}\aluminadensity
   \frac{4}{3}\pi r^3 S^k.
 \end{equation*}
 Ainsi finalement,
@@ -396,8 +396,8 @@ de l'écoulement défini par
 \end{equation}
 Les valeurs du paramètre $\electrolytemoldiff$ associé à la diffusion
 moléculaire et de $\electrolyteturbdiff$ associé à la diffusion
-induite par les turbulences de l'écoulement, sont rapportées dans le
-tableau \ref{tab:dissolution-physical-parameters}.
+induite par les turbulences de l'écoulement, sont rapportées dans la
+table \ref{tab:dissolution-physical-parameters}.
 
 
 \begin{table}
