@@ -96,7 +96,7 @@ Les figures \ref{fig:stokes-exact-sol},
 choix $\thickness = 2$, i. e. dans le domaine $\Omega =
 [-1,1]^2\times[0,\thickness]$.
 
-\begin{figure}[t]
+\begin{figure}[h!]
   \begin{center}
     \begin{subfigure}[b]{0.49\textwidth}
       \includegraphics[width=\textwidth]{../media/fourier/fig-exact/print/slice-6.png}
@@ -165,7 +165,7 @@ choix $\thickness = 2$, i. e. dans le domaine $\Omega =
     \label{fig:stokes-exact-sol-streamlines}
   \end{center}
 \end{figure}
-
+\clearpage
 
 \subsection{Convergence de l'erreur en $K$ et en $h$}
 On s'intéresse d'une part à la convergence de l'erreur d'approximation
@@ -278,7 +278,7 @@ lorsque $\thickness$ tend vers zéro. Ce résultat indique qu'il est
 avantageux de considérer le modèle SF lorsque le domaine de calcul
 $\Omega$ présente une forte anisotropie.
 
-\begin{figure}[t!]
+\begin{figure}[h!]
   \begin{center}
     \input{../media/fourier/convergence/sf-convergence.tex}
     \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en fonction
@@ -288,23 +288,6 @@ $\Omega$ présente une forte anisotropie.
     \label{fig:e-sf-e-s3d-convergence}
   \end{center}
 \end{figure}
-
-Finalement, on compare les temps CPU pour chaque schéma, ainsi
-que le nombre d'itérations de l'algorithme GMRES pour résoudre le
-système linéaire dans le cas du schéma S3D, dont les résultats sont
-synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
-comparé les performances entre le temps de calculs du modèle S3D et SF
-en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et
-\num{1.19}. On note que le coût en temps de calcul de la solution
-$u_h^\mathrm{S3D}$ augmente catastrophiquement lorsque $\thickness$
-diminue. Ceci est principalement dû au conditionnement de la matrice
-qui se péjore et au nombre d'itérations de
-l'algorithme GMRES nécessaire pour atteindre la tolérance souhaitée.
-En comparaison, le coût en temps de calcul de la solution
-$u_{h,K}^{\mathrm{SF}}$ est indépendent de l'épaisseur $\thickness$,
-et est environ 17 fois plus faible que le coût de calcul de
-$u_h^\mathrm{S3D}$ dans le pire des cas. A nouveau, ce résultat
-indique un clair avantage du modèle SF par rapport au modèle S3D.
 
 \begin{table}[h!]
   \caption{Erreurs $e_{h,K}^\mathrm{SF}$ et $e_h^\mathrm{S3D}$ en
@@ -335,12 +318,31 @@ indique un clair avantage du modèle SF par rapport au modèle S3D.
   \end{center}
 \end{table}
 
+Finalement, on compare les temps CPU pour chaque schéma, ainsi que le
+nombre d'itérations de l'algorithme GMRES pour résoudre le système
+linéaire dans le cas du schéma S3D, dont les résultats sont
+synthétisés par la table \ref{tab:e-sf-e-s3d-cpu-cost}. Ici on a
+comparé les performances entre le temps de calculs du modèle S3D et SF
+en variant l'épaisseur $\thickness$ du domaine entre \num{2e-2} et
+\num{1.19}. On note que le coût en temps de calcul de la solution
+$u_h^\mathrm{S3D}$ augmente catastrophiquement lorsque $\thickness$
+diminue. Ceci est principalement dû au conditionnement de la matrice
+qui se péjore et au nombre d'itérations de l'algorithme GMRES
+nécessaire pour atteindre la tolérance souhaitée. En comparaison, le
+coût en temps de calcul de la solution $u_{h,K}^{\mathrm{SF}}$ est
+indépendent de l'épaisseur $\thickness$, et est environ 17 fois plus
+faible que le coût de calcul de $u_h^\mathrm{S3D}$ dans le pire des
+cas. A nouveau, ce résultat indique un clair avantage du modèle SF par
+rapport au modèle S3D.
+
 \begin{table}[h!]
   \caption{Comparaison des performances entre les schémas permettant
     de calculer $u_{h,K}^{\mathrm{SF}}$ et $u_h^\mathrm{S3D}$ en
-    fonction de l'épaisseur $\thickness$. Les calculs
-    sont effectués sur un machine équipée d'un processeur Intel$^{\tiny{\textregistered}}$ Xeon$^{\tiny{\textregistered}}$
-    E5-2620 v2 @ 2.1 \si{\giga\hertz} et 32 \si{\giga\octet} de RAM.}
+    fonction de l'épaisseur $\thickness$ lorsque $K = 20$ et $h =
+    2/64$. Les calculs sont effectués sur un machine équipée d'un
+    processeur Intel$^{\tiny{\textregistered}}$
+    Xeon$^{\tiny{\textregistered}}$ E5-2620 v2 @ 2.1 \si{\giga\hertz}
+    et 32 \si{\giga\octet} de RAM.}
   \label{tab:e-sf-e-s3d-cpu-cost}
   \begin{center}
     \begin{tabular}{@{}lrrrrr@{}}

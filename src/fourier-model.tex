@@ -56,8 +56,8 @@ horizontales de $\partial\Omega$ et à ce que les contraintes
 tangentielles sur ces faces soient nulles. En utilisant
 (\ref{eq:stokes-bc-2}), la condition (\ref{eq:stokes-bc-3}) se réécrit
 \begin{equation}
-\frac{\partial u_1}{\partial x_3}
-  = 0 \quad \text{et} \quad \frac{\partial u_2}{\partial x_3}
+\frac{\partial u_1}{\partial x_3} + \frac{\partial u_3}{\partial x_1}
+  = 0 \quad \text{et} \quad \frac{\partial u_2}{\partial x_3} + \frac{\partial u_3}{\partial x_2}
   = 0\quad \text{ sur }\quad\partial \Lambda \times\cparent{0,\thickness}.
 \end{equation}
 
@@ -216,17 +216,28 @@ $k \geq 0$ qui apparaissent dans les membres de droite des équations
 (\ref{eq:fourier-harm-2}) s'obtiennent par une projection $\mathrm
 L^2$ sur la base de Fourier correspondante. Pour $k = 0$ on a
 \begin{align}
-  f_i^0(x_1, x_2) =
+  f_i^0(x_1, x_2) &=
   \frac{1}{2\thickness}\int_{-\thickness}^{\thickness}F_i(x_1, x_2, x_3)\,\mathrm
+  dx_3, \quad i = 1,2,\nonumber\\
+  &= \frac{1}{\thickness}\int_{0}^{\thickness}f_i(x_1, x_2, x_3)\,\mathrm
   dx_3, \quad i = 1,2,\label{eq:f-1}
 \end{align}
 et pour $k > 0$ on a
 \begin{align}
-&f_i^k(x_1, x_2) =
+f_i^k(x_1, x_2) &=
 \frac{1}{\thickness}\int_{-\thickness}^{\thickness}F_i(x_1, x_2,
-x_3)\cos\parent{\beta^k x_3}\,\mathrm dx_3,\quad i = 1,2,\label{eq:f-2}\\
-&f_3^k(x_1, x_2) = \frac{1}{\thickness}\int_{-\thickness}^{\thickness}
-F_3(x_1, x_2,x_3) \sin\parent{\beta^k x_3}\,\mathrm dx_3.\label{eq:f-3}
+x_3)\cos\parent{\beta^k x_3}\,\mathrm dx_3,\quad i =
+1,2,\\
+&=
+\frac{2}{\thickness}\int_{0}^{\thickness}f_i(x_1, x_2,
+x_3)\cos\parent{\beta^k x_3}\,\mathrm dx_3,\quad i =
+1,2,\label{eq:f-2}\\
+f_3^k(x_1, x_2) &= \frac{1}{\thickness}\int_{-\thickness}^{\thickness}
+F_3(x_1, x_2,x_3) \sin\parent{\beta^k x_3}\,\mathrm
+dx_3,\\
+&= \frac{2}{\thickness}\int_{0}^{\thickness}
+f_3(x_1, x_2,x_3) \sin\parent{\beta^k x_3}\,\mathrm
+dx_3.\label{eq:f-3}
 \end{align}
 
 

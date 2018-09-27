@@ -61,15 +61,18 @@ de force pour calculer $u_{h,K}^\mathrm{SF}$ définie par
 \end{figure}
 
 On choisit une triangulation de $\Lambda$ de sorte à ce que la taille
-des mailles dans le plan $(x,y)$ des deux calculs (Stokes-Fourier et méthode 3D standard)
-soient comparables, soit $h = \num{0.69}$. La moyenne $\bar{c}$ dans
-(\ref{eq:stat-alumina-avg-c}) est fixée à 3\% masse, identique à la
-concentration d'alumine dissoute initialement dans le modèle de transport
-et de dissolution décrit dans le chapitre 2. Dans
-(\ref{eq:stat-alumina-consommation}), le courant électrique total est $I =
-\num{320000}$ \si{\ampere}. Les différentes grandeurs physiques qui
-interviennent dans ce modèle ont déjà été introduites dans la table
-\ref{tab:dissolution-physical-parameters}. Les figures
+des mailles des deux calculs (Stokes 3D et Stokes-Fourier) soient
+comparables avec la méthode 3D standard, soit $h = \num{0.69}$
+\si{\meter} dans le plan $(x,y)$, et une taille verticale de
+\num{0.015} \si{\meter} pour le calcule de Stokes 3D. On somme $K =
+20$ termes de la série de Fourier pour le calcul SF. La moyenne
+$\bar{c}$ dans (\ref{eq:stat-alumina-avg-c}) est fixée à 3\% masse,
+identique à la concentration d'alumine dissoute initialement dans le
+modèle de transport et de dissolution décrit dans le chapitre 2. Dans
+(\ref{eq:stat-alumina-consommation}), le courant électrique total est
+$I = \num{320000}$ \si{\ampere}. Les différentes grandeurs physiques
+qui interviennent dans ce modèle ont déjà été introduites dans la
+table \ref{tab:dissolution-physical-parameters}. Les figures
 \ref{fig:harmonic-velocity} et \ref{fig:harmonic-concentration}
 représente les champs $u^{\mathrm{SF}}$, $c^\mathrm{SF}$,
 $u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
@@ -702,3 +705,5 @@ modèle S3D et le modèle SF.
     \label{fig:harmonic-concentration-comp-fc}
 \end{center}
 \end{figure}
+
+\clearpage

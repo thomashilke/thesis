@@ -73,7 +73,7 @@ discrétisé consiste à chercher les fonctions $(u^k_h, p^k_h) \in
   \int_\Lambda f\cdot v_h,\label{eq:fourier-harm-discrete-1}\\
   &\int_\Lambda \parent{\frac{\partial u^k_{1,h}}{\partial x_1} +
     \frac{\partial u^k_{2,h}}{\partial x_2} + \beta^k u^k_{3,h}}q_h +
-  \delta \sum_{\meshcell\in\mathcal M_h} h_\meshcell^2
+  \frac{\delta}{\displaystyle\max_{1\leq i,j\leq 3}\mu_{i,j}} \sum_{\meshcell\in\mathcal M_h} h_\meshcell^2
   \int_\meshcell\parent{\parent{\beta^k}^2 p^k_h q_h + \nabla p_h^k \nabla
     q_h} = 0\label{eq:fourier-harm-discrete-2}
 \end{align}
@@ -82,8 +82,8 @@ H_0^1(\Lambda))^3\times V_h$. Ici $\delta > 0$ et le terme de
 stabilisation dans (\ref{eq:fourier-harm-discrete-2}) qui est justifié
 par le fait que, d'après (\ref{eq:fourier-coeff-def-3}),
 \begin{equation}
-  \Delta P = \Delta p^0 + \sum_{k > 0} (\Delta p^k -
-  \parent{\beta^k}^2 p^k)\cos(\beta^k x_3).
+  \Delta P = \Delta p^0 + \sum_{k > 0} \parent{\Delta p^k -
+  \parent{\beta^k}^2 p^k}\cos(\beta^k x_3).
 \end{equation}
 
 \paragraph{Quadrature pour les coefficients de Fourier de la force}
