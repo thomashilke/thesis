@@ -16,10 +16,10 @@ dissolution d'alumine en fonction de la température, soit les
 \end{align}
 et
 \begin{align}
-  & \frac{\partial \concentration}{\partial t} + u(x)\cdot\nabla \concentration - \div\parent{\cdiffusivity(x) \nabla \concentration} = q_1 + q_2,
+  & \frac{\partial \concentration}{\partial t} + u(x)\cdot\nabla \concentration - \div\parent{\cdiffusivity(u(x)) \nabla \concentration} = q_1 + q_2,
   & \forall t\in (0, T),\label{eq:mdl-eq-4}\\
 %
-  & \frac{\partial \temperature}{\partial t} + u(x)\cdot\nabla\temperature - \div\parent{\electrolytetdiff(x)\nabla \temperature} = \frac{1}{\electrolytedensity\electrolytehc}\sum_{i = 1}^{3}p_i,
+  & \frac{\partial \temperature}{\partial t} + u(x)\cdot\nabla\temperature - \div\parent{\electrolytetdiff(u(x))\nabla \temperature} = \frac{1}{\electrolytedensity\electrolytehc}\sum_{i = 1}^{3}p_i,
   & \forall t\in(0, T)\label{eq:mdl-eq-5}
 \end{align}
 dans $\Omega$. Les termes source de la concentration $\concentration$ sont

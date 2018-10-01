@@ -164,12 +164,12 @@ $n_p^k$ qui se dissolvent dans le bain à l'instant $t\in[0, T]$.
 La concentration d'alumine dissoute $\concentration$ est transportée
 dans le bain par la vitesse d'écoulement $u$, mais est de plus sujette
 à une diffusion liée d'une part à l'agitation moléculaire, et d'autre
-part aux turbulences de l'écoulement. Soit
-$\cdiffusivity:\Omega\to\mathbb R^*_+$ la diffusivité de la
-concentration d'alumine dissoute dans le bain, supposée connue. Alors
-la concentration $\concentration$ doit satisfaire l'équation
+part aux turbulences de l'écoulement. Soit $\cdiffusivity > 0$ la
+diffusivité de la concentration d'alumine dissoute dans le bain, que
+l'on suppose étant fonction du champ de vitesse $u$. Alors la
+concentration $\concentration$ doit satisfaire l'équation
 \begin{equation}\label{eq:concentration}
-  \frac{\partial \concentration}{\partial t}(t, x) + u(x)\cdot\nabla \concentration(t, x) - \div\parent{\cdiffusivity(x)
+  \frac{\partial \concentration}{\partial t}(t, x) + u(x)\cdot\nabla \concentration(t, x) - \div\parent{\cdiffusivity(u(x))
   \nabla \concentration(t, x)} = q_1(x) + q_2(t, x),\quad \forall
   x\in\Omega,\ t\in (0, T).
 \end{equation}
@@ -177,7 +177,7 @@ Puisque qu'il ne peut y avoir de flux de masse d'alumine à travers le
 bord du domaine $\Omega$, la concentration doit satisfaire la
 condition aux limites de Neumann homogène
 \begin{equation}\label{eq:c-bc}
-  \electrolytecdiff(x)\frac{\partial \concentration}{\partial \nu}(t, x) = 0 \quad  \quad
+  \electrolytecdiff(u(x))\frac{\partial \concentration}{\partial \nu}(t, x) = 0 \quad  \quad
   \forall x\in\partial \Omega,\ t\in[0, T].
 \end{equation}
 
@@ -244,15 +244,15 @@ Tout comme la concentration d'alumine, la température du bain
 électrolytique $\temperature$ est transportée par la vitesse
 d'écoulement $u$, et diffusée dans le bain. Cette diffusion est due à
 la l'agitation moléculaire d'une part, et à aux turbulences de
-l'écoulement d'autre part. Soit $\electrolytetdiff:\Omega\to\mathbb
-R^*_+$ la diffusivité de la température dans le bain, supposée
-donnée. Comme précédemment on a noté $\electrolytedensity$,
+l'écoulement d'autre part. Soit $\electrolytetdiff > 0$ la diffusivité
+de la température dans le bain, que l'on suppose étant une fonction
+du champ de vitesse $u$. Comme précédemment on a noté $\electrolytedensity$,
 $\electrolytehc$ la densité et la chaleur spécifique du bain
 électrolytique. Alors la température $\temperature$ doit satisfaire
 l'équation
 \begin{equation}\label{eq:temperature}
 \frac{\partial \temperature}{\partial t}(t, x) +
-u(x)\cdot\nabla\temperature - \div\parent{\electrolytetdiff(x)\nabla
+u(x)\cdot\nabla\temperature - \div\parent{\electrolytetdiff(u(x))\nabla
 \temperature(t, x)} =
 \frac{1}{\electrolytedensity\electrolytehc}\sum_{i = 1}^{3}p_i(t, x),
 \quad \forall x\in\Omega,\ t\in(0, T).
@@ -260,7 +260,7 @@ u(x)\cdot\nabla\temperature - \div\parent{\electrolytetdiff(x)\nabla
 De plus, et conformément à l'hypothèse d'isolation thermique, la température
 $\temperature$ doit satisfaire une condition de Neumann homogène
 \begin{equation}\label{eq:t-bc}
-  \electrolytehc\frac{\partial \temperature}{\partial \nu}(t, x) = 0, \quad
+  \electrolytehc(u(x))\frac{\partial \temperature}{\partial \nu}(t, x) = 0, \quad
   \forall\ x\in\partial \Omega,\ t\in[0, T].
 \end{equation}
 

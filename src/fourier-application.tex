@@ -30,6 +30,23 @@ direction du champ de force $f$ dans le plan $x_3 = \thickness / 2$,
 de force pour calculer $u_{h,K}^\mathrm{SF}$ définie par
 (\ref{eq:u-h-12}), (\ref{eq:u-h-3}).
 
+On choisit une triangulation de $\Lambda$ de sorte à ce que la taille
+des mailles des deux calculs (Stokes 3D et Stokes-Fourier) soient
+comparables avec la méthode 3D standard, soit $h = \num{0.69}$
+\si{\meter} dans le plan $(x,y)$, et une taille verticale de
+\num{0.015} \si{\meter} pour le calcule de Stokes 3D. On somme $K =
+20$ termes de la série de Fourier pour le calcul SF. La moyenne
+$\bar{c}$ dans (\ref{eq:stat-alumina-avg-c}) est fixée à 3\% masse,
+identique à la concentration d'alumine dissoute initialement dans le
+modèle de transport et de dissolution décrit dans le chapitre 2. Dans
+(\ref{eq:stat-alumina-consommation}), le courant électrique total est
+$I = \num{320000}$ \si{\ampere}. Les différentes grandeurs physiques
+qui interviennent dans ce modèle ont déjà été introduites dans la
+table \ref{tab:dissolution-physical-parameters}. Les figures
+\ref{fig:harmonic-velocity} et \ref{fig:harmonic-concentration}
+représente les champs $u^{\mathrm{SF}}$, $c^\mathrm{SF}$,
+$u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
+
 \begin{figure}[h!]
   \begin{center}
     \begin{tikzpicture}
@@ -59,23 +76,6 @@ de force pour calculer $u_{h,K}^\mathrm{SF}$ définie par
     \label{fig:harmonic-force-h}
   \end{center}
 \end{figure}
-
-On choisit une triangulation de $\Lambda$ de sorte à ce que la taille
-des mailles des deux calculs (Stokes 3D et Stokes-Fourier) soient
-comparables avec la méthode 3D standard, soit $h = \num{0.69}$
-\si{\meter} dans le plan $(x,y)$, et une taille verticale de
-\num{0.015} \si{\meter} pour le calcule de Stokes 3D. On somme $K =
-20$ termes de la série de Fourier pour le calcul SF. La moyenne
-$\bar{c}$ dans (\ref{eq:stat-alumina-avg-c}) est fixée à 3\% masse,
-identique à la concentration d'alumine dissoute initialement dans le
-modèle de transport et de dissolution décrit dans le chapitre 2. Dans
-(\ref{eq:stat-alumina-consommation}), le courant électrique total est
-$I = \num{320000}$ \si{\ampere}. Les différentes grandeurs physiques
-qui interviennent dans ce modèle ont déjà été introduites dans la
-table \ref{tab:dissolution-physical-parameters}. Les figures
-\ref{fig:harmonic-velocity} et \ref{fig:harmonic-concentration}
-représente les champs $u^{\mathrm{SF}}$, $c^\mathrm{SF}$,
-$u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
 
 \begin{figure}[h!]
   \begin{center}
@@ -177,6 +177,18 @@ qui revient à imposer $f = 0$ sous l'anode désactivée (voir figure
 dessus et leur numérotation dans la cuve AP32 est schématisé sur la
 figure \ref{fig:anode-numerotations}.
 
+Les figures \ref{fig:f3d-deactivated-a}, \ref{fig:f3d-deactivated-b},
+présente le champ de vitesse stationnaire $u^{S3D}$ du bain
+électrolytique dans l'ACD de la cuve AP32 et la distribution de
+concentration $c^{S3D}$, pour quatre configurations différentes du
+plan anodique, soit les anodes $(1,1)$, $(1,2)$, $(2,1)$ et $(2,2)$
+successivement désactivées. On se réfère à la figure
+\ref{fig:anode-numerotations} pour le placement de chacune de ces
+anodes. Les anodes désactivées se trouvent au niveau de l'extrémité
+gauche de la cuve. On note que l'influence sur le champ de vitesse et
+la distribution de concentration s'étend à proximité de l'anode
+désactivée, mais ne s'étend pas à l'ensemble de la cuve.
+
 \begin{figure}[h!]
   \begin{center}
     \input{../media/fourier/anode-deactivation/anode-deactivation.pdf_tex}
@@ -190,18 +202,6 @@ figure \ref{fig:anode-numerotations}.
     \label{fig:anode-deactivation}
   \end{center}
 \end{figure}
-
-Les figures \ref{fig:f3d-deactivated-a}, \ref{fig:f3d-deactivated-b},
-présente le champ de vitesse stationnaire $u^{S3D}$ du bain
-électrolytique dans l'ACD de la cuve AP32 et la distribution de
-concentration $c^{S3D}$, pour quatre configurations différentes du
-plan anodique, soit les anodes $(1,1)$, $(1,2)$, $(2,1)$ et $(2,2)$
-successivement désactivées. On se réfère à la figure
-\ref{fig:anode-numerotations} pour le placement de chacune de ces
-anodes. Les anodes désactivées se trouvent au niveau de l'extrémité
-gauche de la cuve. On note que l'influence sur le champ de vitesse et
-la distribution de concentration s'étend à proximité de l'anode
-désactivée, mais ne s'étend pas à l'ensemble de la cuve.
 
 \begin{figure}[h!]
   \begin{center}

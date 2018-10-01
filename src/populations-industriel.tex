@@ -42,7 +42,7 @@ constamment, d'une part à cause du produit de la réaction
 d'électrolyse, et d'autre part à cause des opérations de siphonnage du
 métal, qui interviennent environ une fois par jour.
 
-\begin{figure}[t]
+\begin{figure}[h!]
   \begin{center}
     \begin{subfigure}[b]{0.49\textwidth}
       \includegraphics[width=\textwidth]{../media/populations/ap32-mesh-components/print/metal-bath-anodes-cathode-bus-bars.png}
@@ -140,57 +140,8 @@ suite.
 
 Dans chacune des phases de sur-alimentation ou sous-alimentation, les
 injecteurs déposent les doses d'alumine selon une cadence préétablie
-et périodique. La période et une taille des doses peuvent être spécifiées
+et périodique. La période et la taille des doses peuvent être spécifiées
 indépendemment pour chaque injecteur.
-
-\begin{figure}[t]
-  \begin{center}
-    \begin{tikzpicture}
-      \begin{axis}[
-          hide axis,
-          colorbar,
-          scale only axis,
-          height=0.41\rasterimagewidth,,
-          width=\rasterimagewidth,
-          colorbar horizontal,
-          point meta min=0.00,
-          point meta max=0.05,
-          colorbar style={
-            title=Vitesse $u$ [\si{\meter\per\second}],
-            width=7.4cm,
-            height=0.3cm,
-            xtick={0.00, 0.01, 0.02, 0.03, 0.04, 0.05},
-            xticklabel style={
-              /pgf/number format/fixed,
-              /pgf/number format/fixed zerofill,
-              /pgf/number format/precision=2
-            },
-            scaled x ticks = false,
-            at={(0.5\rasterimagewidth,0.4cm)},
-            anchor=north
-          }
-        ]
-        \addplot [] coordinates {(0,0)};
-        \node (myfirstpic) at (0,0) {\includegraphics[width=\rasterimagewidth]{{../media/populations/ap32-fluid-flow/print/acd-all-anodes-velocity-0.00-0.05}.png}};
-      \end{axis}
-    \end{tikzpicture}
-    \caption{Champ de vitesse $u$ dans le bain électrolytique d'une
-      cuve AP32 restreint sur une surface placée à mi-hauteur de
-      l'ACD, vue depuis dessus. Cette situation correspond à un état
-      d'opération standard.}
-    \label{fig:ap32-flow-acd}
-  \end{center}
-\end{figure}
-
-\begin{figure}[t]
-  \begin{center}
-    \includegraphics[width=\rasterimagewidth]{../media/populations/ap32-fluid-flow/print/chanel-velocity-streamlines.png}
-    \caption{Lignes de courant correspondant au champ de vitesse
-      représenté sur la figure \ref{fig:ap32-flow-acd}. Les lignes de
-      courant prennent leur origine le long du canal central.}
-    \label{fig:ap32-flow-streamlines}
-  \end{center}
-\end{figure}
 
 \paragraph{Calcul de l'écoulement dans le bain} Une approximation de vitesse
 d'écoulement du bain $u$ et de la densité de courant $j$ dans la cuve
@@ -231,6 +182,55 @@ négligeable d'énergie s'échappe par le métal, les parois latérales de
 la cuve, les anodes, la surface du bain et par le \ce{CO2} qui
 s'échappe dans l'atmosphère.
 
+\begin{figure}[h!]
+  \begin{center}
+    \begin{tikzpicture}
+      \begin{axis}[
+          hide axis,
+          colorbar,
+          scale only axis,
+          height=0.41\rasterimagewidth,,
+          width=\rasterimagewidth,
+          colorbar horizontal,
+          point meta min=0.00,
+          point meta max=0.05,
+          colorbar style={
+            title=Vitesse $u$ [\si{\meter\per\second}],
+            width=7.4cm,
+            height=0.3cm,
+            xtick={0.00, 0.01, 0.02, 0.03, 0.04, 0.05},
+            xticklabel style={
+              /pgf/number format/fixed,
+              /pgf/number format/fixed zerofill,
+              /pgf/number format/precision=2
+            },
+            scaled x ticks = false,
+            at={(0.5\rasterimagewidth,0.4cm)},
+            anchor=north
+          }
+        ]
+        \addplot [] coordinates {(0,0)};
+        \node (myfirstpic) at (0,0) {\includegraphics[width=\rasterimagewidth]{{../media/populations/ap32-fluid-flow/print/acd-all-anodes-velocity-0.00-0.05}.png}};
+      \end{axis}
+    \end{tikzpicture}
+    \caption{Champ de vitesse $u$ dans le bain électrolytique d'une
+      cuve AP32 restreint sur une surface placée à mi-hauteur de
+      l'ACD, vue depuis dessus. Cette situation correspond à un état
+      d'opération standard.}
+    \label{fig:ap32-flow-acd}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=\rasterimagewidth]{../media/populations/ap32-fluid-flow/print/chanel-velocity-streamlines.png}
+    \caption{Lignes de courant correspondant au champ de vitesse
+      représenté sur la figure \ref{fig:ap32-flow-acd}. Les lignes de
+      courant prennent leur origine le long du canal central.}
+    \label{fig:ap32-flow-streamlines}
+  \end{center}
+\end{figure}
+
 Pour éviter que la masse totale d'alumine dans la cuve croisse sans
 limite au cours du temps, il faut s'assurer que dans un état pseudo
 stationnaire, la masse d'alumine reste proche de la masse d'alumine
@@ -253,40 +253,12 @@ sorte à ce que le débit de masse de poudre d'alumine moyen au cours du
 temps soit égal à $\frac{I[\cee{Al2O3}]}{6F}$, c'est-à-dire
 \num{56.382e-3} \si{\kilo\gram\per\second}.
 
-\begin{figure}
-  \begin{center}
-    \input{../media/populations/anode-configuration/anode-configuration.pdf_tex}
-    \caption{Vue schématique de la partie supérieure du bain
-      électrolytique. Les blocs rectangulaires représentent
-      l'emplacement des anodes, tandis que les cercles indiqués par
-      les flèches et numérotés marquent l'emplacement des injecteurs
-      disposés le long du canal central.}
-    \label{fig:anode-configuration}
-  \end{center}
-\end{figure}
-
 La cuve AP32 possède 4 injecteurs placés au-dessus du canal central,
 numérotés de 1 à 4, dans le sens de la coordonnée $x$ croissante (voir
 la figure \ref{fig:anode-configuration}). Les paramètres qui
 définissent chaque injecteur sont regroupés dans la table
 \ref{tab:injectors}.
 
-\begin{table}
-  \begin{center}
-    \caption{Paramètres caractérisant les 4 injecteurs de la cuve AP32.}
-    \label{tab:injectors}
-    \begin{tabularx}{\textwidth}{@{}rrrrZ@{}}
-      \toprule
-      Injecteur & Position & Première injection & Intervalle d'injection & Masse de dose\\
-      \midrule
-      \#1         & \num{-4.4}\si\meter & \num{16}\si\second & \num{16}\si\second  & \num{0.225} \si{\kilo\gram} \\
-      \#2         & \num{-1.6}\si\meter & \num{32}\si\second & \num{32}\si\second  & \num{0.451} \si{\kilo\gram} \\
-      \#3         & \num{ 1.6}\si\meter & \num{48}\si\second & \num{48}\si\second  & \num{0.676} \si{\kilo\gram} \\
-      \#4         & \num{ 4.4}\si\meter & \num{64}\si\second & \num{24}\si\second  & \num{0.338} \si{\kilo\gram} \\
-      \bottomrule
-    \end{tabularx}
-  \end{center}
-\end{table}
 La masse des doses dans la table \ref{tab:injectors} est choisie de
 telle sorte à ce que l'ensemble des 4 injecteurs injecte 25\% de la
 masse d'alumine en moyenne. La région de répartition des densités des particules
@@ -304,7 +276,19 @@ de $P = \num{192}$ \si\second. La figure \ref{fig:injections} représente les
 injections qui ont lieu durant les \num{192} premières secondes de la
 simulation.
 
-\begin{figure}
+\begin{figure}[h!]
+  \begin{center}
+    \input{../media/populations/anode-configuration/anode-configuration.pdf_tex}
+    \caption{Vue schématique de la partie supérieure du bain
+      électrolytique. Les blocs rectangulaires représentent
+      l'emplacement des anodes, tandis que les cercles indiqués par
+      les flèches et numérotés marquent l'emplacement des injecteurs
+      disposés le long du canal central.}
+    \label{fig:anode-configuration}
+  \end{center}
+\end{figure}
+
+\begin{figure}[h!]
   \begin{center}
     \input{../media/populations/cadence/cadence.tex}
     \caption{Temps d'injections des différents injecteurs de la cuve
@@ -313,6 +297,23 @@ simulation.
     \label{fig:injections}
   \end{center}
 \end{figure}
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Paramètres caractérisant les 4 injecteurs de la cuve AP32.}
+    \label{tab:injectors}
+    \begin{tabularx}{\textwidth}{@{}rrrrZ@{}}
+      \toprule
+      Injecteur & Position & Première injection & Intervalle d'injection & Masse de dose\\
+      \midrule
+      \#1         & \num{-4.4}\si\meter & \num{16}\si\second & \num{16}\si\second  & \num{0.225} \si{\kilo\gram} \\
+      \#2         & \num{-1.6}\si\meter & \num{32}\si\second & \num{32}\si\second  & \num{0.451} \si{\kilo\gram} \\
+      \#3         & \num{ 1.6}\si\meter & \num{48}\si\second & \num{48}\si\second  & \num{0.676} \si{\kilo\gram} \\
+      \#4         & \num{ 4.4}\si\meter & \num{64}\si\second & \num{24}\si\second  & \num{0.338} \si{\kilo\gram} \\
+      \bottomrule
+    \end{tabularx}
+  \end{center}
+\end{table}
 
 On détermine maintenant une condition sur la conductivité électrique
 $\conductivity$, issue d'un argument similaire à celui fait sur
@@ -384,14 +385,14 @@ $\electrolytemoldiff_c$ et $\electrolyteturbdiff_c$ pour tout
 $x\in\Omega$ de la manière suivante:
 \begin{align}
   &\electrolytetdiff(x) = \electrolytemoldiff_\temperature +
-  \electrolyteturbdiff_\temperature\parent{2\sum_{i,j}\straintensor_{ij}(x)\straintensor_{ij}(x)}^{1/2},\\
+  \electrolyteturbdiff_\temperature\parent{2\sum_{i,j}\straintensor_{ij}(u(x))\straintensor_{ij}(u(x))}^{1/2},\\
   &\electrolytecdiff(x) = \electrolytemoldiff_c +
-  \electrolyteturbdiff_c\parent{2\sum_{i,j}\straintensor_{ij}(x)\straintensor_{ij}(x)}^{1/2},
+  \electrolyteturbdiff_c\parent{2\sum_{i,j}\straintensor_{ij}(u(x))\straintensor_{ij}(u(x))}^{1/2},
 \end{align}
 où $\straintensor_{ij}$, $i, j = 1,2,3$ est le tenseur des déformation
 de l'écoulement défini par
 \begin{equation}
-  \straintensor_{ij} = \frac{1}{2}\parent{\frac{\partial u_i}{\partial
+  \straintensor_{ij}(u) = \frac{1}{2}\parent{\frac{\partial u_i}{\partial
       x_j} + \frac{\partial u_j}{\partial x_i}}.
 \end{equation}
 Les valeurs du paramètre $\electrolytemoldiff$ associé à la diffusion
@@ -503,7 +504,7 @@ et $\dr = \num{40}$ \si{\micro\meter}. Enfin on fixe $\dt = 1$
 \si{\second} et $T = \num{10000}$ \si{\second}, le temps auquel on
 veut évaluer la concentration.
 
-\begin{figure}
+\begin{figure}[h!]
   \begin{center}
     \includegraphics[width=\rasterimagewidth]{../media/populations/ap32-mesh-components/print/bath-mesh.png}
     \caption{Aperçu du maillage du domaine occupé par le bain
@@ -583,7 +584,7 @@ dans l'électrolyte. Cet effet se traduit par un accroissement de la
 variance de la concentration immédiatement après l'injection d'une
 dose, puis par une décroissance de la variance.
 
-\begin{figure}
+\begin{figure}[h!]
   \begin{center}
     \input{../media/populations/variances/variance-control.tex}
     \caption{Évolution de $\Var_\concentration$ au cours du temps sur
@@ -608,7 +609,7 @@ auquel la solution est évaluée correspond donc à environ \num{51}
 périodes du cycle d'injection global, sans compter la phase
 transitoire initiale de \num{64} \si{\second}.
 
-\begin{figure}
+\begin{figure}{h!}
   \begin{center}
     \begin{tikzpicture}
       \begin{axis}[
@@ -759,7 +760,9 @@ de la concentration d'alumine dissoute $c$ dans l'ACD de la cuve AP32
 issue de quatre calculs, pour lesquels les paramètres sont reportés
 dans la table \ref{tab:dissolution-physical-parameters}, à
 l'exception de la température initiale du bain $\tinit$. La
-température initiale du bain est fixée à $\tinit = \tliq + \tsur$ avec $\tsur = $ \numlist{1;2;5;10} degrés Kelvin.
+température initiale du bain est fixée à $\tinit = \tliq + \tsur$ avec
+$\tsur = $ \numlist{1;2;5;10} degrés Kelvin.
+\clearpage
 
 Les champs de concentration sur la figure
 \ref{fig:dissolution-alumin-influence-sur} correspondent de haut en
@@ -791,7 +794,6 @@ suivant nous proposons d'évaluer la distribution de concentration dans
 le bain électrolytique en fonction du paramètre $\tcrit$.
 
 
-\clearpage
 % Sensibilité par rapport au modèle de dépendence (tcrit, exp vs heaviside)
 \paragraph{Sensibilité par rapport à la température critique de transition}
 \input{populations-figures-tcrit.tex}
@@ -846,7 +848,6 @@ concentration d'alumine dissoute.
 % Sensibilité par rapport a la vitesse de chute dans le bain
 \paragraph{Effet de la vitesse de chute des particules sur leur
   dissolution}
-\input{populations-figures-w.tex}
 
 Nous avons déterminé, dans la section \ref{sec:particle-fall}, la vitesse
 de chute et la profondeur maximale atteinte dans le fluide des
@@ -891,6 +892,8 @@ La figure \ref{fig:sedimentation-comparaison} représente les champs de
 concentration dans l'ACD de la cuve AP32 obtenus par ces deux calculs,
 évalués à $t = \num{10000}$ \si{\second}, lorsque l'état périodique est
 atteint.
+
+\input{populations-figures-w.tex}
 
 On remarque quelques différences entre les deux solutions,
 essentiellement au niveau des points d'injection. Les valeur maximales
