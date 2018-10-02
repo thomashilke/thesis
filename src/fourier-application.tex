@@ -110,6 +110,19 @@ $u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
   \end{center}
 \end{figure}
 
+% conclusion:
+%figure 4.6: \ref{fig:harmonic-velocity}
+%figure 4.7: \ref{fig:harmonic-concentration}
+
+On constate sur la figure \ref{fig:harmonic-velocity} que le champ de
+courant $u_{h,K}^{\mathrm{SF}}$ reproduit les grandes structures de
+l'écoulement $u_h^{\mathrm{S3D}}$: deux tourbillons principaux divise
+la cuve, et la position de leur frontière correspond. Cependant, le
+champ $u_{h,K}^{\mathrm{SF}}$ ne parvient pas a capturer les plus
+petites structures qui apparaissent dans $u_h^{\mathrm{S3D}}$, soient
+les petits tourbillons secondaires dans les coins en aval, ainsi
+qu'une certaine asymétrie général par rapport à l'axe $x$.
+
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=\rasterimagewidth]{{../media/fourier/application/print/all-concentration-acd}.png}\\
@@ -133,7 +146,11 @@ $u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
           }
         ]
         \addplot [] coordinates {(0,0)};
-        \node (myfirstpic) at (0,0) {\includegraphics[width=\rasterimagewidth]{../media/fourier/application/print/all-concentration-harm.png}};
+        \node (myfirstpic) at (0,0) {
+          \includegraphics
+              [width=\rasterimagewidth]
+              {../media/fourier/application/print/all-concentration-harm.png}
+        };
       \end{axis}
     \end{tikzpicture}
     \caption{Champ de concentration stationnaire $c_h^\mathrm{S3D}$
@@ -142,6 +159,17 @@ $u^\mathrm{S3D}$ et $c^{S3D}$ dans le plan $x_3 = \thickness / 2$.
     \label{fig:harmonic-concentration}
   \end{center}
 \end{figure}
+
+En comparaison avec le champ $c_h^\mathrm{S3D}$ (en
+haut sur la figure \ref{fig:harmonic-concentration}), le champ de
+concentration stationnaire $c_h^\mathrm{SF}$ (en bas sur la
+figure \ref{fig:harmonic-concentration}) reproduit certains aspects
+caractéristiques. En particulier, les amplitudes de variation de la
+concentration sont très similaires. De plus, la position des points
+d'injections apparaît clairement dans sur les deux calculs. En
+revanche, le champ $c_h^\mathrm{SF}$ présente une zone appauvrie en
+périphérie du tourbillon de droite, qui n'est pas présente dans
+le champ $c_h^\mathrm{S3D}$.
 
 \subsection{Désactivation d'anodes}
 On s'intéresse maintenant au cas du calcul de l'écoulement des fluides
@@ -203,6 +231,31 @@ désactivée, mais ne s'étend pas à l'ensemble de la cuve.
   \end{center}
 \end{figure}
 
+
+% figures 4.12, 4.13
+Pour évaluer l'effet des approximations introduites par le modèle
+SF par rapport au modèle S3D, on compare les champs de vitesse
+$u_h^{\mathrm{S3D}}$ et $u_h^{\mathrm{SF}}$. Pour le calcul de
+$u_h^{\mathrm{SF}}$, on utilise le champ de force $f$ issus du calcul de
+$u_h^{\mathrm{S3D}}$. Sur les figures \ref{fig:harmonic-velocity-comp-a}, \ref{fig:harmonic-velocity-comp-b}
+on peut comparer les champs de vitesse $u_h^{\mathrm{S3D}}$ et
+$u_h^\mathrm{SF}$ sur une surface horizontale placée respectivement
+dans l'ACD de la cuve AP32 ou dans le domaine $\Omega$ à une hauteur
+correspondante.
+
+
+%figure 4.14, 4.15
+L'objectif final est de calculer le champ de concentration d'alumine
+dans le bain électrolytique. Sur les figures
+\ref{fig:harmonic-concentration-comp-a},
+\ref{fig:harmonic-concentration-comp-b}, on compare les champs de
+concentration $c^\mathrm{S3D}$ et le champ de concentration
+stationnaire $c^\mathrm{SF}$ dans le domaine $\Omega$ avec le modèle
+SF. On obtient le champ de transport $u_h^\mathrm{SF}$ qui sert au
+calcul de $c_h^\mathrm{SF}$ en utilisant le champ de force $f$ issus
+du calcul de $u^\mathrm{S3D}$ avec l'anode correspondante désactivée
+(voir figure \ref{fig:anode-deactivation}a).
+
 \begin{figure}[h!]
   \begin{center}
     \input{../media/fourier/anode-numerotations/anode-numerotation.pdf_tex}
@@ -210,6 +263,16 @@ désactivée, mais ne s'étend pas à l'ensemble de la cuve.
     \label{fig:anode-numerotations}
   \end{center}
 \end{figure}
+
+L'objectif du modèle étant d'obtenir une approximation du champ de
+vitesse et du champ de concentration à moindre coût, on veut éviter à
+tout prix de devoir utiliser le modèle S3D pour obtenir le champ de
+force en fonction de la configuration du plan anodique. A la place, on
+effectue un calcul de la force que l'on note $f^0$ avec le modèle S3D
+dans la configuration où toutes les anodes sont actives (voir figure
+\ref{fig:anode-deactivation}b.1 et
+\ref{fig:anode-deactivation}b.2). La force $f^0$ est représentée sur
+la figure \ref{fig:harmonic-force-h}.
 
 \begin{figure}[!h]
   \begin{center}
@@ -356,17 +419,8 @@ désactivée, mais ne s'étend pas à l'ensemble de la cuve.
     \label{fig:f3d-deactivated-b}
   \end{center}
 \end{figure}
+%
 
-% figures 4.12, 4.13
-Pour évaluer l'effet des approximations introduites par le modèle
-SF par rapport au modèle S3D, on compare les champs de vitesse
-$u_h^{\mathrm{S3D}}$ et $u_h^{\mathrm{SF}}$. Pour le calcul de
-$u_h^{\mathrm{SF}}$, on utilise le champ de force $f$ issus du calcul de
-$u_h^{\mathrm{S3D}}$. Sur les figures \ref{fig:harmonic-velocity-comp-a}, \ref{fig:harmonic-velocity-comp-b}
-on peut comparer les champs de vitesse $u_h^{\mathrm{S3D}}$ et
-$u_h^\mathrm{SF}$ sur une surface horizontale placée respectivement
-dans l'ACD de la cuve AP32 ou dans le domaine $\Omega$ à une hauteur
-correspondante.
 
 \begin{figure}[!h]
   \begin{center}
@@ -473,18 +527,6 @@ correspondante.
   \end{center}
 \end{figure}
 
-%figure 4.14, 4.15
-L'objectif final est de calculer le champ de concentration d'alumine
-dans le bain électrolytique. Sur les figures
-\ref{fig:harmonic-concentration-comp-a},
-\ref{fig:harmonic-concentration-comp-b}, on compare les champs de
-concentration $c^\mathrm{S3D}$ et le champ de concentration
-stationnaire $c^\mathrm{SF}$ dans le domaine $\Omega$ avec le modèle
-SF. On obtient le champ de transport $u_h^\mathrm{SF}$ qui sert au
-calcul de $c_h^\mathrm{SF}$ en utilisant le champ de force $f$ issus
-du calcul de $u^\mathrm{S3D}$ avec l'anode correspondante désactivée
-(voir figure \ref{fig:anode-deactivation}a).
-
 \begin{figure}[h!]
   \begin{center}
     \begin{subfigure}[t]{\textwidth}
@@ -586,16 +628,6 @@ du calcul de $u^\mathrm{S3D}$ avec l'anode correspondante désactivée
     \label{fig:harmonic-concentration-comp-b}
   \end{center}
 \end{figure}
-
-L'objectif du modèle étant d'obtenir une approximation du champ de
-vitesse et du champ de concentration à moindre coût, on veut éviter à
-tout prix de devoir utiliser le modèle S3D pour obtenir le champ de
-force en fonction de la configuration du plan anodique. A la place, on
-effectue un calcul de la force que l'on note $f^0$ avec le modèle S3D
-dans la configuration où toutes les anodes sont actives (voir figure
-\ref{fig:anode-deactivation}b.1 et
-\ref{fig:anode-deactivation}b.2). La force $f^0$ est représentée sur
-la figure \ref{fig:harmonic-force-h}.
 
 Lorsqu'une anodes est désactivée, elle ne conduit plus le courant
 électrique, et par conséquent la densité de courant électrique
