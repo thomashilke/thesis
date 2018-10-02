@@ -244,7 +244,7 @@ on demande à ce que
 c'est-à-dire que
 \begin{equation}\label{eq:injection-mass-condition}
   \frac{I[\cee{Al2O3}]}{6F}
-  =\lim_{n\to \infty}\frac{1}{t_{n+1}}\ \sum_{\mathclap{\substack{k\\ p^k + 1\leq n +
+  =\lim_{n\to \infty}\frac{1}{t_{n+1}}\ \sum_{\mathclap{\substack{k\\ i^k + 1\leq n +
         1}}}\ \int_\Omega\intd{x}\int_\rplus\intd{r}\aluminadensity S^k \frac{4}{3}\pi r^3.
 \end{equation}
 Il faut donc choisir la masse des doses d'alumine injectées $S^k$, $k
@@ -326,11 +326,11 @@ reste proche de l'énergie thermique initiale, on demande à ce que
 ce qui correspond à la condition, en considérant (\ref{eq:energy-mass-balance}):
 \begin{eqnarray}
   \frac{1}{\conductivity} \int_\Omega j\cdot j\intd{x} &=&
-  \aluminahc\parent{\tinit - \tinj}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ p^k +
+  \aluminahc\parent{\tinit - \tinj}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ i^k +
   1 \leq n + 1}}}\int_\Omega\intd{x}\int_\rplus\intd{r}\aluminadensity
   \frac{4}{3}\pi r^3 S^k\nonumber \\
   &&-
-       {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ q^k < m + 1}}} \int_\Omega\intd{x}\int_\rplus\intd{r} \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}.\nonumber\\
+       {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{m = 0}^{n}\sum_{\mathclap{\substack{k\\ j^k < m + 1}}} \int_\Omega\intd{x}\int_\rplus\intd{r} \aluminadensity \frac{4}{3}\pi r^3\parent{n_{p,m+1}^k-n_{p,m}^k}.\nonumber\\
        \label{eq:energy-condition}
 \end{eqnarray}
 Le premier terme du membre de droite de (\ref{eq:energy-condition})
@@ -343,17 +343,17 @@ terme du membre de droite de (\ref{eq:energy-condition}) converge, il
 est suffisant que chaque population $k\geq 1$ se dissolve en un temps
 fini quelque soit $k$. Plus précisément, les populations $n_p^k$
 se dissolvent en un temps fini s'il existe un entier positif $q'$ tel
-que $n_{p,n}^k = 0$ pour tout $n > q^k + q'$.
+que $n_{p,n}^k = 0$ pour tout $n > j^k + q'$.
 
 Le cas échéant on peut télescoper la somme sur $k$ et en remarquant que
 \begin{equation*}
-  \int_\Omega n_{p,q^k}^k\intd{x} = \int_\Omega S^k\intd{x}
+  \int_\Omega n_{p,j^k}^k\intd{x} = \int_\Omega S^k\intd{x}
 \end{equation*}
 pour tout $k \leq 1$ et pour tout $r > 0$ lorsque la vitesse de chute
 est nulle, le deuxième terme du membre de droite de
 (\ref{eq:energy-condition}) se réduit à
 \begin{equation*}
-  {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ p^k +
+  {\aluminadissolutionenthalpy}\lim_{n\to\infty}\frac{1}{t_{n+1}}\sum_{\mathclap{\substack{k\\ i^k +
   1 \leq n + 1}}}\int_\Omega\intd{x}\int_\rplus\intd{r}\aluminadensity
   \frac{4}{3}\pi r^3 S^k.
 \end{equation*}
